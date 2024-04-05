@@ -1,33 +1,32 @@
-z <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../resources/css/public.css">
-    <script src="https://kit.fontawesome.com/b7134240d3.js" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D&M Systems</title>
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <!--Link de fuente de texto-->
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 </head>
 <body>
-  <!--Formulario para el login, implementado desde Bootstrap-->
-    <form>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Boton de algo</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    
+
+    <hr size="50px" color="white" />
+
+    <div class="container">
+      
+      <img src="" alt="">
+        <h1>Inicio de Sesión</h1>
+        <form action="#">
+            <label for="usuario">Usuario</label>
+            <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario">
+            <br><br><br><br>
+            <label for="contraseña">Contraseña</label>
+            <input type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña">
+            <br><br><br>
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <hr class="hrBajo" size="50px" color="white" />
 </body>
 </html>
