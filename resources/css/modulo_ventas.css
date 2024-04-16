@@ -1,0 +1,17 @@
+.panel1 {
+    margin-top: 25px;
+    display: flex; /* Convertimos panel1 en un contenedor flex */
+    flex-direction: column; /* Organizamos los elementos verticalmente */
+    align-items: flex-end; /* Alineamos los elementos al borde derecho */
+}
+
+.panel1 .row {
+    display: flex; /* Convertimos cada fila en un contenedor flex */
+    align-items: center; /* Alineamos los elementos verticalmente dentro de cada fila */
+}
+
+.container1{
+    margin-top:2%;
+}
+
+
