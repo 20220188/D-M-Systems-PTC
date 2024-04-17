@@ -1,119 +1,130 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Factura</title>
-  <link rel="stylesheet" href="../resources/css/salidas.css">
+  <title>Formulario de venta</title>
+
+
   <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css">
-  <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" /></head>
+  <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+
+</head>
+
 <body>
-    <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <h1>Factura</h1>
+  <div class="container">
+    <h1>Formulario de venta</h1>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="col-12">
+          <label for="numeroSalida">Número de salida:</label>
+          <input type="text" class="form-control" id="numeroSalida" placeholder="Introduzca el número de salida">
+        </div>
+
+        <div class="col-12">
+          <label for="numeroSalida">Entrega:</label>
+          <input type="text" class="form-control" id="numeroSalida" placeholder="Introduzca el número de salida">
+        </div>
+
+        <div class="col-12">
+          <label for="inputCliente" class="form-label">Cliente</label>
+          <div class="input-group">
+            <input type="text" aria-label="First name" class="form-control">
+            <input type="text" aria-label="Last name" class="form-control" disabled>
           </div>
         </div>
-    
-        <div class="row mb-3">
-          <div class="col-6">
-            <label for="numeroSalida" class="form-label">Número de salida:</label>
-            <input type="text" class="form-control" id="numeroSalida" value="123456">
-          </div>
-          <div class="col-6">
-            <label for="fecha" class="form-label">Fecha:</label>
-            <input type="date" class="form-control" id="fecha" value="2024-02-13">
-          </div>
-        </div>
-    
-        <div class="row mb-3">
-          <div class="col-6">
-            <label for="tipoFactura" class="form-label">Tipo:</label>
-            <input type="text" class="form-control" id="tipoFactura" value="En kort tittel">
-          </div>
-          <div class="col-6">
-            <label for="cliente" class="form-label">Cliente:</label>
-            <input type="text" class="form-control" id="cliente" value="Búsqueda de cliente">
-          </div>
-        </div>
-    
-        <div class="row mb-3">
-          <div class="col-6">
-            <label for="vendedor" class="form-label">Vendedor:</label>
-            <input type="text" class="form-control" id="vendedor" value="En kort tittel">
-          </div>
-          
-        </div>
-        <div>
-            <div class="col-6">
-                <label for="notas" class="form-label">Notas:</label>
-                <textarea class="form-control" id="notas" rows="5"></textarea>
-              </div>
-        </div>
-    
-        <div class="row">
-          <div class="col-12">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Código</th>
-                  <th>Descripción artículo</th>
-                  <th>Cantidad</th>
-                  <th>Precio</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>12345</td>
-                  <td>Producto 1</td>
-                  <td>1</td>
-                  <td>$10.00</td>
-                  <td>$10.00</td>
-                </tr>
-                <tr>
-                  <td>67890</td>
-                  <td>Producto 2</td>
-                  <td>2</td>
-                  <td>$15.00</td>
-                  <td>$30.00</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td><b>$40.00</b></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-    
-        <div class="row">
-          
-          <div class="col-6 d-grid gap-2">
-            <button class="btn btn-primary" type="button">Agregar</button>
-            <button class="btn btn-success" type="button">Procesar</button>
-            <button class="btn btn-secondary" type="button">Descartar</button>
-            <button class="btn btn-danger" type="button">Imprimir</button>
-          </div>
+
+        <div class="col-12">
+          <label for="inputNotas" class="form-label">Notas</label>
+          <input type="text" class="form-control" id="inputNotas">
         </div>
       </div>
-      <div class="row mt-3">
-        <div class="col-3">
-          <label for="existencias" class="form-label">Existencias:</label>
-          <input type="number" class="form-control" id="existencias" value="0">
+
+      <div class="col-md-6">
+        <div class="col-12">
+          <label for="fecha">Fecha:</label>
+          <input type="date" class="form-control" id="fecha">
         </div>
-        <div class="col-3">
-          <label for="lineas" class="form-label">Líneas:</label>
-          <input type="number" class="form-control" id="lineas" value="0">
+
+        <div class="form-group">
+          <label for="tipo">Tipo:</label>
+          <input type="text" class="form-control" id="tipo" placeholder="Introduzca el tipo de venta">
         </div>
-        <div class="col-3">
-          <label for="suma" class="form-label">Suma:</label>
-          <input type="number" class="form-control" id="suma" value="0">
+  
+        <div class="form-group">
+          <label for="vendedor">Vendedor:</label>
+          <input type="text" class="form-control" id="vendedor" placeholder="Introduzca el nombre del vendedor">
         </div>
       </div>
-      
+    </div>
+
+    <div>
+      <div class="row">
+        <div class="col-md-8">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-4">
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+          </div>
+
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+          </div>
+          
+          
+        </div>
+
+      </div>
+
+      <div>
+        <div class="row">
+          <div class="d-grid gap-2 d-md-block">
+            <button type="button" class="btn1"><i class="fa-solid fa-pen fa-1x"></i> Editar</button>
+            <button type="button" class="btn1"><i class="fa-solid fa-circle-plus fa-1x"></i> Agregar</button>
+            <button type="button" class="btn1"><i class="fa-solid fa-print fa-1x"></i> Imprimir</button>
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
