@@ -17,7 +17,7 @@ const asideHTML = `
 
     <div class="options__menu">	
 
-        <a href="#" class="selected">
+        <a href="caja.html">
         <div class="maestros">
             <div class="option">
             <i class="fa-solid fa-cart-shopping" title="Caja"></i>
@@ -26,7 +26,7 @@ const asideHTML = `
         </div>
         </a>
 
-        <a href="#">
+        <a href="consultas.html" >
             <div class="option">
             <i class="fa-solid fa-align-left" title="Consultas"></i>
                 <h4>Consultas</h4>

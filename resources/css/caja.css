@@ -6,15 +6,50 @@ table{
 }
 .panel1{
     margin-top: 150px;
-}
-.botones{
-    margin-top: 200px;
-}
+}z  
 
 h1{
     font-family: 'Poppins';
 
 }
+.inputsss{
+    width: 130px;
+}
+.botones1{
+    color: #fffcfc;
+    background-color: #336688;
+    border-color: #336688;
+    width: 130px;
+    height: 55px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.botones1:hover {
+    color: #336688;
+    background-color: #f8f7f7;
+    border-color: #336688
+}
+
+.precio2{
+    margin-top: 10px;
+}
+.precio3{
+    margin-left: 140px;
+    margin-top: -93px;
+}
+.precio4{
+    margin-left: 280px;
+    margin-top: -93px;
+}
+.precio5{
+    margin-left: 420px;
+    margin-top: -93px;
+}
+.precio6{
+    margin-left: 560px;
+    margin-top: -93px;
+}
+
 .btn {
     color: #ff342b;
     background-color: #ebd7d6;
@@ -29,6 +64,31 @@ h1{
     background-color: #ff342b;
     border-color: #ebd7d6
 }
+
+.contenedor {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .precio {
+      width: 150px;
+      height: 50px;
+      border: 1px solid #ccc;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .boton {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
 
 .content-table {
     border-collapse: collapse;
