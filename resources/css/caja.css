@@ -12,6 +12,9 @@ h1{
     font-family: 'Poppins';
 
 }
+.container2{
+    margin-top: -150px;
+}
 .inputsss{
     width: 130px;
 }
@@ -25,6 +28,62 @@ h1{
     border-radius: 15px;
 }
 .botones1:hover {
+    color: #336688;
+    background-color: #f8f7f7;
+    border-color: #336688
+}
+.botones2{
+    color: #fffcfc;
+    background-color: #336688;
+    border-color: #336688;
+    width: 130px;
+    height: 55px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.botones2:hover {
+    color: #336688;
+    background-color: #f8f7f7;
+    border-color: #336688
+}
+.botones3{
+    color: #fffcfc;
+    background-color: #336688;
+    border-color: #336688;
+    width: 130px;
+    height: 55px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.botones3:hover {
+    color: #336688;
+    background-color: #f8f7f7;
+    border-color: #336688
+}
+.botones4{
+    color: #fffcfc;
+    background-color: #336688;
+    border-color: #336688;
+    width: 130px;
+    height: 55px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.botones4:hover {
+    color: #336688;
+    background-color: #f8f7f7;
+    border-color: #336688
+}
+.botones5{
+    color: #fffcfc;
+    background-color: #336688;
+    border-color: #336688;
+    width: 130px;
+    height: 55px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.botones5:hover {
     color: #336688;
     background-color: #f8f7f7;
     border-color: #336688
