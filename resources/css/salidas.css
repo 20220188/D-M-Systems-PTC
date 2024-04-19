@@ -1,0 +1,65 @@
+/* Estilo general del formulario */
+#formularioVenta {
+  margin-top: 20px;
+}
+
+/* Etiquetas de los campos */
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Campos de entrada */
+.form-control {
+  width: 100%;
+  height: 38px;
+  padding: 8px 12px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Botones */
+.btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* Tabla de artículos */
+.table {
+  margin-top: 20px;
+}
+
+.table-striped tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+/* Totales */
+tfoot th {
+  text-align: right;
+}
+
+
+.btn1 {
+  color: #ff342b;
+  background-color: #ff837c;
+  border-color: #ff7d77;
+  width: 150px;
+  height: 65px;
+  font-family: 'Poppins';
+  border-radius: 15px;
+}
+.btn1:hover {
+  color: #ff7972;
+  background-color: #ff342b;
+  border-color: #ebd7d6
+}
