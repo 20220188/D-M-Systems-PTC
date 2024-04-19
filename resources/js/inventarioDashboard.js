@@ -12,12 +12,12 @@ const asideHTML = `
 
     <div class="name__page">
     <i class="fa-solid fa-user-tie"></i>
-        <h4>Admin</h4>
+        <h4>Inventario</h4>
     </div>
 
     <div class="options__menu">	
 
-        <a href="#" class="selected">
+        <a href="#">
         <div class="maestros">
             <div class="option">
             <i class="fa-solid fa-star" title="Maestros"></i>
@@ -32,25 +32,11 @@ const asideHTML = `
                 <h4>Movimientos</h4>
             </div>
         </a>
-        
-        <a href="#">
-            <div class="option">
-            <i class="fa-solid fa-align-left" title="Consultas"></i>
-                <h4>Consultas</h4>
-            </div>
-        </a>
 
         <a href="#">
             <div class="option">
-            <i class="fa-solid fa-file" title="reportes"></i>
+            <i class="fa-solid fa-file" title="Reportes"></i>
                 <h4>Reportes</h4>
-            </div>
-        </a>
-
-        <a href="#">
-            <div class="option">
-            <i class="fa-solid fa-eye" title="Utilidades"></i>
-                <h4>Utilidades</h4>
             </div>
         </a>
 

@@ -1,3 +1,7 @@
+.container{
+  margin-top: 150px;
+}
+
 /* Estilo general del formulario */
 #formularioVenta {
   margin-top: 20px;
@@ -51,15 +55,15 @@ tfoot th {
 
 .btn1 {
   color: #ff342b;
-  background-color: #ff837c;
-  border-color: #ff7d77;
-  width: 150px;
+  background-color: #ebd7d6;
+  border-color: #ebd7d6;
+  width: 200px;
   height: 65px;
   font-family: 'Poppins';
   border-radius: 15px;
 }
 .btn1:hover {
-  color: #ff7972;
+  color: #ebd7d6;
   background-color: #ff342b;
   border-color: #ebd7d6
 }
