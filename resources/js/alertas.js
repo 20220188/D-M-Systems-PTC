@@ -55,3 +55,15 @@ document.querySelectorAll('#btnAgregar').forEach(button => {
         });
     });
 });
+
+//Alerta para botones de cancelado/descartado
+document.querySelectorAll('#btnCancelar').forEach(button => {
+    button.addEventListener('click', function () {
+        // Muestra la alerta de SweetAlert2
+        Swal.fire({
+            title: "Cancelado!",
+            text: "Se ha cancelado la acción",
+            icon: "info"
+        });
+    });
+});
