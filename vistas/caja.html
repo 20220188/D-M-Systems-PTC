@@ -53,8 +53,8 @@
 
     <!--Botones-->
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button type="button" class="btn"><i class="fa-solid fa-xmark fa-1x"></i> Cancelar</button>
-      <button type="button" class="btn"><i class="fa-solid fa-rotate-right fa-1x"></i> Refrescar</button>
+      <button type="button" class="btn" id="btnEliminar"><i class="fa-solid fa-xmark fa-1x"></i> Cancelar</button>
+      <button type="button" class="btn" id="btnRefrescar"><i class="fa-solid fa-rotate-right fa-1x"></i> Refrescar</button>
     </div>
     <!--Division-->
     <hr>
@@ -159,9 +159,9 @@
     <div class=" container2 row">
       <div class="col-md-6">
         <div class="botones">
-          <button type="button" class="btn"><i class="fa-solid fa-pen fa-1x"></i> Editar</button>
-          <button type="button" class="btn"><i class="fa-solid fa-circle-plus fa-1x"></i> Agregar</button>
-          <button type="button" class="btn"><i class="fa-solid fa-print fa-1x"></i> Imprimir</button>
+          <button type="button" class="btn" id="btnEditar"><i class="fa-solid fa-pen fa-1x"></i> Editar</button>
+          <button type="button" class="btn" id="btnAgregar"><i class="fa-solid fa-circle-plus fa-1x"></i> Agregar</button>
+          <button type="button" class="btn" id="btnImprimir"><i class="fa-solid fa-print fa-1x"></i> Imprimir</button>
         </div>
       </div>
     </div>
@@ -208,10 +208,12 @@
 </body>
 
 
-
-</body>
-
 <script src="../resources/js/dashboard.js"></script>
 <script type="text/javascript" src="../resources/js/cajaDashboard.js"></script>
+<script type="text/javascript" src="../resources/js/alertas.js"></script>
+<!--Mandamos a llamar las librerias de Sweetalert2-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
 
 </html>

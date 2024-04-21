@@ -33,6 +33,7 @@
         </div>
     </div>
     <br>
+    <!--Inicio del formulario para ingresar la información-->
     <div class="row col-auto" >
         <div class="col-md-3">
             <div class="col-md-12">
@@ -97,12 +98,12 @@
             </div>
         </div>
     </div>
-
+<!-- Botones para realizar acciones-->
     <div class="row">
         <div class="col-md-6-sm-6" id="botones">
             <div class="d-grid gap-2 d-md-block">
-                <button type="button" class="btn1"><i class="fa-solid fa-circle-plus fa-1x"></i> Agregar</button>
-                <button type="button" class="btn1"><i class="lni lni-cross-circle"></i> Cancelar</button>
+                <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus fa-1x"></i> Agregar</button>
+                <button type="button" class="btn1" id="btnEliminar"><i class="lni lni-cross-circle"></i> Cancelar</button>
             </div>
         </div>
     </div>
@@ -111,8 +112,13 @@
 
 </main>
 
+<!--Mandamos a llamar los archivos js del sitio web-->
 <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="../resources/js/inventarioDashboard.js"></script>
+<script type="text/javascript" src="../resources/js/alertas.js"></script>
+<!--Mandamos a llamar las librerias de Sweetalert2-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
