@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorios</title>
+
+    <!--Links importantes-->
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../resources/css/dashboard.css">
+    <link rel="stylesheet" href="../resources/css/maestro_laboratorios.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="icon" href="../img/por el momento.jpg">
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body id="body">
+
+    <main>
+
+        <div class=" container2 row d-flex justify-content-center">
+            <div class="col-md-9  d-flex justify-content-center">
+                <div class="botones">
+                    <a href="maestro_productos.html"><button type="button" class="btn"><i
+                                class="fa-solid fa-tag"></i> Productos</button></a>
+                    <a href="maestro_clientes.html"><button type="button" class="btn"><i class="fa-solid fa-users"></i>
+                            Clientes</button></a>
+                    <a href="maestros_proveedores.html"><button type="button" class="btn"><i
+                                class="fa-solid fa-diagram-project"></i> Proveedores</button></a>
+                    <a href="maestro_vendedores.html"><button type="button" class="btn"><i
+                                class="fa-solid fa-hand-holding-dollar"></i>Vendedores</button></a>
+                    <a href="maestro_laboratorios.html"><button type="button" class="btn-seleccionado"><i
+                                class="fa-solid fa-flask-vial"></i> Laboratorios</button></a>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <div class="row col-auto" >
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputCodigo" class="form-label">Código/NRC</label>
+                    <input type="text" class="form-control" id="inputCodigo">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputNombre" class="form-label">Nombre/Razón social</label>
+                    <input type="text" class="form-control" id="inputNombre">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputPais" class="form-label">País</label>
+                    <input type="text" class="form-control" id="inputPais">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputnegocio" class="form-label">Giro negocio</label>
+                    <input type="text" class="form-control" id="inputnegocio">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputDUI" class="form-label">DUI</label>
+                    <input type="text" class="form-control" id="inputDUI">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputNomCo" class="form-label">Nombre comercial</label>
+                    <input type="text" class="form-control" id="inputNomCo">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputFecha" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="inputFecha">
+                </div>
+            </div>
+    
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputNIT" class="form-label">NIT</label>
+                    <input type="text" class="form-control" id="inputNIT">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputTel" class="form-label">Telefono</label>
+                    <input type="tel" class="form-control" id="inputTel">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputContacto" class="form-label">Contacto</label>
+                    <input type="text" class="form-control" id="inputContacto">
+                </div>
+            </div>
+    
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputDireccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="inputDireccion">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputDep" class="form-label">Departamento</label>
+                    <input type="text" class="form-control" id="inputDep">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputMunicipio" class="form-label">Municipio</label>
+                    <input type="text" class="form-control" id="inputMunicipio">
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <!--Botones-->
+        <div class="d-grid gap-2 d-md-flex d-flex justify-content-center ">
+            <button type="button" class="btn1"><i class="fa-solid fa-circle-plus"></i> Guardar</button>
+            <button type="button" class="btn1"><i class="fa-solid fa-circle-xmark"></i> Descartar</button>
+            <button type="button" class="btn1"><i class="fa-solid fa-trash"></i> Eliminar</button>
+        </div>
+    </main>
+
+</body>
+<script type="text/javascript" src="../resources/js/inventarioDashboard.js"></script>
+
+</html>
