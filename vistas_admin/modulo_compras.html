@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo Compras</title>
+
+    <!--Link de ccs bootstrap-->
+    <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <!--Link del css-->
+    <link type="text/css" rel="stylesheet" href="../resources/css/dashboard.css">
+    <link rel="stylesheet" href="../resources/css/modulo_compras.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+</head>
+
+<body id="body">
+
+    <main>
+
+        <div class=" container2 row d-flex justify-content-center">
+            <div class="col-md-9  d-flex justify-content-center">
+                <div class="botones">
+                    <a href=""><button type="button" class="btn2"><i class="fa-solid fa-tag"></i> Ingresos</button></a>
+                    <a href="modulo_compras.html"><button type="button" class="btn2-seleccionado"><i class="fa-solid fa-users"></i> Compras</button></a>
+                    <a href="salida.html"><button type="button" class="btn2"><i class="fa-solid fa-diagram-project"></i> Salidas</button></a>
+                </div>
+            </div>
+        </div>
+        <!--Formulario de busqueda -->
+        <div>
+            <form class="col-sm-12 col-md-6" id="searchForm">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="search" class="form-control" name="search" placeholder="Buscar producto" required>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success">
+                            <i class="lni lni-search-alt"></i>
+                        </button>
+                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                            <i class="lni lni-eraser"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--DIV para separar los 3 loques de inputs-->
+        <div class="row">
+            <!--Primer bloque de inputs-->
+            <div class="panel1 col-md-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="inputFecha" class="form-label">Fecha</label>
+                        <input type="date" class="form-control" id="inputFecha">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputVendedor" class="form-label"># Factura</label>
+                        <input type="text" class="form-control" id="inputVendedor">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="inputPago" class="form-label">Forma de pago</label>
+                        <select id="inputPago" name="inputPago" class="form-select" required>
+                            <option value="">Seleccionar </option>
+                            <option value="Zapatillas">Efectivo </option>
+                            <option value="Jerseys">Tarjeta de credito</option>
+                            <option value="Jerseys">Tarjeta de debito</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputBodega" class="form-label">Bodega</label>
+                        <select id="inputBodega" name="inputBodega" class="form-select" required>
+                            <option value="">Seleccionar </option>
+                            <option value="Zapatillas">Bodega 1</option>
+                            <option value="Jerseys">Bodega 2</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--Bloque de inputs 2-->
+            <div class="panel2 col-md-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="inputDocumento" class="form-label">Documento</label>
+                        <select id="inputDocumento" name="inputDocumento" class="form-select" required>
+                            <option value="">Seleccionar </option>
+                            <option value="Zapatillas">Documento 1</option>
+                            <option value="Jerseys">Documento 2</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputSerie" class="form-label">Serie</label>
+                        <input type="text" class="form-control" id="inputSerie">
+                    </div>
+
+                    <div class="col-12">
+                        <label for="inputNotas" class="form-label">Notas</label>
+                        <textarea class="form-control" id="notas" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Bloque de inputs 3-->
+            <div class="panel1 col-md-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="inputDireccion" class="form-label">Tipo documento</label>
+                        <select id="inputDepartamento" name="inputDepartamento" class="form-select" required>
+                            <option value="">Seleccionar </option>
+                            <option value="Zapatillas">Documento 1</option>
+                            <option value="Jerseys">Documento 2</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputNIT" class="form-label">NIT</label>
+                        <input type="text" class="form-control" id="inputNIT">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="inputDepartamento" class="form-label">Clase de documento</label>
+                        <select id="inputDepartamento" name="inputDepartamento" class="form-select" required>
+                            <option value="">Seleccionar </option>
+                            <option value="Zapatillas">Clase doc 1</option>
+                            <option value="Jerseys">Clase doc 2</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inpuMunicipio" class="form-label">Serie de persepción</label>
+                        <input type="text" class="form-control" id="inpuMunicipio">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Linea meramente estetica para separar las secciones de la pagina-->
+        <hr style="width: 100%; height: 2px; background-color: #000000;">
+
+        <!--Codigo de la tabla donde se mostraran las ventas-->
+        <div class="container1 row">
+            <div class="  col-md-10 col-sm-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Articulo⬇</th>
+                            <th scope="col">Descripción⬇</th>
+                            <th scope="col">Precio⬇</th>
+                            <th scope="col">%Desc⬇</th>
+                            <th scope="col">Vencimiento⬇</th>
+                            <th scope="col">Cantidad⬇</th>
+                            <th scope="col">Bonificado⬇</th>
+                            <th scope="col">CantidadT.⬇</th>
+                            <th scope="col">Valor⬇</th>
+                            <th scope="col">Exento⬇</th>
+                            <th scope="col">P.Venta⬇</th>
+                            <th scope="col">%Venta⬇</th>
+                            <th scope="col">Descuento⬇</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6</th>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                            <td>@twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class=" container2 row">
+                <div class="col-md-6">
+                  <div class="botones">
+                    <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-pen fa-1x"></i> Agregar</button>
+                    <button type="button" class="btn1" id="btnEliminar"><i class="fa-solid fa-circle-plus"></i> Eliminar</button>
+                    <button type="button" class="btn1" id="btnEditar"><i class="fa-solid fa-print fa-1x"></i> Guardar</button>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </main>
+
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
+    <script type="text/javascript" src="../resources/js/alertas.js"></script>
+<!--Mandamos a llamar las librerias de Sweetalert2-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>

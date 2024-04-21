@@ -17,7 +17,7 @@ const asideHTML = `
 
     <div class="options__menu">	
 
-        <a href="#" class="selected">
+        <a href="../../vistas_admin/maestro_clientes.html">
         <div class="maestros">
             <div class="option">
             <i class="fa-solid fa-star" title="Maestros"></i>
@@ -26,20 +26,13 @@ const asideHTML = `
         </div>
         </a>
 
-        <a href="#">
+        <a href="../vistas_admin/modulo_compras.html">
             <div class="option">
             <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
                 <h4>Movimientos</h4>
             </div>
         </a>
         
-        <a href="#">
-            <div class="option">
-            <i class="fa-solid fa-align-left" title="Consultas"></i>
-                <h4>Consultas</h4>
-            </div>
-        </a>
-
         <a href="#">
             <div class="option">
             <i class="fa-solid fa-file" title="reportes"></i>
