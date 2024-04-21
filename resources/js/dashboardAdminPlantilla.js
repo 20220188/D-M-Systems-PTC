@@ -33,7 +33,7 @@ const asideHTML = `
             </div>
         </a>
         
-        <a href="#">
+        <a href="../vistas_admin/reporte_compras.html">
             <div class="option">
             <i class="fa-solid fa-file" title="reportes"></i>
                 <h4>Reportes</h4>
