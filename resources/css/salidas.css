@@ -13,6 +13,8 @@ label {
   margin-bottom: 5px;
 }
 
+
+
 /* Campos de entrada */
 .form-control {
   width: 100%;
@@ -67,4 +69,19 @@ tfoot th {
   color: #ebd7d6;
   background-color: #ff342b;
   border-color: #ebd7d6
+}
+
+.btn-seleccionado{
+  color: #d2d9f1;
+  background-color: #5D41DE;
+  border-color: #d2d9f1;
+  width: 200px;
+  height: 65px;
+  font-family: 'Poppins';
+  border-radius: 15px;
+}
+.btn-seleccionado:hover {
+  color: #5D41DE;
+  background-color: #d2d9f1;
+  border-color: #d2d9f1
 }

@@ -6,6 +6,14 @@ body{
     background-color: #E7F4F4;
 }
 
+.historial{
+    margin-left: 1200px;
+    margin-top: -60px;
+}
+.h2{
+    margin-top: 50px;
+}
+
 .btn {
     color: #5D41DE;
     background-color: #d2d9f1;
@@ -19,6 +27,23 @@ body{
     color: #ebd7d6;
     background-color: #5D41DE;
     border-color: #ebd7d6
+}
+
+
+
+.btn-seleccionado{
+    color: #d2d9f1;
+    background-color: #5D41DE;
+    border-color: #d2d9f1;
+    width: 200px;
+    height: 65px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.btn-seleccionado:hover {
+    color: #5D41DE;
+    background-color: #d2d9f1;
+    border-color: #d2d9f1
 }
 
 .input-group{

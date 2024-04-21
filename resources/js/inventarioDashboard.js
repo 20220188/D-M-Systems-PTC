@@ -10,9 +10,10 @@ const asideHTML = `
         </header>
 <div class="menu__side" id="menu_side">
 
+    
     <div class="name__page">
     <i class="fa-solid fa-user-tie"></i>
-        <h4>Inventario</h4>
+    <a href="inventario.html"> <h4>Inventario</h4> </a>
     </div>
 
     <div class="options__menu">	
