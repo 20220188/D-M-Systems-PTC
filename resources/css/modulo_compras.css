@@ -1,3 +1,8 @@
+*{
+    font-family: 'Poppins';
+
+}
+
 .panel1 {
     margin-top: 25px;
     display: flex; /* Convertimos panel1 en un contenedor flex */
@@ -14,4 +19,32 @@
     margin-top:2%;
 }
 
+.btn1 {
+    color: #ff342b;
+    background-color: #ebd7d6;
+    border-color: #ebd7d6;
+    width: 150px;
+    height: 65px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.btn1:hover {
+    color: #ebd7d6;
+    background-color: #ff342b;
+    border-color: #ebd7d6
+}
 
+.btn2 {
+    color: #5D41DE;
+    background-color: #d2d9f1;
+    border-color: #d2d9f1;
+    width: 200px;
+    height: 65px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+  }
+  .btn2:hover {
+    color: #ebd7d6;
+    background-color: #5D41DE;
+    border-color: #ebd7d6
+  }

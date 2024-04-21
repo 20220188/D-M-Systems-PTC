@@ -2,6 +2,10 @@
     font-family: 'Poppins';
 }
 
+body{
+    background-color: #E7F4F4;
+}
+
 .btn {
     color: #5D41DE;
     background-color: #d2d9f1;
