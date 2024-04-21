@@ -1,0 +1,23 @@
+body{
+    background-color: #E7F4F4;
+}
+
+
+.btn1 {
+    color: #ff342b;
+    background-color: #ebd7d6;
+    border-color: #ebd7d6;
+    width: 150px;
+    height: 65px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.btn1:hover {
+    color: #ebd7d6;
+    background-color: #ff342b;
+    border-color: #ebd7d6
+}
+
+#botones{
+    margin-top: 5%;
+}

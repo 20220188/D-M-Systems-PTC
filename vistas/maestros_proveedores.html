@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú lateral responsive - MagtimusPro</title>
 
+    <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../resources/css/maestros_proveedores.css">
     <link rel="stylesheet" href="../resources/css/dashboard.css">
 
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
@@ -17,11 +20,87 @@
 
 
 <main>
+    <div class="row col-auto" >
+        <div class="col-md-3">
+            <div class="col-md-12">
+                <label for="inputCodigo" class="form-label">Código/NRC</label>
+                <input type="text" class="form-control" id="inputCodigo">
+            </div>
+            <div class="col-md-12">
+                <label for="inputNombre" class="form-label">Nombre/Razón social</label>
+                <input type="text" class="form-control" id="inputNombre">
+            </div>
+            <div class="col-md-12">
+                <label for="inputPais" class="form-label">País</label>
+                <input type="text" class="form-control" id="inputPais">
+            </div>
+            <div class="col-md-12">
+                <label for="inputnegocio" class="form-label">Giro negocio</label>
+                <input type="text" class="form-control" id="inputnegocio">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="col-md-12">
+                <label for="inputDUI" class="form-label">DUI</label>
+                <input type="text" class="form-control" id="inputDUI">
+            </div>
+            <div class="col-md-12">
+                <label for="inputNomCo" class="form-label">Nombre comercial</label>
+                <input type="text" class="form-control" id="inputNomCo">
+            </div>
+            <div class="col-md-12">
+                <label for="inputFecha" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="inputFecha">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="col-md-12">
+                <label for="inputNIT" class="form-label">NIT</label>
+                <input type="text" class="form-control" id="inputNIT">
+            </div>
+            <div class="col-md-12">
+                <label for="inputTel" class="form-label">Telefono</label>
+                <input type="tel" class="form-control" id="inputTel">
+            </div>
+            <div class="col-md-12">
+                <label for="inputContacto" class="form-label">Contacto</label>
+                <input type="text" class="form-control" id="inputContacto">
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="col-md-12">
+                <label for="inputDireccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="inputDireccion">
+            </div>
+            <div class="col-md-12">
+                <label for="inputDep" class="form-label">Departamento</label>
+                <input type="text" class="form-control" id="inputDep">
+            </div>
+            <div class="col-md-12">
+                <label for="inputMunicipio" class="form-label">Municipio</label>
+                <input type="text" class="form-control" id="inputMunicipio">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6-sm-6" id="botones">
+            <div class="d-grid gap-2 d-md-block">
+                <button type="button" class="btn1"><i class="fa-solid fa-circle-plus fa-1x"></i> Agregar</button>
+                <button type="button" class="btn1"><i class="lni lni-cross-circle"></i> Cancelar</button>
+            </div>
+        </div>
+    </div>
+        
     
+
 </main>
 
 
 
+<script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
     <script src="../resources/js/dashboard.js"></script>
     <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
 </body>
