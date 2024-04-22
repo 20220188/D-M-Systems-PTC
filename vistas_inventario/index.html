@@ -10,7 +10,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!--Link del css-->
     <link rel="stylesheet" href="../css/registro.css">
-    <link rel="stylesheet" href="../css/inicioSesion.css">
+    <link rel="stylesheet" href="../resources/css/inicioSesion.css">
     <!--Link de fuente de texto-->
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <!--Icono de pestaña-->
@@ -19,7 +19,7 @@
 
 <body>
     <div class="contenedor">
-        <form class="d-none container" id="loginForm">
+        <form class="container" id="loginForm"> <!-- colocar cuando este con la base el: d-none -->
             <h1>Iniciar Sesión</h1>
             <label for="usuario">Usuario</label>
             <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
@@ -27,7 +27,7 @@
             <label for="contraseña">Contraseña</label>
             <input type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" required>
             <br><br>
-            <button type="submit">Iniciar Sesión</button>
+            <a href="inventario.html"><button type="submit">Iniciar sesión</button></a>
         </form>
 
         <form class="d-none" id="signupForm">
