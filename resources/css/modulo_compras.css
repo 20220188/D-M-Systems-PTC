@@ -2,7 +2,9 @@
     font-family: 'Poppins';
 
 }
-
+body{
+    background-color: #E7F4F4;
+}
 .panel1 {
     margin-top: 25px;
     display: flex; /* Convertimos panel1 en un contenedor flex */

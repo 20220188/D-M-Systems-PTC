@@ -27,14 +27,14 @@ const asideHTML = `
         </div>
         </a>
 
-        <a href="modulo_compras.html">
+        <a href="ingresos.html">
             <div class="option">
             <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
                 <h4>Movimientos</h4>
             </div>
         </a>
 
-        <a href="#">
+        <a href="reporte_ventas.html">
             <div class="option">
             <i class="fa-solid fa-file" title="Reportes"></i>
                 <h4>Reportes</h4>
