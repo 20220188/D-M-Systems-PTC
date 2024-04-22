@@ -2,151 +2,177 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Salidas</title>
-   <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
-  <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../resources/css/dashboard.css">
-  <link rel="stylesheet" href="../resources/css/salidas.css">
-  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salidas</title>
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../resources/css/dashboard.css">
+    <link rel="stylesheet" href="../resources/css/salidas.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
-  <link rel="icon" href="../img/por el momento.jpg">
-  <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="../img/por el momento.jpg">
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 </head>
 
 <body id="body">
-  <main>
-  <div class=" container2 row d-flex justify-content-center">
-    <div class="col-md-9  d-flex justify-content-center">
-        <div class="botones">
-            <a href="ingresos.html"><button type="button" class="btn"><i class="fa-solid fa-tag"></i> Ingresos</button></a>
-            <a href="modulo_compras.html"><button type="button" class="btn"><i class="fa-solid fa-users"></i> Compras</button></a>
-            <a href="salida.html"><button type="button" class="btn-seleccionado"><i class="fa-solid fa-diagram-project"></i> Salidas</button></a>
-        </div>
-    </div>
-</div>
-
-  <div class="container">
-
-    <div class="row">
-      <div class="col-md-6">
-        <div class="col-12">
-          <label for="numeroSalida">Número de salida:</label>
-          <input type="text" class="form-control" id="numeroSalida" placeholder="Introduzca el número de salida">
+    <main>
+        <!-- Contenedor de botones de navegación -->
+        <div class=" container2 row d-flex justify-content-center">
+            <div class="col-md-9  d-flex justify-content-center">
+                <!-- Botones de navegación -->
+                <div class="botones">
+                    <a href="ingresos.html"><button type="button" class="btn"><i class="fa-solid fa-tag"></i>
+                            Ingresos</button></a>
+                    <a href="modulo_compras.html"><button type="button" class="btn"><i class="fa-solid fa-users"></i>
+                            Compras</button></a>
+                    <a href="salida.html"><button type="button" class="btn-seleccionado"><i
+                                class="fa-solid fa-diagram-project"></i> Salidas</button></a>
+                </div>
+            </div>
         </div>
 
-        <div class="col-12">
-          <label for="numeroSalida">Entrega:</label>
-          <input type="text" class="form-control" id="numeroSalida" placeholder="Introduzca el número de salida">
-        </div>
+        <!-- Formulario para ingresar información de salidas -->
+        <div class="container">
 
-        <div class="col-12">
-          <label for="inputCliente" class="form-label">Cliente</label>
-          <div class="input-group">
-            <input type="text" aria-label="First name" class="form-control">
-            <input type="text" aria-label="Last name" class="form-control" disabled>
-          </div>
-        </div>
+            <div class="row">
+                <!-- Columna izquierda -->
+                <div class="col-md-6">
+                    <!-- Campos de entrada -->
+                    <div class="col-12">
+                        <label for="numeroSalida">Número de salida:</label>
+                        <input type="text" class="form-control" id="numeroSalida"
+                            placeholder="Introduzca el número de salida">
+                    </div>
 
-        <div class="col-12">
-          <label for="inputNotas" class="form-label">Notas</label>
-          <input type="text" class="form-control" id="inputNotas">
-        </div>
-      </div>
+                    <div class="col-12">
+                        <label for="numeroSalida">Entrega:</label>
+                        <input type="text" class="form-control" id="numeroSalida"
+                            placeholder="Introduzca el número de salida">
+                    </div>
 
-      <div class="col-md-6">
-        <div class="col-12">
-          <label for="fecha">Fecha:</label>
-          <input type="date" class="form-control" id="fecha">
-        </div>
+                    <div class="col-12">
+                        <label for="inputCliente" class="form-label">Cliente</label>
+                        <div class="input-group">
+                            <input type="text" aria-label="First name" class="form-control">
+                            <input type="text" aria-label="Last name" class="form-control" disabled>
+                        </div>
+                    </div>
 
-        <div class="form-group">
-          <label for="tipo">Tipo:</label>
-          <input type="text" class="form-control" id="tipo" placeholder="Introduzca el tipo de venta">
-        </div>
-  
-        <div class="form-group">
-          <label for="vendedor">Vendedor:</label>
-          <input type="text" class="form-control" id="vendedor" placeholder="Introduzca el nombre del vendedor">
-        </div>
-      </div>
-    </div>
+                    <div class="col-12">
+                        <label for="inputNotas" class="form-label">Notas</label>
+                        <input type="text" class="form-control" id="inputNotas">
+                    </div>
+                </div>
 
-    <div>
-      <div class="row">
-        <div class="col-md-8">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
+                <!-- Columna derecha -->
+                <div class="col-md-6">
+                    <div class="col-12">
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" class="form-control" id="fecha">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo">Tipo:</label>
+                        <input type="text" class="form-control" id="tipo" placeholder="Introduzca el tipo de venta">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vendedor">Vendedor:</label>
+                        <input type="text" class="form-control" id="vendedor"
+                            placeholder="Introduzca el nombre del vendedor">
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <!-- Tabla de detalles de salida -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Filas de la tabla -->
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td colspan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Columna lateral derecha con campos adicionales -->
+                    <div class="col-md-4">
+                        <!-- Campos adicionales -->
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Existencias</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Linea</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+                        <div class="input-group input-group-sm mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-sm">Suma</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-sm">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Botones de acción -->
+                <div>
+                    <div class="row">
+                        <div class="d-grid gap-2 d-md-block">
+                            <button type="button" class="btn1" id="btnEditar"><i class="fa-solid fa-pen fa-1x"></i>
+                                Editar</button>
+                            <button type="button" class="btn1" id="btnAgregar"><i
+                                    class="fa-solid fa-circle-plus fa-1x"></i>
+                                Agregar</button>
+                            <button type="button" class="btn1" id="btnImprimir"><i class="fa-solid fa-print fa-1x"></i>
+                                Imprimir</button>
+                            <button type="button" class="btn1" id="btnEditar"><i class="fa-solid fa-print fa-1x"></i>
+                                Guardar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-
-        <div class="col-md-4">
-          <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Existencias</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-          </div>
-
-          <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Linea</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-          </div>
-          
-          <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Suma</span>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-          </div>
-          
-        </div>
-
-      </div>
-
-      <div>
-        <div class="row">
-          <div class="d-grid gap-2 d-md-block">
-            <button type="button" class="btn1" id="btnEditar"><i class="fa-solid fa-pen fa-1x"></i> Editar</button>
-            <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus fa-1x"></i> Agregar</button>
-            <button type="button" class="btn1" id="btnImprimir"><i class="fa-solid fa-print fa-1x"></i> Imprimir</button>
-            <button type="button" class="btn1" id="btnEditar"><i class="fa-solid fa-print fa-1x"></i> Guardar</button>
-        </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</main>
-<script type="text/javascript" src="../resources/js/inventarioDashboard.js"></script>
-<script type="text/javascript" src="../resources/js/alertas.js"></script>
-<!--Mandamos a llamar las librerias de Sweetalert2-->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </main>
+    <!-- Scripts -->
+    <script type="text/javascript" src="../resources/js/inventarioDashboard.js"></script>
+    <script type="text/javascript" src="../resources/js/alertas.js"></script>
+    <!--Mandamos a llamar las librerias de Sweetalert2-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
