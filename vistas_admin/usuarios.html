@@ -24,15 +24,69 @@
         <div class=" container2 row d-flex justify-content-center">
             <div class="col-md-9  d-flex justify-content-center">
                 <div class="botones">
-                    <a href="usuarios.html"><button type="button" class="btn"><i class="fa-solid fa-tag"></i>
+                    <a href="usuarios.html"><button type="button" class="btn-seleccionado"><i
+                                class="fa-solid fa-tag"></i>
                             Usuarios</button></a>
                 </div>
             </div>
         </div>
-        
-        <!--Formulario para la creacion de usuarios-->
+        <br><br><br>
 
-        
+        <!--Formulario para la creacion de usuarios-->
+        <div class="row col-auto">
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputCodigo" class="mandatory form-label">Usuario *</label>
+                    <input type="text" class="form-control" id="inputCodigo">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputPais" class="form-label">Telefono</label>
+                    <input type="text" class="form-control" id="inputPais">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputDUI" class="mandatory form-label">Clave *</label>
+                    <input type="text" class="form-control" id="inputDUI">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputDep" class="form-label">Correo</label>
+                    <input type="text" class="form-control" id="inputDep">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputNIT" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="inputNIT">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputDocumento" class="mandatory form-label">Nivel de usuario *</label>
+                    <select id="inputDocumento" name="inputDocumento" class="form-select" required>
+                        <option value="Zapatillas">Caja</option>
+                        <option value="Jerseys">Punto de venta</option>
+                        <option value="Jerseys">Admin</option>
+                        <option value="Jerseys">Inventario</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputDireccion" class="form-label">DUI</label>
+                    <input type="text" class="form-control" id="inputDireccion">
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <!--Botones-->
+        <div class="d-grid gap-2 d-md-flex d-flex justify-content-center ">
+            <button type="button" class="btn1" id="btnEditar"><i class="fa-solid fa-circle-plus"></i> Guardar</button>
+            <button type="button" class="btn1" id="btnCancelar"><i class="fa-solid fa-circle-xmark"></i>
+                Descartar</button>
+            <button type="button" class="btn1" id="btnEliminar"><i class="fa-solid fa-trash"></i> Eliminar</button>
+        </div>
+
 
     </main>
 

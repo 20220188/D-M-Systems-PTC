@@ -84,3 +84,7 @@ body{
     margin-top: -53px;
     margin-left: 300px;
 }
+
+.mandatory{
+    color: red;
+}
