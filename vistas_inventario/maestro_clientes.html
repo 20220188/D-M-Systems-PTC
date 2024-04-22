@@ -21,13 +21,14 @@
 <body id="body">
 
     <main>
-
+        <!-- Contenedor de botones de navegación -->
         <div class=" container2 row d-flex justify-content-center">
             <div class="col-md-9  d-flex justify-content-center">
                 <div class="botones">
-                    <a href="maestro_productos.html"><button type="button" class="btn"><i
-                                class="fa-solid fa-tag"></i> Productos</button></a>
-                    <a href="maestro_clientes.html"><button type="button" class="btn-seleccionado"><i class="fa-solid fa-users"></i>
+                    <a href="maestro_productos.html"><button type="button" class="btn"><i class="fa-solid fa-tag"></i>
+                            Productos</button></a>
+                    <a href="maestro_clientes.html"><button type="button" class="btn-seleccionado"><i
+                                class="fa-solid fa-users"></i>
                             Clientes</button></a>
                     <a href="maestros_proveedores.html"><button type="button" class="btn"><i
                                 class="fa-solid fa-diagram-project"></i> Proveedores</button></a>
@@ -39,9 +40,10 @@
             </div>
         </div>
         <br>
-
-        <div class="row col-auto" >
+        <!-- Formulario de datos de clientes -->
+        <div class="row col-auto">
             <div class="col-md-3">
+                <!-- Campos para ingresar datos -->
                 <div class="col-md-12">
                     <label for="inputCodigo" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="inputCodigo">
@@ -56,6 +58,7 @@
                 </div>
             </div>
             <div class="col-md-3">
+                <!-- Campos para ingresar datos -->
                 <div class="col-md-12">
                     <label for="inputDUI" class="form-label">NIT</label>
                     <input type="text" class="form-control" id="inputDUI">
@@ -69,8 +72,9 @@
                     <input type="text" class="form-control" id="inputDep">
                 </div>
             </div>
-    
+
             <div class="col-md-3">
+                <!-- Campos para ingresar datos -->
                 <div class="col-md-12">
                     <label for="inputNIT" class="form-label">NRC</label>
                     <input type="text" class="form-control" id="inputNIT">
@@ -80,8 +84,9 @@
                     <input type="text" class="form-control" id="inputTel">
                 </div>
             </div>
-    
+
             <div class="col-md-3">
+                <!-- Campo para seleccionar tipo de cliente -->
                 <div class="col-md-12">
                     <label for="inputDireccion" class="form-label">Tipo</label>
                     <input type="text" class="form-control" id="inputDireccion">
@@ -89,16 +94,19 @@
             </div>
         </div>
         <br><br>
-        <!--Botones-->
+        <!-- Botones de acción -->
         <div class="d-grid gap-2 d-md-flex d-flex justify-content-center ">
             <button type="button" class="btn1" id="btnEditar"><i class="fa-solid fa-circle-plus"></i> Guardar</button>
-            <button type="button" class="btn1" id="btnCancelar"><i class="fa-solid fa-circle-xmark"></i> Descartar</button>
+            <button type="button" class="btn1" id="btnCancelar"><i class="fa-solid fa-circle-xmark"></i>
+                Descartar</button>
             <button type="button" class="btn1" id="btnEliminar"><i class="fa-solid fa-trash"></i> Eliminar</button>
         </div>
     </main>
 
+    <!-- Scripts JavaScript -->
     <script type="text/javascript" src="../resources/js/inventarioDashboard.js">
-    </script><script type="text/javascript" src="../resources/js/alertas.js"></script>
+    </script>
+    <script type="text/javascript" src="../resources/js/alertas.js"></script>
     <!--Mandamos a llamar las librerias de Sweetalert2-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
