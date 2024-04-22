@@ -1,0 +1,86 @@
+*{
+    font-family: 'Poppins';
+}
+
+body{
+    background-color: #E7F4F4;
+}
+
+.historial{
+    margin-left: 1200px;
+    margin-top: -60px;
+}
+.h2{
+    margin-top: 50px;
+}
+
+.btn {
+    color: #5D41DE;
+    background-color: #d2d9f1;
+    border-color: #d2d9f1;
+    width: 200px;
+    height: 65px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.btn:hover {
+    color: #ebd7d6;
+    background-color: #5D41DE;
+    border-color: #ebd7d6 
+}
+
+.btn1 {
+    color: #ff342b;
+    background-color: #ebd7d6;
+    border-color: #ebd7d6;
+    width: 200px;
+    height: 65px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.btn1:hover {
+    color: #ebd7d6;
+    background-color: #ff342b;
+    border-color: #ebd7d6
+}
+
+.btn-seleccionado{
+    color: #d2d9f1;
+    background-color: #5D41DE;
+    border-color: #d2d9f1;
+    width: 200px;
+    height: 65px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+.btn-seleccionado:hover {
+    color: #5D41DE;
+    background-color: #d2d9f1;
+    border-color: #d2d9f1
+}
+
+.input-group{
+    color: black;
+}
+
+.container{
+    margin-top: 15px;
+    width: 300px;
+    margin-left: 10px;
+}
+
+.largo{
+    width: 500px;
+    color: black;
+}
+
+.sinIVA{
+    width: 300px;
+    margin-top: -53px;
+}
+
+.largo1{
+    width: 300px;
+    margin-top: -53px;
+    margin-left: 300px;
+}
