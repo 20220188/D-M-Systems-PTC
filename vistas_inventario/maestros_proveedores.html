@@ -19,13 +19,13 @@
 
 <body id="body">
 
-<main>
-
-    <div class=" container2 row d-flex justify-content-center">
+    <main>
+        <!-- Contenedor de botones de navegación -->
+        <div class=" container2 row d-flex justify-content-center">
             <div class="col-md-9  d-flex justify-content-center">
                 <div class="botones">
-                    <a href="maestro_productos.html"><button type="button" class="btn"><i
-                                class="fa-solid fa-tag"></i> Productos</button></a>
+                    <a href="maestro_productos.html"><button type="button" class="btn"><i class="fa-solid fa-tag"></i>
+                            Productos</button></a>
                     <a href="maestro_clientes.html"><button type="button" class="btn"><i class="fa-solid fa-users"></i>
                             Clientes</button></a>
                     <a href="maestros_proveedores.html"><button type="button" class="btn-seleccionado"><i
@@ -37,93 +37,95 @@
                 </div>
             </div>
         </div>
-    <br>
-    <!--Inicio del formulario para ingresar la información-->
-    <div class="row col-auto" >
-        <div class="col-md-3">
-            <div class="col-md-12">
-                <label for="inputCodigo" class="form-label">Código/NRC</label>
-                <input type="text" class="form-control" id="inputCodigo">
+        <br>
+        <!--Inicio del formulario para ingresar la información-->
+        <div class="row col-auto">
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputCodigo" class="form-label">Código/NRC</label>
+                    <input type="text" class="form-control" id="inputCodigo">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputNombre" class="form-label">Nombre/Razón social</label>
+                    <input type="text" class="form-control" id="inputNombre">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputPais" class="form-label">País</label>
+                    <input type="text" class="form-control" id="inputPais">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputnegocio" class="form-label">Giro negocio</label>
+                    <input type="text" class="form-control" id="inputnegocio">
+                </div>
             </div>
-            <div class="col-md-12">
-                <label for="inputNombre" class="form-label">Nombre/Razón social</label>
-                <input type="text" class="form-control" id="inputNombre">
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputDUI" class="form-label">DUI</label>
+                    <input type="text" class="form-control" id="inputDUI">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputNomCo" class="form-label">Nombre comercial</label>
+                    <input type="text" class="form-control" id="inputNomCo">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputFecha" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="inputFecha">
+                </div>
             </div>
-            <div class="col-md-12">
-                <label for="inputPais" class="form-label">País</label>
-                <input type="text" class="form-control" id="inputPais">
+
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputNIT" class="form-label">NIT</label>
+                    <input type="text" class="form-control" id="inputNIT">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputTel" class="form-label">Telefono</label>
+                    <input type="tel" class="form-control" id="inputTel">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputContacto" class="form-label">Contacto</label>
+                    <input type="text" class="form-control" id="inputContacto">
+                </div>
             </div>
-            <div class="col-md-12">
-                <label for="inputnegocio" class="form-label">Giro negocio</label>
-                <input type="text" class="form-control" id="inputnegocio">
+
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputDireccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="inputDireccion">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputDep" class="form-label">Departamento</label>
+                    <input type="text" class="form-control" id="inputDep">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputMunicipio" class="form-label">Municipio</label>
+                    <input type="text" class="form-control" id="inputMunicipio">
+                </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="col-md-12">
-                <label for="inputDUI" class="form-label">DUI</label>
-                <input type="text" class="form-control" id="inputDUI">
-            </div>
-            <div class="col-md-12">
-                <label for="inputNomCo" class="form-label">Nombre comercial</label>
-                <input type="text" class="form-control" id="inputNomCo">
-            </div>
-            <div class="col-md-12">
-                <label for="inputFecha" class="form-label">Fecha</label>
-                <input type="date" class="form-control" id="inputFecha">
+        <!-- Botones para realizar acciones-->
+        <div class="d-grid gap-2 d-md-flex d-flex justify-content-center">
+            <div class="col-md-6-sm-6" id="botones">
+                <div class="d-grid gap-2 d-md-block">
+                    <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus fa-1x"></i>
+                        Agregar</button>
+                    <button type="button" class="btn1" id="btnCancelar"><i class="lni lni-cross-circle"></i>
+                        Cancelar</button>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="col-md-12">
-                <label for="inputNIT" class="form-label">NIT</label>
-                <input type="text" class="form-control" id="inputNIT">
-            </div>
-            <div class="col-md-12">
-                <label for="inputTel" class="form-label">Telefono</label>
-                <input type="tel" class="form-control" id="inputTel">
-            </div>
-            <div class="col-md-12">
-                <label for="inputContacto" class="form-label">Contacto</label>
-                <input type="text" class="form-control" id="inputContacto">
-            </div>
-        </div>
 
-        <div class="col-md-3">
-            <div class="col-md-12">
-                <label for="inputDireccion" class="form-label">Dirección</label>
-                <input type="text" class="form-control" id="inputDireccion">
-            </div>
-            <div class="col-md-12">
-                <label for="inputDep" class="form-label">Departamento</label>
-                <input type="text" class="form-control" id="inputDep">
-            </div>
-            <div class="col-md-12">
-                <label for="inputMunicipio" class="form-label">Municipio</label>
-                <input type="text" class="form-control" id="inputMunicipio">
-            </div>
-        </div>
-    </div>
-<!-- Botones para realizar acciones-->
-    <div class="d-grid gap-2 d-md-flex d-flex justify-content-center">
-        <div class="col-md-6-sm-6" id="botones">
-            <div class="d-grid gap-2 d-md-block">
-                <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus fa-1x"></i> Agregar</button>
-                <button type="button" class="btn1" id="btnCancelar"><i class="lni lni-cross-circle"></i> Cancelar</button>
-            </div>
-        </div>
-    </div>
-        
-    
 
-</main>
+    </main>
 
-<!--Mandamos a llamar los archivos js del sitio web-->
-<script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="../resources/js/inventarioDashboard.js"></script>
-<script type="text/javascript" src="../resources/js/alertas.js"></script>
-<!--Mandamos a llamar las librerias de Sweetalert2-->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--Mandamos a llamar los archivos js del sitio web-->
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/inventarioDashboard.js"></script>
+    <script type="text/javascript" src="../resources/js/alertas.js"></script>
+    <!--Mandamos a llamar las librerias de Sweetalert2-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
