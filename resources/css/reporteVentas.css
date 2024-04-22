@@ -1,0 +1,39 @@
+.table {
+    margin-left: 100px;
+}
+
+#searchForm {
+    margin-left: 100px;
+}
+
+.btn2 {
+    color: #5D41DE;
+    background-color: #d2d9f1;
+    border-color: #d2d9f1;
+    width: 200px;
+    height: 65px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+
+.btn2:hover {
+    color: #ebd7d6;
+    background-color: #5D41DE;
+    border-color: #ebd7d6
+}
+
+.btn2-seleccionado {
+    color: #d2d9f1;
+    background-color: #5D41DE;
+    border-color: #d2d9f1;
+    width: 200px;
+    height: 65px;
+    font-family: 'Poppins';
+    border-radius: 15px;
+}
+
+.btn2-seleccionado:hover {
+    color: #5D41DE;
+    background-color: #d2d9f1;
+    border-color: #d2d9f1
+}

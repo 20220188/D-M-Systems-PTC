@@ -10,35 +10,152 @@
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <!-- Links css -->
+    <link rel="stylesheet" href="../resources/css/reporteVentas.css">
     <link rel="stylesheet" href="../resources/css/dashboard.css">
-    <link rel="stylesheet" href="../resources/css/maestro_clientes.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="icon" href="../img/por el momento.jpg">
-    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body id="body">
 
     <main>
+
+        <!-- Contenedor de botones de navegación -->
         <div class=" container2 row d-flex justify-content-center">
             <div class="col-md-9  d-flex justify-content-center">
                 <div class="botones">
-                    <a href="reporte_ventas.html"><button type="button" class="btn-seleccionado"><i class="fa-solid fa-tag"></i>
+                    <a href="reporte_ventas.html"><button type="button" class="btn2-seleccionado"><i
+                                class="fa-solid fa-tag"></i>
                             Ventas</button></a>
-                    <a href="reporte_compras.html"><button type="button" class="btn"><i
-                                class="fa-solid fa-users"></i>
+                    <a href="reporte_compras.html"><button type="button" class="btn2"><i class="fa-solid fa-users"></i>
                             Compras</button></a>
                 </div>
             </div>
         </div>
+        <!--Contenido aqui-->
+        <br>
+        <br>
+
+        <!--Formulario de busqueda -->
+        <div>
+            <form class="col-sm-12 col-md-6" id="searchForm">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="search" class="form-control" name="search" placeholder="Buscar producto" required>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success" id="botondx1">
+                            <i class="lni lni-search-alt"></i>
+                        </button>
+                        <button type="reset" class="btn btn-secondary" id="botondx2" onclick="fillTable()">
+                            <i class="lni lni-eraser"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br>
+
+        <!--Tabla-->
+
+        <div class="  col-md-10 col-sm-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Codigo⬇</th>
+                        <th scope="col">Descripción⬇</th>
+                        <th scope="col">Cantidad⬇</th>
+                        <th scope="col">Precio sin descuento⬇</th>
+                        <th scope="col">%Descuento⬇</th>
+                        <th scope="col">P.U⬇</th>
+                        <th scope="col">Valor⬇</th>
+                        <th scope="col">Exento⬇</th>
+                        <th scope="col">Cliente⬇</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>                    
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </main>
 
-    <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/inventarioDashboard.js"></script>
     <script type="text/javascript" src="../resources/js/alertas.js"></script>
     <!--Mandamos a llamar las librerias de Sweetalert2-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
