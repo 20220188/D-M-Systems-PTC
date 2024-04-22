@@ -21,12 +21,13 @@
 <body id="body">
 
     <main>
-
+        <!-- Contenedor de botones de navegación -->
         <div class=" container2 row d-flex justify-content-center">
             <div class="col-md-9  d-flex justify-content-center">
+                <!-- Botones de navegación -->
                 <div class="botones">
-                    <a href="maestro_productos.html"><button type="button" class="btn"><i
-                                class="fa-solid fa-tag"></i> Productos</button></a>
+                    <a href="maestro_productos.html"><button type="button" class="btn"><i class="fa-solid fa-tag"></i>
+                            Productos</button></a>
                     <a href="maestro_clientes.html"><button type="button" class="btn"><i class="fa-solid fa-users"></i>
                             Clientes</button></a>
                     <a href="maestros_proveedores.html"><button type="button" class="btn"><i
@@ -40,36 +41,40 @@
         </div>
         <br>
 
-        <div class="row col-auto d-md-flex d-flex justify-content-center" >
-
+        <!-- Formulario de datos de laboratorios -->
+        <div class="row col-auto d-md-flex d-flex justify-content-center">
+            <!-- Columna para el campo de código -->
             <div class="col-md-3 ">
                 <div class="col-md-12 ">
                     <label for="inputDUI" class="form-label">Codigo</label>
                     <input type="text" class="form-control" id="inputDUI">
                 </div>
             </div>
-
+            <!-- Columna para el campo de nombre -->
             <div class="col-md-3">
                 <div class="col-md-12">
                     <label for="inputNIT" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="inputNIT">
                 </div>
-        </div>
-    <br><br><br><br>
-        <br><br>
-        <!--Botones-->
-        <div class="d-grid gap-2 d-md-flex d-flex justify-content-center ">
-            <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus"></i> Guardar</button>
-            <button type="button" class="btn1" id="btnCancelar"><i class="fa-solid fa-circle-xmark"></i> Descartar</button>
-            <button type="button" class="btn1" id="btnEliminar"><i class="fa-solid fa-trash"></i> Eliminar</button>
-        </div>
+            </div>
+            <br><br><br><br>
+            <br><br>
+            <!-- Botones de acción -->
+            <div class="d-grid gap-2 d-md-flex d-flex justify-content-center ">
+                <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus"></i>
+                    Guardar</button>
+                <button type="button" class="btn1" id="btnCancelar"><i class="fa-solid fa-circle-xmark"></i>
+                    Descartar</button>
+                <button type="button" class="btn1" id="btnEliminar"><i class="fa-solid fa-trash"></i> Eliminar</button>
+            </div>
     </main>
 
+    <!-- Scripts JavaScript -->
     <script type="text/javascript" src="../resources/js/inventarioDashboard.js"></script>
     <script type="text/javascript" src="../resources/js/alertas.js"></script>
-<!--Mandamos a llamar las librerias de Sweetalert2-->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--Mandamos a llamar las librerias de Sweetalert2-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
