@@ -10,10 +10,10 @@ const asideHTML = `
         </header>
 <div class="menu__side" id="menu_side">
 
-    <div class="name__page">
+    <a href="admin.html"><div class="name__page">
     <i class="fa-solid fa-user-tie"></i>
         <h4>Admin</h4>
-    </div>
+    </div></a>
 
     <div class="options__menu">	
 
