@@ -29,9 +29,10 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
-                    !$administrador->setApellido($_POST['apellidoAdministrador']) or
+                    !$administrador->setDUI($_POST['duiUsuario']) or
                     !$administrador->setCorreo($_POST['correoAdministrador']) or
                     !$administrador->setAlias($_POST['aliasAdministrador']) or
+                    !$administrador->setTelefono($_POST['telefonoUsuario']) or
                     !$administrador->setClave($_POST['claveAdministrador'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -89,14 +90,30 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el administrador';
                 }
                 break;
-            case 'getUser':
-                if (isset($_SESSION['aliasAdministrador'])) {
-                    $result['status'] = 1;
-                    $result['username'] = $_SESSION['aliasAdministrador'];
-                } else {
-                    $result['error'] = 'Alias de administrador indefinido';
-                }
-                break;
+                case 'getUser':
+                    if (isset($_SESSION['aliasAdministrador'])) {
+                        // Inicia la conexión a la base de datos.
+                        $db = new Database();
+                
+                        // Obtener el alias del administrador de la sesión.
+                        $alias = $_SESSION['aliasAdministrador'];
+                
+                        // Consulta para obtener el nivel de usuario basado en el alias.
+                        $sql = 'SELECT id_nivel_usuario FROM tb_usuarios WHERE usuario = ?';
+                        $params = array($alias);
+                        $data = $db->getRow($sql, $params);
+                
+                        if ($data) {
+                            $result['status'] = 1;
+                            $result['username'] = $alias;
+                            $result['user_level'] = $data['id_nivel_usuario'];
+                        } else {
+                            $result['error'] = 'No se pudo obtener el nivel de usuario';
+                        }
+                    } else {
+                        $result['error'] = 'Alias de administrador indefinido';
+                    }
+                    break;
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;
@@ -162,9 +179,10 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$administrador->setNombre($_POST['nombreAdministrador']) or
-                    !$administrador->setApellido($_POST['apellidoAdministrador']) or
+                    !$administrador->setDUI($_POST['duiUsuario']) or
                     !$administrador->setCorreo($_POST['correoAdministrador']) or
                     !$administrador->setAlias($_POST['aliasAdministrador']) or
+                    !$administrador->setTelefono($_POST['telefonoUsuario']) or
                     !$administrador->setClave($_POST['claveAdministrador'])
                 ) {
                     $result['error'] = $administrador->getDataError();

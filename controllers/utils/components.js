@@ -2,7 +2,7 @@
 *   CONTROLADOR DE USO GENERAL EN TODAS LAS PÁGINAS WEB.
 */
 // Constante para establecer la ruta base del servidor.
-const SERVER_URL = 'http://localhost/coffeeshop/api/';
+const SERVER_URL = 'http://localhost/D-M-SYSTEMS-PTC/api/';
 
 /*
 *   Función para mostrar un mensaje de confirmación. Requiere la librería sweetalert para funcionar.
