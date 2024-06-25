@@ -15,7 +15,7 @@ tipo_usuario VARCHAR(20)
 CREATE TABLE tb_usuarios(
 id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 usuario VARCHAR(10),
-clave VARCHAR(10),
+clave VARCHAR(100),
 correo VARCHAR(50),
 nombre VARCHAR(25),
 DUI VARCHAR(10),
@@ -26,6 +26,17 @@ FOREIGN KEY (id_nivel_usuario)
 REFERENCES tb_niveles_usuarios (id_nivel_usuario)
 );
 
+INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
+VALUES ('usuario1', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario1@example.com', 'Juan Perez', '01234567-8', '22223333', 1);
+
+INSERT INTO tb_niveles_usuarios (id_nivel_usuario, tipo_usuario)
+VALUES 
+(1, 'administrador'),
+(2, 'inventario'),
+(3, 'ventas'),
+(4, 'caja');
+
+select * from tb_usuarios;
 
 CREATE TABLE tb_clientes( 
 id_cliente INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
