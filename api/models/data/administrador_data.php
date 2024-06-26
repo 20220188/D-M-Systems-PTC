@@ -39,17 +39,17 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
-    public function setApellido($value, $min = 2, $max = 50)
+    public function setDUI($value)
     {
-        if (!Validator::validateAlphabetic($value)) {
-            $this->data_error = 'El apellido debe ser un valor alfabético';
+        if (!Validator::validateDUI($value)) {
+            $this->data_error = 'El DUI debe tener el formato ########-#';
             return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->apellido = $value;
-            return true;
+        } elseif($this->checkDuplicate($value)) {
+            $this->data_error = 'El DUI ingresado ya existe';
+            return false;
         } else {
-            $this->data_error = 'El apellido debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
+            $this->dui = $value;
+            return true;
         }
     }
 
@@ -77,6 +77,17 @@ class AdministradorData extends AdministradorHandler
             return true;
         } else {
             $this->data_error = 'El alias debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setTelefono($value)
+    {
+        if (Validator::validatePhone($value)) {
+            $this->telefono = $value;
+            return true;
+        } else {
+            $this->data_error = 'El teléfono debe tener el formato (2, 6, 7)###-####';
             return false;
         }
     }
