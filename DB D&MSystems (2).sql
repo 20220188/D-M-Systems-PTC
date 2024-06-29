@@ -54,10 +54,6 @@ categoria VARCHAR(30),
 descrpicion VARCHAR(100) NULL
 );
 
-CREATE TABLE tb_fabricantes(
-id_fabricante INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-nombre_fabricante VARCHAR(20)
-);
 
 CREATE TABLE tb_iva(
 id_iva INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -95,11 +91,7 @@ REFERENCES tb_categorias (id_categoria)
 
 CREATE TABLE tb_proveedores(
 id_proveedor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-nombre_proveedor VARCHAR(15),
-id_fabricante INT,
-CONSTRAINT fk_proveedor_fabricante
-FOREIGN KEY (id_fabricante)
-REFERENCES tb_fabricantes (id_fabricante)
+nombre_proveedor VARCHAR(15)
 );
 
 
