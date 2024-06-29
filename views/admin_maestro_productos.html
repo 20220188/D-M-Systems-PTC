@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+
+    <!--Links importantes-->
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../resources/css/dashboard.css">
+    <link rel="stylesheet" href="../resources/css/maestro_productos.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="icon" href="../img/por el momento.jpg">
+
+</head>
+
+<body id="body">
+
+    <main>
+
+        <div class=" container2 row d-flex justify-content-center">
+            <div class="col-md-9  d-flex justify-content-center">
+                <div class="botones">
+                    <a href="admin_maestro_productos.html"><button type="button" class="btn-seleccionado"><i
+                                class="fa-solid fa-tag"></i> Productos</button></a>
+                    <a href="admin_maestro_clientes.html"><button type="button" class="btn"><i
+                                class="fa-solid fa-users"></i>
+                            Clientes</button></a>
+                    <a href="admin_maestros_proveedores.html"><button type="button" class="btn"><i
+                                class="fa-solid fa-diagram-project"></i> Proveedores</button></a>
+                    <a href="admin_maestro_vendedores.html"><button type="button" class="btn"><i
+                                class="fa-solid fa-hand-holding-dollar"></i> Dependientes</button></a>
+                    <a href="admin_maestro_laboratorios.html"><button type="button" class="btn"><i
+                                class="fa-solid fa-flask-vial"></i> Laboratorios</button></a>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <!--Info obligatoria-->
+        <h2 class="row d-flex justify-content-center">Información obligatoria </h2>
+
+        <div class="row col-auto row d-flex justify-content-center">
+            <div class="col-md-3 ">
+                <div class="col-md-12 ">
+                    <label for="inputCodigo" class="form-label">Codigo</label>
+                    <input type="text" class="form-control" id="inputCodigo" name="inputCodigo" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="inputNombre" class="form-label">Descripción</label>
+                    <input type="text" class="form-control" id="inputNombre" name="inputNombre" required>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="inputVentaIVA" class="form-label">Precio venta c/IVA</label>
+                    <input type="text" class="form-control" id="inputVentaIVA" name="inputVentaIVA" required>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputPrecio" class="form-label">Precio sin IVA </label>
+                    <input type="text" class="form-control" id="inputPrecio" name="inputPrecio" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="inputCostoUnitario" class="form-label">Costo unitario</label>
+                    <input type="text" class="form-control" id="inputCostoUnitario" name="inputCostoUnitario" required>
+                </div>
+                <br>
+                <button type="button" class="btn"><i class="fa-solid fa-database"></i> Historial de compras</button>
+            </div>
+
+        </div>
+
+
+
+
+        <!--Detalles-->
+        <h2 class=" h2 row d-flex justify-content-center">Detalles de producto</h2>
+
+        <div class="row col-auto row d-flex justify-content-center">
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputPresentacion" class="form-label">Presentación</label>
+                    <input type="text" class="form-control" id="inputPresentacion" name="inputPresentacion" required>
+                </div>
+                <!--Ubicacion fisica. BODEGA 01 o BODEGA 02-->
+                <div class="col-md-12">
+                    <label for="inputUbicacion" class="form-label">Ubicación </label>
+                    <input type="text" class="form-control" id="inputUbicacion" name="inputUbicacion" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="inputMinimo" class="form-label">Mínimo</label>
+                    <input type="text" class="form-control" id="inputMinimo" name="inputMinimo" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="inputMaximo" class="form-label">Máximo </label>
+                    <input type="text" class="form-control" id="inputMaximo" name="inputMaximo" required>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputMarca" class="form-label">Marca</label>
+                    <input type="text" class="form-control" id="inputMarca" name="inputMarca" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="inputExistencia" class="form-label">Periodo de existencia</label>
+                    <input type="text" class="form-control" id="inputExistencia" name="inputExistencia" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="inputFecha" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="inputFecha" name="inputFecha">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputLaboratorio" class="form-label">Laboratorio</label>
+                    <input type="text" class="form-control" id="inputLaboratorio" name="inputLaboratorio" required>
+                </div>
+            </div>
+        </div>
+
+        <!--Precios-->
+        <h2 class=" h2 row d-flex justify-content-center">Detalles de precios </h2>
+
+        <div class="row col-auto row d-flex justify-content-center">
+            <div class="col-md-3 ">
+                <div class="col-md-12 ">
+                    <label for="inputDescuento" class="form-label">Descuento %</label>
+                    <input type="text" class="form-control" id="inputDescuento" name="inputDescuento" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="inputPrecioOp1" class="form-label">Precio opcional 1</label>
+                    <input type="text" class="form-control" id="inputPrecioOp1" name="inputPrecioOp1">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputPrecioOp3" class="form-label">Precio opcional 3</label>
+                    <input type="text" class="form-control" id="inputPrecioOp3" name="inputPrecioOp3">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputPrecioOp5" class="form-label">Precio opcional 5</label>
+                    <input type="text" class="form-control" id="inputPrecioOp5" name="inputPrecioOp5">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputPrecioDesc" class="form-label">Precio c/Descuento </label>
+                    <input type="text" class="form-control" id="inputPrecioDesc" name="inputPrecioDesc" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="inputPrecioOp2" class="form-label">Precio opcional 2</label>
+                    <input type="text" class="form-control" id="inputPrecioOp2" name="inputPrecioOp2">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputPrecioOp4" class="form-label">Precio opcional 4</label>
+                    <input type="text" class="form-control" id="inputPrecioOp4" name="inputPrecioOp4">
+                </div>
+            </div>
+        </div>
+        <!--Info de solo lectura-->
+        <h2 class=" h2 row d-flex justify-content-center">Información de solo lectura </h2>
+        <div class="row col-auto row d-flex justify-content-center">
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="fechaUltVenta" class="form-label">Fecha ultima venta</label>
+                    <input type="date" class="form-control" id="fechaUltVenta" name="fechaUltVenta">
+                </div>
+                <div class="col-md-12">
+                    <label for="entradas" class="form-label">Entradas </label>
+                    <input type="text" class="form-control" id="entradas" name="entradas">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="ultimoPrecioCompra" class="form-label">Ultimo precio de compra</label>
+                    <input type="text" class="form-control" id="ultimoPrecioCompra" name="ultimoPrecioCompra">
+                </div>
+                <div class="col-md-12">
+                    <label for="salidas" class="form-label">Salidas</label>
+                    <input type="text" class="form-control" id="salidas" name="salidas">
+                </div>
+                <div class="col-md-12">
+                    <label for="costoTotal" class="form-label">Costo total</label>
+                    <input type="date" class="form-control" id="costoTotal" name="costoTotal">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="ultimoProveedorCompra" class="form-label">Ultimo proveedor de compra</label>
+                    <input type="text" class="form-control" id="ultimoProveedorCompra" name="ultimoProveedorCompra">
+                </div>
+                <div class="col-md-12">
+                    <label for="existenciaActual" class="form-label">Existencia actual</label>
+                    <input type="text" class="form-control" id="existenciaActual" name="existenciaActual">
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <!--Botones-->
+        <div class="d-grid gap-2 d-md-flex d-flex justify-content-center ">
+            <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus"></i> Guardar</button>
+            <button type="button" class="btn1" id="btnCancelar"><i class="fa-solid fa-circle-xmark"></i>
+                Descartar</button>
+            <button type="button" class="btn1" id="btnEliminar"><i class="fa-solid fa-trash"></i> Eliminar</button>
+        </div>
+    </main>
+    <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
+    <script type="text/javascript" src="../resources/js/alertas.js"></script>
+    <!--Mandamos a llamar las librerias de Sweetalert2-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Llamada al kit de font awesome -->
+    <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+</body>
+
+
+</html>

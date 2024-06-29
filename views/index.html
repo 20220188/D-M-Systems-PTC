@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- Declaración del idioma para el documento -->
+<html lang="es">
+
+<head>
+    <!-- Título del documento -->
+    <title></title>
+    <!-- Metadatos de la página web -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- IMPORTACIÓN DE RECURSOS EXTERNOS -->
+    <!-- Llamada al icono de la página web -->
+    <link type="image/png" rel="icon" href="../resources/img/icon.png">
+    <!-- Llamada a las hojas de estilos del framework e iconos -->
+    <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <!-- Contenido principal del documento -->
+    <main>
+        <!-- Título del contenido principal -->
+        <h3 id="mainTitle"></h3>
+        <img src="../../resources/img/user.png" class="mx-auto d-block" width="200">
+        <!-- Formulario para iniciar sesión -->
+        <form class="d-none" id="loginForm">
+            <div class="row g-3">
+                <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                    <label for="alias" class="form-label">Alias</label>
+                    <input id="alias" type="text" name="alias" class="form-control" required>
+                </div>
+                <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                    <label for="clave" class="form-label">Contraseña</label>
+                    <input id="clave" type="password" name="clave" class="form-control" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Enviar</button>
+                </div>
+            </div>
+        </form>
+        <!-- Formulario para crear el primer administrador -->
+        <form class="d-none" id="signupForm">
+            <div class="row g-3">
+                <div class="col-sm-12 col-md-6">
+                    <label for="nombreAdministrador" class="form-label">Nombre</label>
+                    <input id="nombreAdministrador" type="text" name="nombreAdministrador" class="form-control"
+                        required>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <label for="duiUsuario" class="form-label">Dui</label>
+                    <input id="duiUsuario" type="text" name="duiUsuario" class="form-control"
+                        required>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <label for="correoAdministrador" class="form-label">Correo</label>
+                    <input id="correoAdministrador" type="email" name="correoAdministrador" class="form-control"
+                        required>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <label for="aliasAdministrador" class="form-label">Alias</label>
+                    <input id="aliasAdministrador" type="text" name="aliasAdministrador" class="form-control" required>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <label for="telefonoUsuario" class="form-label">Telefono</label>
+                    <input id="telefonoUsuario" type="text" name="telefonoUsuario" class="form-control"
+                        required>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <label for="claveAdministrador" class="form-label">Contraseña</label>
+                    <input id="claveAdministrador" type="password" name="claveAdministrador" class="form-control"
+                        required>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
+                    <input id="confirmarClave" type="password" name="confirmarClave" class="form-control" required>
+                </div>
+                <div class="text-center">
+                    <button type="reset" class="btn btn-secondary"><i class="bi bi-x-square"></i> Cancelar</button>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+                </div>
+            </div>
+        </form>
+    </main>
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../controllers/utils/components.js"></script>
+    <!-- Llamada al controlador del sitio privado -->
+    <script type="text/javascript" src="../controllers/utils/admin.js"></script>
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../controllers/admin/index.js"></script>
+</body>
+
+</html>
