@@ -11,6 +11,7 @@ class ProveedorHandler
     */
     protected $id_proveedor = null;
     protected $nombre_proveedor = null;
+    protected $descripcion = null;
 
     /*
     *   Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
