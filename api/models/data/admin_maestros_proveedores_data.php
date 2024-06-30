@@ -17,7 +17,7 @@ class ProveedorData extends ProveedorHandler
     /*
      *   Métodos para validar y establecer los datos.
      */
-    public function setId($value)
+    public function setIdProveedor($value)
     {
         if (Validator::validateNaturalNumber($value)) {
             $this->id_proveedor = $value;
@@ -28,16 +28,145 @@ class ProveedorData extends ProveedorHandler
         }
     }
 
-    public function setNombre($value, $min = 2, $max = 50)
+    public function setCodigoProveedor($value)
     {
-        if (!Validator::validateAlphanumeric($value)) {
-            $this->data_error = 'El nombre debe ser un valor alfanumérico';
+        if (Validator::validateNaturalNumber($value)) {
+            $this->codigo_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El código del proveedor es incorrecto';
             return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
+        }
+    }
+
+    public function setNombreProveedor($value)
+    {
+        if (Validator::validateAlphanumeric($value, 1, 100)) {
             $this->nombre_proveedor = $value;
             return true;
         } else {
-            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            $this->data_error = 'El nombre del proveedor es incorrecto';
+            return false;
+        }
+    }
+
+    public function setPaisProveedor($value)
+    {
+        if (Validator::validateAlphabetic($value, 1, 50)) {
+            $this->pais_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El país del proveedor es incorrecto';
+            return false;
+        }
+    }
+
+    public function setGiroNegocioProveedor($value)
+    {
+        if (Validator::validateAlphanumeric($value, 1, 100)) {
+            $this->giro_negocio_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El giro de negocio del proveedor es incorrecto';
+            return false;
+        }
+    }
+
+    public function setDuiProveedor($value)
+    {
+        if (Validator::validateAlphanumeric($value, 1, 10)) {
+            $this->dui_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El DUI del proveedor es incorrecto';
+            return false;
+        }
+    }
+
+    public function setNombreComercialProveedor($value)
+    {
+        if (Validator::validateAlphanumeric($value, 1, 100)) {
+            $this->nombre_comercial_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre comercial del proveedor es incorrecto';
+            return false;
+        }
+    }
+
+    public function setFechaProveedor($value)
+    {
+        if (Validator::validateDate($value)) {
+            $this->fecha_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'La fecha del proveedor es incorrecta';
+            return false;
+        }
+    }
+
+    public function setNitProveedor($value)
+    {
+        if (Validator::validateAlphanumeric($value, 1, 17)) {
+            $this->nit_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El NIT del proveedor es incorrecto';
+            return false;
+        }
+    }
+
+    public function setTelefonoProveedor($value)
+    {
+        if (Validator::validatePhone($value)) {
+            $this->telefono_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El teléfono del proveedor es incorrecto';
+            return false;
+        }
+    }
+
+    public function setContactoProveedor($value)
+    {
+        if (Validator::validateAlphanumeric($value, 1, 100)) {
+            $this->contacto_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El contacto del proveedor es incorrecto';
+            return false;
+        }
+    }
+
+    public function setDireccionProveedor($value)
+    {
+        if (Validator::validateAlphanumeric($value, 1, 200)) {
+            $this->direccion_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'La dirección del proveedor es incorrecta';
+            return false;
+        }
+    }
+
+    public function setDepartamentoProveedor($value)
+    {
+        if (Validator::validateAlphabetic($value, 1, 50)) {
+            $this->departamento_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El departamento del proveedor es incorrecto';
+            return false;
+        }
+    }
+
+    public function setMunicipioProveedor($value)
+    {
+        if (Validator::validateAlphabetic($value, 1, 50)) {
+            $this->municipio_proveedor = $value;
+            return true;
+        } else {
+            $this->data_error = 'El municipio del proveedor es incorrecto';
             return false;
         }
     }
