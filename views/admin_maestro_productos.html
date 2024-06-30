@@ -8,12 +8,9 @@
 
     <!--Links importantes-->
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link rel="stylesheet" href="../resources/css/dashboard.css">
     <link rel="stylesheet" href="../resources/css/maestro_productos.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="icon" href="../img/por el momento.jpg">
 
 </head>
 
@@ -69,7 +66,7 @@
                     <i class="fa-solid fa-plus"></i>
                 </button>
 
-                
+
 
             </div>
         </div>
@@ -79,7 +76,7 @@
             <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
             <thead>
                 <tr>
-                    <td class="text-start" colspan="7" id="rowsFound"></td>
+                    <td class="text-start" colspan="8" id="rowsFound"></td>
                 </tr>
                 <tr>
                     <th>IMAGEN</th>
@@ -103,8 +100,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="modalTitle"></h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Formulario para crear o actualizar un registro -->
                     <form id="saveForm">
@@ -113,8 +109,8 @@
                             <input type="number" class="d-none" id="idProducto" name="idProducto">
                             <div class="col-sm-12 col-md-6">
                                 <label for="nombreProducto" class="form-label">Nombre</label>
-                                <input id="nombreProducto" type="text" name="nombreProducto"
-                                    class="form-control" required>
+                                <input id="nombreProducto" type="text" name="nombreProducto" class="form-control"
+                                    required>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="descripcionProducto" class="form-label">Descripción</label>
@@ -123,33 +119,33 @@
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="codigoProducto" class="form-label">Codigo</label>
-                                <input id="codigoProducto" type="text" name="codigoProducto"
+                                <input id="codigoProducto" type="text" name="codigoProducto" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="fechaVencimiento" class="form-label">Fecha de vencimiento</label>
+                                <input id="fechaVencimiento" type="date" name="fechaVencimiento" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="precioSinIVA" class="form-label">Precio sin IVA</label>
+                                <input id="precioSinIVA" type="number" name="precioSinIVA" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="precioVentaConIVA" class="form-label">Precio de venta c/IVA</label>
+                                <input id="precioVentaConIVA" type="number" name="precioVentaConIVA"
                                     class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="FechaVencimiento" class="form-label">Fecha de vencimiento</label>
-                                <input id="FechaVencimiento" type="date" name="FechaVencimiento"
-                                    class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="PrecioSinIVA" class="form-label">Precio sin IVA</label>
-                                <input id="PrecioSinIVA" type="number" name="PrecioSinIVA"
-                                    class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="PrecioVentaConIVA" class="form-label">Precio de venta c/IVA</label>
-                                <input id="PrecioVentaConIVA" type="number" name="PrecioVentaConIVA"
-                                    class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="PrecioUnitario" class="form-label">Precio unitario</label>
-                                <input id="PrecioUnitario" type="number" name="PrecioUnitario"
-                                class="form-control" required>
+                                <label for="precioUnitario" class="form-label">Precio unitario</label>
+                                <input id="precioUnitario" type="number" name="precioUnitario" class="form-control"
+                                    required>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="imagenProducto" class="form-label">Imagen</label>
-                                <input id="imagenProducto" type="file" name="imagenProducto"
-                                    class="form-control" accept=".png, .jpg">
+                                <input id="imagenProducto" type="file" name="imagenProducto" class="form-control"
+                                    accept=".png, .jpg">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -160,16 +156,26 @@
             </div>
         </div>
 
-        
+
     </main>
     <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
     <script type="text/javascript" src="../resources/js/alertas.js"></script>
-    <!--Mandamos a llamar las librerias de Sweetalert2-->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="../controllers/utils/admin.js"></script>
+    <script src="../controllers/utils/components.js"></script>
     <!-- Llamada al kit de font awesome -->
     <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+
+    <!-- Scripts de JavaScript -->
+    <!-- Agrega los enlaces a los scripts de Bootstrap y SweetAlert2 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../controllers/admin/admin_maestro_productos.js"></script>
 </body>
 
 

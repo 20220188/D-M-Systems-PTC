@@ -27,7 +27,7 @@ const loadTemplate = async () => {
             let navOptions = '';
             if (DATA.user_level == 1) {
                 navOptions = `
-                  <div class="menu__side" id="menu_side">
+                <div class="menu__side" id="menu_side">
 
     <a href="admin.html"><div class="name__page">
     <i class="fa-solid fa-user-tie"></i>
@@ -36,7 +36,7 @@ const loadTemplate = async () => {
 
     <div class="options__menu">	
 
-        <a href="maestro_clientes.html">
+        <a href="admin_maestro_clientes.html">
         <div class="maestros">
             <div class="option">
             <i class="fa-solid fa-star" title="Maestros"></i>
@@ -45,21 +45,21 @@ const loadTemplate = async () => {
         </div>
         </a>
 
-        <a href="modulo_compras.html">
+        <a href="admin_modulo_compras.html">
             <div class="option">
             <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
                 <h4>Movimientos</h4>
             </div>
         </a>
         
-        <a href="reporte_ventas.html">
+        <a href="admin_reporte_ventas.html">
             <div class="option">
             <i class="fa-solid fa-file" title="reportes"></i>
                 <h4>Reportes</h4>
             </div>
         </a>
 
-        <a href="usuarios.html">
+        <a href="admin_usuarios.html">
             <div class="option">
             <i class="fa-solid fa-eye" title="Utilidades"></i>
                 <h4>Utilidades</h4>
