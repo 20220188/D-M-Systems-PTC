@@ -26,7 +26,31 @@ if (isset($_GET['action'])) {
                 break;
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
-                if (!$proveedor->setNombreProveedor($_POST['nombre_proveedor'])) {
+                if (!$proveedor->setCodigoProveedor($_POST['codigo_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setNombreProveedor($_POST['nombre_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setPaisProveedor($_POST['pais_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setGiroNegocioProveedor($_POST['giro_negocio_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setDuiProveedor($_POST['dui_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setNombreComercialProveedor($_POST['nombre_comercial_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setFechaProveedor($_POST['fecha_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setNitProveedor($_POST['nit_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setTelefonoProveedor($_POST['telefono_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setContactoProveedor($_POST['contacto_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setDireccionProveedor($_POST['direccion_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setDepartamentoProveedor($_POST['departamento_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setMunicipioProveedor($_POST['municipio_proveedor'])) {
                     $result['error'] = $proveedor->getDataError();
                 } elseif ($proveedor->createRow()) {
                     $result['status'] = 1;
@@ -54,7 +78,33 @@ if (isset($_GET['action'])) {
                 break;
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
-                if (!$proveedor->setIdProveedor($_POST['id_proveedor']) or !$proveedor->setNombreProveedor($_POST['nombre_proveedor'])) {
+                if (!$proveedor->setIdProveedor($_POST['id_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setCodigoProveedor($_POST['codigo_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setNombreProveedor($_POST['nombre_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setPaisProveedor($_POST['pais_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setGiroNegocioProveedor($_POST['giro_negocio_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setDuiProveedor($_POST['dui_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setNombreComercialProveedor($_POST['nombre_comercial_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setFechaProveedor($_POST['fecha_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setNitProveedor($_POST['nit_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setTelefonoProveedor($_POST['telefono_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setContactoProveedor($_POST['contacto_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setDireccionProveedor($_POST['direccion_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setDepartamentoProveedor($_POST['departamento_proveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif (!$proveedor->setMunicipioProveedor($_POST['municipio_proveedor'])) {
                     $result['error'] = $proveedor->getDataError();
                 } elseif ($proveedor->updateRow()) {
                     $result['status'] = 1;
@@ -88,3 +138,4 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
+?>
