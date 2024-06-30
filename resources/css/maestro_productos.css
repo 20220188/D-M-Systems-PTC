@@ -14,7 +14,7 @@ body{
     margin-top: 50px;
 }
 
-.btn {
+.btn1 {
     color: #5D41DE;
     background-color: #d2d9f1;
     border-color: #d2d9f1;
@@ -23,26 +23,13 @@ body{
     font-family: 'Poppins';
     border-radius: 15px;
 }
-.btn:hover {
+.btn1:hover {
     color: #ebd7d6;
     background-color: #5D41DE;
     border-color: #ebd7d6 
 }
 
-.btn1 {
-    color: #ff342b;
-    background-color: #ebd7d6;
-    border-color: #ebd7d6;
-    width: 200px;
-    height: 65px;
-    font-family: 'Poppins';
-    border-radius: 15px;
-}
-.btn1:hover {
-    color: #ebd7d6;
-    background-color: #ff342b;
-    border-color: #ebd7d6
-}
+
 
 .btn-seleccionado{
     color: #d2d9f1;
