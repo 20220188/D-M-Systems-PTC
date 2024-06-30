@@ -4,23 +4,26 @@ require_once('../../helpers/database.php');
 /*
  *  Clase para manejar el comportamiento de los datos de la tabla administrador.
  */
-class MaestroProductosHandler
+class ProductosHandler
 {
     /*
      *  Declaración de atributos para el manejo de datos.
      */
 
-    /*Atributos para la seccion de informacion obligatoria*/ 
+    /*Atributos para la seccion de informacion obligatoria*/
     protected $id = null;
     protected $codigo = null;
     protected $descripcion = null;
     protected $nombre = null;
+    protected $imagen = null;
     protected $precio_sin_iva = null;
     protected $precio_con_iva = null;
     protected $costo_unitario = null;
     protected $fecha_vencimiento = null;
 
-    /*Atributos para la seccion de detalles de productos*/
+
+    /*Atributos para la tabla de detalles de productos*/
+    protected $id_detalle_producto = null;
     protected $presentacion = null;
     protected $ubicaion = null;
     protected $minimo = null;
@@ -37,7 +40,7 @@ class MaestroProductosHandler
     protected $precio_opcional3 = null;
     protected $precio_opcional4 = null;
 
-    /*Atributos para la seccion de detalles de informacion de solo lectura*/
+    /*Atributos para la seccion de detalles de informacion de solo lectura
     protected $fecha_ultima_compra = null;
     protected $entradas = null;
     protected $salidas = null;
@@ -46,103 +49,50 @@ class MaestroProductosHandler
     protected $id_proveedor = null;
     protected $existencias_actuales = null;
     protected $id_iva = null;
+    */
 
-    /*
-     *  Métodos para gestionar la cuenta del administrador.
-     */
-    public function checkUser($username, $password)
-    {
-        $sql = 'SELECT id_admin, alias_admin, clave_admin
-                FROM tb_administradores
-                WHERE  alias_admin = ?';
-        $params = array($username);
-        if (!($data = Database::getRow($sql, $params))) {
-            return false;
-        } elseif (password_verify($password, $data['clave_admin'])) {
-            $_SESSION['idAdministrador'] = $data['id_admin'];
-            $_SESSION['aliasAdministrador'] = $data['alias_admin'];
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function checkPassword($password)
-    {
-        $sql = 'SELECT clave_admin
-                FROM tb_administradores
-                WHERE id_admin = ?';
-        $params = array($_SESSION['idAdministrador']);
-        $data = Database::getRow($sql, $params);
-        // Se verifica si la contraseña coincide con el hash almacenado en la base de datos.
-        if (password_verify($password, $data['clave_admin'])) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function changePassword()
-    {
-        $sql = 'UPDATE tb_administradores
-                SET clave_admin = ?
-                WHERE id_admin = ?';
-        $params = array($this->clave, $_SESSION['idAdministrador']);
-        return Database::executeRow($sql, $params);
-    }
-
-    public function readProfile()
-    {
-        $sql = 'SELECT id_admin, nombre_admin, apellido_admin, correo_admin, alias_admin
-                FROM tb_administradores
-                WHERE id_admin = ?';
-        $params = array($_SESSION['idAdministrador']);
-        return Database::getRow($sql, $params);
-    }
-
-    public function editProfile()
-    {
-        $sql = 'UPDATE tb_administradores
-                SET nombre_admin = ?, apellido_admin = ?, correo_admin = ?, alias_admin = ?
-                WHERE id_admin = ?';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->alias, $_SESSION['idAdministrador']);
-        return Database::executeRow($sql, $params);
-    }
+    // Constante para establecer la ruta de las imágenes.
+    const RUTA_IMAGEN = '../../images/productos/';
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
      */
+
+    /*
+    *  Método para los registros de la tabla de productos.
+    */
+
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_admin, nombre_admin, apellido_admin, correo_admin, alias_admin
-                FROM tb_administradores
-                WHERE apellido_admin LIKE ? OR nombre_admin LIKE ?
-                ORDER BY apellido_admin';
-        $params = array($value, $value);
+        $sql = 'SELECT id_producto, imagen, codigo, nombre, descripcion, fecha_vencimiento, precio_con_iva, costo_unitario
+                FROM tb_productos
+                WHERE codigo LIKE ? OR nombre LIKE ? OR descripcion LIKE ? OR fecha_vencimiento LIKE ? OR precio_con_iva LIKE ? OR costo_unitario LIKE ?
+                ORDER BY nombre';
+        $params = array($value, $value, $value, $value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_administradores(nombre_admin, apellido_admin, correo_admin, alias_admin, clave_admin)
-                VALUES(?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->alias, $this->clave);
+        $sql = 'INSERT INTO tb_productos(imagen, codigo, nombre, descripcion, fecha_vencimiento, precio_sin_iva, precio_con_iva, costo_unitario)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
+        $params = array($this->imagen, $this->codigo, $this->nombre, $this->descripcion, $this->fecha_vencimiento, $this->precio_sin_iva, $this->precio_con_iva, $this->costo_unitario);
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
-        $sql = 'SELECT id_admin, nombre_admin, apellido_admin, correo_admin, alias_admin
-                FROM tb_administradores
-                ORDER BY nombre_admin';
+        $sql = 'SELECT id_producto, imagen, codigo, nombre, descripcion, fecha_vencimiento, precio_con_iva, costo_unitario
+                FROM tb_productos
+                ORDER BY nombre';
         return Database::getRows($sql);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_admin, nombre_admin, apellido_admin, correo_admin, alias_admin
-                FROM tb_administradores
+        $sql = 'SELECT id_producto, imagen, codigo, nombre, descripcion, fecha_vencimiento,precio_sin_iva, precio_con_iva, costo_unitario
+                FROM tb_productos
                 WHERE id_admin = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
@@ -150,18 +100,31 @@ class MaestroProductosHandler
 
     public function updateRow()
     {
-        $sql = 'UPDATE tb_administradores
-                SET nombre_admin = ?, apellido_admin = ?, correo_admin = ?
-                WHERE id_admin = ?';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->id);
+        $sql = 'UPDATE tb_productos
+                SET imagen = ?, codigo = ?, nombre = ?, descripcion = ?, fecha_vencimiento = ?, precio_sin_iva = ?, precio_con_iva = ?, costo_unitario = ?
+                WHERE id_producto = ?';
+        $params = array($this->imagen, $this->codigo, $this->nombre, $this->descripcion, $this->fecha_vencimiento, $this->precio_sin_iva, $this->precio_con_iva, $this->costo_unitario, $this->id);
         return Database::executeRow($sql, $params);
     }
 
     public function deleteRow()
     {
-        $sql = 'DELETE FROM tb_administradores
-                WHERE id_admin = ?';
+        $sql = 'DELETE FROM tb_productos
+                WHERE id_producto = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+
+    public function readFilename()
+    {
+        $sql = 'SELECT imagen
+                FROM tb_productos
+                WHERE id_producto = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+
+    /*
+    *  Método para los registros de la tabla de detalles de productos.
+    */
 }
