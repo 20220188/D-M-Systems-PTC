@@ -26,19 +26,22 @@ if (isset($_GET['action'])) {
         switch ($_GET['action']) {
             case 'searchRows':
                 // Validar el término de búsqueda antes de ejecutar la búsqueda.
-                if (!Validator::validateSearch($_POST['search'])) {
-                    $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $proveedor->searchRows()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                if (!isset($_POST['search']) || empty($_POST['search'])) {
+                    $result['error'] = 'El término de búsqueda no puede estar vacío';
                 } else {
-                    $result['error'] = 'No hay coincidencias';
+                    // Aquí puedes aplicar tu lógica de búsqueda utilizando $proveedor->searchRows()
+                    if ($result['dataset'] = $proveedor->searchRows($_POST['search'])) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                    } else {
+                        $result['error'] = 'No hay coincidencias';
+                    }
                 }
                 break;
 
             case 'createRow':
                 // Validar y filtrar los datos del formulario antes de crear un nuevo proveedor.
-                $_POST = Validator::validateForm($_POST);
+                $_POST = array_map('htmlspecialchars', $_POST); // Ejemplo básico de sanitización, ajusta según tus necesidades.
                 if (
                     !$proveedor->setNombreProveedor($_POST['nombreProveedor']) ||
                     !$proveedor->setCodigoProveedor($_POST['codigoProveedor']) ||
@@ -86,7 +89,7 @@ if (isset($_GET['action'])) {
 
             case 'updateRow':
                 // Validar y filtrar los datos del formulario antes de actualizar un proveedor existente.
-                $_POST = Validator::validateForm($_POST);
+                $_POST = array_map('htmlspecialchars', $_POST); // Ejemplo básico de sanitización, ajusta según tus necesidades.
                 if (
                     !$proveedor->setIdProveedor($_POST['idProveedor']) ||
                     !$proveedor->setNombreProveedor($_POST['nombreProveedor']) ||
