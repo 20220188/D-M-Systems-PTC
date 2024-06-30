@@ -5,12 +5,19 @@ CREATE DATABASE DB_DMSystems;
 USE DB_DMSystems;
 
 
-/*tablas de inicio de sesion*/
+/tablas de inicio de sesion/
 
 CREATE TABLE tb_niveles_usuarios(
 id_nivel_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 tipo_usuario VARCHAR(20)
 );
+
+INSERT INTO tb_niveles_usuarios (id_nivel_usuario, tipo_usuario)
+VALUES 
+(1, 'administrador'),
+(2, 'inventario'),
+(3, 'ventas'),
+(4, 'caja');
 
 CREATE TABLE tb_usuarios(
 id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -29,12 +36,7 @@ REFERENCES tb_niveles_usuarios (id_nivel_usuario)
 INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
 VALUES ('usuario1', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario1@example.com', 'Juan Perez', '01234567-8', '22223333', 1);
 
-INSERT INTO tb_niveles_usuarios (id_nivel_usuario, tipo_usuario)
-VALUES 
-(1, 'administrador'),
-(2, 'inventario'),
-(3, 'ventas'),
-(4, 'caja');
+
 
 select * from tb_usuarios;
 
@@ -88,45 +90,85 @@ FOREIGN KEY (id_categoria)
 REFERENCES tb_categorias (id_categoria)
 );
 
+CREATE TABLE tb_laboratorios(
+    id_laboratorio INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    codigo INT UNIQUE,
+    nombre_laboratorio VARCHAR(50)
+);
 
-CREATE TABLE tb_proveedores(
-id_proveedor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-nombre_proveedor VARCHAR(15)
+CREATE TABLE proveedores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_proveedor VARCHAR(255),
+    nombre_proveedor VARCHAR(255),
+    pais_proveedor VARCHAR(255),
+    giro_negocio_proveedor VARCHAR(255),
+    dui_proveedor VARCHAR(255),
+    nombre_comercial_proveedor VARCHAR(255),
+    fecha_proveedor DATE,
+    nit_proveedor VARCHAR(255),
+    telefono_proveedor VARCHAR(255),
+    contacto_proveedor VARCHAR(255),
+    direccion_proveedor VARCHAR(255),
+    departamento_proveedor VARCHAR(255),
+    municipio_proveedor VARCHAR(255)
 );
 
 
 
 CREATE TABLE tb_productos(
-id_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-codigo INT,
-nombre VARCHAR(250),
-id_proveedor INT,
-CONSTRAINT fk_producto_proveedor
-FOREIGN KEY (id_proveedor)
-REFERENCES tb_proveedores (id_proveedor),
-precio_sin_iva FLOAT,
-CHECK (precio_sin_iva>0),
-existencia INT
-CHECK (existencia>=0),
-descuento INT NULL
-CHECK (descuento>=0),
-id_sub_categoria INT,
-CONSTRAINT fk_producto_sub_categoria
-FOREIGN KEY (id_sub_categoria)
-REFERENCES tb_sub_categorias (id_sub_categoria),
-id_iva INT,
-CONSTRAINT fk_producto_iva
-FOREIGN KEY (id_iva)
-REFERENCES tb_iva (id_iva)
+    id_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    imagen VARCHAR(30),
+    codigo varchar(15) UNIQUE,
+    nombre VARCHAR(250),
+    descripcion VARCHAR(250),
+    fecha_vencimiento DATETIME,
+    precio_sin_iva FLOAT CHECK (precio_sin_iva > 0),
+    precio_con_iva FLOAT CHECK (precio_con_iva > 0),
+    costo_unitario FLOAT CHECK (costo_unitario > 0)
 );
+	 
+CREATE TABLE tb_detalle_Productos(
+    /campos de detalles de productos/
+    id_detalle_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    presentacion VARCHAR(25),
+    ubicacion VARCHAR(250),
+	 minimo INT,
+    maximo INT,
+	 marca VARCHAR(50),
+	 periodo_existencia DATETIME,
+	 fecha DATETIME,
+	 id_laboratorio INT,
+    CONSTRAINT fk_productos_laboratorio
+    FOREIGN KEY (id_laboratorio)
+    REFERENCES tb_laboratorios (id_laboratorio),
+    /Campos de detalles de precio/
+    descuento INT NULL CHECK (descuento >= 0),
+    precio_con_descuento FLOAT CHECK(precio_con_descuento >=0),
+    precio_opcional1 FLOAT CHECK(precio_opcional1 >=0),
+    precio_opcional2 FLOAT CHECK(precio_opcional2 >=0),
+    precio_opcional3 FLOAT CHECK(precio_opcional3 >=0),
+    precio_opcional4 FLOAT CHECK(precio_opcional4 >=0)
+    /*Campos de informacion de solo lectura
+    fecha_ultima_compra DATETIME,
+    entradas INT,
+    salidas INT,
+    precio_ultima_compra NUMERIC(5,2) CHECK (precio_ultima_compra >= 0),
+    costo_total INT CHECK (costo_total > 0),
+    id_proveedor INT,
+    CONSTRAINT fk_producto_proveedor
+    FOREIGN KEY (id_proveedor)
+    REFERENCES tb_proveedores (id_proveedor),
+    existencias_actuales INT CHECK (existencias_actuales > 0),
+    id_iva INT,
+    CONSTRAINT fk_producto_iva
+    FOREIGN KEY (id_iva)
+    REFERENCES tb_iva (id_iva)*/
+);
+
 
 
 CREATE TABLE tb_compras(
 id_compra INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-id_fabricante INT,
-CONSTRAINT fk_compra_fabricante
-FOREIGN KEY (id_fabricante)
-REFERENCES tb_fabricantes (id_fabricante),
 id_usuario INT,
 CONSTRAINT fk_compra_usuario
 FOREIGN KEY (id_usuario)
