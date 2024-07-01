@@ -86,8 +86,7 @@ if (isset($_GET['action'])) {
                 break;
             case 'deleteRow':
                 if (
-                    !$cliente->setId($_POST['idCliente']) or
-                    !$cliente->setFilename()
+                    !$cliente->setId($_POST['idCliente'])                    
                 ) {
                     $result['error'] = $cliente->getDataError();
                 } elseif ($cliente->deleteRow()) {

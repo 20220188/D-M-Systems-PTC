@@ -60,28 +60,19 @@ class clienteHandler
         return Database::getRow($sql, $params);
     }
 
-    public function readFilename()
-    {
-        $sql = 'SELECT imagen_categoria
-                FROM categoria
-                WHERE id_categoria = ?';
-        $params = array($this->id);
-        return Database::getRow($sql, $params);
-    }
-
     public function updateRow()
     {
-        $sql = 'UPDATE categoria
-                SET imagen_categoria = ?, nombre_categoria = ?, descripcion_categoria = ?
-                WHERE id_categoria = ?';
-        $params = array($this->imagen, $this->nombre, $this->descripcion, $this->id);
+        $sql = 'UPDATE tb_clientes
+                SET nombre = ?, NIT = ?, NRC = ?, tipo = ?, nombre_comercial = ?, codigo = ?, direccion = ?, telefono = ?, correo = ?
+                WHERE id_usuario = ?';
+        $params = array($this->nombre, $this->nit, $this->nrc, $this->tipo, $this->nombrec, $this->codigo,$this->direccion,$this->telefono,$this->correo,$this->id);
         return Database::executeRow($sql, $params);
     }
 
     public function deleteRow()
     {
         $sql = 'DELETE FROM tb_usuarios
-                WHERE id_categoria = ?';
+                WHERE id_usuario = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
