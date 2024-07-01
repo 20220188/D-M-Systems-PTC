@@ -9,100 +9,167 @@
     <!--Links importantes-->
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link rel="stylesheet" href="../resources/css/dashboard.css">
     <link rel="stylesheet" href="../resources/css/maestro_clientes.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="icon" href="../img/por el momento.jpg">
-    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="../resources/img/por el momento.jpg">
 
 </head>
 
 <body id="body">
-
     <main>
-
         <div class=" container2 row d-flex justify-content-center">
             <div class="col-md-9  d-flex justify-content-center">
                 <div class="botones">
-                    <a href="admin_maestro_productos.html"><button type="button" class="btn"><i
+                    <a href="admin_maestro_productos.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-tag"></i> Productos</button></a>
-                    <a href="admin_maestro_clientes.html"><button type="button" class="btn-seleccionado"><i class="fa-solid fa-users"></i>
+                    <a href="admin_maestro_clientes.html"><button type="button" class="btn-seleccionado"><i
+                                class="fa-solid fa-users"></i>
                             Clientes</button></a>
-                    <a href="admin_maestros_proveedores.html"><button type="button" class="btn"><i
+                    <a href="admin_maestros_proveedores.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-diagram-project"></i> Proveedores</button></a>
-                    <a href="admin_maestro_vendedores.html"><button type="button" class="btn"><i
+                    <a href="admin_maestro_vendedores.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-hand-holding-dollar"></i> Dependientes</button></a>
-                    <a href="admin_maestro_laboratorios.html"><button type="button" class="btn"><i
+                    <a href="admin_maestro_laboratorios.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-flask-vial"></i> Laboratorios</button></a>
                 </div>
             </div>
         </div>
         <br>
-
-        <div class="row col-auto">
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <label for="inputCodigo" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="inputCodigo">
+        <!-- Título del contenido principal -->
+        <h3 id="mainTitle"></h3>
+        <div class="row">
+            <!-- Formulario de búsqueda -->
+            <form class="col-sm-12 col-md-6" id="searchForm">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="search" class="form-control" name="search" placeholder="Buscar" required>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                            <i class="fa-solid fa-eraser"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-md-12">
-                    <label for="inputNombre" class="form-label">Nombre comercial </label>
-                    <input type="text" class="form-control" id="inputNombre">
-                </div>
-                <div class="col-md-12">
-                    <label for="inputPais" class="form-label">Telefono</label>
-                    <input type="text" class="form-control" id="inputPais">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <label for="inputDUI" class="form-label">NIT</label>
-                    <input type="text" class="form-control" id="inputDUI">
-                </div>
-                <div class="col-md-12">
-                    <label for="inputNomCo" class="form-label">Codigo</label>
-                    <input type="text" class="form-control" id="inputNomCo">
-                </div>
-                <div class="col-md-12">
-                    <label for="inputDep" class="form-label">Correo</label>
-                    <input type="text" class="form-control" id="inputDep">
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <label for="inputNIT" class="form-label">NRC</label>
-                    <input type="text" class="form-control" id="inputNIT">
-                </div>
-                <div class="col-md-12">
-                    <label for="inputTel" class="form-label">Direccion</label>
-                    <input type="text" class="form-control" id="inputTel">
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <label for="inputDireccion" class="form-label">Tipo</label>
-                    <input type="text" class="form-control" id="inputDireccion">
-                </div>
+            </form>
+            <div class="col-sm-12 col-md-6 text-end">
+                <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
+                <button type="button" class="btn btn-primary" onclick="openCreate()">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
             </div>
         </div>
-        <br><br>
-        <!--Botones-->
-        <div class="d-grid gap-2 d-md-flex d-flex justify-content-center ">
-            <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus"></i> Guardar</button>
-            <button type="button" class="btn1" id="btnCancelar"><i class="fa-solid fa-circle-xmark"></i>
-                Descartar</button>
-            <button type="button" class="btn1" id="btnEliminar"><i class="fa-solid fa-trash"></i> Eliminar</button>
-        </div>
+
+        <!-- Tabla para mostrar los registros existentes -->
+        <table class="table table-hover text-center">
+            <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+            <thead>
+                <tr>
+                    <td class="text-start" colspan="10" id="rowsFound"></td>
+                </tr>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>NIT</th>
+                    <th>NRC</th>
+                    <th>TIPO</th>
+                    <th>NOMBRE COMERCIAL</th>
+                    <th>CODIGO</th>
+                    <th>DIRECCIÓN</th>
+                    <th>TELEFONO</th>
+                    <th>CORREO</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <!-- Tabla para mostrar los registros existentes -->
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para guardar un registro -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                            <input type="number" class="d-none" id="idCliente" name="idCliente">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreCliente" class="form-label">Nombre</label>
+                                <input id="nombreCliente" type="text" name="nombreCliente" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="NitCliente" class="form-label">NIT</label>
+                                <input id="NitCliente" type="text" name="NitCliente" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="NrcCliente" class="form-label">NRC</label>
+                                <input id="NrcCliente" type="text" name="NrcCliente" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="TipoCliente" class="form-label">Tipo</label>
+                                <input id="TipoCliente" type="text" name="TipoCliente" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="NombreCo" class="form-label">Nombre comercial</label>
+                                <input id="NombreCo" type="text" name="NombreCo" min="0.01" step="0.01"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="CodigoCliente" class="form-label">Codigo</label>
+                                <input id="CodigoCliente" type="text" name="CodigoCliente" min="0.01" step="0.01"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="DireccionCliente" class="form-label">Dirección</label>
+                                <input id="DireccionCliente" type="text" name="DireccionCliente" min="0.01" step="0.01"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="TelefonoCliente" class="form-label">Telefono</label>
+                                <input id="TelefonoCliente" type="text" name="TelefonoCliente" min="0.01" step="0.01"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="CorreoCliente" class="form-label">Correo</label>
+                                <input id="CorreoCliente" type="text" name="CorreoCliente" min="0.01" step="0.01"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>        
     </main>
 
     <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
     <script type="text/javascript" src="../resources/js/alertas.js"></script>
+    <script src="../controllers/utils/admin.js"></script>
+    <script src="../controllers/utils/components.js"></script>
+
+    <!-- Llamada al kit de font awesome -->
+    <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
     <!--Mandamos a llamar las librerias de Sweetalert2-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../controllers/admin/admin_maestro_clientes.js"></script>
+
 </body>
 
 </html>

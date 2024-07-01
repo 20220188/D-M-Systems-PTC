@@ -58,6 +58,12 @@ const loadTemplate = async () => {
                 <i class="fa-solid fa-eye" title="Utilidades"></i>
             </div>
         </a>
+        <a href="admin_usuarios.html" class="menu-option">
+            <div class="option">
+                <i class="fa-solid fa-file" title="Cerrar sesión"></i>
+            </div>
+        </a>
+
     </div>
 </div>
                 `;
