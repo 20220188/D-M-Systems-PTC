@@ -44,7 +44,7 @@ class LaboratoriosHandler
 
     public function readAll()
     {
-        $sql = 'SELECT id_laboratorio, codigo, nombre_laboratorio
+        $sql = 'SELECT id_laboratorio,nombre_laboratorio, codigo 
                 FROM tb_laboratorios
                 ORDER BY nombre_laboratorio';
         return Database::getRows($sql);
