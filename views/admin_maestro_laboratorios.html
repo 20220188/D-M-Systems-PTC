@@ -8,13 +8,10 @@
 
     <!-- Links importantes -->
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link rel="stylesheet" href="../resources/css/dashboard.css">
     <link rel="stylesheet" href="../resources/css/maestro_laboratorios.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="icon" href="../img/por el momento.jpg">
-    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/f6e8d56735.css" crossorigin="anonymous">
 </head>
 
 <body id="body">
@@ -24,63 +21,121 @@
         <div class="container2 row d-flex justify-content-center">
             <div class="col-md-9 d-flex justify-content-center">
                 <div class="botones">
-                    <a href="admin_maestro_productos.html"><button type="button" class="btn"><i class="fa-solid fa-tag"></i> Productos</button></a>
-                    <a href="admin_maestro_clientes.html"><button type="button" class="btn"><i class="fa-solid fa-users"></i> Clientes</button></a>
-                    <a href="admin_maestros_proveedores.html"><button type="button" class="btn"><i class="fa-solid fa-diagram-project"></i> Proveedores</button></a>
-                    <a href="admin_maestro_vendedores.html"><button type="button" class="btn"><i class="fa-solid fa-hand-holding-dollar"></i> Dependientes</button></a>
-                    <a href="admin_maestro_laboratorios.html"><button type="button" class="btn-seleccionado"><i class="fa-solid fa-flask-vial"></i> Laboratorios</button></a>
+                    <a href="admin_maestro_productos.html">
+                        <button type="button" class="btn1"><i class="fa-solid fa-tag"></i> Productos</button>
+                    </a>
+                    <a href="admin_maestro_clientes.html">
+                        <button type="button" class="btn1"><i class="fa-solid fa-users"></i> Clientes</button>
+                    </a>
+                    <a href="admin_maestros_proveedores.html">
+                        <button type="button" class="btn1"><i class="fa-solid fa-diagram-project"></i> Proveedores</button>
+                    </a>
+                    <a href="admin_maestro_vendedores.html">
+                        <button type="button" class="btn1"><i class="fa-solid fa-hand-holding-dollar"></i> Dependientes</button>
+                    </a>
+                    <a href="admin_maestro_laboratorios.html">
+                        <button type="button" class="btn-seleccionado"><i class="fa-solid fa-flask-vial"></i> Laboratorios</button>
+                    </a>
                 </div>
             </div>
         </div>
         <br><br>
 
-        <!-- Buscador y Botón Agregar -->
-        <div class="row col-auto d-md-flex d-flex justify-content-center mb-3">
-            <div class="col-md-9 d-flex justify-content-between align-items-center">
-                <input type="text" class="form-control" id="searchInput" placeholder="Buscar...">
-                <button type="button" class="btnAgregarNuevo" id="btnAgregarNuevo"><i class="fa-solid fa-circle-plus"></i> Agregar laboratorios</button>
+        <!-- Formulario de búsqueda -->
+        <form class="col-sm-12 col-md-6" id="searchForm">
+            <div class="row">
+                <div class="col-6">
+                    <input type="search" class="form-control" name="search" placeholder="Buscar por nombre, categoría, tipo o deporte" required>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                        <i class="fa-solid fa-eraser"></i>
+                    </button>
+                </div>
             </div>
-        </div>
+        </form>
 
-        <!-- Tabla para los registros -->
-        <div class="row col-auto d-md-flex d-flex justify-content-center">
-            <div class="col-md-9">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">Código</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                    </thead>
-                    <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                    <tbody id="tabla_idioma" class="text-center">
-                        <tr>
-                            
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <button class="btn1" id="botonEditar">
-                                    <i class="bi bi-pencil-square h4 icono-editar"></i>
-                                </button>
-                                <button class="btn1" id="botonEliminar">
-                                    <i class="bi bi-trash h4 text-danger"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="col-sm-12 col-md-6 text-end">
+            <button type="button" class="btn btn-secondary" onclick="openCreate()">
+                <i class="fa-regular fa-clipboard"></i>
+            </button>
+            <button type="button" class="btn btn-primary" onclick="openCreate()">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+        <br>
+
+        <!-- Tabla para mostrar los registros existentes -->
+        <table class="table table-hover text-center">
+            <thead>
+                <tr>
+                    <td class="text-start" colspan="8" id="rowsFound"></td>
+                </tr>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>CODIGO</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <!-- Componente Modal para guardar un registro -->
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para crear o actualizar un registro -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <input type="number" class="d-none" id="idProducto" name="idProducto">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreProducto" class="form-label">Nombre</label>
+                                <input id="nombreProducto" type="text" name="nombreProducto" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="codigoProducto" class="form-label">Codigo</label>
+                                <input id="codigoProducto" type="text" name="codigoProducto" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <br><br>
 
     </main>
-    
-    <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
-    <script type="text/javascript" src="../resources/js/alertas.js"></script>
-    <!-- Mandamos a llamar las librerías de Sweetalert2 -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!--Importaciones-->
+  <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
+  <script type="text/javascript" src="../resources/js/alertas.js"></script>
+
+  <!--Controladores globales-->
+  <script src="../controllers/utils/admin.js"></script>
+  <script src="../controllers/utils/components.js"></script>
+
+  <!-- Llamada al kit de font awesome -->
+  <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+
+  <!-- Scripts de JavaScript -->
+  <!-- Agrega los enlaces a los scripts de Bootstrap y SweetAlert2 -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+  <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+  <!-- Llamada al framework y librería de mensajes -->
+  <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+
+  <!-- Llamada al controlador de la página web -->
+  <script type="text/javascript" src="../controllers/admin/admin_maestro_laboratorios.js"></script>
 </body>
 
 </html>
