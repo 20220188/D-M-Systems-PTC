@@ -5,7 +5,7 @@ CREATE DATABASE DB_DMSystems;
 USE DB_DMSystems;
 
 
-/*tablas de inicio de sesion*/
+/* tablas de inicio de session */
 
 CREATE TABLE tb_niveles_usuarios(
 id_nivel_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -15,7 +15,7 @@ tipo_usuario VARCHAR(20)
 CREATE TABLE tb_usuarios(
 id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 usuario VARCHAR(10),
-clave VARCHAR(100),
+clave VARCHAR(100),1
 correo VARCHAR(50),
 nombre VARCHAR(25),
 DUI VARCHAR(10),
@@ -25,6 +25,7 @@ CONSTRAINT fk_usuarios_niveles_usuarios
 FOREIGN KEY (id_nivel_usuario)
 REFERENCES tb_niveles_usuarios (id_nivel_usuario)
 );
+
 INSERT INTO tb_niveles_usuarios (id_nivel_usuario, tipo_usuario)
 VALUES 
 (1, 'administrador'),
@@ -32,7 +33,7 @@ VALUES
 (3, 'ventas'),
 (4, 'caja');
 
-INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
+/*INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
 VALUES ('usuario1', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario1@example.com', 'Juan Perez', '01234567-8', '22223333', 1);
 
 INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
@@ -43,7 +44,7 @@ VALUES ('usuario3', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7
 
 INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
 VALUES ('usuario4', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario4@example.com', 'Juan Perez', '01234567-6', '22223333', 4);
-
+*/ 
 
 select * from tb_usuarios;
 
@@ -97,6 +98,11 @@ FOREIGN KEY (id_categoria)
 REFERENCES tb_categorias (id_categoria)
 );
 
+CREATE TABLE tb_laboratorios(
+id_laboratorio INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+codigo INT UNIQUE,
+nombre_laboratorio VARCHAR(50)
+);
 
 CREATE TABLE tb_proveedores (
     id_proveedor INT AUTO_INCREMENT PRIMARY KEY,

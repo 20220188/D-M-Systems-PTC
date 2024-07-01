@@ -3,11 +3,7 @@
 
 // Constante para completar la ruta de la API.
 const USER_API = 'services/admin/administrador.php';
-// Constante para establecer el elemento del contenido principal.
-const MAIN = document.querySelector('main');
-MAIN.style.paddingTop = '75px';
-MAIN.style.paddingBottom = '100px';
-MAIN.classList.add('container');
+
 // Constante para establecer el elemento del título principal.
 const MAIN_TITLE = document.getElementById('mainTitle');
 MAIN_TITLE.classList.add('text-center', 'py-3');
@@ -27,6 +23,14 @@ const loadTemplate = async () => {
             let navOptions = '';
             if (DATA.user_level == 1) {
                 navOptions = `
+                    <header class="header">
+        
+        <div class="icon__menu">
+            <i class="fas fa-bars" id="btn_open"></i>
+        </div>
+        <div><img src="" alt="">
+        </div>
+        </header>
                     <div class="menu__side" id="menu_side">
     <div class="name__page">
         <i class="fa-solid fa-user-tie"></i>
@@ -99,32 +103,6 @@ const loadTemplate = async () => {
                     </li>
                 `;
             }
-            // Se agrega el encabezado de la página web antes del contenido principal.
-            // Se agrega el encabezado de la página web antes del contenido principal.
-MAIN.insertAdjacentHTML('beforebegin', `
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
-            <div class="container">
-            </div>
-            
-            <div class="collapse navbar-collapse order-lg-1" id="navMenu">
-            
-                <ul class="navbar-nav mx-auto text-center">
-                    ${navOptions}
-                    <li class="nav-item px-2 py-2 dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Cuenta: <b>${DATA.username}</b></a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="perfil.html">Editar perfil</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" onclick="logOut()">Cerrar sesión</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    
-`);
 
             // Se agrega el footer de la página web después del contenido principal.
             const asideElement = document.createElement('aside');
@@ -151,37 +129,44 @@ MAIN.insertAdjacentHTML('beforebegin', `
 // Llamar a la función para cargar la plantilla.
 loadTemplate();
 
-// Ejecutar función en el evento click para abrir y cerrar el menú lateral.
+//Ejecutar función en el evento click
 document.getElementById("btn_open").addEventListener("click", open_close_menu);
 
-// Declarar variables para el menú lateral y el botón de abrir.
+//Declaramos variables
 var side_menu = document.getElementById("menu_side");
 var btn_open = document.getElementById("btn_open");
-var body = document.body;
+var body = document.getElementById("body");
 
-// Función para mostrar y ocultar el menú lateral.
-function open_close_menu() {
-    body.classList.toggle("body_move");
-    side_menu.classList.toggle("menu__side_move");
-}
+//Evento para mostrar y ocultar menú
+    function open_close_menu(){
+        body.classList.toggle("body_move");
+        side_menu.classList.toggle("menu__side_move");
+    }
 
-// Si el ancho de la página es menor a 760px, ocultará el menú al recargar la página.
-if (window.innerWidth < 760) {
+//Si el ancho de la página es menor a 760px, ocultará el menú al recargar la página
+
+if (window.innerWidth < 760){
+
     body.classList.add("body_move");
     side_menu.classList.add("menu__side_move");
 }
 
-// Haciendo el menú responsive (adaptable) al cambiar el tamaño de la ventana.
-window.addEventListener("resize", function () {
-    if (window.innerWidth > 760) {
+//Haciendo el menú responsive(adaptable)
+
+window.addEventListener("resize", function(){
+
+    if (window.innerWidth > 760){
+
         body.classList.remove("body_move");
         side_menu.classList.remove("menu__side_move");
     }
-    if (window.innerWidth < 760) {
+
+    if (window.innerWidth < 760){
+
         body.classList.add("body_move");
         side_menu.classList.add("menu__side_move");
     }
-});
 
+});
 
 
