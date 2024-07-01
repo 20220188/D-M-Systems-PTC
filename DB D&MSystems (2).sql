@@ -25,16 +25,25 @@ CONSTRAINT fk_usuarios_niveles_usuarios
 FOREIGN KEY (id_nivel_usuario)
 REFERENCES tb_niveles_usuarios (id_nivel_usuario)
 );
-
-INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
-VALUES ('usuario1', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario1@example.com', 'Juan Perez', '01234567-8', '22223333', 1);
-
 INSERT INTO tb_niveles_usuarios (id_nivel_usuario, tipo_usuario)
 VALUES 
 (1, 'administrador'),
 (2, 'inventario'),
 (3, 'ventas'),
 (4, 'caja');
+
+INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
+VALUES ('usuario1', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario1@example.com', 'Juan Perez', '01234567-8', '22223333', 1);
+
+INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
+VALUES ('usuario2', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario2@example.com', 'JuanPijita', '01234567-9', '22223333', 2);
+
+INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
+VALUES ('usuario3', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario3@example.com', 'Juan Perez', '01234567-7', '22223333', 3);
+
+INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
+VALUES ('usuario4', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario4@example.com', 'Juan Perez', '01234567-6', '22223333', 4);
+
 
 select * from tb_usuarios;
 
@@ -89,11 +98,22 @@ REFERENCES tb_categorias (id_categoria)
 );
 
 
-CREATE TABLE tb_proveedores(
-id_proveedor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-nombre_proveedor VARCHAR(15)
+CREATE TABLE tb_proveedores (
+    id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_proveedor VARCHAR(255),
+    nombre_proveedor VARCHAR(255),
+    pais_proveedor VARCHAR(255),
+    giro_negocio_proveedor VARCHAR(255),
+    dui_proveedor VARCHAR(255),
+    nombre_comercial_proveedor VARCHAR(255),
+    fecha_proveedor DATE,
+    nit_proveedor VARCHAR(255),
+    telefono_proveedor VARCHAR(255),
+    contacto_proveedor VARCHAR(255),
+    direccion_proveedor VARCHAR(255),
+    departamento_proveedor VARCHAR(255),
+    municipio_proveedor VARCHAR(255)
 );
-
 
 
 CREATE TABLE tb_productos(
@@ -123,10 +143,6 @@ REFERENCES tb_iva (id_iva)
 
 CREATE TABLE tb_compras(
 id_compra INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-id_fabricante INT,
-CONSTRAINT fk_compra_fabricante
-FOREIGN KEY (id_fabricante)
-REFERENCES tb_fabricantes (id_fabricante),
 id_usuario INT,
 CONSTRAINT fk_compra_usuario
 FOREIGN KEY (id_usuario)
