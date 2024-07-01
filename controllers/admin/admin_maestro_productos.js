@@ -46,7 +46,7 @@ const SAVE_FORM_DETALLE = document.getElementById('saveFormDetalle'),
     MAXIMO_DETALLE = document.getElementById('maximoDetalle'),
     MARCA_DETALLE = document.getElementById('marcaDetalle'),
     FECHA_INGRESO_DETALLE = document.getElementById('fechaIngresoDetalle'),
-    PERIODO_EXISTENCIA_DETALLE = document.getElementById('periodoExistenciaDetalle'),
+    PERIODO_EXISTENCIA_DETALLE = document.getElementById('periodoEistenciaDetalle'),
     DESCUENTO_DETALLE = document.getElementById('descuentoDetalle'),
     PRECIO_DESCUENTO_DETALLE = document.getElementById('precioDescDetalle'),
     PRECIO_OPCIONAL1_DETALLE = document.getElementById('precioOpc1Detalle'),
@@ -344,13 +344,14 @@ const openUpdateDetails = async (id1) => {
         MAXIMO_DETALLE.value = ROW.maximo;
         MARCA_DETALLE.value = ROW.marca;
         FECHA_INGRESO_DETALLE.value = ROW.fecha;
-        PERIODO_EXISTENCIA_DETALLE.value = ROW.periodo_existencia;
         DESCUENTO_DETALLE.value = ROW.descuento;
-        PRECIO_DESCUENTO_DETALLE.value = ROW.precio_descuento;
+        PRECIO_DESCUENTO_DETALLE.value = ROW.precio_con_descuento;
         PRECIO_OPCIONAL1_DETALLE.value = ROW.precio_opcional1;
         PRECIO_OPCIONAL2_DETALLE.value = ROW.precio_opcional2;
         PRECIO_OPCIONAL3_DETALLE.value = ROW.precio_opcional3;
         PRECIO_OPCIONAL4_DETALLE.value = ROW.precio_opcional4;
+        PERIODO_EXISTENCIA_DETALLE.value = ROW.periodo_existencia;
+        
         fillSelect(LABORATORIO_API, 'readAll', 'laboratorioDetalle', ROW.id_laboratorio); 
 
     } else {

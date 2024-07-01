@@ -33,6 +33,7 @@ if (isset($_GET['action'])) {
                     !$producto->setFechaVencimiento($_POST['fechaVencimiento']) or
                     !$producto->setPrecioSinIva($_POST['precioSinIVA']) or
                     !$producto->setPrecioConIva($_POST['precioVentaConIVA']) or
+                    !$producto->setImagen($_FILES['imagenProducto']) or
                     !$producto->setCostoUnitario($_POST['precioUnitario'])
                 ) {
                     $result['error'] = $producto->getDataError();
@@ -158,7 +159,7 @@ if (isset($_GET['action'])) {
                     !$producto->setMaximo($_POST['maximoDetalle']) or
                     !$producto->setMarca($_POST['marcaDetalle']) or
                     !$producto->setFechaIngreso($_POST['fechaIngresoDetalle']) or
-                    !$producto->setPeriodoExistencia($_POST['periodoExistenciaDetalle']) or
+                    !$producto->setPeriodoExistencia($_POST['periodoEistenciaDetalle']) or
                     !$producto->setIdLaboratorio($_POST['laboratorioDetalle']) or
                     !$producto->setDescuento($_POST['descuentoDetalle']) or
                     !$producto->setPrecioConDescuento($_POST['precioDescDetalle']) or
