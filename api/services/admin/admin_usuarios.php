@@ -12,19 +12,18 @@ if (isset($_GET['action'])) {
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idAdministrador'])) {
-        // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
-        switch ($_GET['action']) {
-            case 'searchRows':
-                if (!Validator::validateSearch($_POST['search'])) {
-                    $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $usuario->searchRows($_POST['search'])) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
-                } else {
-                    $result['error'] = 'No hay coincidencias';
-                }
-                break;
-            case 'createRow':
+       // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
+       switch ($_GET['action']) {
+        case 'searchRows':
+            if (!Validator::validateSearch($_POST['search'])) {
+                $result['error'] = Validator::getSearchError();
+            } elseif ($result['dataset'] = $usuario->searchRows()) {
+                $result['status'] = 1;
+                $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+            } else {
+                $result['error'] = 'No hay coincidencias';
+            }
+            break;
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$usuario->setUsuario($_POST['usuario']) or
