@@ -99,11 +99,8 @@ class ProveedorData extends ProveedorHandler
         if (!Validator::validateDUI($value)) {
             $this->data_error = 'El DUI debe tener el formato ########-#';
             return false;
-        } elseif($this->checkDuplicate($value)) {
-            $this->data_error = 'El DUI ingresado ya existe';
-            return false;
-        } else {
-            $this->dui = $value;
+        }  else {
+            $this-> dui_proveedor = $value;
             return true;
         }
     }

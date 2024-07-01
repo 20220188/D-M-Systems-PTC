@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/admin_maestros_Proveedores_data.php');
+require_once('../../models/data/admin_maestros_proveedores_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -61,7 +61,7 @@ if (isset($_GET['action'])) {
             case 'readOne':
                 if (!$proveedor->setIdProveedor($_POST['idProveedor'])) {
                     $result['error'] = $proveedor->getDataError();
-                } elseif ($result['dataset'] = $roveedor->readOne()) {
+                } elseif ($result['dataset'] = $proveedor->readOne()) {
                     $result['status'] = 1;
                 } else {
                     $result['error'] = 'Proveedor inexistente';

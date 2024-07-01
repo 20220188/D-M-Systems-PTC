@@ -128,9 +128,11 @@ const openUpdate = async (id) => {
     const FORM = new FormData();
     FORM.append('idProveedor', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(PROVEEDOR_API, 'readOne', FORM);
+    const responseData = await fetchData(PROVEEDOR_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
+    if (responseData.status)
+        
+    {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
         MODAL_TITLE.textContent = 'Actualizar proveedor';
