@@ -27,51 +27,38 @@ const loadTemplate = async () => {
             let navOptions = '';
             if (DATA.user_level == 1) {
                 navOptions = `
-                <div class="menu__side" id="menu_side">
-
-    <a href="admin.html"><div class="name__page">
-    <i class="fa-solid fa-user-tie"></i>
+                    <div class="menu__side" id="menu_side">
+    <div class="name__page">
+        <i class="fa-solid fa-user-tie"></i>
         <h4>Admin</h4>
-    </div></a>
-
-    <div class="options__menu">	
-
-        <a href="admin_maestro_clientes.html">
-        <div class="maestros">
-            <div class="option">
-            <i class="fa-solid fa-star" title="Maestros"></i>
-                <h4>Maestros</h4>
-            </div>
-        </div>
-        </a>
-
-        <a href="admin_modulo_compras.html">
-            <div class="option">
-            <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
-                <h4>Movimientos</h4>
-            </div>
-        </a>
-        
-        <a href="admin_reporte_ventas.html">
-            <div class="option">
-            <i class="fa-solid fa-file" title="reportes"></i>
-                <h4>Reportes</h4>
-            </div>
-        </a>
-
-        <a href="admin_usuarios.html">
-            <div class="option">
-            <i class="fa-solid fa-eye" title="Utilidades"></i>
-                <h4>Utilidades</h4>
-            </div>
-        </a>
-
     </div>
-
+   
+    <div class="options__menu">    
+        <a href="admin_modulo_compras.html" class="menu-option">
+            <div class="option">
+                <i class="fa-solid fa-star" title="Maestros"></i>
+            </div>
+        </a>
+        <a href="modulo_compras.html" class="menu-option">
+            <div class="option">
+                <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
+            </div>
+        </a>
+        <a href="admin_reporte_ventas.html" class="menu-option">
+            <div class="option">
+                <i class="fa-solid fa-file" title="Reportes"></i>
+            </div>
+        </a>
+        <a href="admin_usuarios.html" class="menu-option">
+            <div class="option">
+                <i class="fa-solid fa-eye" title="Utilidades"></i>
+            </div>
+        </a>
+    </div>
 </div>
-
                 `;
-            } else if (DATA.user_level == 2) {
+            
+            }else if (DATA.user_level == 2) {
                 navOptions = `
                     <li class="nav-item px-2 py-2 dropdown">
                         <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -113,33 +100,32 @@ const loadTemplate = async () => {
                 `;
             }
             // Se agrega el encabezado de la página web antes del contenido principal.
-            MAIN.insertAdjacentHTML('beforebegin', `
-                <header>
-                    <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
-                        <div class="container">
-                            <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="../admin/dashboard.html">
-                                <img src="../../resources/img/LogoComods.png" class="logo img-fluid" alt="site icon">
-                            </a>
-                        </div>
-                        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse order-lg-1" id="navMenu">
-                            <ul class="navbar-nav mx-auto text-center">
-                                ${navOptions}
-                                <li class="nav-item px-2 py-2 dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Cuenta: <b>${DATA.username}</b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="perfil.html">Editar perfil</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#" onclick="logOut()">Cerrar sesión</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </header>
-            `);
+            // Se agrega el encabezado de la página web antes del contenido principal.
+MAIN.insertAdjacentHTML('beforebegin', `
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
+            <div class="container">
+            </div>
+            
+            <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+            
+                <ul class="navbar-nav mx-auto text-center">
+                    ${navOptions}
+                    <li class="nav-item px-2 py-2 dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Cuenta: <b>${DATA.username}</b></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="perfil.html">Editar perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logOut()">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+`);
+
             // Se agrega el footer de la página web después del contenido principal.
             const asideElement = document.createElement('aside');
             asideElement.classList.add('aside'); // Add class for styling
@@ -196,3 +182,6 @@ window.addEventListener("resize", function () {
         side_menu.classList.add("menu__side_move");
     }
 });
+
+
+

@@ -1,17 +1,28 @@
-*{
+* {
     font-family: 'Poppins';
 }
 
-body{
+body {
     background-color: #E7F4F4;
 }
 
-.historial{
+.historial {
     margin-left: 1200px;
     margin-top: -60px;
 }
-.h2{
+
+.h2 {
     margin-top: 50px;
+}
+
+.btnAgregarNuevo {
+    color: #ffffff;
+    background-color: #000000;
+    border-color: #d2d9f1;
+    width: 270px;
+    height: 50px;
+    font-family: 'Poppins';
+    border-radius: 20px;
 }
 
 .btn {
@@ -23,28 +34,14 @@ body{
     font-family: 'Poppins';
     border-radius: 15px;
 }
+
 .btn:hover {
     color: #ebd7d6;
     background-color: #5D41DE;
     border-color: #ebd7d6 
 }
 
-.btn1 {
-    color: #ff342b;
-    background-color: #ebd7d6;
-    border-color: #ebd7d6;
-    width: 200px;
-    height: 65px;
-    font-family: 'Poppins';
-    border-radius: 15px;
-}
-.btn1:hover {
-    color: #ebd7d6;
-    background-color: #ff342b;
-    border-color: #ebd7d6
-}
-
-.btn-seleccionado{
+.btn-seleccionado {
     color: #d2d9f1;
     background-color: #5D41DE;
     border-color: #d2d9f1;
@@ -53,34 +50,88 @@ body{
     font-family: 'Poppins';
     border-radius: 15px;
 }
+
 .btn-seleccionado:hover {
     color: #5D41DE;
     background-color: #d2d9f1;
     border-color: #d2d9f1
 }
 
-.input-group{
+.input-group {
     color: black;
 }
 
-.container{
+.container {
     margin-top: 15px;
     width: 300px;
     margin-left: 10px;
 }
 
-.largo{
+.largo {
     width: 500px;
     color: black;
 }
 
-.sinIVA{
+.sinIVA {
     width: 300px;
     margin-top: -53px;
 }
 
-.largo1{
+.largo1 {
     width: 300px;
     margin-top: -53px;
     margin-left: 300px;
+}
+.contenedor-form {
+    border: 0px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
+    border-radius: 0.25rem;
+    min-height: 50px;
+}
+
+.elemento-form {
+    border: 0px;
+    background-color: #fff;
+}
+
+#btnBuscar {
+    cursor: pointer;
+}
+
+#container_busqueda {
+    padding: 0px;
+}
+
+.agregar-icono {
+    margin-bottom: 0px !important;
+}
+
+.icono-editar {
+    color: #0CBA52;
+}
+
+.table {
+    --bs-table-bg: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
+    border-radius: 0.25rem;
+    width: 100%;  /* Asegura que la tabla ocupe todo el ancho del contenedor */
+    font-size: 1rem;  /* Ajusta el tamaño de la fuente si es necesario */
+}
+
+.table th, .table td {
+    vertical-align: middle;  /* Centra el contenido verticalmente */
+}
+
+.table .btn {
+    margin: 0;  /* Remueve cualquier margen adicional alrededor de los botones */
+}
+
+.acciones {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    align-items: center;     /* Centra los botones verticalmente */
+}
+
+.acciones .btn {
+    margin: 0 5px; /* Añade espacio entre los botones */
 }

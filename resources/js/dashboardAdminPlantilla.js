@@ -2,51 +2,41 @@
 const asideHTML = `
 
 <header class="header">
-        <div class="icon__menu">
-            <i class="fas fa-bars" id="btn_open"></i>
-        </div>
-        <div><img src="" alt="">
-        </div>
+        
+        
         </header>
 <div class="menu__side" id="menu_side">
 
-    <a href="admin.html"><div class="name__page">
+    <a href="dashboard.html"><div class="name__page">
     <i class="fa-solid fa-user-tie"></i>
         <h4>Admin</h4>
     </div></a>
 
-    <div class="options__menu">	
-
-        <a href="maestro_clientes.html">
-        <div class="maestros">
+    <div class="options__menu">    
+        <a href="admin_maestro_productos.html" class="menu-option">
             <div class="option">
-            <i class="fa-solid fa-star" title="Maestros"></i>
+                <i class="fa-solid fa-star" title="Maestros"></i>
                 <h4>Maestros</h4>
             </div>
-        </div>
         </a>
-
-        <a href="modulo_compras.html">
+        <a href="admin_ingresos.html" class="menu-option">
             <div class="option">
-            <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
+                <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
                 <h4>Movimientos</h4>
             </div>
         </a>
-        
-        <a href="reporte_ventas.html">
+        <a href="admin_reporte_ventas.html" class="menu-option">
             <div class="option">
-            <i class="fa-solid fa-file" title="reportes"></i>
+                <i class="fa-solid fa-file" title="Reportes"></i>
                 <h4>Reportes</h4>
             </div>
         </a>
-
-        <a href="usuarios.html">
+        <a href="admin_usuarios.html" class="menu-option">
             <div class="option">
-            <i class="fa-solid fa-eye" title="Utilidades"></i>
+                <i class="fa-solid fa-eye" title="Utilidades"></i>
                 <h4>Utilidades</h4>
             </div>
         </a>
-
     </div>
 
 </div>
