@@ -126,28 +126,62 @@ CREATE TABLE tb_proveedores (
 
 
 CREATE TABLE tb_productos(
-id_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-codigo INT,
-nombre VARCHAR(250),
-id_proveedor INT,
-CONSTRAINT fk_producto_proveedor
-FOREIGN KEY (id_proveedor)
-REFERENCES tb_proveedores (id_proveedor),
-precio_sin_iva FLOAT,
-CHECK (precio_sin_iva>0),
-existencia INT
-CHECK (existencia>=0),
-descuento INT NULL
-CHECK (descuento>=0),
-id_sub_categoria INT,
-CONSTRAINT fk_producto_sub_categoria
-FOREIGN KEY (id_sub_categoria)
-REFERENCES tb_sub_categorias (id_sub_categoria),
-id_iva INT,
-CONSTRAINT fk_producto_iva
-FOREIGN KEY (id_iva)
-REFERENCES tb_iva (id_iva)
+    id_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    imagen VARCHAR(30),
+    codigo varchar(15) UNIQUE,
+    nombre VARCHAR(250),
+    descripcion VARCHAR(250),
+    fecha_vencimiento DATE,
+    precio_sin_iva FLOAT CHECK (precio_sin_iva > 0),
+    precio_con_iva FLOAT CHECK (precio_con_iva > 0),
+    costo_unitario FLOAT CHECK (costo_unitario > 0)
 );
+
+SELECT * FROM tb_productos;
+
+	
+CREATE TABLE tb_detalle_Productos(
+    /*campos de detalles de productos*/
+    id_detalle_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    presentacion VARCHAR(25),
+    ubicacion VARCHAR(250),
+	minimo INT,
+    maximo INT,
+	marca VARCHAR(50),
+	periodo_existencia DATE,
+	fecha DATE,
+	id_laboratorio INT,
+    CONSTRAINT fk_productos_laboratorio
+    FOREIGN KEY (id_laboratorio)
+    REFERENCES tb_laboratorios (id_laboratorio),
+    /*Campos de detalles de precio*/
+    descuento INT NULL CHECK (descuento >= 0),
+    precio_con_descuento FLOAT CHECK(precio_con_descuento >=0),
+    precio_opcional1 FLOAT CHECK(precio_opcional1 >=0),
+    precio_opcional2 FLOAT CHECK(precio_opcional2 >=0),
+    precio_opcional3 FLOAT CHECK(precio_opcional3 >=0),
+    precio_opcional4 FLOAT CHECK(precio_opcional4 >=0),
+    id_producto INT,
+    CONSTRAINT fk_productos_detalle
+    FOREIGN KEY (id_producto)
+    REFERENCES tb_productos (id_producto)
+    /*Campos de informacion de solo lectura
+    fecha_ultima_compra DATETIME,
+    entradas INT,
+    salidas INT,
+    precio_ultima_compra NUMERIC(5,2) CHECK (precio_ultima_compra >= 0),
+    costo_total INT CHECK (costo_total > 0),
+    id_proveedor INT,
+    CONSTRAINT fk_producto_proveedor
+    FOREIGN KEY (id_proveedor)
+    REFERENCES tb_proveedores (id_proveedor),
+    existencias_actuales INT CHECK (existencias_actuales > 0),
+    id_iva INT,
+    CONSTRAINT fk_producto_iva
+    FOREIGN KEY (id_iva)
+    REFERENCES tb_iva (id_iva)*/
+);
+
 
 
 CREATE TABLE tb_compras(
