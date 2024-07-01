@@ -46,8 +46,7 @@ if (isset($_GET['action'])) {
                 } elseif ($Proveedor->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Proveedor creado correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenProveedor'], $Proveedor::RUTA_IMAGEN);
+
                 } else {
                     $result['exception'] = Database::getException();
                 }
