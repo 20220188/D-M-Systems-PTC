@@ -9,53 +9,55 @@
     <!-- Escalabilidad para dispositivos -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <!-- Font Awesome para iconos -->
-    <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../resources/css/dashboard.css">
-	<link rel="stylesheet" href="../resources/css/reloj.css">
-	<script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
-	<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+   <!-- Links importantes -->
+   <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+   <link rel="stylesheet" href="../resources/css/dashboard.css">
+   <link rel="stylesheet" href="../resources/css/maestro_laboratorios.css">
+   <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+   <link rel="stylesheet" href="https://kit.fontawesome.com/f6e8d56735.css" crossorigin="anonymous">
 
 </head>
 
-<body>
+<body id="body">
 
-	<br>
-	<br>
+	
     <!-- Contenido principal del documento -->
     <main>
         <!-- Título del contenido principal -->
         <h3 id="mainTitle"></h3>
-        <!-- Contenedor de gráficos -->
-        <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <!-- Gráfico 1: Cantidad de productos por categoría -->
-                <canvas id="chart1"></canvas>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <!-- Gráfico 2: Porcentaje de productos por categoría -->
-                <canvas id="chart2"></canvas>
-            </div>
-        </div>
-        <!-- Importación de la librería Chart.js para generar los gráficos -->
-        <script type="text/javascript" src="../../resources/js/chart.umd.min.js"></script>
     </main>
 
-    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <!-- Archivo JavaScript específico para el dashboard -->
-    <script src="../../Recursos/js/Publica/Dashboard.js"></script>
-    <!-- Librería SweetAlert para mensajes -->
-    <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
-    <!-- Controlador general de la aplicación -->
-    <script type="text/javascript" src="../controllers/utils/components.js"></script>
+    
+    
+    
     <!-- Controlador del sitio privado -->
-    <script type="text/javascript" src="../controllers/utils/admin.js"></script>
+   
     <!-- Controlador específico de esta página -->
     <script type="text/javascript" src="../controllers/admin/dashboard.js"></script>
+
+    <!--Importaciones-->
+  <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
+  <script type="text/javascript" src="../resources/js/alertas.js"></script>
+  <script type="text/javascript" src="../controllers/utils/admin.js"></script>
+
+  <!--Controladores globales-->
+
+  <script src="../controllers/utils/components.js"></script>
+
+  <!-- Llamada al kit de font awesome -->
+  <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+
+  <!-- Scripts de JavaScript -->
+  <!-- Agrega los enlaces a los scripts de Bootstrap y SweetAlert2 -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+  <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+  <!-- Llamada al framework y librería de mensajes -->
+  <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+
+  <!-- Llamada al controlador de la página web -->
+  <script type="text/javascript" src="../controllers/admin/admin_maestro_laboratorios.js"></script>
 
 </body>
 

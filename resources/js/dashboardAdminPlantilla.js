@@ -3,7 +3,11 @@ const asideHTML = `
 
 <header class="header">
         
-        
+        <div class="icon__menu">
+            <i class="fas fa-bars" id="btn_open"></i>
+        </div>
+        <div><img src="" alt="">
+        </div>
         </header>
 <div class="menu__side" id="menu_side">
 
