@@ -126,8 +126,7 @@ const loadTemplate = async () => {
     }
 }
 
-// Llamar a la función para cargar la plantilla.
-loadTemplate();
+
 
 //Ejecutar función en el evento click
 document.getElementById("btn_open").addEventListener("click", open_close_menu);
