@@ -11,8 +11,8 @@ class clienteHandler
      */
     protected $id = null;
     protected $nombre = null;
-    protected $nit = null;
-    protected $nrc = null;
+    protected $NIT = null;
+    protected $NRC = null;
     protected $tipo = null;
     protected $nombrec = null;
     protected $codigo = null;
@@ -38,7 +38,7 @@ class clienteHandler
 {
     $sql = 'INSERT INTO tb_clientes(nombre, NIT, NRC, tipo, nombre_comercial, codigo, direccion, telefono, correo)
             VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    $params = array($this->nombre, $this->nit, $this->nrc, $this->tipo, $this->nombrec, $this->codigo, $this->direccion, $this->telefono, $this->correo);
+    $params = array($this->nombre, $this->NIT, $this->NRC, $this->tipo, $this->nombrec, $this->codigo, $this->direccion, $this->telefono, $this->correo);
     return Database::executeRow($sql, $params);
 }
 
@@ -64,15 +64,15 @@ class clienteHandler
     {
         $sql = 'UPDATE tb_clientes
                 SET nombre = ?, NIT = ?, NRC = ?, tipo = ?, nombre_comercial = ?, codigo = ?, direccion = ?, telefono = ?, correo = ?
-                WHERE id_usuario = ?';
-        $params = array($this->nombre, $this->nit, $this->nrc, $this->tipo, $this->nombrec, $this->codigo,$this->direccion,$this->telefono,$this->correo,$this->id);
+                WHERE id_cliente = ?';
+        $params = array($this->nombre, $this->NIT, $this->NRC, $this->tipo, $this->nombrec, $this->codigo,$this->direccion,$this->telefono,$this->correo,$this->id);
         return Database::executeRow($sql, $params);
     }
 
     public function deleteRow()
     {
-        $sql = 'DELETE FROM tb_usuarios
-                WHERE id_usuario = ?';
+        $sql = 'DELETE FROM tb_clientes
+                WHERE id_cliente = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }

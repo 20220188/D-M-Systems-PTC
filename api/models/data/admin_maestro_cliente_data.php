@@ -48,7 +48,7 @@ class ClienteData extends clienteHandler
             $this->data_error = 'El tipocliente debe ser un valor alfabético';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->tipocliente = $value;
+            $this->tipo = $value;
             return true;
         } else {
             $this->data_error = 'El tipo cliente debe tener una longitud entre ' . $min . ' y ' . $max;
@@ -62,7 +62,7 @@ class ClienteData extends clienteHandler
             $this->data_error = 'El nombre comercial debe ser un valor alfabético';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->nombrecomercial = $value;
+            $this->nombrec = $value;
             return true;
         } else {
             $this->data_error = 'El nombre comercial debe tener una longitud entre ' . $min . ' y ' . $max;
@@ -87,7 +87,7 @@ class ClienteData extends clienteHandler
             $this->data_error = 'El DUI debe tener el formato ########-#';
             return false;
         } else {
-            $this->dui = $value;
+            $this->NIT = $value;
             return true;
         }
     }
