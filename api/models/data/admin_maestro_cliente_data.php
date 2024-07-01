@@ -120,7 +120,7 @@ class ClienteData extends clienteHandler
             $this->filename = $data['imagen_categoria'];
             return true;
         } else {
-            $this->data_error = 'Categoría inexistente';
+            $this->data_error = 'Cliente inexistente';
             return false;
         }
     }
