@@ -14,19 +14,20 @@ const MODAL_TITLE = document.getElementById('modalTitle');
 const SAVE_FORM = document.getElementById('saveForm');
 
 // Campos del formulario de guardar.
-const ID_PROVEEDOR = document.getElementById('inputCodigo');
-const NOMBRE_PROVEEDOR = document.getElementById('inputNombre');
-const PAIS = document.getElementById('inputPais');
-const GIRO_NEGOCIO = document.getElementById('inputnegocio');
-const DUI = document.getElementById('inputDUI');
-const NOMBRE_COMERCIAL = document.getElementById('inputNomCo');
-const FECHA = document.getElementById('inputFecha');
-const NIT = document.getElementById('inputNIT');
-const TELEFONO = document.getElementById('inputTel');
-const CONTACTO = document.getElementById('inputContacto');
-const DIRECCION = document.getElementById('inputDireccion');
-const DEPARTAMENTO = document.getElementById('inputDep');
-const MUNICIPIO = document.getElementById('inputMunicipio');
+const ID_PROVEEDOR = document.getElementById('idProveedor');
+const NOMBRE_PROVEEDOR = document.getElementById('nombreProveedor');
+const CODIGO_PROVEEDOR = document.getElementById('codigoProveedor');
+const PAIS = document.getElementById('paisProveedor');
+const GIRO_NEGOCIO = document.getElementById('giroProveedor');
+const DUI = document.getElementById('duiProveedor');
+const NOMBRE_COMERCIAL = document.getElementById('nombreComercialProveedor');
+const FECHA = document.getElementById('fechaProveedor');
+const NIT = document.getElementById('nitProveedor');
+const TELEFONO = document.getElementById('telefonoProveedor');
+const CONTACTO = document.getElementById('contactoProveedor');
+const DIRECCION = document.getElementById('direccionProveedor');
+const DEPARTAMENTO = document.getElementById('departamentoProveedor');
+const MUNICIPIO = document.getElementById('municipioProveedor');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -88,22 +89,12 @@ const fillTable = async () => {
         responseData.dataset.forEach(proveedor => {
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${proveedor.codigo}</td>
                     <td>${proveedor.nombre}</td>
-                    <td>${proveedor.pais}</td>
+                    <td>${proveedor.codigo}</td>
                     <td>${proveedor.giro_negocio}</td>
-                    <td>${proveedor.dui}</td>
-                    <td>${proveedor.nombre_comercial}</td>
-                    <td>${proveedor.fecha}</td>
-                    <td>${proveedor.nit}</td>
-                    <td>${proveedor.telefono}</td>
-                    <td>${proveedor.contacto}</td>
-                    <td>${proveedor.direccion}</td>
-                    <td>${proveedor.departamento}</td>
-                    <td>${proveedor.municipio}</td>
                     <td>
-                        <button class="btn btn-info" onclick="openUpdate(${proveedor.id})">Editar</button>
-                        <button class="btn btn-danger" onclick="openDelete(${proveedor.id})">Eliminar</button>
+                        <button class="btn btn-info" onclick="openUpdate(${proveedor.id_proveedor})">Editar</button>
+                        <button class="btn btn-danger" onclick="openDelete(${proveedor.id_proveedor})">Eliminar</button>
                     </td>
                 </tr>
             `;
@@ -113,125 +104,83 @@ const fillTable = async () => {
     }
 };
 
-// Función para preparar el formulario al momento de insertar un nuevo proveedor.
+/*
+*   Función para preparar el formulario al momento de insertar un registro.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
 const openCreate = () => {
-    SAVE_MODAL.show(); // Mostrar el modal de guardar.
-    MODAL_TITLE.textContent = 'Crear Proveedor'; // Establecer título del modal.
-    SAVE_FORM.reset(); // Limpiar el formulario de guardar.
-};
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL.show();
+    MODAL_TITLE.textContent = 'Crear proveedor';
+    // Se prepara el formulario.
+    SAVE_FORM.reset();
+}
 
-// Función para preparar el formulario al momento de editar un proveedor existente.
+/*
+*   Función asíncrona para preparar el formulario al momento de actualizar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
 const openUpdate = async (id) => {
-    const formData = new FormData();
-    formData.append('idProveedor', id);
-    
-    // Realizar la solicitud para obtener los datos del proveedor seleccionado.
-    const responseData = await fetchData(PROVEEDOR_API, 'readOne', formData);
-    
-    // Mostrar los datos del proveedor en el formulario de guardar.
-    if (responseData.status) {
-        SAVE_MODAL.show(); // Mostrar el modal de guardar.
-        MODAL_TITLE.textContent = 'Editar Proveedor'; // Establecer título del modal.
-
-        // Llenar los campos del formulario con los datos del proveedor.
-        const proveedor = responseData.dataset;
-        ID_PROVEEDOR.value = proveedor.codigo;
-        NOMBRE_PROVEEDOR.value = proveedor.nombre;
-        PAIS.value = proveedor.pais;
-        GIRO_NEGOCIO.value = proveedor.giro_negocio;
-        DUI.value = proveedor.dui;
-        NOMBRE_COMERCIAL.value = proveedor.nombre_comercial;
-        FECHA.value = proveedor.fecha;
-        NIT.value = proveedor.nit;
-        TELEFONO.value = proveedor.telefono;
-        CONTACTO.value = proveedor.contacto;
-        DIRECCION.value = proveedor.direccion;
-        DEPARTAMENTO.value = proveedor.departamento;
-        MUNICIPIO.value = proveedor.municipio;
+    // Se define un objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('idLab', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(PROVEEDOR_API, 'readOne', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL.show();
+        MODAL_TITLE.textContent = 'Actualizar proveedor';
+        // Se prepara el formulario.
+        SAVE_FORM.reset();
+        // Se inicializan los campos con los datos.
+        const ROW = DATA.dataset;
+        ID_PROVEEDOR.value = ROW.id_proveedor;
+        NOMBRE_PROVEEDOR.value = ROW.nombre;
+        CODIGO_PROVEEDOR.value = ROW.codigo;
+        PAIS.value = ROW.pais;
+        GIRO_NEGOCIO.value = ROW.giro_negocio;
+        DUI.value = ROW.dui;
+        NOMBRE_COMERCIAL.value = ROW.nombre_comercial;
+        NIT.value = ROW.nit;
+        FECHA.value =ROW.fecha_registro;
+        TELEFONO.value = ROW.telefono;
+        CONTACTO.value = ROW.contacto;
+        DIRECCION.value = ROW.direccion;
+        DEPARTAMENTO.value = ROW.departamento;
+        MUNICIPIO.value = ROW.municipio;
     } else {
-        sweetAlert(2, responseData.error, false);
+        sweetAlert(2, DATA.error, false);
     }
-};
+}
 
-// Función para eliminar un proveedor.
+/*
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
 const openDelete = async (id) => {
-    // Confirmar acción con el usuario.
-    const confirmAction = await confirm('¿Estás seguro de eliminar este proveedor?');
-
-    if (confirmAction) {
-        // Construir los datos del formulario en formato FormData.
-        const formData = new FormData();
-        formData.append('idProveedor', id);
-
-        // Realizar la solicitud para eliminar el proveedor.
-        const responseData = await fetchData(PROVEEDOR_API, 'deleteRow', formData);
-
-        // Mostrar mensaje de éxito o error según la respuesta.
-        if (responseData.status) {
-            sweetAlert(1, responseData.message, true);
-            fillTable(); // Actualizar la tabla después de eliminar.
+    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
+    const RESPONSE = await confirmAction('¿Desea eliminar el proveedor de forma permanente?');
+    // Se verifica la respuesta del mensaje.
+    if (RESPONSE) {
+        // Se define una constante tipo objeto con los datos del registro seleccionado.
+        const FORM = new FormData();
+        FORM.append('idProveedor', id);
+        // Petición para eliminar el registro seleccionado.
+        const DATA = await fetchData(PROVEEDOR_API, 'deleteRow', FORM);
+        console.log(DATA);
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se muestra un mensaje de éxito.
+            await sweetAlert(1, DATA.message, true);
+            // Se carga nuevamente la tabla para visualizar los cambios.
+            fillTable();
         } else {
-            sweetAlert(2, responseData.error, false);
+            sweetAlert(2, DATA.error, false);
         }
     }
-};
-
-// Función para realizar peticiones fetch al servidor.
-const fetchData = async (url, action, formData) => {
-    try {
-        const response = await fetch(`${url}?action=${action}`, {
-            method: 'POST',
-            body: formData
-        });
-
-        if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
-        }
-
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        sweetAlert(3, 'Error en la solicitud', false);
-        return { status: 0, error: 'Error en la solicitud' };
-    }
-};
-
-// Función para mostrar mensajes de alerta usando SweetAlert.
-const sweetAlert = (type, message, reload) => {
-    switch (type) {
-        case 1:
-            Swal.fire('Éxito', message, 'success');
-            break;
-        case 2:
-            Swal.fire('Error', message, 'error');
-            break;
-        case 3:
-            Swal.fire('Error', message, 'error');
-            break;
-        case 4:
-            Swal.fire('Información', message, 'info');
-            break;
-        default:
-            break;
-    }
-
-    if (reload) {
-        fillTable(); // Recargar la tabla después de una operación exitosa.
-    }
-};
-
-// Función para confirmar acciones con el usuario usando SweetAlert.
-const confirm = async (message) => {
-    const result = await Swal.fire({
-        title: 'Confirmación',
-        text: message,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, confirmar',
-        cancelButtonText: 'Cancelar'
-    });
-
-    return result.isConfirmed;
-};
+}
+          

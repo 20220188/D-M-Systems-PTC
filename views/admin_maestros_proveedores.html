@@ -7,14 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proveedores</title>
 
-    <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../resources/css/maestros_proveedores.css">
+    <!-- Links importantes -->
+    <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="../resources/css/dashboard.css">
-    <link rel="stylesheet" href="../resources/css/maestro_proveedores.css">
+    <link rel="stylesheet" href="../resources/css/maestros_proveedores.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link rel="icon" href="../img/por el momento.jpg">
-    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/f6e8d56735.css" crossorigin="anonymous">
+</head>
 </head>
 
 <body id="body">
@@ -24,106 +23,144 @@
         <div class=" container2 row d-flex justify-content-center">
             <div class="col-md-9  d-flex justify-content-center">
                 <div class="botones">
-                    <a href="admin_maestro_productos.html"><button type="button" class="btn"><i
+                    <a href="admin_maestro_productos.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-tag"></i> Productos</button></a>
-                    <a href="admin_maestro_clientes.html"><button type="button" class="btn"><i class="fa-solid fa-users"></i>
+                    <a href="admin_maestro_clientes.html"><button type="button" class="btn1"><i
+                                class="fa-solid fa-users"></i>
                             Clientes</button></a>
                     <a href="admin_maestros_proveedores.html"><button type="button" class="btn-seleccionado"><i
                                 class="fa-solid fa-diagram-project"></i> Proveedores</button></a>
-                    <a href="admin_maestro_vendedores.html"><button type="button" class="btn"><i
+                    <a href="admin_maestro_vendedores.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-hand-holding-dollar"></i> Dependientes</button></a>
-                    <a href="admin_maestro_laboratorios.html"><button type="button" class="btn"><i
+                    <a href="admin_maestro_laboratorios.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-flask-vial"></i> Laboratorios</button></a>
                 </div>
             </div>
         </div>
         <br>
-        <!--Inicio del formulario para ingresar la información-->
-        <div class="row col-auto">
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <label for="inputCodigo" class="form-label">Código/NRC</label>
-                    <input type="text" class="form-control" id="inputCodigo">
+        <h3 id="mainTitle"></h3>
+        <div class="row">
+            <!-- Formulario de búsqueda -->
+            <form class="col-sm-12 col-md-6" id="searchForm">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="search" class="form-control" name="search"
+                            placeholder="Buscar por nombre, codigo, giro o teléfono" required>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                            <i class="fa-solid fa-eraser"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-md-12">
-                    <label for="inputNombre" class="form-label">Nombre/Razón social</label>
-                    <input type="text" class="form-control" id="inputNombre">
-                </div>
+            </form>
+            <div class="col-sm-12 col-md-6 text-end">
+                <!-- Boton para abrir el historial de compras-->
+                <button type="button" class="btn btn-secondary" onclick="openCreate()">
+                    <i class="fa-regular fa-clipboard"></i>
+                </button>
+                <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
+                <button type="button" class="btn btn-primary" onclick="openCreate()">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
 
 
-                <div class="col-md-12">
-                    <label for="inputPais" class="form-label">País</label>
-                    <input type="text" class="form-control" id="inputPais">
-                </div>
-                <div class="col-md-12">
-                    <label for="inputnegocio" class="form-label">Giro negocio</label>
-                    <input type="text" class="form-control" id="inputnegocio">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <label for="inputDUI" class="form-label">DUI</label>
-                    <input type="text" class="form-control" id="inputDUI">
-                </div>
-                <div class="col-md-12">
-                    <label for="inputNomCo" class="form-label">Nombre comercial</label>
-                    <input type="text" class="form-control" id="inputNomCo">
-                </div>
 
-                <div class="col-md-12">
-                    <label for="inputFecha" class="form-label">Fecha</label>
-                    <input type="date" class="form-control" id="inputFecha">
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <label for="inputNIT" class="form-label">NIT</label>
-                    <input type="text" class="form-control" id="inputNIT">
-                </div>
-                <div class="col-md-12">
-                    <label for="inputTel" class="form-label">Telefono</label>
-                    <input type="tel" class="form-control" id="inputTel">
-                </div>
-                <div class="col-md-12">
-                    <label for="inputContacto" class="form-label">Contacto</label>
-                    <input type="text" class="form-control" id="inputContacto">
-                </div>
-            </div>
-
-            <div class="col-md-3">
-                <div class="col-md-12">
-                    <label for="inputDireccion" class="form-label">Dirección</label>
-                    <input type="text" class="form-control" id="inputDireccion">
-                </div>
-                <div class="col-md-12">
-                    <label for="inputDep" class="form-label">Departamento</label>
-                    <input type="text" class="form-control" id="inputDep">
-                </div>
-                <div class="col-md-12">
-                    <label for="inputMunicipio" class="form-label">Municipio</label>
-                    <input type="text" class="form-control" id="inputMunicipio">
-                </div>
-            </div>
-
-
-        </div>
-        
-        <!-- Botones para realizar acciones-->
-        <div class="d-grid gap-2 d-md-flex d-flex justify-content-center">
-            <div class="col-md-6-sm-6" id="botones">
-                <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus fa-1x"></i>
-                        Agregar</button>
-                    <button type="button" class="btn1" id="btnEliminar"><i class="lni lni-cross-circle"></i>
-                        Cancelar</button>
-                        <button type="button" class="btn1" id="btnActualizar"><i class="lni lni-cross-circle"></i>
-                            Actualizar</button>
-                </div>
             </div>
         </div>
 
+        <!-- Tabla para mostrar los registros existentes -->
+        <table class="table table-hover text-center">
+            <thead>
+                <tr>
+                    <td class="text-start" colspan="8" id="rowsFound"></td>
+                </tr>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>CODIGO</th>
+                    <th>GIRO</th>
+                    <th>TELEFONO</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
 
+        <!-- Componente Modal para guardar un registro -->
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para crear o actualizar un registro -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <input type="number" class="d-none" id="idLab" name="idProveedor">
+                            <div class="col-sm-12 col-md-3">
+                                <label for="nombreProveedor" class="form-label">Nombre</label>
+                                <input id="nombreLaboratorio" type="text" name="nombreLaboratorio" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="codigoProveedor" class="form-label">Codigo</label>
+                                <input id="codigoProveedor" type="number" name="codigoProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="paisProveedor" class="form-label">País</label>
+                                <input id="paisProveedor" type="text" name="paisProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="giroProveedor" class="form-label">Giro</label>
+                                <input id="giroProveedor" type="text" name="giroProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="duiProveedor" class="form-label">DUI</label>
+                                <input id="duiProveedor" type="text" name="duiProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="nombreComercialProveedor" class="form-label">Nombre comercial</label>
+                                <input id="nombreComercialProveedor" type="text" name="nombreComercialProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="fechaProveedor" class="form-label">Fecha</label>
+                                <input id="fechaProveedor" type="date" name="fechaProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="nitProveedor" class="form-label">NIT</label>
+                                <input id="nitProveedor" type="number" name="nitProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="telefonoProveedor" class="form-label">Teléfono</label>
+                                <input id="telefonoProveedor" type="tel" name="telefonoProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="contactoProveedor" class="form-label">Contacto</label>
+                                <input id="contactoProveedor" type="text" name="contactoProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="direccionProveedor" class="form-label">Dirección</label>
+                                <input id="direccionProveedor" type="text" name="direccionProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="departamentoProveedor" class="form-label">Departamento</label>
+                                <input id="departamentoProveedor" type="text" name="departamentoProveedor" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-3">
+                                <label for="municipioProveedor" class="form-label">Municipio</label>
+                                <input id="municipioProveedor" type="text" name="municipioProveedor" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </main>
 
@@ -147,7 +184,7 @@
     <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
 
     <!-- Llamada al controlador de la página web -->
-    <script type="text/javascript" src="../controllers/admin/admin_maestro_productos.js"></script>
+    <script type="text/javascript" src="../controllers/admin/admin_maestros_proveedores.js"></script>
 </body>
 
 </html>
