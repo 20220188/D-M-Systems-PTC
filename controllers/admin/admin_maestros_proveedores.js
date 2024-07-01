@@ -89,12 +89,13 @@ const fillTable = async () => {
         responseData.dataset.forEach(proveedor => {
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${proveedor.nombre}</td>
-                    <td>${proveedor.codigo}</td>
-                    <td>${proveedor.giro_negocio}</td>
+                    <td>${row.nombre_proveedor}</td>
+                    <td>${row.codigo_proveedor}</td>
+                    <td>${row.giro_negocio_proveedor}</td>
+                     <td>${row.telefono_proveedor}</td>
                     <td>
-                        <button class="btn btn-info" onclick="openUpdate(${proveedor.id_proveedor})">Editar</button>
-                        <button class="btn btn-danger" onclick="openDelete(${proveedor.id_proveedor})">Eliminar</button>
+                        <button class="btn btn-info" onclick="openUpdate(${row.id_proveedor})">Editar</button>
+                        <button class="btn btn-danger" onclick="openDelete(${row.id_proveedor})">Eliminar</button>
                     </td>
                 </tr>
             `;

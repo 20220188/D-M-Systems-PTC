@@ -49,7 +49,7 @@ class ProveedorHandler
 
     public function readAll()
     {
-        $sql = 'SELECT id_proveedor, codigo_proveedor, nombre_proveedor, pais_proveedor, giro_negocio_proveedor, dui_proveedor, nombre_comercial_proveedor, fecha_proveedor, nit_proveedor, telefono_proveedor, contacto_proveedor, direccion_proveedor, departamento_proveedor, municipio_proveedor
+        $sql = 'SELECT id_proveedor, codigo_proveedor, nombre_proveedor, giro_negocio_proveedor, telefono_proveedor
                 FROM tb_proveedores
                 ORDER BY nombre_proveedor';
         return Database::getRows($sql);

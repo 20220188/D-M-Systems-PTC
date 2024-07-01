@@ -17,7 +17,7 @@ if (isset($_GET['action'])) {
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $Proveedor->searchRows()) {
+                } elseif ($result['dataset'] = $proveedor->searchRows($_POST['search'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
                 } else {
@@ -42,8 +42,8 @@ if (isset($_GET['action'])) {
                     !$proveedor->setDepartamentoProveedor($_POST['departamentoProveedor']) or
                     !$proveedor->setMunicipioProveedor($_POST['municipioProveedor'])
                 ) {
-                    $result['error'] = $Proveedor->getDataError();
-                } elseif ($Proveedor->createRow()) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif ($proveedor->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Proveedor creado correctamente';
 
@@ -52,7 +52,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readAll':
-                if ($result['dataset'] = $Proveedor->readAll()) {
+                if ($result['dataset'] = $proveedor->readAll()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
@@ -60,9 +60,9 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOne':
-                if (!$Proveedor->setIdProveedor($_POST['idProveedor'])) {
-                    $result['error'] = $Proveedor->getDataError();
-                } elseif ($result['dataset'] = $Proveedor->readOne()) {
+                if (!$proveedor->setIdProveedor($_POST['idProveedor'])) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif ($result['dataset'] = $roveedor->readOne()) {
                     $result['status'] = 1;
                 } else {
                     $result['error'] = 'Proveedor inexistente';
@@ -86,8 +86,8 @@ if (isset($_GET['action'])) {
                     !$proveedor->setDepartamentoProveedor($_POST['departamentoProveedor']) or
                     !$proveedor->setMunicipioProveedor($_POST['municipioProveedor'])
                 ) {
-                    $result['error'] = $Proveedor->getDataError();
-                } elseif ($Proveedor->updateRow()) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif ($proveedor->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Proveedor modificado correctamente';
                 } else {
@@ -96,11 +96,11 @@ if (isset($_GET['action'])) {
                 break;
             case 'deleteRow':
                 if (
-                    !$Proveedor->setIdProveedor($_POST['idProveedor'])
+                    !$proveedor->setIdProveedor($_POST['idProveedor'])
                    
                 ) {
-                    $result['error'] = $Proveedor->getDataError();
-                } elseif ($Proveedor->deleteRow()) {
+                    $result['error'] = $proveedor->getDataError();
+                } elseif ($proveedor->deleteRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Proveedor eliminado correctamente';
                 
