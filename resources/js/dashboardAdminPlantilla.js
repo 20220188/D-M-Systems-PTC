@@ -41,7 +41,7 @@ const asideHTML = `
                 <h4>Utilidades</h4>
             </div>
         </a>
-        <a href="#" class="menu-option" onclick="logOut()">
+        <a href="#" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-user" title="Cerrar sesión"></i>
             </div>

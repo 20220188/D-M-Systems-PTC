@@ -15,7 +15,7 @@ tipo_usuario VARCHAR(20)
 CREATE TABLE tb_usuarios(
 id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 usuario VARCHAR(10),
-clave VARCHAR(100),
+clave VARCHAR(100),1
 correo VARCHAR(50),
 nombre VARCHAR(25),
 DUI VARCHAR(10),
