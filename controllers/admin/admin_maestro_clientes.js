@@ -1,5 +1,5 @@
 // Constante para completar la ruta de la API.
-const CATEGORIA_API = 'services/admin/categoria.php';
+const CATEGORIA_API = 'services/admin/admin_maestro_cliente.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.
@@ -96,14 +96,11 @@ const fillTable = async (form = null) => {
                     <td>${row.correo}</td>
                     <td>
                         <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_cliente})">
-                            <i class="bi bi-pencil-fill"></i>
+                            <i class="fa-solid fa-pen"></i>
                         </button>
                         <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_cliente})">
-                            <i class="bi bi-trash-fill"></i>
-                        </button>
-                        <button type="button" class="btn btn-warning" onclick="openReport(${row.id_cliente})">
-                            <i class="bi bi-filetype-pdf"></i>
-                        </button>
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>                        
                     </td>
                 </tr>
             `;
@@ -143,7 +140,7 @@ const openUpdate = async (id) => {
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar categoría';
+        MODAL_TITLE.textContent = 'Actualizar cliente';
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.

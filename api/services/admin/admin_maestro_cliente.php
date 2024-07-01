@@ -60,7 +60,7 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $cliente->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Categoría inexistente';
+                    $result['error'] = 'Cliente inexistente';
                 }
                 break;
             case 'updateRow':

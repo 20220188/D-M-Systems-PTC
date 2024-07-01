@@ -13,6 +13,13 @@ class clienteHandler
     protected $nombre = null;
     protected $nit = null;
     protected $nrc = null;
+    protected $tipo = null;
+    protected $nombrec = null;
+    protected $codigo = null;
+    protected $direccion = null;
+    protected $telefono = null;
+    protected $correro = null;
+
 
 
     /*
@@ -21,10 +28,10 @@ class clienteHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_categoria, nombre_categoria, imagen_categoria, descripcion_categoria
-                FROM categoria
-                WHERE nombre_categoria LIKE ? OR descripcion_categoria LIKE ?
-                ORDER BY nombre_categoria';
+        $sql = 'SELECT id_cliente, nombre, NIT, NRC, tipo, nombre_comercial, codigo, direccion, telefono, correo
+                FROM tb_clientes
+                WHERE nombre LIKE ? OR codigo LIKE ?
+                ORDER BY nombre';
         $params = array($value, $value);
         return Database::getRows($sql, $params);
     }
@@ -39,17 +46,16 @@ class clienteHandler
 
     public function readAll()
     {
-        $sql = 'SELECT id_categoria, nombre_categoria, imagen_categoria, descripcion_categoria
-                FROM categoria
-                ORDER BY nombre_categoria';
+        $sql = 'SELECT id_cliente, nombre, NIT, NRC, tipo, nombre_comercial, codigo, direccion, telefono, correo
+                FROM tb_clientes';
         return Database::getRows($sql);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_categoria, nombre_categoria, imagen_categoria, descripcion_categoria
-                FROM categoria
-                WHERE id_categoria = ?';
+        $sql = 'SELECT id_cliente, nombre, NIT, NRC, tipo, nombre_comercial, codigo, direccion, telefono, correo
+                FROM tb_clientes
+                WHERE id_cliente = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
