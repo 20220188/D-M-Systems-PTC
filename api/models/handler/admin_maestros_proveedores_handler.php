@@ -34,7 +34,6 @@ class ProveedorHandler
         $sql = 'SELECT id_proveedor, codigo_proveedor, nombre_proveedor, pais_proveedor, giro_negocio_proveedor, dui_proveedor, nombre_comercial_proveedor, fecha_proveedor, nit_proveedor, telefono_proveedor, contacto_proveedor, direccion_proveedor, departamento_proveedor, municipio_proveedor
                 FROM tb_proveedores
                 WHERE nombre_proveedor LIKE ? OR codigo_proveedor LIKE ? 
-                OR telefono_proveedor LIKE ? OR dui_proveedor LIKE ?
                 ORDER BY nombre_proveedor';
         $params = array($value, $value, $value, $value );
         return Database::getRows($sql, $params);

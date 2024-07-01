@@ -31,10 +31,8 @@ if (isset($_GET['action'])) {
                     !$producto->setDescripcion($_POST['descripcionProducto']) or
                     !$producto->setCodigo($_POST['codigoProducto']) or
                     !$producto->setFechaVencimiento($_POST['fechaVencimiento']) or
-                    !$producto->setPrecioSinIva($_POST['precioSinIVA']) or
-                    !$producto->setPrecioConIva($_POST['precioVentaConIVA']) or
-                    !$producto->setImagen($_FILES['imagenProducto']) or
-                    !$producto->setCostoUnitario($_POST['precioUnitario'])
+                    !$producto->setPresentacion($_POST['presentacionDetalle']) or
+                    !$producto->setImagen($_FILES['imagenProducto']) 
                 ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->createRow()) {
@@ -72,9 +70,7 @@ if (isset($_GET['action'])) {
                     !$producto->setDescripcion($_POST['descripcionProducto']) or
                     !$producto->setCodigo($_POST['codigoProducto']) or
                     !$producto->setFechaVencimiento($_POST['fechaVencimiento']) or
-                    !$producto->setPrecioSinIva($_POST['precioSinIVA']) or
-                    !$producto->setPrecioConIva($_POST['precioVentaConIVA']) or
-                    !$producto->setCostoUnitario($_POST['precioUnitario']) or
+                    !$producto->setPresentacion($_POST['presentacionDetalle']) or
                     !$producto->setImagen($_FILES['imagenProducto'], $producto->getFilename())
                 ) {
                     $result['error'] = $producto->getDataError();
@@ -106,7 +102,7 @@ if (isset($_GET['action'])) {
             case 'createRowDetalleProducto':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setPresentacion($_POST['presentacionDetalle']) or
+                    
                     !$producto->setUbicacion($_POST['ubicacionDetalle']) or
                     !$producto->setMinimo($_POST['minimoDetalle']) or
                     !$producto->setMaximo($_POST['maximoDetalle']) or
@@ -114,6 +110,9 @@ if (isset($_GET['action'])) {
                     !$producto->setFechaIngreso($_POST['fechaIngresoDetalle']) or
                     !$producto->setPeriodoExistencia($_POST['periodoEistenciaDetalle']) or
                     !$producto->setIdLaboratorio($_POST['laboratorioDetalle']) or
+                    !$producto->setPrecioSinIva($_POST['precioSinIVA']) or
+                    !$producto->setPrecioConIva($_POST['precioVentaConIVA']) or
+                    !$producto->setCostoUnitario($_POST['precioUnitario']) or
                     !$producto->setDescuento($_POST['descuentoDetalle']) or
                     !$producto->setPrecioConDescuento($_POST['precioDescDetalle']) or
                     !$producto->setPrecioOpcional1($_POST['precioOpc1Detalle']) or
@@ -153,7 +152,6 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$producto->setIdDetalle($_POST['idDetalle']) or
-                    !$producto->setPresentacion($_POST['presentacionDetalle']) or
                     !$producto->setUbicacion($_POST['ubicacionDetalle']) or
                     !$producto->setMinimo($_POST['minimoDetalle']) or
                     !$producto->setMaximo($_POST['maximoDetalle']) or
@@ -161,6 +159,9 @@ if (isset($_GET['action'])) {
                     !$producto->setFechaIngreso($_POST['fechaIngresoDetalle']) or
                     !$producto->setPeriodoExistencia($_POST['periodoEistenciaDetalle']) or
                     !$producto->setIdLaboratorio($_POST['laboratorioDetalle']) or
+                    !$producto->setPrecioSinIva($_POST['precioSinIVA']) or
+                    !$producto->setPrecioConIva($_POST['precioVentaConIVA']) or
+                    !$producto->setCostoUnitario($_POST['precioUnitario']) or
                     !$producto->setDescuento($_POST['descuentoDetalle']) or
                     !$producto->setPrecioConDescuento($_POST['precioDescDetalle']) or
                     !$producto->setPrecioOpcional1($_POST['precioOpc1Detalle']) or

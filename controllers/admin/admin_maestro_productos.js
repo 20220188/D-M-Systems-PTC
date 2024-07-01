@@ -1,6 +1,6 @@
 // Constantes para completar las rutas de la API de PRODUCTO.
 const PRODUCTO_API = 'services/admin/admin_maestro_productos.php';
-LABORATORIO_API = 'services/admin/admin_maestro_laboratorios.php';
+const LABORATORIO_API = 'services/admin/admin_maestro_laboratorios.php';
 
 
 /*
@@ -58,6 +58,12 @@ const SAVE_FORM_DETALLE = document.getElementById('saveFormDetalle'),
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
+
+    const today = new Date().toISOString().split('T')[0];
+    
+    // Asigna la fecha actual al atributo 'min' del input de fecha
+    const FECHA_VENCIMIENTO = document.getElementById('fechaVencimiento');
+    FECHA_VENCIMIENTO.setAttribute('min', today);
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
     // Se establece el título del contenido principal.
@@ -124,8 +130,7 @@ const fillTable = async (form = null) => {
                     <td>${row.nombre}</td>
                     <td>${row.descripcion}</td>
                     <td>${row.fecha_vencimiento}</td>
-                    <td>${row.precio_con_iva}</td>
-                    <td>${row.costo_unitario}</td>
+                    <td>${row.presentacion}</td>
                     <td>
                         <button type="button" class="btn btn-success" onclick="openDetails(${row.id_producto})">
                         <i class="fa-regular fa-square-plus"></i>
@@ -185,9 +190,7 @@ const openUpdate = async (id) => {
         DESCRIPCION_PRODUCTO.value = ROW.descripcion;
         CODIGO_PRODUCTO.value = ROW.codigo;
         FECHA_VENCIMIENTO.value = ROW.fecha_vencimiento;
-        PRECIO_SIN_IVA.value = ROW.precio_sin_iva;
-        PRECIO_CON_IVA.value = ROW.precio_con_iva;
-        PRECIO_UNITARIO.value = ROW.costo_unitario;
+        PRESENTACION_DETALLE.value = ROW.presentacion;
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -269,7 +272,6 @@ const fillTableDetails = async (id) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY_DETALLE.innerHTML += `
                 <tr>
-                    <td>${row.presentacion}</td>
                     <td>${row.marca}</td>
                     <td>${row.ubicacion}</td>
                     <td>${row.minimo}</td>
@@ -277,6 +279,8 @@ const fillTableDetails = async (id) => {
                     <td>${row.fecha}</td>
                     <td>${row.periodo_existencia}</td>
                     <td>${row.nombre_laboratorio}</td>
+                    <td>${row.precio_con_iva}</td>
+                    <td>${row.costo_unitario}</td>
                     <td>${row.descuento}</td>
                     <td>${row.precio_con_descuento}</td>   
                     <td>
@@ -338,12 +342,14 @@ const openUpdateDetails = async (id1) => {
         const ROW = DATA.dataset;
         ID_DETALLE.value = ROW.id_detalle_producto;
         ID_PRODUCTO_DETALLE.value = ROW.id_producto;
-        PRESENTACION_DETALLE.value = ROW.presentacion;
         UBICACION_DETALLE.value = ROW.ubicacion;
         MINIMO_DETALLE.value = ROW.minimo;
         MAXIMO_DETALLE.value = ROW.maximo;
         MARCA_DETALLE.value = ROW.marca;
         FECHA_INGRESO_DETALLE.value = ROW.fecha;
+        PRECIO_SIN_IVA.value = ROW.precio_sin_iva;
+        PRECIO_CON_IVA.value = ROW.precio_con_iva;
+        PRECIO_UNITARIO.value = ROW.costo_unitario;
         DESCUENTO_DETALLE.value = ROW.descuento;
         PRECIO_DESCUENTO_DETALLE.value = ROW.precio_con_descuento;
         PRECIO_OPCIONAL1_DETALLE.value = ROW.precio_opcional1;

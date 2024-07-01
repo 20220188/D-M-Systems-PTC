@@ -18,7 +18,7 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 const SAVE_FORM = document.getElementById('saveForm'),
     ID_DEPENDIENTE = document.getElementById('idDependiente'),
     NOMBRE_DEPENDIENTE = document.getElementById('nombreDependiente'),
-    CODIGO_DEPENDIENTE = document.getElementById('CodigoDependiente');
+    CODIGO_DEPENDIENTE = document.getElementById('codigoDependiente');
 
 
 // Método del evento para cuando el documento ha cargado.
@@ -84,8 +84,8 @@ const fillTable = async (form = null) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${row.nombre_dependiente}</td>
-                    <td>${row.codigo}</td>                    
+                    <td>${row.codigo}</td>
+                    <td>${row.nombre_dependiente}</td>                    
                     <td>
                         <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_dependiente})">
                         <i class="fa-solid fa-pencil"></i>

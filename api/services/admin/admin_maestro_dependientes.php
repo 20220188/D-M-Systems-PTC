@@ -34,7 +34,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $dependientes->getDataError();
                 } elseif ($dependientes->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Laboratorio creado correctamente';
+                    $result['message'] = 'dependiente creado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
                 }
@@ -44,7 +44,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen laboratorios registrados';
+                    $result['error'] = 'No existen dependientes registrados';
                 }
                 break;
             case 'readOne':
@@ -53,7 +53,7 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $dependientes->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Laboratorio inexistente';
+                    $result['error'] = 'dependiente inexistente';
                 }
                 break;
             case 'updateRow':
@@ -66,9 +66,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $dependientes->getDataError();
                 } elseif ($dependientes->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Laboratorio modificado correctamente';
+                    $result['message'] = 'dependiente modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el laboratorio';
+                    $result['error'] = 'Ocurrió un problema al modificar el dependiente';
                 }
                 break;
             case 'deleteRow':
@@ -78,9 +78,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $dependientes->getDataError();
                 } elseif ($dependientes->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Laboratorio eliminado correctamente';
+                    $result['message'] = 'dependiente eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar el laboratorio';
+                    $result['error'] = 'Ocurrió un problema al eliminar el dependiente';
                 }
                 break;
                 

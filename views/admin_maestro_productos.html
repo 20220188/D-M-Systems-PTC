@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col-6">
                         <input type="search" class="form-control" name="search"
-                            placeholder="Buscar por nombre, categoría, tipo o deporte" required>
+                            placeholder="Buscar por nombre, código, descripción o presentación" required>
                     </div>
                     <div class="col-6">
                         <button type="submit" class="btn btn-success">
@@ -74,16 +74,15 @@
             <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
             <thead>
                 <tr>
-                    <td class="text-start" colspan="8" id="rowsFound"></td>
+                    <td class="text-start" colspan="7" id="rowsFound"></td>
                 </tr>
                 <tr>
                     <th>IMAGEN</th>
-                    <th>CODIGO</th>
+                    <th>CóDIGO</th>
                     <th>NOMBRE</th>
-                    <th>DESCRIPCION</th>
+                    <th>DESCRIPCIóN</th>
                     <th>FECHA VENCIMIENTO</th>
-                    <th>PRECIO VENTA c/IVA</th>
-                    <th>COSTO UNITARIO</th>
+                    <th>PRESENTACION</th>
                     <th>ACCIONES</th>
                 </tr>
             </thead>
@@ -116,7 +115,12 @@
                                     class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="codigoProducto" class="form-label">Codigo</label>
+                                <label for="presentacionDetalle" class="form-label">Presentación</label>
+                                <input id="presentacionDetalle" type="text" name="presentacionDetalle" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="codigoProducto" class="form-label">Código</label>
                                 <input id="codigoProducto" type="text" name="codigoProducto" class="form-control"
                                     required>
                             </div>
@@ -125,21 +129,7 @@
                                 <input id="fechaVencimiento" type="date" name="fechaVencimiento" class="form-control"
                                     required>
                             </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="precioSinIVA" class="form-label">Precio sin IVA</label>
-                                <input id="precioSinIVA" type="number" name="precioSinIVA" min="0.01" step="0.01"
-                                    class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="precioVentaConIVA" class="form-label">Precio de venta c/IVA</label>
-                                <input id="precioVentaConIVA" type="number" name="precioVentaConIVA" min="0.01"
-                                    step="0.01" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="precioUnitario" class="form-label">Precio unitario</label>
-                                <input id="precioUnitario" type="number" name="precioUnitario" min="0.01" step="0.01"
-                                    class="form-control" required>
-                            </div>
+                            
                             <div class="col-sm-12 col-md-6">
                                 <label for="imagenProducto" class="form-label">Imagen</label>
                                 <input id="imagenProducto" type="file" name="imagenProducto" class="form-control"
@@ -169,13 +159,9 @@
                             <!-- Campo oculto para asignar el id del registro al momento de modificar -->
                             <input type="number" class="d-none" id="idDetalle" name="idDetalle">
                             <input type="number" class="d-none" id="idProductoDetalle" name="idProductoDetalle">
+                            
                             <div class="col-sm-12 col-md-6">
-                                <label for="presentacionDetalle" class="form-label">Presentacion</label>
-                                <input id="presentacionDetalle" type="text" name="presentacionDetalle" class="form-control"
-                                    required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="ubicacionDetalle" class="form-label">Ubicacion</label>
+                                <label for="ubicacionDetalle" class="form-label">Ubicación</label>
                                 <input id="ubicacionDetalle" type="text" name="ubicacionDetalle" class="form-control"
                                     required>
                             </div>
@@ -204,7 +190,7 @@
                                 <label for="periodoEistenciaDetalle" class="form-label">Periodo de existencia</label>
                                 <input id="periodoEistenciaDetalle" type="date" name="periodoEistenciaDetalle" class="form-control"
                                     required>
-                                    <div class="form-text" id="basic-addon4">Hasta cuando se estima que durara el producto </div>
+                                    <div class="form-text" id="basic-addon4">Hasta cuando se estima que durará el producto </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="laboratorioDetalle" class="form-label">Laboratorio</label>
@@ -212,6 +198,21 @@
                                 </select>
                             </div>
                             <h5 class="text-center" >Apartado de precios</h5>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="precioSinIVA" class="form-label">Precio sin IVA</label>
+                                <input id="precioSinIVA" type="number" name="precioSinIVA" min="0.01" step="0.01"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="precioVentaConIVA" class="form-label">Precio de venta c/IVA</label>
+                                <input id="precioVentaConIVA" type="number" name="precioVentaConIVA" min="0.01"
+                                    step="0.01" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="precioUnitario" class="form-label">Precio unitario</label>
+                                <input id="precioUnitario" type="number" name="precioUnitario" min="0.01" step="0.01"
+                                    class="form-control" required>
+                            </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="descuentoDetalle" class="form-label">Descuento</label>
                                 <input id="descuentoDetalle" type="number" name="descuentoDetalle" min="0.01" step="0.01"
@@ -253,10 +254,9 @@
                             <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
                             <thead>
                                 <tr>
-                                    <td class="text-start" colspan="11" id="rowsFoundDetalle"></td>
+                                    <td class="text-start" colspan="12" id="rowsFoundDetalle"></td>
                                 </tr>
                                 <tr>
-                                    <th>PRESENTACION</th>
                                     <th>MARCA</th>
                                     <th>UBICACION</th>
                                     <th>MINIMO</th>
@@ -264,6 +264,8 @@
                                     <th>FECHA INGRESO</th>
                                     <th>PERIODO EXISTENCIA</th>
                                     <th>LABORATORIO</th>
+                                    <th>PRECIO CON IVA</th>
+                                    <th>COSTO UNITARIO</th>
                                     <th>DESCUENTO</th>
                                     <th>PRECIO CON DESCUENTO</th>
                                     <th>ACCIONES</th>

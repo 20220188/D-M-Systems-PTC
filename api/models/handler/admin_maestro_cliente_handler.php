@@ -28,9 +28,9 @@ class clienteHandler
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = 'SELECT id_cliente, nombre, NIT, NRC, tipo, nombre_comercial, codigo, direccion, telefono, correo
                 FROM tb_clientes
-                WHERE nombre LIKE ? OR codigo LIKE ? OR NIT LIKE ? OR tipo LIKE ? OR telefono LIKE ? OR nombre_comercial LIKE ?
+                WHERE nombre LIKE ? OR codigo LIKE ? OR NIT LIKE ? 
                 ORDER BY nombre';
-        $params = array($value, $value, $value, $value, $value, $value);
+        $params = array($value, $value, $value);
         return Database::getRows($sql, $params);
     }
 
