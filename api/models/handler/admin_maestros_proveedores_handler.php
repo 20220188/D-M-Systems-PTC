@@ -33,9 +33,15 @@ class ProveedorHandler
         $value = '%' . $value . '%';
         $sql = 'SELECT id_proveedor, codigo_proveedor, nombre_proveedor, pais_proveedor, giro_negocio_proveedor, dui_proveedor, nombre_comercial_proveedor, fecha_proveedor, nit_proveedor, telefono_proveedor, contacto_proveedor, direccion_proveedor, departamento_proveedor, municipio_proveedor
                 FROM tb_proveedores
-                WHERE nombre_proveedor LIKE ? OR codigo_proveedor LIKE ? OR nombre_proveedor LIKE ? OR pais_proveedor LIKE ? OR giro_negocio_proveedor LIKE ? OR dui_proveedor LIKE ? OR nombre_comercial_proveedor LIKE ? OR fecha_proveedor LIKE ? OR nit_proveedor LIKE ? OR telefono_proveedor LIKE ? OR contacto_proveedor LIKE ? OR direccion_proveedor LIKE ? OR departamento_proveedor LIKE ? OR municipio_proveedor LIKE ?
+                WHERE nombre_proveedor LIKE ? OR codigo_proveedor LIKE ? 
+                OR nombre_proveedor LIKE ? OR pais_proveedor LIKE ? OR 
+                giro_negocio_proveedor LIKE ? OR dui_proveedor LIKE ? OR 
+                nombre_comercial_proveedor LIKE ? OR fecha_proveedor LIKE ? 
+                OR nit_proveedor LIKE ? OR telefono_proveedor LIKE ? OR 
+                contacto_proveedor LIKE ? OR direccion_proveedor LIKE ? OR 
+                departamento_proveedor LIKE ? OR municipio_proveedor LIKE ?
                 ORDER BY nombre_proveedor';
-        $params = array($value, $value);
+        $params = array($value, $value, $value, $value, $value, $value, $value, $value, $value, $value, $value, $value, $value, $value,);
         return Database::getRows($sql, $params);
     }
 
@@ -67,7 +73,11 @@ class ProveedorHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_proveedores
-                SET codigo_proveedor = ?, nombre_proveedor = ?, pais_proveedor = ?, giro_negocio_proveedor = ?, dui_proveedor = ?, nombre_comercial_proveedor = ?, fecha_proveedor = ?, nit_proveedor = ?, telefono_proveedor = ?, contacto_proveedor = ?, direccion_proveedor = ?, departamento_proveedor = ?, municipio_proveedor = ?
+                SET codigo_proveedor = ?, nombre_proveedor = ?, pais_proveedor = ?, 
+                giro_negocio_proveedor = ?, dui_proveedor = ?, nombre_comercial_proveedor = ?,
+                 fecha_proveedor = ?, nit_proveedor = ?, telefono_proveedor = ?, 
+                 contacto_proveedor = ?, direccion_proveedor = ?, departamento_proveedor = ?, 
+                 municipio_proveedor = ?
                 WHERE id_proveedor = ?';
         $params = array($this->codigo_proveedor, $this->nombre_proveedor, $this->pais_proveedor, $this->giro_negocio_proveedor, $this->dui_proveedor, $this->nombre_comercial_proveedor, $this->fecha_proveedor, $this->nit_proveedor, $this->telefono_proveedor, $this->contacto_proveedor, $this->direccion_proveedor, $this->departamento_proveedor, $this->municipio_proveedor, $this->id_proveedor);
         return Database::executeRow($sql, $params);

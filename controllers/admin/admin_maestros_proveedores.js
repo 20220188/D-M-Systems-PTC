@@ -18,7 +18,7 @@ const ID_PROVEEDOR = document.getElementById('idProveedor');
 const NOMBRE_PROVEEDOR = document.getElementById('nombreProveedor');
 const CODIGO_PROVEEDOR = document.getElementById('codigoProveedor');
 const PAIS = document.getElementById('paisProveedor');
-const GIRO_NEGOCIO = document.getElementById('giroProveedor');
+const GIRO_NEGOCIO = document.getElementById('giroNegocioProveedor');
 const DUI = document.getElementById('duiProveedor');
 const NOMBRE_COMERCIAL = document.getElementById('nombreComercialProveedor');
 const FECHA = document.getElementById('fechaProveedor');
@@ -134,6 +134,7 @@ const openUpdate = async (id) => {
     FORM.append('idProveedor', id);
     // Petición para obtener los datos del registro solicitado.
     const responseData = await fetchData(PROVEEDOR_API, 'readOne', FORM);
+
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (responseData.status)
         
@@ -144,7 +145,7 @@ const openUpdate = async (id) => {
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
-        const ROW = DATA.dataset;
+        const ROW = responseData.dataset;
         ID_PROVEEDOR.value = ROW.id_proveedor;
         NOMBRE_PROVEEDOR.value = ROW.nombre_proveedor;
         CODIGO_PROVEEDOR.value = ROW.codigo_proveedor;
@@ -158,8 +159,9 @@ const openUpdate = async (id) => {
         DIRECCION.value = ROW.direccion_proveedor;
         DEPARTAMENTO.value = ROW.departamento_proveedor;
         MUNICIPIO.value = ROW.municipio_proveedor;
+        CONTACTO.value=ROW.contacto_proveedor;
     } else {
-        sweetAlert(2, DATA.error, false);
+        sweetAlert(2, responseData.error, false);
     }
 }
 

@@ -30,7 +30,7 @@ class ProveedorData extends ProveedorHandler
 
     public function setCodigoProveedor($value)
     {
-        if (Validator::validateNaturalNumber($value)) {
+        if (Validator::validateAlphanumeric($value)) {
             $this->codigo_proveedor = $value;
             return true;
         } else {
@@ -118,24 +118,24 @@ class ProveedorData extends ProveedorHandler
 
     public function setNitProveedor($value)
     {
-        if (Validator::validateAlphanumeric($value, 1, 17)) {
+        //if (Validator::validateAlphanumeric($value)) {
             $this->nit_proveedor = $value;
             return true;
-        } else {
-            $this->data_error = 'El NIT del proveedor es incorrecto';
-            return false;
-        }
+        //} else {
+           // $this->data_error = 'El NIT del proveedor es incorrecto';
+           // return false;
+       // }
     }
 
     public function setTelefonoProveedor($value)
     {
-        if (Validator::validatePhone($value)) {
+        //if (Validator::validatePhone($value)) {
             $this->telefono_proveedor = $value;
             return true;
-        } else {
-            $this->data_error = 'El teléfono del proveedor es incorrecto';
-            return false;
-        }
+        //} else {
+           // $this->data_error = 'El teléfono del proveedor es incorrecto';
+           // return false;
+        //}
     }
 
     public function setContactoProveedor($value)
@@ -151,13 +151,13 @@ class ProveedorData extends ProveedorHandler
 
     public function setDireccionProveedor($value)
     {
-        if (Validator::validateAlphanumeric($value, 1, 200)) {
+        //if (Validator::validateAlphanumeric($value, 1, 200)) {
             $this->direccion_proveedor = $value;
             return true;
-        } else {
-            $this->data_error = 'La dirección del proveedor es incorrecta';
-            return false;
-        }
+        //} else {
+        //    $this->data_error = 'La dirección del proveedor es incorrecta';
+        //    return false;
+        //}
     }
 
     public function setDepartamentoProveedor($value)
