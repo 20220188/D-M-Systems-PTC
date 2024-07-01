@@ -170,59 +170,76 @@
                             <input type="number" class="d-none" id="idDetalle" name="idDetalle">
                             <input type="number" class="d-none" id="idProductoDetalle" name="idProductoDetalle">
                             <div class="col-sm-12 col-md-6">
-                                <label for="codigoProducto" class="form-label">Presentacion</label>
-                                <input id="codigoProducto" type="text" name="codigoProducto" class="form-control"
+                                <label for="presentacionDetalle" class="form-label">Presentacion</label>
+                                <input id="presentacionDetalle" type="text" name="presentacionDetalle" class="form-control"
                                     required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="codigoProducto" class="form-label">Minimo</label>
-                                <input id="codigoProducto" type="text" name="codigoProducto" class="form-control"
+                                <label for="ubicacionDetalle" class="form-label">Ubicacion</label>
+                                <input id="ubicacionDetalle" type="text" name="ubicacionDetalle" class="form-control"
                                     required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="codigoProducto" class="form-label">Maximo</label>
-                                <input id="codigoProducto" type="text" name="codigoProducto" class="form-control"
+                                <label for="minimoDetalle" class="form-label">Minimo</label>
+                                <input id="minimoDetalle" type="text" name="minimoDetalle" class="form-control"
                                     required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="codigoProducto" class="form-label">Marca</label>
-                                <input id="codigoProducto" type="text" name="codigoProducto" class="form-control"
+                                <label for="maximoDetalle" class="form-label">Maximo</label>
+                                <input id="maximoDetalle" type="text" name="maximoDetalle" class="form-control"
                                     required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="marcaDetalle" class="form-label">Marca</label>
+                                <input id="marcaDetalle" type="text" name="marcaDetalle" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="fechaIngresoDetalle" class="form-label">Fecha de ingreso</label>
+                                <input id="fechaIngresoDetalle" type="date" name="fechaIngresoDetalle" class="form-control"
+                                    required>
+                                    <div class="form-text" id="basic-addon4">Fecha de ingreso del producto</div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="periodoEistenciaDetalle" class="form-label">Periodo de existencia</label>
+                                <input id="periodoEistenciaDetalle" type="date" name="periodoEistenciaDetalle" class="form-control"
+                                    required>
+                                    <div class="form-text" id="basic-addon4">Hasta cuando se estima que durara el producto </div>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="laboratorioDetalle" class="form-label">Laboratorio</label>
                                 <select id="laboratorioDetalle" name="laboratorioDetalle" class="form-select" required>
                                 </select>
                             </div>
-                            <h6>Apartado de precios</h6>
+                            <h5 class="text-center" >Apartado de precios</h5>
                             <div class="col-sm-12 col-md-6">
-                                <label for="precioDetalle" class="form-label">Descuento</label>
-                                <input id="precioDetalle" type="number" name="precioDetalle" min="0.01" step="0.01"
+                                <label for="descuentoDetalle" class="form-label">Descuento</label>
+                                <input id="descuentoDetalle" type="number" name="descuentoDetalle" min="0.01" step="0.01"
                                     class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="existenciasDetalle" class="form-label">Precio con descuento</label>
-                                <input id="existenciasDetalle" type="number" name="existenciasDetalle" min="1" step="1"
+                                <label for="precioDescDetalle" class="form-label">Precio con descuento</label>
+                                <input id="precioDescDetalle" type="number" name="precioDescDetalle" min="0.01" step="0.01"
                                     class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="existenciasDetalle" class="form-label">Precio opcional 1</label>
-                                <input id="existenciasDetalle" type="number" name="existenciasDetalle" min="1" step="1"
+                                <label for="precioOpc1Detalle" class="form-label">Precio opcional 1</label>
+                                <input id="precioOpc1Detalle" type="number" name="precioOpc1Detalle" min="0.01" step="0.01"
                                     class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="existenciasDetalle" class="form-label">Precio opcional 2</label>
-                                <input id="existenciasDetalle" type="number" name="existenciasDetalle" min="1" step="1"
+                                <label for="precioOpc2Detalle" class="form-label">Precio opcional 2</label>
+                                <input id="precioOpc2Detalle" type="number" name="precioOpc2Detalle" min="0.01" step="0.01"
                                     class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="existenciasDetalle" class="form-label">Precio opcional 3</label>
-                                <input id="existenciasDetalle" type="number" name="existenciasDetalle" min="1" step="1"
+                                <label for="precioOpc3Detalle" class="form-label">Precio opcional 3</label>
+                                <input id="precioOpc3Detalle" type="number" name="precioOpc3Detalle" min="0.01" step="0.01"
                                     class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="existenciasDetalle" class="form-label">Precio opcional 4</label>
-                                <input id="existenciasDetalle" type="number" name="existenciasDetalle" min="1" step="1"
+                                <label for="precioOpc4Detalle" class="form-label">Precio opcional 4</label>
+                                <input id="precioOpc4Detalle" type="number" name="precioOpc4Detalle" min="0.01" step="0.01"
                                     class="form-control" required>
                             </div>
                             
@@ -236,7 +253,7 @@
                             <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
                             <thead>
                                 <tr>
-                                    <td class="text-start" colspan="5" id="rowsFoundDetalle"></td>
+                                    <td class="text-start" colspan="11" id="rowsFoundDetalle"></td>
                                 </tr>
                                 <tr>
                                     <th>PRESENTACION</th>
@@ -249,6 +266,7 @@
                                     <th>LABORATORIO</th>
                                     <th>DESCUENTO</th>
                                     <th>PRECIO CON DESCUENTO</th>
+                                    <th>ACCIONES</th>
                                 </tr>
                             </thead>
                             <!-- Cuerpo de la tabla para mostrar un registro por fila -->

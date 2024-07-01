@@ -30,6 +30,7 @@ class ProductosHandler
     protected $maximo = null;
     protected $marca = null;
     protected $fecha = null;
+    protected $periodo_existencia = null;
     protected $id_laboratorio = null;
 
     /*Atributos para la seccion de detalles de precios*/
@@ -132,16 +133,17 @@ class ProductosHandler
 
     public function createRowDetalle()
     {
-        $sql = 'INSERT INTO tb_detalle_productos(presentacion, ubicacion, minimo, manimo, marca, periodo_existencia, fecha, id_laboratorio, descuento, precio_con_descuento, precio_opcional1, precio_opcional2, precio_opcional3, precio_opcional4, id_producto)
+        $sql = 'INSERT INTO tb_detalle_productos(presentacion, ubicacion, minimo, maximo, marca, periodo_existencia, fecha, id_laboratorio, descuento, precio_con_descuento, precio_opcional1, precio_opcional2, precio_opcional3, precio_opcional4, id_producto)
                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->presentacion, $this->ubicacion, $this->minimo, $this->maximo, $this->marca, $this->fecha, $this->id_laboratorio, $this->descuento, $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id);
+        $params = array($this->presentacion, $this->ubicacion, $this->minimo, $this->maximo, $this->marca,$this->periodo_existencia, $this->fecha, $this->id_laboratorio, $this->descuento, $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id);
         return Database::executeRow($sql, $params);
     }
 
     public function readAllDetalle()
     {
-        $sql = 'SELECT id_detalle_producto, presentacion, ubicacion, minimo, maximo, marca, periodo_existencia, fecha, id_laboratorio, descuento, precio_con_descuento
+        $sql = 'SELECT dp.id_detalle_producto, dp.presentacion, dp.ubicacion, dp.minimo, dp.maximo, dp.marca, dp.periodo_existencia, dp.fecha, l.nombre_laboratorio, dp.descuento, dp.precio_con_descuento
         FROM tb_detalle_productos dp
+        INNER JOIN tb_laboratorios l USING(id_laboratorio)
         INNER JOIN tb_productos p USING(id_producto)
         WHERE dp.id_producto = ?';
         $params = array($this->id);
@@ -150,7 +152,7 @@ class ProductosHandler
 
     public function readOneDetalle()
     {
-        $sql = 'SELECT id_detalle_producto, presentacion, ubicacion, minimo, maximo, marca, periodo_existencia, fecha, id_laboratorio, descuento, precio_con_descuento, precio_opcional1, precio_opcional2, precio_opcional3, precio_opcional4, id_producto
+        $sql = 'SELECT id_detalle_producto, presentacion, ubicacion, minimo, maximo, marca, periodo_existencia, fecha, nombre_laboratorio, descuento, precio_con_descuento, precio_opcional1, precio_opcional2, precio_opcional3, precio_opcional4, id_producto
                 FROM tb_detalle_productos
                 INNER JOIN tb_productos USING(id_producto) 
                 WHERE id_detalle_producto = ?';
@@ -163,7 +165,7 @@ class ProductosHandler
         $sql = 'UPDATE tb_detalle_productos 
                 SET presentacion = ?, ubicacion = ?, minimo = ?, manimo = ?, marca = ?, periodo_existencia = ?, fecha = ?, id_laboratorio = ?, descuento = ?, precio_con_descuento = ?, precio_opcional1 = ?, precio_opcional2 = ?, precio_opcional3 = ?, precio_opcional4 = ?
                 WHERE id_detalle_producto = ?';
-        $params = array($this->presentacion, $this->ubicacion, $this->minimo, $this->maximo, $this->marca, $this->fecha, $this->id_laboratorio, $this->descuento, $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id_detalle_producto);
+        $params = array($this->presentacion, $this->ubicacion, $this->minimo, $this->maximo, $this->marca,$this->periodo_existencia, $this->fecha, $this->id_laboratorio, $this->descuento, $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id_detalle_producto);
         return Database::executeRow($sql, $params);
     }
 

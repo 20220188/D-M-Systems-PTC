@@ -26,7 +26,7 @@ class ProductosData extends ProductosHandler
             return true;
         } else {
             $this->data_error = 'El identificador del producto es incorrecto';
-            
+
             return false;
         }
     }
@@ -146,6 +146,185 @@ class ProductosData extends ProductosHandler
             return false;
         }
     }
+
+    /*
+     *  Métodos para el manejo de la tabla DETALLE_PRODUCTO.
+     */
+
+    public function setIdDetalle($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_detalle_producto = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del detalle es incorrecto';
+            return false;
+        }
+    }
+
+    public function setPresentacion($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'La presentación debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->presentacion = $value;
+            return true;
+        } else {
+            $this->data_error = 'La presentación debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setUbicacion($value, $min = 2, $max = 250)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'La ubicación debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->ubicacion = $value;
+            return true;
+        } else {
+            $this->data_error = 'La ubicación debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setMinimo($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->minimo = $value;
+            return true;
+        } else {
+            $this->data_error = 'El mínimo debe ser un valor numérico';
+            return false;
+        }
+    }
+
+    public function setMaximo($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->maximo = $value;
+            return true;
+        } else {
+            $this->data_error = 'El máximo debe ser un valor numérico';
+            return false;
+        }
+    }
+
+    public function setMarca($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'La marca debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->marca = $value;
+            return true;
+        } else {
+            $this->data_error = 'La marca debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setFechaIngreso($value)
+    {
+        if (Validator::validateDate($value)) {
+            $this->fecha = $value;
+            return true;
+        } else {
+            $this->data_error = 'La fecha es incorrecta';
+            return false;
+        }
+    }
+
+    public function setPeriodoExistencia($value)
+    {
+        if (Validator::validateDate($value)) {
+            $this->periodo_existencia = $value;
+            return true;
+        } else {
+            $this->data_error = 'La fecha es incorrecta';
+            return false;
+        }
+    }
+
+    public function setIdLaboratorio($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_laboratorio = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del laboratorio es incorrecto';
+            return false;
+        }
+    }
+
+    public function setDescuento($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->descuento = $value;
+            return true;
+        } else {
+            $this->data_error = 'El descuento debe ser un valor numérico';
+            return false;
+        }
+    }
+
+    public function setPrecioConDescuento($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->precio_con_descuento = $value;
+            return true;
+        } else {
+            $this->data_error = 'El precio con descuento debe ser un valor numérico';
+            return false;
+        }
+    }
+
+    public function setPrecioOpcional1($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->precio_opcional1 = $value;
+            return true;
+        } else {
+            $this->data_error = 'El precio opcional 1 debe ser un valor numérico';
+            return false;
+        }
+    }
+
+    public function setPrecioOpcional2($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->precio_opcional2 = $value;
+            return true;
+        } else {
+            $this->data_error = 'El precio opcional 2 debe ser un valor numérico';
+            return false;
+        }
+    }
+
+    public function setPrecioOpcional3($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->precio_opcional3 = $value;
+            return true;
+        } else {
+            $this->data_error = 'El precio opcional 3 debe ser un valor numérico';
+            return false;
+        }
+    }
+
+    public function setPrecioOpcional4($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->precio_opcional4 = $value;
+            return true;
+        } else {
+            $this->data_error = 'El precio opcional 4 debe ser un valor numérico';
+            return false;
+        }
+    }
+
 
     /*
      *  Métodos para obtener los atributos adicionales.

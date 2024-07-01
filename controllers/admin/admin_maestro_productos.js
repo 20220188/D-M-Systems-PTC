@@ -1,5 +1,6 @@
 // Constantes para completar las rutas de la API de PRODUCTO.
 const PRODUCTO_API = 'services/admin/admin_maestro_productos.php';
+LABORATORIO_API = 'services/admin/admin_maestro_laboratorios.php';
 
 
 /*
@@ -38,9 +39,20 @@ const SAVE_MODAL_DETALLE = new bootstrap.Modal('#saveModalDetalle'),
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM_DETALLE = document.getElementById('saveFormDetalle'),
     ID_DETALLE = document.getElementById('idDetalle'),
-    PRECIO_DETALLE = document.getElementById('precioDetalle'),
-    EXISTENCIAS_DETALLE = document.getElementById('existenciasDetalle')
     ID_PRODUCTO_DETALLE = document.getElementById('idProductoDetalle');
+    PRESENTACION_DETALLE = document.getElementById('presentacionDetalle'),
+    UBICACION_DETALLE = document.getElementById('ubicacionDetalle'),
+    MINIMO_DETALLE = document.getElementById('minimoDetalle'),
+    MAXIMO_DETALLE = document.getElementById('maximoDetalle'),
+    MARCA_DETALLE = document.getElementById('marcaDetalle'),
+    FECHA_INGRESO_DETALLE = document.getElementById('fechaIngresoDetalle'),
+    PERIODO_EXISTENCIA_DETALLE = document.getElementById('periodoExistenciaDetalle'),
+    DESCUENTO_DETALLE = document.getElementById('descuentoDetalle'),
+    PRECIO_DESCUENTO_DETALLE = document.getElementById('precioDescDetalle'),
+    PRECIO_OPCIONAL1_DETALLE = document.getElementById('precioOpc1Detalle'),
+    PRECIO_OPCIONAL2_DETALLE = document.getElementById('precioOpc2Detalle'),
+    PRECIO_OPCIONAL3_DETALLE = document.getElementById('precioOpc3Detalle'),
+    PRECIO_OPCIONAL4_DETALLE = document.getElementById('precioOpc4Detalle');
 
 
 
@@ -257,19 +269,22 @@ const fillTableDetails = async (id) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY_DETALLE.innerHTML += `
                 <tr>
-                    <td>${row.precio}</td>
-                    <td>${row.cantidad_disponible}</td>
-                    <td>${row.talla}</td>
-                    <td>${row.nombre_producto}</td>
+                    <td>${row.presentacion}</td>
+                    <td>${row.marca}</td>
+                    <td>${row.ubicacion}</td>
+                    <td>${row.minimo}</td>
+                    <td>${row.maximo}</td>
+                    <td>${row.fecha}</td>
+                    <td>${row.periodo_existencia}</td>
+                    <td>${row.nombre_laboratorio}</td>
+                    <td>${row.descuento}</td>
+                    <td>${row.precio_con_descuento}</td>   
                     <td>
                         <button type="button" class="btn btn-info" onclick="openUpdateDetails(${row.id_detalle_producto})">
                         <i class="fa-solid fa-pencil"></i>
                         </button>
                         <button type="button" class="btn btn-danger" onclick="openDeleteDetails(${row.id_detalle_producto},${id})">
                         <i class="fa-regular fa-trash-can"></i>
-                        </button>
-                        <button type="button" class="btn btn-warning" data-bs-target="#saveModalComentario" data-bs-toggle="modal" onclick="openCreateComentario(${row.id_detalle_producto})">
-                        <i class="fa-regular fa-comment-dots"></i>
                         </button>
                     </td>
                 </tr>
@@ -296,7 +311,7 @@ const openDetails = (id_producto) => {
     SAVE_FORM_DETALLE.reset();
 
     ID_PRODUCTO_DETALLE.value = id_producto;
-    fillSelect(TALLA_API, 'readAll', 'tallaDetalle');
+    fillSelect(LABORATORIO_API, 'readAll', 'laboratorioDetalle');
 
     fillTableDetails(id_producto);
 }
@@ -322,10 +337,21 @@ const openUpdateDetails = async (id1) => {
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
         ID_DETALLE.value = ROW.id_detalle_producto;
-        PRECIO_DETALLE.value = ROW.precio;
         ID_PRODUCTO_DETALLE.value = ROW.id_producto;
-        EXISTENCIAS_DETALLE.value = ROW.cantidad_disponible;
-        fillSelect(TALLA_API, 'readAll', 'tallaDetalle', ROW.id_talla); 
+        PRESENTACION_DETALLE.value = ROW.presentacion;
+        UBICACION_DETALLE.value = ROW.ubicacion;
+        MINIMO_DETALLE.value = ROW.minimo;
+        MAXIMO_DETALLE.value = ROW.maximo;
+        MARCA_DETALLE.value = ROW.marca;
+        FECHA_INGRESO_DETALLE.value = ROW.fecha;
+        PERIODO_EXISTENCIA_DETALLE.value = ROW.periodo_existencia;
+        DESCUENTO_DETALLE.value = ROW.descuento;
+        PRECIO_DESCUENTO_DETALLE.value = ROW.precio_descuento;
+        PRECIO_OPCIONAL1_DETALLE.value = ROW.precio_opcional1;
+        PRECIO_OPCIONAL2_DETALLE.value = ROW.precio_opcional2;
+        PRECIO_OPCIONAL3_DETALLE.value = ROW.precio_opcional3;
+        PRECIO_OPCIONAL4_DETALLE.value = ROW.precio_opcional4;
+        fillSelect(LABORATORIO_API, 'readAll', 'laboratorioDetalle', ROW.id_laboratorio); 
 
     } else {
         sweetAlert(2, DATA.error, false);
