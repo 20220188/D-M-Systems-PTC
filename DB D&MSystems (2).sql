@@ -107,6 +107,14 @@ codigo INT UNIQUE,
 nombre_laboratorio VARCHAR(50)
 );
 
+
+CREATE TABLE tb_dependientes(
+id_dependiente INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+codigo INT UNIQUE,
+nombre_dependiente VARCHAR(50)
+);
+
+
 CREATE TABLE tb_proveedores (
     id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
     codigo_proveedor VARCHAR(255),

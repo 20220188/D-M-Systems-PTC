@@ -2,41 +2,48 @@
     font-family: 'Poppins';
 }
 
+body {
+    background-color: #E7F4F4;
+}
 
 .h2 {
     margin-top: 50px;
+}
+
+.btn1, .btn-seleccionado {
+    width: 200px;
+    height: 65px;
+    font-family: 'Poppins';
+    border-radius: 15px;
 }
 
 .btn1 {
     color: #5D41DE;
     background-color: #d2d9f1;
     border-color: #d2d9f1;
-    width: 200px;
-    height: 65px;
-    font-family: 'Poppins';
-    border-radius: 15px;
 }
 
 .btn1:hover {
     color: #ebd7d6;
     background-color: #5D41DE;
-    border-color: #ebd7d6
+    border-color: #ebd7d6;
 }
 
 .btn-seleccionado {
     color: #d2d9f1;
     background-color: #5D41DE;
     border-color: #d2d9f1;
-    width: 200px;
-    height: 65px;
-    font-family: 'Poppins';
-    border-radius: 15px;
 }
 
 .btn-seleccionado:hover {
     color: #5D41DE;
     background-color: #d2d9f1;
-    border-color: #d2d9f1
+    border-color: #d2d9f1;
+}
+
+.historial {
+    margin-left: 1200px;
+    margin-top: -60px;
 }
 
 .input-group {
