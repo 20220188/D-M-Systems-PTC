@@ -74,7 +74,7 @@ class ProveedorData extends ProveedorHandler
 
     public function setDuiProveedor($value)
     {
-        if (Validator::validateAlphanumeric($value, 1, 10)) {
+        if (Validator::validateDUI($value)) {
             $this->dui_proveedor = $value;
             return true;
         } else {

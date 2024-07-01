@@ -41,9 +41,9 @@ class ProveedorHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_proveedores (codigo_proveedor, nombre_proveedor, pais_proveedor, giro_negocio_proveedor, dui_proveedor, nombre_comercial_proveedor, fecha_proveedor, nit_proveedor, telefono_proveedor, contacto_proveedor, direccion_proveedor, departamento_proveedor, municipio_proveedor)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->codigo_proveedor, $this->nombre_proveedor, $this->pais_proveedor, $this->giro_negocio_proveedor, $this->dui_proveedor, $this->nombre_comercial_proveedor, $this->fecha_proveedor, $this->nit_proveedor, $this->telefono_proveedor, $this->contacto_proveedor, $this->direccion_proveedor, $this->departamento_proveedor, $this->municipio_proveedor);
+        $sql = 'INSERT INTO tb_proveedores (id_proveedor, codigo_proveedor, nombre_proveedor, pais_proveedor, giro_negocio_proveedor, dui_proveedor, nombre_comercial_proveedor, fecha_proveedor, nit_proveedor, telefono_proveedor, contacto_proveedor, direccion_proveedor, departamento_proveedor, municipio_proveedor)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $params = array($this->id_proveedor, $this->codigo_proveedor, $this->nombre_proveedor, $this->pais_proveedor, $this->giro_negocio_proveedor, $this->dui_proveedor, $this->nombre_comercial_proveedor, $this->fecha_proveedor, $this->nit_proveedor, $this->telefono_proveedor, $this->contacto_proveedor, $this->direccion_proveedor, $this->departamento_proveedor, $this->municipio_proveedor);
         return Database::executeRow($sql, $params);
     }
 

@@ -86,7 +86,7 @@ const fillTable = async () => {
     // Mostrar los resultados en la tabla.
     if (responseData.status) {
         ROWS_FOUND.textContent = responseData.message;
-        responseData.dataset.forEach(proveedor => {
+        responseData.dataset.forEach(row => {
             TABLE_BODY.innerHTML += `
                 <tr>
                     <td>${row.nombre_proveedor}</td>
@@ -126,7 +126,7 @@ const openCreate = () => {
 const openUpdate = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('idLab', id);
+    FORM.append('idProveedor', id);
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(PROVEEDOR_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -139,19 +139,18 @@ const openUpdate = async (id) => {
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
         ID_PROVEEDOR.value = ROW.id_proveedor;
-        NOMBRE_PROVEEDOR.value = ROW.nombre;
-        CODIGO_PROVEEDOR.value = ROW.codigo;
-        PAIS.value = ROW.pais;
-        GIRO_NEGOCIO.value = ROW.giro_negocio;
-        DUI.value = ROW.dui;
-        NOMBRE_COMERCIAL.value = ROW.nombre_comercial;
-        NIT.value = ROW.nit;
-        FECHA.value =ROW.fecha_registro;
-        TELEFONO.value = ROW.telefono;
-        CONTACTO.value = ROW.contacto;
-        DIRECCION.value = ROW.direccion;
-        DEPARTAMENTO.value = ROW.departamento;
-        MUNICIPIO.value = ROW.municipio;
+        NOMBRE_PROVEEDOR.value = ROW.nombre_proveedor;
+        CODIGO_PROVEEDOR.value = ROW.codigo_proveedor;
+        PAIS.value = ROW.pais_proveedor;
+        GIRO_NEGOCIO.value = ROW.giro_negocio_proveedor;
+        DUI.value = ROW.dui_proveedor;
+        NOMBRE_COMERCIAL.value = ROW.nombre_comercial_proveedor;
+        NIT.value = ROW.nit_proveedor;
+        FECHA.value =ROW.fecha_proveedor;
+        TELEFONO.value = ROW.telefono_proveedor;
+        DIRECCION.value = ROW.direccion_proveedor;
+        DEPARTAMENTO.value = ROW.departamento_proveedor;
+        MUNICIPIO.value = ROW.municipio_proveedor;
     } else {
         sweetAlert(2, DATA.error, false);
     }

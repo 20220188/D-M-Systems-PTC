@@ -27,7 +27,6 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$proveedor->setIdProveedor($_POST['idProveedor']) or
                     !$proveedor->setNombreProveedor($_POST['nombreProveedor']) or
                     !$proveedor->setCodigoProveedor($_POST['codigoProveedor']) or
                     !$proveedor->setPaisProveedor($_POST['paisProveedor']) or
