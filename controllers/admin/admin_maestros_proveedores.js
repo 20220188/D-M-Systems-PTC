@@ -1,19 +1,19 @@
-// Constantes para completar las rutas de la API de PROVEEDOR
+// Constante para completar la ruta de la API de Proveedores.
 const PROVEEDOR_API = 'services/admin/admin_maestros_proveedores.php';
 
-/*
-*Elementos para la tabla proveedorS
-*/
-
-// Constante para establecer el formulario de buscar.
+// Elementos para el formulario de búsqueda.
 const SEARCH_FORM = document.getElementById('searchForm');
-// Constantes para establecer el contenido de la tabla.
-const TABLE_BODY = document.getElementById('tableBody'),
-    ROWS_FOUND = document.getElementById('rowsFound');
-// Constantes para establecer los elementos del componente Modal.
-const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
-    MODAL_TITLE = document.getElementById('modalTitle');
-// Constantes para establecer los elementos del formulario de guardar.
+
+// Elementos para la tabla de proveedores.
+const TABLE_BODY = document.getElementById('tableBody');
+const ROWS_FOUND = document.getElementById('rowsFound');
+
+// Elementos para el formulario de guardar y el modal.
+const SAVE_MODAL = new bootstrap.Modal('#saveModal');
+const MODAL_TITLE = document.getElementById('modalTitle');
+const SAVE_FORM = document.getElementById('saveForm');
+
+// Campos del formulario de guardar.
 const ID_PROVEEDOR = document.getElementById('idProveedor');
 const NOMBRE_PROVEEDOR = document.getElementById('nombreProveedor');
 const CODIGO_PROVEEDOR = document.getElementById('codigoProveedor');
@@ -29,93 +29,80 @@ const DIRECCION = document.getElementById('direccionProveedor');
 const DEPARTAMENTO = document.getElementById('departamentoProveedor');
 const MUNICIPIO = document.getElementById('municipioProveedor');
 
-
-
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
-    // Llamada a la función para mostrar el encabezado y pie del documento.
-    loadTemplate();
-    // Se establece el título del contenido principal.
-    MAIN_TITLE.textContent = 'Gestionar proveedors';
-    // Llamada a la función para llenar la tabla con los registros existentes.
-    fillTable();
+    loadTemplate(); // Función para cargar el encabezado y pie de página.
+    fillTable(); // Llenar la tabla con los registros existentes al cargar.
 });
 
-// Método del evento para cuando se envía el formulario de buscar.
+// Método del evento para cuando se envía el formulario de búsqueda.
 SEARCH_FORM.addEventListener('submit', (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(SEARCH_FORM);
-    // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
-    fillTable(FORM);
+    event.preventDefault(); // Evitar el comportamiento por defecto del formulario.
+    fillTable(); // Llenar la tabla con los resultados de la búsqueda.
 });
 
 // Método del evento para cuando se envía el formulario de guardar.
 SAVE_FORM.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Se verifica la acción a realizar.
-    (ID_proveedor.value) ? action = 'updateRow' : action = 'createRow';
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(SAVE_FORM);
-    // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(PROVEEDOR_API, action, FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se cierra la caja de diálogo.
+    event.preventDefault(); // Evitar el comportamiento por defecto del formulario.
+
+    // Determinar la acción a realizar según si existe el ID del proveedor.
+    const action = ID_PROVEEDOR.value ? 'updateRow' : 'createRow';
+
+    // Construir los datos del formulario en formato FormData.
+    const formData = new FormData(SAVE_FORM);
+    
+    // Realizar la solicitud para guardar o actualizar el proveedor.
+    const responseData = await fetchData(PROVEEDOR_API, action, formData);
+    
+    // Mostrar mensajes de éxito o error según la respuesta.
+    if (responseData.status) {
+        // Cerrar el modal de guardar.
         SAVE_MODAL.hide();
-        // Se muestra un mensaje de éxito.
-        sweetAlert(1, DATA.message, true);
-        // Se carga nuevamente la tabla para visualizar los cambios.
+        // Mostrar mensaje de éxito.
+        sweetAlert(1, responseData.message, true);
+        // Volver a llenar la tabla con los datos actualizados.
         fillTable();
     } else {
-        sweetAlert(2, DATA.error, false);
+        // Mostrar mensaje de error.
+        sweetAlert(2, responseData.error, false);
     }
 });
 
-/*
-*   Función asíncrona para llenar la tabla con los registros disponibles.
-*   Parámetros: form (objeto opcional con los datos de búsqueda).
-*   Retorno: ninguno.
-*/
-const fillTable = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
+// Función para llenar la tabla de proveedores.
+const fillTable = async () => {
+    // Limpiar contenido anterior de la tabla.
     ROWS_FOUND.textContent = '';
     TABLE_BODY.innerHTML = '';
-    // Se verifica la acción a realizar.
-    (form) ? action = 'searchRows' : action = 'readAll';
-    // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(PROVEEDOR_API, action, form);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
-        DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+
+    // Determinar la acción a realizar (buscar o leer todos).
+    const action = SEARCH_FORM.search.value.trim() ? 'searchRows' : 'readAll';
+
+    // Construir los datos del formulario de búsqueda.
+    const formData = new FormData(SEARCH_FORM);
+
+    // Realizar la solicitud para obtener los datos de los proveedores.
+    const responseData = await fetchData(PROVEEDOR_API, action, formData);
+
+    // Mostrar los resultados en la tabla.
+    if (responseData.status) {
+        ROWS_FOUND.textContent = responseData.message;
+        responseData.dataset.forEach(proveedor => {
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${row.codigo_proveedor}</td>
-                    <td>${row.nombre_proveedor}</td>
-                    <td>${row.giro_negocio_proveedor}</td>
-                    <td>${row.telefono_proveedor}</td>
+                    <td>${proveedor.nombre}</td>
+                    <td>${proveedor.codigo}</td>
+                    <td>${proveedor.giro_negocio}</td>
                     <td>
-                    
-                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_proveedor})">
-                        <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_proveedor})">
-                        <i class="fa-regular fa-trash-can"></i>
-                        </button>
+                        <button class="btn btn-info" onclick="openUpdate(${proveedor.id_proveedor})">Editar</button>
+                        <button class="btn btn-danger" onclick="openDelete(${proveedor.id_proveedor})">Eliminar</button>
                     </td>
                 </tr>
             `;
         });
-        // Se muestra un mensaje de acuerdo con el resultado.
-        ROWS_FOUND.textContent = DATA.message;
     } else {
-        sweetAlert(4, DATA.error, true);
+        sweetAlert(4, responseData.error, false);
     }
-}
+};
 
 /*
 *   Función para preparar el formulario al momento de insertar un registro.
@@ -138,7 +125,7 @@ const openCreate = () => {
 const openUpdate = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('idProveedor', id);
+    FORM.append('idLab', id);
     // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(PROVEEDOR_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -151,19 +138,19 @@ const openUpdate = async (id) => {
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
         ID_PROVEEDOR.value = ROW.id_proveedor;
-        NOMBRE_PROVEEDOR.value = ROW.nombre_proveedor;
-        CODIGO_PROVEEDOR.value = ROW.codigo_proveedor;
-        PAIS.value = ROW.pais_proveedor;
-        GIRO_NEGOCIO.value = ROW.giro_negocio_proveedor;
-        DUI.value = ROW.dui_proveedor;
-        NOMBRE_COMERCIAL.value = ROW.nombre_comercial_proveedor;
-        NIT.value = ROW.nit_proveedor;
-        FECHA.value =ROW.fecha_proveedor;
-        TELEFONO.value = ROW.telefono_proveedor;
-        CONTACTO.value = ROW.contacto_proveedor;
-        DIRECCION.value = ROW.direccion_proveedor;
-        DEPARTAMENTO.value = ROW.departamento_proveedor;
-        MUNICIPIO.value = ROW.municipio_proveedor;
+        NOMBRE_PROVEEDOR.value = ROW.nombre;
+        CODIGO_PROVEEDOR.value = ROW.codigo;
+        PAIS.value = ROW.pais;
+        GIRO_NEGOCIO.value = ROW.giro_negocio;
+        DUI.value = ROW.dui;
+        NOMBRE_COMERCIAL.value = ROW.nombre_comercial;
+        NIT.value = ROW.nit;
+        FECHA.value =ROW.fecha_registro;
+        TELEFONO.value = ROW.telefono;
+        CONTACTO.value = ROW.contacto;
+        DIRECCION.value = ROW.direccion;
+        DEPARTAMENTO.value = ROW.departamento;
+        MUNICIPIO.value = ROW.municipio;
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -181,7 +168,7 @@ const openDelete = async (id) => {
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
         const FORM = new FormData();
-        FORM.append('idproveedor', id);
+        FORM.append('idProveedor', id);
         // Petición para eliminar el registro seleccionado.
         const DATA = await fetchData(PROVEEDOR_API, 'deleteRow', FORM);
         console.log(DATA);
@@ -196,19 +183,4 @@ const openDelete = async (id) => {
         }
     }
 }
-
-
-
-
-
-/*
-*   Función para abrir un reporte automático de proveedors por categoría.
-*   Parámetros: ninguno.
-*   Retorno: ninguno.
-*/
-const openReport = () => {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/proveedors.php`);
-    // Se abre el reporte en una nueva pestaña.
-    window.open(PATH.href);
-}
+          
