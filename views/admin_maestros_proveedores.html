@@ -37,124 +37,96 @@
                 </div>
             </div>
         </div>
-         <!-- Formulario de búsqueda -->
-         <form class="col-sm-12 col-md-6" id="searchForm">
-            <div class="row">
-                <div class="col-6">
-                    <input type="search" class="form-control" name="search" placeholder="Buscar por nombre, código, país, etc." required>
+        <br>
+        <!--Inicio del formulario para ingresar la información-->
+        <div class="row col-auto">
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputCodigo" class="form-label">Código/NRC</label>
+                    <input type="text" class="form-control" id="inputCodigo">
                 </div>
-                <div class="col-6">
-                    <button type="submit" class="btn1 btn-success">
-                        <i class="fa-solid fa-magnifying-glass"></i> Buscar
-                    </button>
-                    <button type="button" class="btn1 btn-secondary" onclick="fillTable()">
-                        <i class="fa-solid fa-eraser"></i> Limpiar
-                    </button>
+                <div class="col-md-12">
+                    <label for="inputNombre" class="form-label">Nombre/Razón social</label>
+                    <input type="text" class="form-control" id="inputNombre">
+                </div>
+
+
+                <div class="col-md-12">
+                    <label for="inputPais" class="form-label">País</label>
+                    <input type="text" class="form-control" id="inputPais">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputnegocio" class="form-label">Giro negocio</label>
+                    <input type="text" class="form-control" id="inputnegocio">
                 </div>
             </div>
-        </form>
-        <div class="col-sm-12 col-md-6 text-end">
-            <!-- Botón para abrir el modal de creación -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saveModal">
-                <i class="fa-solid fa-plus"></i> Agregar Proveedor
-            </button>
-        </div>
-    </div>
-
-    <!-- Tabla para mostrar los registros existentes -->
-    <table class="table table-hover text-center">
-        <thead>
-            <tr>
-                <td class="text-start" colspan="8" id="rowsFound"></td>
-            </tr>
-            <tr>
-                <th>Código</th>
-                <th>Nombre</th>
-                <th>Giro Negocio</th>
-                <th>Teléfono</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            <!-- Aquí se llenarán dinámicamente los datos -->
-        </tbody>
-    </table>
-
-    <!-- Modal para guardar o actualizar un registro -->
-    <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="modalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Agregar Proveedor</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputDUI" class="form-label">DUI</label>
+                    <input type="text" class="form-control" id="inputDUI">
                 </div>
-                <form id="saveForm">
-                    <div class="modal-body">
-                        <!-- Aquí van los campos del formulario -->
-                        <input type="hidden" id="idProveedor" name="idProveedor">
-                        <div class="mb-3">
-                            <label for="nombreProveedor" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombreProveedor" name="nombreProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="codigoProveedor" class="form-label">Código</label>
-                            <input type="text" class="form-control" id="codigoProveedor" name="codigoProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="paisProveedor" class="form-label">País</label>
-                            <input type="text" class="form-control" id="paisProveedor" name="paisProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="giroNegocioProveedor" class="form-label">Giro Negocio</label>
-                            <input type="text" class="form-control" id="giroNegocioProveedor" name="giroNegocioProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="duiProveedor" class="form-label">DUI</label>
-                            <input type="text" class="form-control" id="duiProveedor" name="duiProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nombreComercialProveedor" class="form-label">Nombre Comercial</label>
-                            <input type="text" class="form-control" id="nombreComercialProveedor" name="nombreComercialProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fechaProveedor" class="form-label">Fecha</label>
-                            <input type="date" class="form-control" id="fechaProveedor" name="fechaProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="nitProveedor" class="form-label">NIT</label>
-                            <input type="text" class="form-control" id="nitProveedor" name="nitProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="telefonoProveedor" class="form-label">Teléfono</label>
-                            <input type="text" class="form-control" id="telefonoProveedor" name="telefonoProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="contactoProveedor" class="form-label">Contacto</label>
-                            <input type="text" class="form-control" id="contactoProveedor" name="contactoProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="direccionProveedor" class="form-label">Dirección</label>
-                            <input type="text" class="form-control" id="direccionProveedor" name="direccionProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="departamentoProveedor" class="form-label">Departamento</label>
-                            <input type="text" class="form-control" id="departamentoProveedor" name="departamentoProveedor" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="municipioProveedor" class="form-label">Municipio</label>
-                            <input type="text" class="form-control" id="municipioProveedor" name="municipioProveedor" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                </form>
+                <div class="col-md-12">
+                    <label for="inputNomCo" class="form-label">Nombre comercial</label>
+                    <input type="text" class="form-control" id="inputNomCo">
+                </div>
+
+                <div class="col-md-12">
+                    <label for="inputFecha" class="form-label">Fecha</label>
+                    <input type="date" class="form-control" id="inputFecha">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputNIT" class="form-label">NIT</label>
+                    <input type="text" class="form-control" id="inputNIT">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputTel" class="form-label">Telefono</label>
+                    <input type="tel" class="form-control" id="inputTel">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputContacto" class="form-label">Contacto</label>
+                    <input type="text" class="form-control" id="inputContacto">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="col-md-12">
+                    <label for="inputDireccion" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="inputDireccion">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputDep" class="form-label">Departamento</label>
+                    <input type="text" class="form-control" id="inputDep">
+                </div>
+                <div class="col-md-12">
+                    <label for="inputMunicipio" class="form-label">Municipio</label>
+                    <input type="text" class="form-control" id="inputMunicipio">
+                </div>
+            </div>
+
+
+        </div>
+        
+        <!-- Botones para realizar acciones-->
+        <div class="d-grid gap-2 d-md-flex d-flex justify-content-center">
+            <div class="col-md-6-sm-6" id="botones">
+                <div class="d-grid gap-2 d-md-block">
+                    <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus fa-1x"></i>
+                        Agregar</button>
+                    <button type="button" class="btn1" id="btnEliminar"><i class="lni lni-cross-circle"></i>
+                        Cancelar</button>
+                        <button type="button" class="btn1" id="btnActualizar"><i class="lni lni-cross-circle"></i>
+                            Actualizar</button>
+                </div>
             </div>
         </div>
-    </div>
-</main>
+
+
+
+    </main>
+
     <!--Mandamos a llamar los archivos js del sitio web-->
     <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
@@ -163,19 +135,19 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Llamada al kit de font awesome -->
-        <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
 
-        <!-- Scripts de JavaScript -->
-        <!-- Agrega los enlaces a los scripts de Bootstrap y SweetAlert2 -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    
-        <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
-        <!-- Llamada al framework y librería de mensajes -->
-        <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
-    
-        <!-- Llamada al controlador de la página web -->
-        <script type="text/javascript" src="../controllers/admin/admin_maestros_proveedores.js"></script>
+    <!-- Scripts de JavaScript -->
+    <!-- Agrega los enlaces a los scripts de Bootstrap y SweetAlert2 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../controllers/admin/admin_maestro_productos.js"></script>
 </body>
 
 </html>
