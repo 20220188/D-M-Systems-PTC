@@ -1,5 +1,5 @@
 // Constantes para completar las rutas de la API de PRODUCTO.
-const PRODUCTO_API = 'services/admin/admin_maestro_productos.php';
+const LABORATORIO_API = 'services/admin/admin_maestro_laboratorios.php';
 
 
 /*
@@ -16,32 +16,9 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
-    ID_PRODUCTO = document.getElementById('idProducto'),
-    NOMBRE_PRODUCTO = document.getElementById('nombreProducto'),
-    DESCRIPCION_PRODUCTO = document.getElementById('descripcionProducto'),
-    CODIGO_PRODUCTO = document.getElementById('codigoProducto'),
-    FECHA_VENCIMIENTO = document.getElementById('fechaVencimiento'),
-    PRECIO_SIN_IVA = document.getElementById('precioSinIVA'),
-    PRECIO_CON_IVA = document.getElementById('precioVentaConIva'),
-    PRECIO_UNITARIO = document.getElementById('precioUnitario');
-
-/*
-*Elementos para la tabla DETALLE_PRODUCTO
-
-
-// Constantes para establecer el contenido de la tabla.
-const TABLE_BODY_DETALLE = document.getElementById('tableBodyDetalle'),
-    ROWS_FOUND_DETALLE = document.getElementById('rowsFoundDetalle');
-// Constantes para establecer los elementos del componente Modal.
-const SAVE_MODAL_DETALLE = new bootstrap.Modal('#saveModalDetalle'),
-    MODAL_TITLE_DETALLE = document.getElementById('modalTitleDetalle');
-// Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORM_DETALLE = document.getElementById('saveFormDetalle'),
-    ID_DETALLE = document.getElementById('idDetalle'),
-    PRECIO_DETALLE = document.getElementById('precioDetalle'),
-    EXISTENCIAS_DETALLE = document.getElementById('existenciasDetalle')
-    ID_PRODUCTO_DETALLE = document.getElementById('idProductoDetalle');
-*/
+    ID_LABORATORIO = document.getElementById('idLab'),
+    NOMBRE_LABORATORIO = document.getElementById('nombreLaboratorio'),
+    CODIGO_LABORATORIO = document.getElementById('codigoLaboratorio');
 
 
 // Método del evento para cuando el documento ha cargado.
@@ -49,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
     // Se establece el título del contenido principal.
-    MAIN_TITLE.textContent = 'Gestionar productos';
+    MAIN_TITLE.textContent = 'Gestionar laboratorios';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
 });
@@ -69,11 +46,11 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_PRODUCTO.value) ? action = 'updateRow' : action = 'createRow';
+    (ID_LABORATORIO.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(PRODUCTO_API, action, FORM);
+    const DATA = await fetchData(LABORATORIO_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.
@@ -107,22 +84,16 @@ const fillTable = async (form = null) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td><img src="${SERVER_URL}images/productos/${row.imagen}" height="50"></td>
-                    <td>${row.codigo}</td>
-                    <td>${row.nombre}</td>
-                    <td>${row.descripcion}</td>
-                    <td>${row.fecha_vencimiento}</td>
-                    <td>${row.precio_sin_iva}</td>
-                    <td>${row.precio_con_iva}</td>
-                    <td>${row.costo_unitario}</td>
+                    <td>${row.nombre_laboratorio}</td>
+                    <td>${row.codigo}</td>                    
                     <td>
-                        <button type="button" class="btn btn-success" onclick="openDetails(${row.id_producto})">
+                        <button type="button" class="btn btn-success" onclick="openDetails(${row.id_laboratorio})">
                         <i class="fa-regular fa-square-plus"></i>
                         </button>
-                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_producto})">
+                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_laboratorio})">
                         <i class="fa-solid fa-pencil"></i>
                         </button>
-                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_producto})">
+                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_laboratorio})">
                         <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </td>
@@ -144,7 +115,7 @@ const fillTable = async (form = null) => {
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Crear producto';
+    MODAL_TITLE.textContent = 'Crear laboratorio';
     // Se prepara el formulario.
     SAVE_FORM.reset();
 }
@@ -157,25 +128,21 @@ const openCreate = () => {
 const openUpdate = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('idProducto', id);
+    FORM.append('idLab', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(PRODUCTO_API, 'readOne', FORM);
+    const DATA = await fetchData(LABORATORIO_API_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar producto';
+        MODAL_TITLE.textContent = 'Actualizar laboratorio';
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_PRODUCTO.value = ROW.id_producto;
-        NOMBRE_PRODUCTO.value = ROW.nombre_producto;
-        DESCRIPCION_PRODUCTO.value = ROW.descripcion;
-        fillSelect(CATEGORIA_API, 'readAll', 'categoriaProducto', ROW.id_categoria);
-        fillSelect(TIPO_PRODUCTO_API, 'readAll_TipoP', 'tipoProducto', ROW.id_tipo_producto);
-        fillSelect(DEPORTE_API, 'readAll', 'deporteProducto', ROW.id_deporte);
-        fillSelect(GENERO_API, 'readAll', 'generoProducto', ROW.id_genero);
+        ID_LABORATORIO.value = ROW.id;
+        NOMBRE_LABORATORIO.value = ROW.nombre_laboratorio;
+        CODIGO_LABORATORIO.value = ROW.codigo;
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -188,14 +155,14 @@ const openUpdate = async (id) => {
 */
 const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar el producto de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el laboratorio de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
         const FORM = new FormData();
-        FORM.append('idProducto', id);
+        FORM.append('idLab', id);
         // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(PRODUCTO_API, 'deleteRow', FORM);
+        const DATA = await fetchData(LABORATORIO_API_API, 'deleteRow', FORM);
         console.log(DATA);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
@@ -218,9 +185,10 @@ const openDelete = async (id) => {
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
 */
+/*
 const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reports/admin/productos.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
-}
+}*/

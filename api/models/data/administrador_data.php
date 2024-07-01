@@ -38,6 +38,19 @@ class AdministradorData extends AdministradorHandler
             return false;
         }
     }
+    public function setApellido($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphabetic($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->nombre = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
 
     public function setDUI($value)
     {
@@ -48,7 +61,7 @@ class AdministradorData extends AdministradorHandler
             $this->data_error = 'El DUI ingresado ya existe';
             return false;
         } else {
-            $this->dui = $value;
+            $this->DUI = $value;
             return true;
         }
     }
