@@ -1,13 +1,14 @@
 <?php
+
 // Se incluye la clase del modelo.
-require_once('../../models/data/admin_maestro_dependiente_data.php');
+require_once('../../models/data/admin_maestro_dependientes_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se instancia la clase correspondiente.
-    $dependiente = new DependientesData;
+    $dependientes = new DependientesData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
@@ -17,7 +18,7 @@ if (isset($_GET['action'])) {
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $dependiente->searchRows()) {
+                } elseif ($result['dataset'] = $dependientes->searchRows()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
                 } else {
@@ -27,129 +28,62 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$dependiente->setNombre($_POST['nombreDependiente']) or
-                    !$dependiente->setCodigo($_POST['codigoDependiente']) 
-                   
+                    !$dependientes->setNombre($_POST['nombreDependiente']) or
+                    !$dependientes->setCodigo($_POST['codigoDependiente'])
                 ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->createRow()) {
+                    $result['error'] = $dependientes->getDataError();
+                } elseif ($dependientes->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Producto creado correctamente';
-                   
+                    $result['message'] = 'Laboratorio creado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
                 }
                 break;
             case 'readAll':
-                if ($result['dataset'] = $dependiente->readAll()) {
+                if ($result['dataset'] = $dependientes->readAll()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen productos registrados';
+                    $result['error'] = 'No existen laboratorios registrados';
                 }
                 break;
             case 'readOne':
-                if (!$dependiente->setId($_POST['idDependiente'])) {
-                    $result['error'] = $dependiente->getDataError();
-                } elseif ($result['dataset'] = $dependiente->readOne()) {
+                if (!$dependientes->setId($_POST['idDependiente'])) {
+                    $result['error'] = $dependientes->getDataError();
+                } elseif ($result['dataset'] = $dependientes->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'dependiente inexistente';
+                    $result['error'] = 'Laboratorio inexistente';
                 }
                 break;
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$dependiente->setId($_POST['idDependiente']) or
-                    !$dependiente->setNombre($_POST['nombreDependiente']) 
-                
+                    !$dependientes->setId($_POST['idDependiente']) or
+                    !$dependientes->setNombre($_POST['nombreDependiente']) or
+                    !$dependientes->setCodigo($_POST['codigoDependiente'])
                 ) {
-                    $result['error'] = $dependiente->getDataError();
-                } elseif ($dependiente->updateRow()) {
+                    $result['error'] = $dependientes->getDataError();
+                } elseif ($dependientes->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Producto modificado correctamente';
-                   
+                    $result['message'] = 'Laboratorio modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el producto';
+                    $result['error'] = 'Ocurrió un problema al modificar el laboratorio';
                 }
                 break;
             case 'deleteRow':
                 if (
-                    !$dependiente->setId($_POST['idProducto']) 
-                    
+                    !$dependientes->setId($_POST['idDependiente'])
                 ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($dependiente->deleteRow()) {
+                    $result['error'] = $dependientes->getDataError();
+                } elseif ($dependientes->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Producto eliminado correctamente';
-                   
+                    $result['message'] = 'Laboratorio eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar el producto';
+                    $result['error'] = 'Ocurrió un problema al eliminar el laboratorio';
                 }
                 break;
-                //Casos para DETALLE_PRODUCTO
-                /*
-            case 'createRowDetalleProducto':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$producto->setPrecio($_POST['precioDetalle']) or
-                    !$producto->setExistencias($_POST['existenciasDetalle']) or
-                    !$producto->setTalla($_POST['tallaDetalle']) or
-                    !$producto->setId($_POST['idProductoDetalle'])
-                ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->createRowDetalleProducto()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Detalle creado correctamente';
-                } else {
-                    $result['exception'] = Database::getException();
-                }
-                break;
-            case 'readAllDetalle':
-                if (!$producto->setId($_POST['idProducto'])) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($result['dataset'] = $producto->readAllDetalle()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                } else {
-                    $result['error'] = 'No existen detalles registrados';
-                }
-                break;
-            case 'readOneDetalleProducto':
-                if (!$producto->setDetalleproducto($_POST['idDetalle'])) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($result['dataset'] = $producto->readOneDetalle()) {
-                    $result['status'] = 1;
-                } else {
-                    $result['error'] = 'Detalle inexistente';
-                }
-                break;
-            case 'updateRowDetalleProducto':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$producto->setDetalleproducto($_POST['idDetalle']) or
-                    !$producto->setPrecio($_POST['precioDetalle']) or
-                    !$producto->setExistencias($_POST['existenciasDetalle']) or
-                    !$producto->setTalla($_POST['tallaDetalle'])
-                ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->updateRowDetalle()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Detalle modificado correctamente';
-                } else {
-                    $result['exception'] = 'Ocurrió un problema al modificar el detalle';
-                }
-                break;
-            case 'deleteRowDetalleProducto':
-                if (!$producto->setDetalleproducto($_POST['idDetalle'])) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->deleteRowDetalle()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Detalle eliminado correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar el detalle';
-                }
-                break;*/
+                
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

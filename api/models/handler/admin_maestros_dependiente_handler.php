@@ -1,40 +1,34 @@
 <?php
 // Se incluye la clase para trabajar con la base de datos.
 require_once('../../helpers/database.php');
+
 /*
- *  Clase para manejar el comportamiento de los datos de la tabla administrador.
+ *  Clase para manejar el comportamiento de los datos de la tabla dependiente.
  */
-class DependienteHandler
+class DependientesHandler
 {
     /*
      *  Declaración de atributos para el manejo de datos.
      */
 
-    /*Atributos para la seccion de informacion obligatoria*/
     protected $id = null;
     protected $codigo = null;
     protected $nombre = null;
-    
-
-
- 
-
-
 
     /*
-     *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
+     *  Métodos para realizar las operaciones CRUD (Create, Read, Update, Delete).
      */
 
     /*
-    *  Método para los registros de la tabla de productos.
-    */
+     *  Métodos para los registros de la tabla de dependientes.
+     */
 
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT 	id_dependiente, codigo, nombre_dependiente 
+        $sql = 'SELECT id_dependiente, codigo, nombre_dependiente
                 FROM tb_dependientes
-                WHERE codigo LIKE ? OR nombre_dependiente  LIKE ? 
+                WHERE codigo LIKE ? OR nombre_dependiente LIKE ? 
                 ORDER BY nombre_dependiente';
         $params = array($value, $value);
         return Database::getRows($sql, $params);
@@ -43,16 +37,16 @@ class DependienteHandler
     public function createRow()
     {
         $sql = 'INSERT INTO tb_dependientes(codigo, nombre_dependiente)
-                VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->codigo, $this->nombre );
+                VALUES(?, ?)';
+        $params = array($this->codigo, $this->nombre);
         return Database::executeRow($sql, $params);
     }
 
     public function readAll()
     {
-        $sql = 'SELECT id_dependiente, codigo, nombre_dependiente 
+        $sql = 'SELECT id_dependiente, nombre_dependiente, codigo 
                 FROM tb_dependientes
-                ORDER BY nombre';
+                ORDER BY nombre_dependiente';
         return Database::getRows($sql);
     }
 
@@ -81,9 +75,6 @@ class DependienteHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
-
-
-    /*
-    *  Método para los registros de la tabla de detalles de productos.
-    */
 }
+
+?>

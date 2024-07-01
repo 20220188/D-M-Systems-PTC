@@ -1,5 +1,5 @@
 // Constantes para completar las rutas de la API de PRODUCTO.
-const DEPENDIENTES_API = 'services/admin/admin_maestro_dependientes.php';
+const DEPENDIENTE_API = 'services/admin/admin_maestro_dependientes.php';
 
 
 /*
@@ -16,27 +16,9 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
-    ID_DEPENDIENTE= document.getElementById('idDependiente'),
+    ID_DEPENDIENTE = document.getElementById('idDependiente'),
     NOMBRE_DEPENDIENTE = document.getElementById('nombreDependiente'),
-   CODIGO_DEPENDIENTE = document.getElementById('codigoDependiente');
-
-/*
-*Elementos para la tabla DETALLE_PRODUCTO
-
-
-// Constantes para establecer el contenido de la tabla.
-const TABLE_BODY_DETALLE = document.getElementById('tableBodyDetalle'),
-    ROWS_FOUND_DETALLE = document.getElementById('rowsFoundDetalle');
-// Constantes para establecer los elementos del componente Modal.
-const SAVE_MODAL_DETALLE = new bootstrap.Modal('#saveModalDetalle'),
-    MODAL_TITLE_DETALLE = document.getElementById('modalTitleDetalle');
-// Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORM_DETALLE = document.getElementById('saveFormDetalle'),
-    ID_DETALLE = document.getElementById('idDetalle'),
-    PRECIO_DETALLE = document.getElementById('precioDetalle'),
-    EXISTENCIAS_DETALLE = document.getElementById('existenciasDetalle')
-    ID_PRODUCTO_DETALLE = document.getElementById('idProductoDetalle');
-*/
+    CODIGO_DEPENDIENTE = document.getElementById('CodigoDependiente');
 
 
 // Método del evento para cuando el documento ha cargado.
@@ -44,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
     // Se establece el título del contenido principal.
-    MAIN_TITLE.textContent = 'Gestionar dependientes';
+    MAIN_TITLE.textContent = 'Gestionar dependiente';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
 });
@@ -64,11 +46,11 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_PRODUCTO.value) ? action = 'updateRow' : action = 'createRow';
+    (ID_DEPENDIENTE.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(PRODUCTO_API, action, FORM);
+    const DATA = await fetchData(DEPENDIENTE_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.
@@ -94,7 +76,7 @@ const fillTable = async (form = null) => {
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
     // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(PRODUCTO_API, action, form);
+    const DATA = await fetchData(DEPENDIENTE_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
@@ -102,13 +84,9 @@ const fillTable = async (form = null) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${row.codigo_dependiente}</td>
                     <td>${row.nombre_dependiente}</td>
-                    
+                    <td>${row.codigo}</td>                    
                     <td>
-                        <button type="button" class="btn btn-success" onclick="openDetails(${row.id_dependiente})">
-                        <i class="fa-regular fa-square-plus"></i>
-                        </button>
                         <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_dependiente})">
                         <i class="fa-solid fa-pencil"></i>
                         </button>
@@ -134,7 +112,7 @@ const fillTable = async (form = null) => {
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Crear producto';
+    MODAL_TITLE.textContent = 'Crear dependiente';
     // Se prepara el formulario.
     SAVE_FORM.reset();
 }
@@ -147,21 +125,21 @@ const openCreate = () => {
 const openUpdate = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('idProducto', id);
+    FORM.append('idDependiente', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(PRODUCTO_API, 'readOne', FORM);
+    const DATA = await fetchData(DEPENDIENTE_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar producto';
+        MODAL_TITLE.textContent = 'Actualizar Dependiente';
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_DEPENDIENTE= document.getElementById('idDependiente');
-        NOMBRE_DEPENDIENTE = document.getElementById('nombreDependiente');
-       CODIGO_DEPENDIENTE = document.getElementById('codigoDependiente');
+        ID_DEPENDIENTE.value = ROW.id_dependiente;
+        NOMBRE_DEPENDIENTE.value = ROW.nombre_dependiente;
+        CODIGO_DEPENDIENTE.value = ROW.codigo;
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -174,14 +152,14 @@ const openUpdate = async (id) => {
 */
 const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar el producto de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el dependiente de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
         const FORM = new FormData();
-        FORM.append('idProducto', id);
+        FORM.append('idDependiente', id);
         // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(PRODUCTO_API, 'deleteRow', FORM);
+        const DATA = await fetchData(DEPENDIENTE_API, 'deleteRow', FORM);
         console.log(DATA);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
@@ -204,9 +182,10 @@ const openDelete = async (id) => {
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
 */
+/*
 const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/dependientes.php`);
+    const PATH = new URL(`${SERVER_URL}reports/admin/productos.php`);
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
-}
+}*/
