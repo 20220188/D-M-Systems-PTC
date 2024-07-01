@@ -1,6 +1,6 @@
 <?php
 // Incluir la clase del modelo de proveedores
-require_once('../../models/data/admin_maestro_proveedores_data.php');
+require_once('../../models/data/admin_maestros_proveedores_data.php');
 
 // Verificar si existe una acción a realizar, de lo contrario, finalizar con un mensaje de error.
 if (isset($_GET['action'])) {
