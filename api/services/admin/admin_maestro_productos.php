@@ -102,17 +102,27 @@ if (isset($_GET['action'])) {
                 }
                 break;
                 //Casos para DETALLE_PRODUCTO
-                /*
             case 'createRowDetalleProducto':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setPrecio($_POST['precioDetalle']) or
-                    !$producto->setExistencias($_POST['existenciasDetalle']) or
-                    !$producto->setTalla($_POST['tallaDetalle']) or
+                    !$producto->setPresentacion($_POST['presentacionDetalle']) or
+                    !$producto->setUbicacion($_POST['ubicacionDetalle']) or
+                    !$producto->setMinimo($_POST['minimoDetalle']) or
+                    !$producto->setMaximo($_POST['maximoDetalle']) or
+                    !$producto->setMarca($_POST['marcaDetalle']) or
+                    !$producto->setFechaIngreso($_POST['fechaIngresoDetalle']) or
+                    !$producto->setPeriodoExistencia($_POST['periodoEistenciaDetalle']) or
+                    !$producto->setIdLaboratorio($_POST['laboratorioDetalle']) or
+                    !$producto->setDescuento($_POST['descuentoDetalle']) or
+                    !$producto->setPrecioConDescuento($_POST['precioDescDetalle']) or
+                    !$producto->setPrecioOpcional1($_POST['precioOpc1Detalle']) or
+                    !$producto->setPrecioOpcional2($_POST['precioOpc2Detalle']) or
+                    !$producto->setPrecioOpcional3($_POST['precioOpc3Detalle']) or
+                    !$producto->setPrecioOpcional4($_POST['precioOpc4Detalle']) or
                     !$producto->setId($_POST['idProductoDetalle'])
                 ) {
                     $result['error'] = $producto->getDataError();
-                } elseif ($producto->createRowDetalleProducto()) {
+                } elseif ($producto->createRowDetalle()) {
                     $result['status'] = 1;
                     $result['message'] = 'Detalle creado correctamente';
                 } else {
@@ -130,7 +140,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOneDetalleProducto':
-                if (!$producto->setDetalleproducto($_POST['idDetalle'])) {
+                if (!$producto->setIdDetalle($_POST['idDetalle'])) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($result['dataset'] = $producto->readOneDetalle()) {
                     $result['status'] = 1;
@@ -141,10 +151,21 @@ if (isset($_GET['action'])) {
             case 'updateRowDetalleProducto':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setDetalleproducto($_POST['idDetalle']) or
-                    !$producto->setPrecio($_POST['precioDetalle']) or
-                    !$producto->setExistencias($_POST['existenciasDetalle']) or
-                    !$producto->setTalla($_POST['tallaDetalle'])
+                    !$producto->setIdDetalle($_POST['idDetalle']) or
+                    !$producto->setPresentacion($_POST['presentacionDetalle']) or
+                    !$producto->setUbicacion($_POST['ubicacionDetalle']) or
+                    !$producto->setMinimo($_POST['minimoDetalle']) or
+                    !$producto->setMaximo($_POST['maximoDetalle']) or
+                    !$producto->setMarca($_POST['marcaDetalle']) or
+                    !$producto->setFechaIngreso($_POST['fechaIngresoDetalle']) or
+                    !$producto->setPeriodoExistencia($_POST['periodoExistenciaDetalle']) or
+                    !$producto->setIdLaboratorio($_POST['laboratorioDetalle']) or
+                    !$producto->setDescuento($_POST['descuentoDetalle']) or
+                    !$producto->setPrecioConDescuento($_POST['precioDescDetalle']) or
+                    !$producto->setPrecioOpcional1($_POST['precioOpc1Detalle']) or
+                    !$producto->setPrecioOpcional2($_POST['precioOpc2Detalle']) or
+                    !$producto->setPrecioOpcional3($_POST['precioOpc3Detalle']) or
+                    !$producto->setPrecioOpcional4($_POST['precioOpc4Detalle'])
                 ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->updateRowDetalle()) {
@@ -155,7 +176,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'deleteRowDetalleProducto':
-                if (!$producto->setDetalleproducto($_POST['idDetalle'])) {
+                if (!$producto->setIdDetalle($_POST['idDetalle'])) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->deleteRowDetalle()) {
                     $result['status'] = 1;
@@ -163,7 +184,7 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['error'] = 'Ocurrió un problema al eliminar el detalle';
                 }
-                break;*/
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

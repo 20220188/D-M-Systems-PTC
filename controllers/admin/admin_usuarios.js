@@ -1,9 +1,8 @@
-// Constantes para completar las rutas de la API de PRODUCTO.
-const LABORATORIO_API = 'services/admin/admin_maestro_laboratorios.php';
-
+// Constantes para completar las rutas de la API de USUARIO.
+const USUARIO_API = 'services/admin/admin_maestro_usuarios.php';
 
 /*
-*Elementos para la tabla PRODUCTOS
+*Elementos para la tabla USUARIOS
 */
 
 // Constante para establecer el formulario de buscar.
@@ -16,17 +15,16 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
-    ID_LABORATORIO = document.getElementById('idLab'),
-    NOMBRE_LABORATORIO = document.getElementById('nombreLaboratorio'),
-    CODIGO_LABORATORIO = document.getElementById('codigoLaboratorio');
-
+    ID_USUARIO = document.getElementById('idUsuario'),
+    USUARIO = document.getElementById('usuario'),
+    CORREO = document.getElementById('correo'),
+    NOMBRE = document.getElementById('nombre'),
+    DUI = document.getElementById('DUI'),
+    TELEFONO = document.getElementById('telefono'),
+    ID_NIVEL_USUARIO = document.getElementById('idNivelUsuario');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
-    // Llamada a la función para mostrar el encabezado y pie del documento.
-    loadTemplate();
-    // Se establece el título del contenido principal.
-    MAIN_TITLE.textContent = 'Gestionar laboratorios';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
 });
@@ -46,11 +44,11 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_LABORATORIO.value) ? action = 'updateRow' : action = 'createRow';
+    (ID_USUARIO.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(LABORATORIO_API, action, FORM);
+    const DATA = await fetchData(USUARIO_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.
@@ -76,7 +74,7 @@ const fillTable = async (form = null) => {
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
     // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(LABORATORIO_API, action, form);
+    const DATA = await fetchData(USUARIO_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
@@ -84,14 +82,19 @@ const fillTable = async (form = null) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${row.nombre_laboratorio}</td>
-                    <td>${row.codigo}</td>                    
+                    <td>${row.id_usuario}</td>
+                    <td>${row.usuario}</td>
+                    <td>${row.correo}</td>
+                    <td>${row.nombre}</td>
+                    <td>${row.DUI}</td>
+                    <td>${row.telefono}</td>
+                    <td>${row.id_nivel_usuario}</td>
                     <td>
-                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_laboratorio})">
-                        <i class="fa-solid fa-pencil"></i>
+                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_usuario})">
+                            <i class="fa-solid fa-pencil"></i>
                         </button>
-                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_laboratorio})">
-                        <i class="fa-regular fa-trash-can"></i>
+                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_usuario})">
+                            <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </td>
                 </tr>
@@ -112,7 +115,7 @@ const fillTable = async (form = null) => {
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Crear laboratorio';
+    MODAL_TITLE.textContent = 'Crear usuario';
     // Se prepara el formulario.
     SAVE_FORM.reset();
 }
@@ -125,21 +128,25 @@ const openCreate = () => {
 const openUpdate = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('idLab', id);
+    FORM.append('idUsuario', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(LABORATORIO_API, 'readOne', FORM);
+    const DATA = await fetchData(USUARIO_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar laboratorio';
+        MODAL_TITLE.textContent = 'Actualizar usuario';
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_LABORATORIO.value = ROW.id_laboratorio;
-        NOMBRE_LABORATORIO.value = ROW.nombre_laboratorio;
-        CODIGO_LABORATORIO.value = ROW.codigo;
+        ID_USUARIO.value = ROW.id_usuario;
+        USUARIO.value = ROW.usuario;
+        CORREO.value = ROW.correo;
+        NOMBRE.value = ROW.nombre;
+        DUI.value = ROW.DUI;
+        TELEFONO.value = ROW.telefono;
+        ID_NIVEL_USUARIO.value = ROW.id_nivel_usuario;
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -152,15 +159,14 @@ const openUpdate = async (id) => {
 */
 const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar el laboratorio de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar el usuario de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
         const FORM = new FormData();
-        FORM.append('idLab', id);
+        FORM.append('idUsuario', id);
         // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(LABORATORIO_API, 'deleteRow', FORM);
-        console.log(DATA);
+        const DATA = await fetchData(USUARIO_API, 'deleteRow', FORM);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             // Se muestra un mensaje de éxito.
@@ -172,20 +178,3 @@ const openDelete = async (id) => {
         }
     }
 }
-
-
-
-
-
-/*
-*   Función para abrir un reporte automático de productos por categoría.
-*   Parámetros: ninguno.
-*   Retorno: ninguno.
-*/
-/*
-const openReport = () => {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/productos.php`);
-    // Se abre el reporte en una nueva pestaña.
-    window.open(PATH.href);
-}*/
