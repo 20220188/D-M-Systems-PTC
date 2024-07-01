@@ -30,14 +30,14 @@ class UsuarioData extends UsuarioHandler
 
     public function setUsuario($value, $min = 2, $max = 50)
     {
-        if (!Validator::validateAlphabetic($value)) {
-            $this->data_error = 'El nombre debe ser un valor alfabético';
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El usuario debe ser un valor alfanumérico';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
             $this->usuario = $value;
             return true;
         } else {
-            $this->data_error = 'El nombre de usuario debe tener una longitud entre ' . $min . ' y ' . $max;
+            $this->data_error = 'El usuario debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
@@ -85,6 +85,17 @@ class UsuarioData extends UsuarioHandler
             return false;
         } elseif($this->checkDuplicate($value)) {
             $this->data_error = 'El DUI ingresado ya existe';
+            return false;
+        } else {
+            $this->DUI = $value;
+            return true;
+        }
+    }
+
+    public function setDUIUpdate($value)
+    {
+        if (!Validator::validateDUI($value)) {
+            $this->data_error = 'El DUI debe tener el formato ########-#';
             return false;
         } else {
             $this->DUI = $value;

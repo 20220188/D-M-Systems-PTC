@@ -40,8 +40,9 @@ class UsuarioHandler
     }
     public function readAll()
     {
-        $sql = 'SELECT id_usuario, usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario
+        $sql = 'SELECT id_usuario, usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario, tipo_usuario
                 FROM tb_usuarios
+                INNER JOIN tb_niveles_usuarios USING(id_nivel_usuario)
                 ORDER BY nombre';
         return Database::getRows($sql);
     }
@@ -58,9 +59,9 @@ class UsuarioHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_usuarios
-                SET usuario = ?, clave = ?, correo = ?, nombre = ?, DUI = ?, telefono = ?, id_nivel_usuario = ?
+                SET usuario = ?, correo = ?, nombre = ?, DUI = ?, telefono = ?, id_nivel_usuario = ?
                 WHERE id_usuario = ?';
-        $params = array($this->usuario, $this->clave, $this->correo, $this->nombre, $this->DUI, $this->telefono, $this->id_nivel_usuario, $this->id_usuario);
+        $params = array($this->usuario, $this->correo, $this->nombre, $this->DUI, $this->telefono, $this->id_nivel_usuario, $this->id_usuario);
         return Database::executeRow($sql, $params);
     }
 
@@ -84,7 +85,7 @@ class UsuarioHandler
         $sql = 'SELECT id_usuario
                 FROM tb_usuarios
                 WHERE DUI = ?';
-        $params = array($value, $value);
+        $params = array($value);
         return Database::getRow($sql, $params);
     }
 

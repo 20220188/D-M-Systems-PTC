@@ -90,7 +90,7 @@ const fillTable = async (form = null) => {
                     <td>${row.telefono}</td>
                     <td>${row.correo}</td>
                     <td>${row.DUI}</td>
-                    <td>${row.id_nivel_usuario}</td>
+                    <td>${row.tipo_usuario}</td>
                     <td>
                         <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_usuario})">
                             <i class="fa-solid fa-pencil"></i>
@@ -120,6 +120,7 @@ const openCreate = () => {
     MODAL_TITLE.textContent = 'Crear usuario';
     // Se prepara el formulario.
     SAVE_FORM.reset();
+    CLAVE.disabled = false;
     fillSelect(USUARIO_API, 'readAllNiveles', 'idNivelUsuario');
     fillTable();
 }
@@ -151,6 +152,7 @@ const openUpdate = async (id) => {
         DUI.value = ROW.DUI;
         TELEFONO.value = ROW.telefono;
         ID_NIVEL_USUARIO.value = ROW.id_nivel_usuario;
+        CLAVE.disabled = true;
         fillSelect(USUARIO_API, 'readAllNiveles', 'idNivelUsuario', ROW.id_nivel_usuario);
     } else {
         sweetAlert(2, DATA.error, false);
