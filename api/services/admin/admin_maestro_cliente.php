@@ -24,28 +24,28 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-            //  case 'createRow':
-            //      $_POST = Validator::validateForm($_POST);
-            //      if (
-            //          !$cliente->setNombre($_POST['nombreCliente']) or
-            //          !$cliente->setDUI($_POST['NitCliente']) or
-            //          !$cliente->setDUI($_POST['NrcCliente']) or
-            //          !$cliente->setNombre($_POST['TipoCliente']) or
-            //          !$cliente->setNombre($_POST['NombreCo']) or
-            //          !$cliente->setCodigo($_POST['CodigoCliente']) or
-            //          !$cliente->setDireccion($_POST['DireccionCliente']) or
-            //          !$cliente->setTelefono($_POST['TelefonoCliente']) or
-            //          !$cliente->setCorreo($_POST['CorreoCliente'])
-            //      ) {
-            //          $result['error'] = $cliente->getDataError();
-            //      } elseif ($cliente->createRow()) {
-            //          $result['status'] = 1;
-            //          $result['message'] = 'Cliente creado correctamente';
-            //         //Se asigna el estado del archivo después de insertar.
-            //     } else {
-            //          $result['error'] = 'Ocurrió un problema al crear un cliente';
-            //      }
-            //      break;
+              case 'createRow':
+                  $_POST = Validator::validateForm($_POST);
+                  if (
+                      !$cliente->setNombre($_POST['nombreCliente']) or
+                      !$cliente->setDUI($_POST['NitCliente']) or
+                      !$cliente->setNRC($_POST['NrcCliente']) or
+                      !$cliente->setTipoCliente($_POST['TipoCliente']) or
+                      !$cliente->setNombreComercial($_POST['NombreCo']) or
+                      !$cliente->setCodigo($_POST['CodigoCliente']) or
+                      !$cliente->setDireccion($_POST['DireccionCliente']) or
+                      !$cliente->setTelefono($_POST['TelefonoCliente']) or
+                      !$cliente->setCorreo($_POST['CorreoCliente'])
+                  ) {
+                      $result['error'] = $cliente->getDataError();
+                  } elseif ($cliente->createRow()) {
+                      $result['status'] = 1;
+                      $result['message'] = 'Cliente creado correctamente';
+                     //Se asigna el estado del archivo después de insertar.
+                 } else {
+                      $result['error'] = 'Ocurrió un problema al crear un cliente';
+                  }
+                  break;
             case 'readAll':
                 if ($result['dataset'] = $cliente->readAll()) {
                     $result['status'] = 1;

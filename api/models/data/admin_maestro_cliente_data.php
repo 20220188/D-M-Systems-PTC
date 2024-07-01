@@ -42,13 +42,49 @@ class ClienteData extends clienteHandler
         }
     }
 
+    public function setTipoCliente($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphabetic($value)) {
+            $this->data_error = 'El tipocliente debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->tipocliente = $value;
+            return true;
+        } else {
+            $this->data_error = 'El tipo cliente debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setNombreComercial($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphabetic($value)) {
+            $this->data_error = 'El nombre comercial debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->nombrecomercial = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre comercial debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setNRC($value)
+    {
+        if (!Validator::validateDUI($value)) {
+            $this->data_error = 'El NRC debe tener el formato ########-#';
+            return false;
+        } else {
+            $this->NRC = $value;
+            return true;
+        }
+    }
+
     public function setDUI($value)
     {
         if (!Validator::validateDUI($value)) {
             $this->data_error = 'El DUI debe tener el formato ########-#';
-            return false;
-        } elseif($this->checkDuplicate($value)) {
-            $this->data_error = 'El DUI ingresado ya existe';
             return false;
         } else {
             $this->dui = $value;
@@ -61,9 +97,6 @@ class ClienteData extends clienteHandler
     // Verificar si el valor contiene solo números
     if (!ctype_digit($value)) {
         $this->data_error = 'El codigo debe contener solo números.';
-        return false;
-    } elseif ($this->checkDuplicate($value)) {
-        $this->data_error = 'El codigo ingresado ya existe.';
         return false;
     } else {
         $this->codigo = $value;
@@ -105,23 +138,9 @@ class ClienteData extends clienteHandler
         } elseif (!Validator::validateLength($value, $min, $max)) {
             $this->data_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
-        } elseif($this->checkDuplicate($value)) {
-            $this->data_error = 'El correo ingresado ya existe';
-            return false;
         } else {
             $this->correo = $value;
             return true;
-        }
-    }
-
-    public function setFilename()
-    {
-        if ($data = $this->readFilename()) {
-            $this->filename = $data['imagen_categoria'];
-            return true;
-        } else {
-            $this->data_error = 'Cliente inexistente';
-            return false;
         }
     }
 
