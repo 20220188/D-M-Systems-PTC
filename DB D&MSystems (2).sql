@@ -14,12 +14,12 @@ tipo_usuario VARCHAR(20)
 
 CREATE TABLE tb_usuarios(
 id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-usuario VARCHAR(10),
-clave VARCHAR(100),
-correo VARCHAR(50),
+usuario VARCHAR(10) unique,
+clave VARCHAR (100) UNIQUE NOT NULL,
+correo VARCHAR(50)UNIQUE NOT NULL,
 nombre VARCHAR(25),
-DUI VARCHAR(10),
-telefono VARCHAR(10),
+DUI VARCHAR (10)UNIQUE NOT NULL,
+telefono VARCHAR(10) unique,
 id_nivel_usuario INT,
 CONSTRAINT fk_usuarios_niveles_usuarios
 FOREIGN KEY (id_nivel_usuario)
@@ -51,19 +51,19 @@ select * from tb_usuarios;
 CREATE TABLE tb_clientes( 
 id_cliente INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 nombre VARCHAR(50),
-NIT VARCHAR(20) NULL,
+NIT VARCHAR(20) UNIQUE NULL,
 NRC VARCHAR(10) NULL,
 tipo VARCHAR(30) NULL,
 nombre_comercial VARCHAR(50) NULL,
-codigo VARCHAR(20) NULL,
+codigo VARCHAR(20)UNIQUE not NULL,
 direccion VARCHAR(200) NULL,
-telefono VARCHAR(9) NULL,
-correo VARCHAR(30)
+telefono VARCHAR(9) UNIQUE NULL,
+correo VARCHAR(30)UNIQUE
 );
 
 CREATE TABLE tb_categorias(
 id_categoria INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-categoria VARCHAR(30),
+categoria VARCHAR(30) unique,
 descrpicion VARCHAR(100) NULL
 );
 
@@ -117,17 +117,17 @@ nombre_dependiente VARCHAR(50)
 
 CREATE TABLE tb_proveedores (
     id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
-    codigo_proveedor VARCHAR(255),
+    codigo_proveedor VARCHAR(255) UNIQUE,
     nombre_proveedor VARCHAR(255),
     pais_proveedor VARCHAR(255),
     giro_negocio_proveedor VARCHAR(255),
-    dui_proveedor VARCHAR(255),
-    nombre_comercial_proveedor VARCHAR(255),
+    dui_proveedor VARCHAR(255) UNIQUE,
+    nombre_comercial_proveedor VARCHAR(255) unique,
     fecha_proveedor DATE,
-    nit_proveedor VARCHAR(255),
-    telefono_proveedor VARCHAR(255),
-    contacto_proveedor VARCHAR(255),
-    direccion_proveedor VARCHAR(255),
+    nit_proveedor VARCHAR(255)UNIQUE,
+    telefono_proveedor VARCHAR(255) UNIQUE,
+    contacto_proveedor VARCHAR(255) UNIQUE,
+    direccion_proveedor VARCHAR(255) UNIQUE,
     departamento_proveedor VARCHAR(255),
     municipio_proveedor VARCHAR(255)
 );
