@@ -76,7 +76,7 @@ const fillTable = async (form = null) => {
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
     // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(PRODUCTO_API, action, form);
+    const DATA = await fetchData(LABORATORIO_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
@@ -87,9 +87,6 @@ const fillTable = async (form = null) => {
                     <td>${row.nombre_laboratorio}</td>
                     <td>${row.codigo}</td>                    
                     <td>
-                        <button type="button" class="btn btn-success" onclick="openDetails(${row.id_laboratorio})">
-                        <i class="fa-regular fa-square-plus"></i>
-                        </button>
                         <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_laboratorio})">
                         <i class="fa-solid fa-pencil"></i>
                         </button>
@@ -130,7 +127,7 @@ const openUpdate = async (id) => {
     const FORM = new FormData();
     FORM.append('idLab', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(LABORATORIO_API_API, 'readOne', FORM);
+    const DATA = await fetchData(LABORATORIO_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
@@ -140,7 +137,7 @@ const openUpdate = async (id) => {
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_LABORATORIO.value = ROW.id;
+        ID_LABORATORIO.value = ROW.id_laboratorio;
         NOMBRE_LABORATORIO.value = ROW.nombre_laboratorio;
         CODIGO_LABORATORIO.value = ROW.codigo;
     } else {
@@ -162,7 +159,7 @@ const openDelete = async (id) => {
         const FORM = new FormData();
         FORM.append('idLab', id);
         // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(LABORATORIO_API_API, 'deleteRow', FORM);
+        const DATA = await fetchData(LABORATORIO_API, 'deleteRow', FORM);
         console.log(DATA);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {

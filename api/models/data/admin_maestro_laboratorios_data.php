@@ -51,7 +51,7 @@ class LaboratoriosData extends LaboratoriosHandler
             $this->data_error = 'El nombre debe ser un valor alfanumérico';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->nombre_laboratorio = $value;
+            $this->nombre = $value;
             return true;
         } else {
             $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;

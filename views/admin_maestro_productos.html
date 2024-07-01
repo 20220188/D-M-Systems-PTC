@@ -66,8 +66,6 @@
                     <i class="fa-solid fa-plus"></i>
                 </button>
 
-
-
             </div>
         </div>
 
@@ -129,18 +127,18 @@
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="precioSinIVA" class="form-label">Precio sin IVA</label>
-                                <input id="precioSinIVA" type="number" name="precioSinIVA" min="0.01"
-                                            step="0.01" class="form-control" required>
+                                <input id="precioSinIVA" type="number" name="precioSinIVA" min="0.01" step="0.01"
+                                    class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="precioVentaConIVA" class="form-label">Precio de venta c/IVA</label>
                                 <input id="precioVentaConIVA" type="number" name="precioVentaConIVA" min="0.01"
-                                            step="0.01" class="form-control" required>
+                                    step="0.01" class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="precioUnitario" class="form-label">Precio unitario</label>
-                                <input id="precioUnitario" type="number" name="precioUnitario" min="0.01"
-                                            step="0.01" class="form-control" required>
+                                <input id="precioUnitario" type="number" name="precioUnitario" min="0.01" step="0.01"
+                                    class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="imagenProducto" class="form-label">Imagen</label>
@@ -155,11 +153,116 @@
                 </div>
             </div>
         </div>
+
+        <!-- Componente Modal para guardar un registro de detalle producto-->
+        <div class="modal fade" id="saveModalDetalle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitleDetalle" aria-hidden="true">
+            <div class="modal-dialog modal-xl  modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitleDetalle"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para crear o actualizar un registro -->
+                    <form id="saveFormDetalle">
+                        <div class="modal-body row g-3">
+                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                            <input type="number" class="d-none" id="idDetalle" name="idDetalle">
+                            <input type="number" class="d-none" id="idProductoDetalle" name="idProductoDetalle">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="codigoProducto" class="form-label">Presentacion</label>
+                                <input id="codigoProducto" type="text" name="codigoProducto" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="codigoProducto" class="form-label">Minimo</label>
+                                <input id="codigoProducto" type="text" name="codigoProducto" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="codigoProducto" class="form-label">Maximo</label>
+                                <input id="codigoProducto" type="text" name="codigoProducto" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="codigoProducto" class="form-label">Marca</label>
+                                <input id="codigoProducto" type="text" name="codigoProducto" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="laboratorioDetalle" class="form-label">Laboratorio</label>
+                                <select id="laboratorioDetalle" name="laboratorioDetalle" class="form-select" required>
+                                </select>
+                            </div>
+                            <h6>Apartado de precios</h6>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="precioDetalle" class="form-label">Descuento</label>
+                                <input id="precioDetalle" type="number" name="precioDetalle" min="0.01" step="0.01"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="existenciasDetalle" class="form-label">Precio con descuento</label>
+                                <input id="existenciasDetalle" type="number" name="existenciasDetalle" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="existenciasDetalle" class="form-label">Precio opcional 1</label>
+                                <input id="existenciasDetalle" type="number" name="existenciasDetalle" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="existenciasDetalle" class="form-label">Precio opcional 2</label>
+                                <input id="existenciasDetalle" type="number" name="existenciasDetalle" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="existenciasDetalle" class="form-label">Precio opcional 3</label>
+                                <input id="existenciasDetalle" type="number" name="existenciasDetalle" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="existenciasDetalle" class="form-label">Precio opcional 4</label>
+                                <input id="existenciasDetalle" type="number" name="existenciasDetalle" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-hover text-center">
+                            <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                            <thead>
+                                <tr>
+                                    <td class="text-start" colspan="5" id="rowsFoundDetalle"></td>
+                                </tr>
+                                <tr>
+                                    <th>PRESENTACION</th>
+                                    <th>MARCA</th>
+                                    <th>UBICACION</th>
+                                    <th>MINIMO</th>
+                                    <th>MAXIMO</th>
+                                    <th>FECHA INGRESO</th>
+                                    <th>PERIODO EXISTENCIA</th>
+                                    <th>LABORATORIO</th>
+                                    <th>DESCUENTO</th>
+                                    <th>PRECIO CON DESCUENTO</th>
+                                </tr>
+                            </thead>
+                            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                            <tbody id="tableBodyDetalle"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
     <script src="../controllers/utils/admin.js"></script>
     <script src="../controllers/utils/components.js"></script>
-    
+
     <!-- Llamada al kit de font awesome -->
     <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
 
@@ -174,7 +277,7 @@
 
     <!-- Llamada al controlador de la página web -->
     <script type="text/javascript" src="../controllers/admin/admin_maestro_productos.js"></script>
-        
+
 </body>
 
 
