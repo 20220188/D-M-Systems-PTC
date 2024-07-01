@@ -1,5 +1,6 @@
 // Constantes para completar las rutas de la API de USUARIO.
-const USUARIO_API = 'services/admin/admin_maestro_usuarios.php';
+const USUARIO_API = 'services/admin/admin_usuarios.php';
+
 
 /*
 *Elementos para la tabla USUARIOS
@@ -16,11 +17,12 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
     ID_USUARIO = document.getElementById('idUsuario'),
-    USUARIO = document.getElementById('usuario'),
-    CORREO = document.getElementById('correo'),
-    NOMBRE = document.getElementById('nombre'),
-    DUI = document.getElementById('DUI'),
-    TELEFONO = document.getElementById('telefono'),
+    USUARIO = document.getElementById('Usuario'),
+    CLAVE = document.getElementById('Clave'),
+    CORREO = document.getElementById('correoUsuario'),
+    NOMBRE_USUARIO = document.getElementById('nombreUsuario'),
+    DUI = document.getElementById('DUIUsuario'),
+    TELEFONO = document.getElementById('telefonoUsuario'),
     ID_NIVEL_USUARIO = document.getElementById('idNivelUsuario');
 
 // Método del evento para cuando el documento ha cargado.
@@ -82,12 +84,12 @@ const fillTable = async (form = null) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${row.id_usuario}</td>
+                    
                     <td>${row.usuario}</td>
-                    <td>${row.correo}</td>
                     <td>${row.nombre}</td>
-                    <td>${row.DUI}</td>
                     <td>${row.telefono}</td>
+                    <td>${row.correo}</td>
+                    <td>${row.DUI}</td>
                     <td>${row.id_nivel_usuario}</td>
                     <td>
                         <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_usuario})">
@@ -118,6 +120,8 @@ const openCreate = () => {
     MODAL_TITLE.textContent = 'Crear usuario';
     // Se prepara el formulario.
     SAVE_FORM.reset();
+    fillSelect(USUARIO_API, 'readAllNiveles', 'idNivelUsuario');
+    fillTable();
 }
 
 /*
@@ -143,10 +147,11 @@ const openUpdate = async (id) => {
         ID_USUARIO.value = ROW.id_usuario;
         USUARIO.value = ROW.usuario;
         CORREO.value = ROW.correo;
-        NOMBRE.value = ROW.nombre;
+        NOMBRE_USUARIO.value = ROW.nombre;
         DUI.value = ROW.DUI;
         TELEFONO.value = ROW.telefono;
         ID_NIVEL_USUARIO.value = ROW.id_nivel_usuario;
+        fillSelect(USUARIO_API, 'readAllNiveles', 'idNivelUsuario', ROW.id_nivel_usuario);
     } else {
         sweetAlert(2, DATA.error, false);
     }

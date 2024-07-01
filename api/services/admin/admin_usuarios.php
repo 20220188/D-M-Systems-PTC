@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/usuario_data.php');
+require_once('../../models/data/admin_usuarios_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -24,15 +24,16 @@ if (isset($_GET['action'])) {
                 $result['error'] = 'No hay coincidencias';
             }
             break;
+            case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$usuario->setUsuario($_POST['usuario']) or
-                    !$usuario->setClave($_POST['clave']) or
-                    !$usuario->setCorreo($_POST['correo']) or
-                    !$usuario->setNombre($_POST['nombre']) or
-                    !$usuario->setDUI($_POST['DUI']) or
-                    !$usuario->setTelefono($_POST['telefono']) or
-                    !$usuario->setIdNivelUsuario($_POST['id_nivel_usuario'])
+                    !$usuario->setUsuario($_POST['Usuario']) or
+                    !$usuario->setClave($_POST['Clave']) or
+                    !$usuario->setCorreo($_POST['correoUsuario']) or
+                    !$usuario->setNombre($_POST['nombreUsuario']) or
+                    !$usuario->setDUI($_POST['DUIUsuario']) or
+                    !$usuario->setTelefono($_POST['telefonoUsuario']) or
+                    !$usuario->setIdNivelUsuario($_POST['idNivelUsuario'])
                 ) {
                     $result['error'] = $usuario->getDataError();
                 } elseif ($usuario->createRow()) {
@@ -51,7 +52,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOne':
-                if (!$usuario->setIdUsuario($_POST['id_usuario'])) {
+                if (!$usuario->setIdUsuario($_POST['idUsuario'])) {
                     $result['error'] = $usuario->getDataError();
                 } elseif ($result['dataset'] = $usuario->readOne()) {
                     $result['status'] = 1;
@@ -62,14 +63,13 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$usuario->setIdUsuario($_POST['id_usuario']) or
-                    !$usuario->setUsuario($_POST['usuario']) or
+                    !$usuario->setUsuario($_POST['Usuario']) or
                     !$usuario->setClave($_POST['clave']) or
-                    !$usuario->setCorreo($_POST['correo']) or
-                    !$usuario->setNombre($_POST['nombre']) or
-                    !$usuario->setDUI($_POST['DUI']) or
-                    !$usuario->setTelefono($_POST['telefono']) or
-                    !$usuario->setIdNivelUsuario($_POST['id_nivel_usuario'])
+                    !$usuario->setCorreo($_POST['correoUsuario']) or
+                    !$usuario->setNombre($_POST['nombreUsuario']) or
+                    !$usuario->setDUI($_POST['DUIUsuario']) or
+                    !$usuario->setTelefono($_POST['telefonoUsuario']) or
+                    !$usuario->setIdNivelUsuario($_POST['idNivelUsuario'])
                 ) {
                     $result['error'] = $usuario->getDataError();
                 } elseif ($usuario->updateRow()) {
@@ -80,7 +80,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'deleteRow':
-                if (!$usuario->setIdUsuario($_POST['id_usuario'])) {
+                if (!$usuario->setIdUsuario($_POST['idUsuario'])) {
                     $result['error'] = $usuario->getDataError();
                 } elseif ($usuario->deleteRow()) {
                     $result['status'] = 1;
@@ -89,6 +89,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el usuario';
                 }
                 break;
+                case 'readAllNiveles':
+                    if ($result['dataset'] = $usuario->readAllNiveles()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    } else {
+                        $result['error'] = 'No existen usuarios registrados';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

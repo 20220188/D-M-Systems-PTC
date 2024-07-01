@@ -2,7 +2,7 @@
 // Se incluye la clase para validar los datos de entrada.
 require_once('../../helpers/validator.php');
 // Se incluye la clase padre.
-require_once('../../models/handler/usuario_handler.php');
+require_once('../../models/handler/admin_usuario_handler.php');
 
 /*
  *	Clase para manejar el encapsulamiento de los datos de la tabla tb_usuarios.
@@ -28,13 +28,16 @@ class UsuarioData extends UsuarioHandler
         }
     }
 
-    public function setUsuario($value)
+    public function setUsuario($value, $min = 2, $max = 50)
     {
-        if (Validator::validateAlphanumeric($value, 1, 10)) {
+        if (!Validator::validateAlphabetic($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
             $this->usuario = $value;
             return true;
         } else {
-            $this->data_error = 'El nombre de usuario es incorrecto';
+            $this->data_error = 'El nombre de usuario debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
@@ -61,25 +64,31 @@ class UsuarioData extends UsuarioHandler
         }
     }
 
-    public function setNombre($value)
+    public function setNombre($value, $min = 2, $max = 50)
     {
-        if (Validator::validateAlphabetic($value, 1, 25)) {
+        if (!Validator::validateAlphabetic($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
             $this->nombre = $value;
             return true;
         } else {
-            $this->data_error = 'El nombre es incorrecto';
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
 
     public function setDUI($value)
     {
-        if (Validator::validateAlphanumeric($value, 1, 10)) {
+        if (!Validator::validateDUI($value)) {
+            $this->data_error = 'El DUI debe tener el formato ########-#';
+            return false;
+        } elseif($this->checkDuplicate($value)) {
+            $this->data_error = 'El DUI ingresado ya existe';
+            return false;
+        } else {
             $this->DUI = $value;
             return true;
-        } else {
-            $this->data_error = 'El DUI es incorrecto';
-            return false;
         }
     }
 
@@ -89,7 +98,7 @@ class UsuarioData extends UsuarioHandler
             $this->telefono = $value;
             return true;
         } else {
-            $this->data_error = 'El teléfono es incorrecto';
+            $this->data_error = 'El teléfono debe tener el formato (2, 6, 7)###-####';
             return false;
         }
     }
