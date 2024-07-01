@@ -71,8 +71,8 @@ if (isset($_GET['action'])) {
                     !$producto->setDescripcion($_POST['descripcionProducto']) or
                     !$producto->setCodigo($_POST['codigoProducto']) or
                     !$producto->setFechaVencimiento($_POST['fechaVencimiento']) or
-                    !$producto->setPrecioSinIva($_POST['precioSinIva']) or
-                    !$producto->setPrecioConIva($_POST['precioConIva']) or
+                    !$producto->setPrecioSinIva($_POST['precioSinIVA']) or
+                    !$producto->setPrecioConIva($_POST['precioVentaConIVA']) or
                     !$producto->setCostoUnitario($_POST['precioUnitario']) or
                     !$producto->setImagen($_FILES['imagenProducto'], $producto->getFilename())
                 ) {

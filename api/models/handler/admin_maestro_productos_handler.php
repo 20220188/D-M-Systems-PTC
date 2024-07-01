@@ -91,9 +91,9 @@ class ProductosHandler
 
     public function readOne()
     {
-        $sql = 'SELECT id_producto, imagen, codigo, nombre, descripcion, fecha_vencimiento,precio_sin_iva, precio_con_iva, costo_unitario
+        $sql = 'SELECT id_producto, imagen, codigo, nombre, descripcion, fecha_vencimiento, precio_sin_iva, precio_con_iva, costo_unitario
                 FROM tb_productos
-                WHERE id_admin = ?';
+                WHERE id_producto = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }

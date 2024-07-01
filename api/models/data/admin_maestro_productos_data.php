@@ -79,10 +79,12 @@ class ProductosData extends ProductosHandler
             $this->precio_sin_iva = $value;
             return true;
         } else {
-            $this->data_error = 'El precio sin IVA es incorrecto';
+            $this->data_error = 'El precio sin IVA debe ser un valor numérico';
             return false;
         }
     }
+
+
 
     public function setPrecioConIva($value)
     {
@@ -90,7 +92,7 @@ class ProductosData extends ProductosHandler
             $this->precio_con_iva = $value;
             return true;
         } else {
-            $this->data_error = 'El precio con IVA es incorrecto';
+            $this->data_error = 'El precio de venta debe ser un valor numérico';
             return false;
         }
     }
@@ -101,7 +103,7 @@ class ProductosData extends ProductosHandler
             $this->costo_unitario = $value;
             return true;
         } else {
-            $this->data_error = 'El costo unitario es incorrecto';
+            $this->data_error = 'El costo unitario debe ser un valor numérico';
             return false;
         }
     }

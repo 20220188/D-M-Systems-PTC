@@ -112,7 +112,6 @@ const fillTable = async (form = null) => {
                     <td>${row.nombre}</td>
                     <td>${row.descripcion}</td>
                     <td>${row.fecha_vencimiento}</td>
-                    <td>${row.precio_sin_iva}</td>
                     <td>${row.precio_con_iva}</td>
                     <td>${row.costo_unitario}</td>
                     <td>
@@ -170,12 +169,13 @@ const openUpdate = async (id) => {
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
         ID_PRODUCTO.value = ROW.id_producto;
-        NOMBRE_PRODUCTO.value = ROW.nombre_producto;
+        NOMBRE_PRODUCTO.value = ROW.nombre;
         DESCRIPCION_PRODUCTO.value = ROW.descripcion;
-        fillSelect(CATEGORIA_API, 'readAll', 'categoriaProducto', ROW.id_categoria);
-        fillSelect(TIPO_PRODUCTO_API, 'readAll_TipoP', 'tipoProducto', ROW.id_tipo_producto);
-        fillSelect(DEPORTE_API, 'readAll', 'deporteProducto', ROW.id_deporte);
-        fillSelect(GENERO_API, 'readAll', 'generoProducto', ROW.id_genero);
+        CODIGO_PRODUCTO.value = ROW.codigo;
+        FECHA_VENCIMIENTO.value = ROW.fecha_vencimiento;
+        PRECIO_SIN_IVA.value = ROW.precio_sin_iva;
+        PRECIO_CON_IVA.value = ROW.precio_con_iva;
+        PRECIO_UNITARIO.value = ROW.costo_unitario;
     } else {
         sweetAlert(2, DATA.error, false);
     }
