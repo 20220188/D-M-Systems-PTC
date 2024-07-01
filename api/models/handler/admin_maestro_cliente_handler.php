@@ -19,9 +19,7 @@ class clienteHandler
     protected $direccion = null;
     protected $telefono = null;
     protected $correro = null;
-
-
-
+    
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
      */
@@ -37,17 +35,19 @@ class clienteHandler
     }
 
     public function createRow()
-    {
-        $sql = 'INSERT INTO categoria(nombre_categoria, imagen_categoria, descripcion_categoria)
-                VALUES(?, ?, ?)';
-        $params = array($this->nombre, $this->imagen, $this->descripcion);
-        return Database::executeRow($sql, $params);
-    }
+{
+    $sql = 'INSERT INTO tb_clientes(nombre, NIT, NRC, tipo, nombre_comercial, codigo, direccion, telefono, correo)
+            VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    $params = array($this->nombre, $this->NIT, $this->NRC, $this->tipo, $this->nombre_comercial, $this->codigo, $this->direccion, $this->telefono, $this->correo);
+    return Database::executeRow($sql, $params);
+}
+
 
     public function readAll()
     {
         $sql = 'SELECT id_cliente, nombre, NIT, NRC, tipo, nombre_comercial, codigo, direccion, telefono, correo
-                FROM tb_clientes';
+                FROM tb_clientes
+                ORDER BY nombre';
         return Database::getRows($sql);
     }
 

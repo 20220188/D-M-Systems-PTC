@@ -1,5 +1,5 @@
 // Constante para completar la ruta de la API.
-const CATEGORIA_API = 'services/admin/admin_maestro_cliente.php';
+const CLIENTE_API = 'services/admin/admin_maestro_cliente.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer los elementos de la tabla.
@@ -47,11 +47,11 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_CATEGORIA.value) ? action = 'updateRow' : action = 'createRow';
+    (ID_CLIENTE.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(CATEGORIA_API, action, FORM);
+    const DATA = await fetchData(CLIENTE_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.
@@ -77,7 +77,7 @@ const fillTable = async (form = null) => {
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
     // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(CATEGORIA_API, action, form);
+    const DATA = await fetchData(CLIENTE_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se recorre el conjunto de registros fila por fila.
@@ -135,7 +135,7 @@ const openUpdate = async (id) => {
     const FORM = new FormData();
     FORM.append('idCliente', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(CATEGORIA_API, 'readOne', FORM);
+    const DATA = await fetchData(CLIENTE_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
@@ -145,9 +145,16 @@ const openUpdate = async (id) => {
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_CATEGORIA.value = ROW.id_categoria;
-        NOMBRE_CATEGORIA.value = ROW.nombre_categoria;
-        DESCRIPCION_CATEGORIA.value = ROW.descripcion_categoria;
+        ID_CLIENTE.value = ROW.id_cliente;
+        NOMBRE_CLIENTE.value = ROW.nombre;
+        NIT_CLIENTE.value = ROW.NIT;
+        NRC_CLIENTE.value = ROW.NRC;
+        TIPO_CLIENTE.value = ROW.tipo;
+        NOMBRECOMERCIAL_CLIENTE.value = ROW.nombre_comercial;
+        CODIGO_CLIENTE.value = ROW.codigo;
+        DIRECCION_CLIENTE.value = ROW.direccion;
+        TELEFONO_CLIENTE.value = ROW.telefono;   
+        CORREO_CLIENTE.value = ROW.correo;             
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -160,14 +167,14 @@ const openUpdate = async (id) => {
 */
 const openDelete = async (id) => {
     // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar la categoría de forma permanente?');
+    const RESPONSE = await confirmAction('¿Desea eliminar al cliente de forma permanente?');
     // Se verifica la respuesta del mensaje.
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
         const FORM = new FormData();
         FORM.append('idCliente', id);
         // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(CATEGORIA_API, 'deleteRow', FORM);
+        const DATA = await fetchData(CLIENTE_API, 'deleteRow', FORM);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             // Se muestra un mensaje de éxito.
@@ -187,7 +194,7 @@ const openDelete = async (id) => {
 */
 const openReport = (id) => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/productos_categoria.php`);
+    const PATH = new URL(`${SERVER_URL}reports/admin/cliente.php`);
     // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
     PATH.searchParams.append('idCliente', id);
     // Se abre el reporte en una nueva pestaña.

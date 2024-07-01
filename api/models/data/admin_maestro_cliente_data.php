@@ -30,8 +30,8 @@ class ClienteData extends clienteHandler
 
     public function setNombre($value, $min = 2, $max = 50)
     {
-        if (!Validator::validateAlphanumeric($value)) {
-            $this->data_error = 'El nombre debe ser un valor alfanumérico';
+        if (!Validator::validateAlphabetic($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
             $this->nombre = $value;
@@ -55,6 +55,22 @@ class ClienteData extends clienteHandler
             return true;
         }
     }
+
+    public function setCodigo($value)
+{
+    // Verificar si el valor contiene solo números
+    if (!ctype_digit($value)) {
+        $this->data_error = 'El codigo debe contener solo números.';
+        return false;
+    } elseif ($this->checkDuplicate($value)) {
+        $this->data_error = 'El codigo ingresado ya existe.';
+        return false;
+    } else {
+        $this->codigo = $value;
+        return true;
+    }
+}
+
 
     public function setDireccion($value, $min = 2, $max = 250)
     {

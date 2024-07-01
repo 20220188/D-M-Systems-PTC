@@ -24,28 +24,28 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-            case 'createRow':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$cliente->setNombre($_POST['nombreCliente']) or
-                    !$cliente->setDUI($_POST['NitCliente']) or
-                    !$cliente->setDUI($_POST['NrcCliente']) or
-                    !$cliente->setNombre($_POST['TipoCliente']) or
-                    !$cliente->setNombre($_POST['NombreCo']) or
-                    !$cliente->setNombre($_POST['CodigoCliente']) or
-                    !$cliente->setDireccion($_POST['DireccionCliente']) or
-                    !$cliente->setTelefono($_POST['TelefonoCliente']) or
-                    !$cliente->setCorreo($_POST['CorreoCliente'])
-                ) {
-                    $result['error'] = $cliente->getDataError();
-                } elseif ($cliente->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Cliente creado correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                } else {
-                    $result['error'] = 'Ocurrió un problema al crear un cliente';
-                }
-                break;
+            //  case 'createRow':
+            //      $_POST = Validator::validateForm($_POST);
+            //      if (
+            //          !$cliente->setNombre($_POST['nombreCliente']) or
+            //          !$cliente->setDUI($_POST['NitCliente']) or
+            //          !$cliente->setDUI($_POST['NrcCliente']) or
+            //          !$cliente->setNombre($_POST['TipoCliente']) or
+            //          !$cliente->setNombre($_POST['NombreCo']) or
+            //          !$cliente->setCodigo($_POST['CodigoCliente']) or
+            //          !$cliente->setDireccion($_POST['DireccionCliente']) or
+            //          !$cliente->setTelefono($_POST['TelefonoCliente']) or
+            //          !$cliente->setCorreo($_POST['CorreoCliente'])
+            //      ) {
+            //          $result['error'] = $cliente->getDataError();
+            //      } elseif ($cliente->createRow()) {
+            //          $result['status'] = 1;
+            //          $result['message'] = 'Cliente creado correctamente';
+            //         //Se asigna el estado del archivo después de insertar.
+            //     } else {
+            //          $result['error'] = 'Ocurrió un problema al crear un cliente';
+            //      }
+            //      break;
             case 'readAll':
                 if ($result['dataset'] = $cliente->readAll()) {
                     $result['status'] = 1;
@@ -66,20 +66,22 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$cliente->setId($_POST['idCliente']) or
-                    !$cliente->setFilename() or
-                    !$cliente->setNombre($_POST['nombreCategoria']) or
-                    !$cliente->setDescripcion($_POST['descripcionCategoria']) or
-                    !$cliente->setImagen($_FILES['imagenCategoria'], $cliente->getFilename())
+                    !$cliente->setNombre($_POST['nombreCliente']) or
+                    !$cliente->setDUI($_POST['NitCliente']) or
+                    !$cliente->setDUI($_POST['NrcCliente']) or
+                    !$cliente->setNombre($_POST['TipoCliente']) or
+                    !$cliente->setNombre($_POST['NombreCo']) or
+                    !$cliente->setCodigo($_POST['CodigoCliente']) or
+                    !$cliente->setDireccion($_POST['DireccionCliente']) or
+                    !$cliente->setTelefono($_POST['TelefonoCliente']) or
+                    !$cliente->setCorreo($_POST['CorreoCliente'])
                 ) {
                     $result['error'] = $cliente->getDataError();
                 } elseif ($cliente->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Categoría modificada correctamente';
-                    // Se asigna el estado del archivo después de actualizar.
-                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenCategoria'], $cliente::RUTA_IMAGEN, $cliente->getFilename());
+                    $result['message'] = 'Cliente modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar la categoría';
+                    $result['error'] = 'Ocurrió un problema al modificar el cliente';
                 }
                 break;
             case 'deleteRow':
@@ -90,11 +92,9 @@ if (isset($_GET['action'])) {
                     $result['error'] = $cliente->getDataError();
                 } elseif ($cliente->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Categoría eliminada correctamente';
-                    // Se asigna el estado del archivo después de eliminar.
-                    $result['fileStatus'] = Validator::deleteFile($cliente::RUTA_IMAGEN, $cliente->getFilename());
+                    $result['message'] = 'Cliente eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar la categoría';
+                    $result['error'] = 'Ocurrió un problema al eliminar el cliente';
                 }
                 break;
             default:

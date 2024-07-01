@@ -50,7 +50,7 @@ select * from tb_usuarios;
 
 CREATE TABLE tb_clientes( 
 id_cliente INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-nombre VARCHAR(15),
+nombre VARCHAR(50),
 NIT VARCHAR(20) NULL,
 NRC VARCHAR(10) NULL,
 tipo VARCHAR(30) NULL,
@@ -58,7 +58,7 @@ nombre_comercial VARCHAR(50) NULL,
 codigo VARCHAR(20) NULL,
 direccion VARCHAR(200) NULL,
 telefono VARCHAR(9) NULL,
-correo VARCHAR(50)
+correo VARCHAR(30)
 );
 
 CREATE TABLE tb_categorias(
