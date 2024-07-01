@@ -5,7 +5,7 @@ CREATE DATABASE DB_DMSystems;
 USE DB_DMSystems;
 
 
-/tablas de inicio de sesion/
+/*tablas de inicio de sesion*/
 
 CREATE TABLE tb_niveles_usuarios(
 id_nivel_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -98,8 +98,8 @@ REFERENCES tb_categorias (id_categoria)
 );
 
 
-CREATE TABLE proveedores (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE tb_proveedores (
+    id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
     codigo_proveedor VARCHAR(255),
     nombre_proveedor VARCHAR(255),
     pais_proveedor VARCHAR(255),
