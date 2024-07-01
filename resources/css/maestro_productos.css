@@ -5,6 +5,9 @@
 .h2{
     margin-top: 50px;
 }
+body {
+    background-color: #E7F4F4;
+}
 
 .btn1 {
     color: #5D41DE;
