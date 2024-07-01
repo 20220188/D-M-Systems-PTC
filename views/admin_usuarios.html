@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reporte de ventas</title>
+    <title>Usuarios</title>
 
     <!--Links importantes-->
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
@@ -32,7 +32,7 @@
         </div>
         <br><br><br>
 
-        <!--Formulario para la creacion de usuarios-->
+        <!--Formulario para la creación de usuarios-->
         <div class="row col-auto">
             <div class="col-md-3">
                 <div class="col-md-12">
@@ -40,7 +40,7 @@
                     <input type="text" class="form-control" id="inputCodigo">
                 </div>
                 <div class="col-md-12">
-                    <label for="inputPais" class="form-label">Telefono</label>
+                    <label for="inputPais" class="form-label">Teléfono</label>
                     <input type="text" class="form-control" id="inputPais">
                 </div>
             </div>
@@ -63,10 +63,10 @@
                 <div class="col-md-6">
                     <label for="inputDocumento" class="mandatory form-label">Nivel de usuario *</label>
                     <select id="inputDocumento" name="inputDocumento" class="form-select" required>
-                        <option value="Zapatillas">Caja</option>
-                        <option value="Jerseys">Punto de venta</option>
-                        <option value="Jerseys">Admin</option>
-                        <option value="Jerseys">Inventario</option>
+                        <option value="Caja">Caja</option>
+                        <option value="Punto de venta">Punto de venta</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Inventario">Inventario</option>
                     </select>
                 </div>
             </div>
@@ -79,7 +79,8 @@
             </div>
         </div>
         <br><br>
-        <!--Botones-->
+
+        <!-- Botones -->
         <div class="d-grid gap-2 d-md-flex d-flex justify-content-center ">
             <button type="button" class="btn1" id="btnEditar"><i class="fa-solid fa-circle-plus"></i> Guardar</button>
             <button type="button" class="btn1" id="btnCancelar"><i class="fa-solid fa-circle-xmark"></i>
@@ -87,14 +88,175 @@
             <button type="button" class="btn1" id="btnEliminar"><i class="fa-solid fa-trash"></i> Eliminar</button>
         </div>
 
+        <!-- Modal para editar usuario -->
+        <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalEditarUsuarioLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditarUsuarioLabel">Editar Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formEditarUsuario">
+                            <input type="hidden" id="editCodigo" value="">
+                            <div class="mb-3">
+                                <label for="editNombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="editNombre">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editClave" class="form-label">Clave</label>
+                                <input type="text" class="form-control" id="editClave">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editTelefono" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="editTelefono">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editCorreo" class="form-label">Correo</label>
+                                <input type="text" class="form-control" id="editCorreo">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editNivel" class="form-label">Nivel de usuario</label>
+                                <select id="editNivel" name="editNivel" class="form-select">
+                                    <option value="Caja">Caja</option>
+                                    <option value="Punto de venta">Punto de venta</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Inventario">Inventario</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="guardarCambiosUsuario()">Guardar
+                            Cambios</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla para mostrar los usuarios -->
+        <table class="table table-hover text-center">
+            <!-- Cabecera de la tabla -->
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Clave</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th>Nivel</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <!-- Cuerpo de la tabla -->
+            <tbody id="tablaUsuarios">
+                <!-- Aquí se cargarán dinámicamente los usuarios -->
+            </tbody>
+        </table>
 
     </main>
 
-    <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
-    <script type="text/javascript" src="../resources/js/alertas.js"></script>
-    <!--Mandamos a llamar las librerias de Sweetalert2-->
+    <!-- Scripts -->
+    <script type="module" src="../resources/js/dashboardAdminPlantilla.js"></script>
+    <script type="module" src="../resources/js/alertas.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module">
+        // Código JavaScript para la gestión de usuarios
+        document.addEventListener('DOMContentLoaded', () => {
+            const tablaUsuarios = document.getElementById('tablaUsuarios');
+
+            // Función para llenar la tabla de usuarios (simulado, se reemplazará con lógica real)
+            function llenarTablaUsuarios() {
+                // Simulación de datos de usuarios
+                const usuarios = [
+                    { usuario: 'user1', nombre: 'Usuario 1', clave: '123456', telefono: '7890123', correo: 'usuario1@example.com', nivel: 'Admin' },
+                    { usuario: 'user2', nombre: 'Usuario 2', clave: '654321', telefono: '4567890', correo: 'usuario2@example.com', nivel: 'Caja' }
+                    // Agregar más usuarios según sea necesario
+                ];
+
+                // Limpiar tabla antes de llenarla
+                tablaUsuarios.innerHTML = '';
+
+                // Iterar sobre los usuarios y agregar filas a la tabla
+                usuarios.forEach(usuario => {
+                    const fila = `
+                        <tr>
+                            <td>${usuario.usuario}</td>
+                            <td>${usuario.nombre}</td>
+                            <td>${usuario.clave}</td>
+                            <td>${usuario.telefono}</td>
+                            <td>${usuario.correo}</td>
+                            <td>${usuario.nivel}</td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary" onclick="editarUsuario('${usuario.usuario}')">Editar</button>
+                                <button type="button" class="btn btn-sm btn-danger" onclick="eliminarUsuario('${usuario.usuario}')">Eliminar</button>
+                            </td>
+                        </tr>
+                    `;
+                    tablaUsuarios.innerHTML += fila;
+                });
+            }
+
+            // Función para editar un usuario (abrir modal con datos del usuario)
+            window.editarUsuario = usuario => {
+                // Simulación de obtener datos del usuario por su ID (en este caso, el usuario)
+                const usuarioSeleccionado = {
+                    usuario: usuario,
+                    nombre: 'Nombre de Usuario', // Obtener nombre real del usuario
+                    clave: '123456', // Obtener clave real del usuario
+                    telefono: '7890123', // Obtener teléfono real del usuario
+                    correo: 'usuario@example.com', // Obtener correo real del usuario
+                    nivel: 'Admin' // Obtener nivel real del usuario
+                };
+
+                // Mostrar datos del usuario en el modal de edición
+                document.getElementById('editCodigo').value = usuarioSeleccionado.usuario;
+                document.getElementById('editNombre').value = usuarioSeleccionado.nombre;
+                document.getElementById('editClave').value = usuarioSeleccionado.clave;
+                document.getElementById('editTelefono').value = usuarioSeleccionado.telefono;
+                document.getElementById('editCorreo').value = usuarioSeleccionado.correo;
+                document.getElementById('editNivel').value = usuarioSeleccionado.nivel;
+
+                // Mostrar el modal de edición de usuario
+                $('#modalEditarUsuario').modal('show');
+            };
+
+            // Función para guardar cambios en el usuario editado
+            window.guardarCambiosUsuario = () => {
+                // Obtener datos actualizados del formulario de edición
+                const usuario = document.getElementById('editCodigo').value;
+                const nombre = document.getElementById('editNombre').value;
+                const clave = document.getElementById('editClave').value;
+                const telefono = document.getElementById('editTelefono').value;
+                const correo = document.getElementById('editCorreo').value;
+                const nivel = document.getElementById('editNivel').value;
+
+                // Simulación de actualizar datos del usuario en la base de datos (en este caso, solo se actualiza en la tabla simulada)
+                console.log('Usuario actualizado:', { usuario, nombre, clave, telefono, correo, nivel });
+
+                // Cerrar modal de edición
+                $('#modalEditarUsuario').modal('hide');
+
+                // Volver a cargar la tabla de usuarios
+                llenarTablaUsuarios();
+            };
+
+            // Función para eliminar un usuario (simulado, se reemplazará con lógica real)
+            window.eliminarUsuario = usuario => {
+                // Simulación de eliminar usuario por su ID (en este caso, el usuario)
+                console.log('Usuario eliminado:', usuario);
+
+                // Volver a cargar la tabla de usuarios después de eliminar
+                llenarTablaUsuarios();
+            };
+
+            // Cargar inicialmente la tabla de usuarios
+            llenarTablaUsuarios();
+        });
+    </script>
 </body>
 
 </html>
