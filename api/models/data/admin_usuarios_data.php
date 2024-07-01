@@ -2,171 +2,105 @@
 // Se incluye la clase para validar los datos de entrada.
 require_once('../../helpers/validator.php');
 // Se incluye la clase padre.
-require_once('../../models/handler/admin_maestros_proveedores_handler.php');
+require_once('../../models/handler/usuario_handler.php');
+
 /*
- *	Clase para manejar el encapsulamiento de los datos de la tabla PRODUCTO.
+ *	Clase para manejar el encapsulamiento de los datos de la tabla tb_usuarios.
  */
-class ProveedorData extends ProveedorHandler
+class UsuarioData extends UsuarioHandler
 {
     /*
      *  Atributos adicionales.
      */
     private $data_error = null;
-    private $filename = null;
 
     /*
      *   Métodos para validar y establecer los datos.
      */
-    public function setIdProveedor($value)
+    public function setIdUsuario($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->id_proveedor = $value;
+            $this->id_usuario = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del proveedor es incorrecto';
+            $this->data_error = 'El identificador del usuario es incorrecto';
             return false;
         }
     }
 
-    public function setCodigoProveedor($value)
-    {
-        if (Validator::validateNaturalNumber($value)) {
-            $this->codigo_proveedor = $value;
-            return true;
-        } else {
-            $this->data_error = 'El código del proveedor es incorrecto';
-            return false;
-        }
-    }
-
-    public function setNombreProveedor($value)
-    {
-        if (Validator::validateAlphanumeric($value, 1, 100)) {
-            $this->nombre_proveedor = $value;
-            return true;
-        } else {
-            $this->data_error = 'El nombre del proveedor es incorrecto';
-            return false;
-        }
-    }
-
-    public function setPaisProveedor($value)
-    {
-        if (Validator::validateAlphabetic($value, 1, 50)) {
-            $this->pais_proveedor = $value;
-            return true;
-        } else {
-            $this->data_error = 'El país del proveedor es incorrecto';
-            return false;
-        }
-    }
-
-    public function setGiroNegocioProveedor($value)
-    {
-        if (Validator::validateAlphanumeric($value, 1, 100)) {
-            $this->giro_negocio_proveedor = $value;
-            return true;
-        } else {
-            $this->data_error = 'El giro de negocio del proveedor es incorrecto';
-            return false;
-        }
-    }
-
-    public function setDuiProveedor($value)
+    public function setUsuario($value)
     {
         if (Validator::validateAlphanumeric($value, 1, 10)) {
-            $this->dui_proveedor = $value;
+            $this->usuario = $value;
             return true;
         } else {
-            $this->data_error = 'El DUI del proveedor es incorrecto';
+            $this->data_error = 'El nombre de usuario es incorrecto';
             return false;
         }
     }
 
-    public function setNombreComercialProveedor($value)
+    public function setClave($value)
     {
-        if (Validator::validateAlphanumeric($value, 1, 100)) {
-            $this->nombre_comercial_proveedor = $value;
+        if (Validator::validatePassword($value)) {
+            $this->clave = password_hash($value, PASSWORD_DEFAULT);
             return true;
         } else {
-            $this->data_error = 'El nombre comercial del proveedor es incorrecto';
+            $this->data_error = 'La clave es incorrecta';
             return false;
         }
     }
 
-    public function setFechaProveedor($value)
+    public function setCorreo($value)
     {
-        if (Validator::validateDate($value)) {
-            $this->fecha_proveedor = $value;
+        if (Validator::validateEmail($value)) {
+            $this->correo = $value;
             return true;
         } else {
-            $this->data_error = 'La fecha del proveedor es incorrecta';
+            $this->data_error = 'El correo es incorrecto';
             return false;
         }
     }
 
-    public function setNitProveedor($value)
+    public function setNombre($value)
     {
-        if (Validator::validateAlphanumeric($value, 1, 17)) {
-            $this->nit_proveedor = $value;
+        if (Validator::validateAlphabetic($value, 1, 25)) {
+            $this->nombre = $value;
             return true;
         } else {
-            $this->data_error = 'El NIT del proveedor es incorrecto';
+            $this->data_error = 'El nombre es incorrecto';
             return false;
         }
     }
 
-    public function setTelefonoProveedor($value)
+    public function setDUI($value)
+    {
+        if (Validator::validateAlphanumeric($value, 1, 10)) {
+            $this->DUI = $value;
+            return true;
+        } else {
+            $this->data_error = 'El DUI es incorrecto';
+            return false;
+        }
+    }
+
+    public function setTelefono($value)
     {
         if (Validator::validatePhone($value)) {
-            $this->telefono_proveedor = $value;
+            $this->telefono = $value;
             return true;
         } else {
-            $this->data_error = 'El teléfono del proveedor es incorrecto';
+            $this->data_error = 'El teléfono es incorrecto';
             return false;
         }
     }
 
-    public function setContactoProveedor($value)
+    public function setIdNivelUsuario($value)
     {
-        if (Validator::validateAlphanumeric($value, 1, 100)) {
-            $this->contacto_proveedor = $value;
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_nivel_usuario = $value;
             return true;
         } else {
-            $this->data_error = 'El contacto del proveedor es incorrecto';
-            return false;
-        }
-    }
-
-    public function setDireccionProveedor($value)
-    {
-        if (Validator::validateAlphanumeric($value, 1, 200)) {
-            $this->direccion_proveedor = $value;
-            return true;
-        } else {
-            $this->data_error = 'La dirección del proveedor es incorrecta';
-            return false;
-        }
-    }
-
-    public function setDepartamentoProveedor($value)
-    {
-        if (Validator::validateAlphabetic($value, 1, 50)) {
-            $this->departamento_proveedor = $value;
-            return true;
-        } else {
-            $this->data_error = 'El departamento del proveedor es incorrecto';
-            return false;
-        }
-    }
-
-    public function setMunicipioProveedor($value)
-    {
-        if (Validator::validateAlphabetic($value, 1, 50)) {
-            $this->municipio_proveedor = $value;
-            return true;
-        } else {
-            $this->data_error = 'El municipio del proveedor es incorrecto';
+            $this->data_error = 'El identificador del nivel de usuario es incorrecto';
             return false;
         }
     }
@@ -178,9 +112,5 @@ class ProveedorData extends ProveedorHandler
     {
         return $this->data_error;
     }
-
-    public function getFilename()
-    {
-        return $this->filename;
-    }
 }
+?>
