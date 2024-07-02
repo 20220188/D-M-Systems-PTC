@@ -42,6 +42,7 @@ if (isset($_GET['action'])) {
                     $result['fileStatus'] = Validator::saveFile($_FILES['imagenProducto'], $producto::RUTA_IMAGEN);
                 } else {
                     $result['exception'] = Database::getException();
+                    $result['error'] = 'Codigo ya existente';
                 }
                 break;
             case 'readAll':

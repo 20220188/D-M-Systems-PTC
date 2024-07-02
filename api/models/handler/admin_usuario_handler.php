@@ -32,11 +32,12 @@ class UsuarioHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_usuario, usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario
-                FROM tb_usuarios
-                WHERE nombre LIKE ? 
-                ORDER BY nombre';
-        $params = array($value);
+        $sql = 'SELECT u.id_usuario, u.usuario, u.clave, u.correo, u.nombre, u.DUI, u.telefono, u.id_nivel_usuario, nu.tipo_usuario
+                FROM tb_usuarios u
+                INNER JOIN tb_niveles_usuarios nu ON u.id_nivel_usuario = nu.id_nivel_usuario
+                WHERE u.nombre LIKE ? OR nu.tipo_usuario LIKE ?
+                ORDER BY u.nombre';
+        $params = array($value, $value);
         return Database::getRows($sql, $params);
     }
     public function readAll()
