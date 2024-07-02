@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!-- Declaración del idioma para el documento -->
+<html lang="es">
+
+<head>
+    <!-- Título del documento -->
+    <title></title>
+    <!-- Metadatos de la página web -->
+    <meta charset="utf-8">
+    <meta name="author" content="JP">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- IMPORTACIÓN DE RECURSOS EXTERNOS -->
+    <link rel="stylesheet" href="../resources/css/dashboard.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+
+    <!-- Llamada al icono de la página web -->
+    <link rel="icon" href="../resources/img/por el momento.jpg">
+    <!-- Llamada a las hojas de estilos del framework e iconos -->
+    <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <!-- Contenido principal del documento -->
+    <main>
+        <br><br><br><br>
+        <!-- Título del contenido principal -->
+        <h3 id="mainTitle"></h3>
+        <br>
+        <!-- Formulario para cambiar datos personales -->
+        <form class="row g-3" id="profileForm">
+            <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
+                <label for="nombreAdministrador" class="form-label">Nombre</label>
+                <input id="nombreAdministrador" type="text" name="nombreAdministrador" class="form-control" required>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="apellidoAdministrador" class="form-label">Apellido</label>
+                <input id="apellidoAdministrador" type="text" name="apellidoAdministrador" class="form-control"
+                    required>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
+                <label for="correoAdministrador" class="form-label">Correo</label>
+                <input id="correoAdministrador" type="email" name="correoAdministrador" class="form-control" required>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <label for="aliasAdministrador" class="form-label">Alias</label>
+                <input id="aliasAdministrador" type="text" name="aliasAdministrador" class="form-control" required>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Guardar</button>
+            </div>
+        </form>
+        <!-- Contenedor con enlace para abrir la caja de diálogo del formulario de cambiar constraseña -->
+        <div class="text-center p-3">
+            <button type="button" class="btn btn-secondary" onclick="openPassword()">
+                <i class="fa-solid fa-key"></i> Cambiar contraseña
+            </button>
+        </div>
+        <!-- Componente Modal para mostrar el formulario de cambio de contraseña -->
+        <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <!-- Contenido del componente Modal -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle">Cambiar contraseña</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para actualizar contraseña -->
+                    <form id="passwordForm">
+                        <div class="modal-body">
+                            <div class="row g-3">
+                                <div class="col-sm-12 col-md-6 offset-md-3">
+                                    <label for="claveActual" class="form-label">Contraseña actual</label>
+                                    <input id="claveActual" type="password" name="claveActual" class="form-control" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row g-3">
+                                <div class="col-12 text-center">
+                                    <h5>CONTRASEÑA NUEVA</h5>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="claveNueva" class="form-label">Nueva contraseña</label>
+                                    <input id="claveNueva" type="password" name="claveNueva" class="form-control" required>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
+                                    <input id="confirmarClave" type="password" name="confirmarClave" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
+    <script type="text/javascript" src="../resources/js/alertas.js"></script>
+    <!-- Llamada al kit de font awesome -->
+    <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../controllers/utils/components.js"></script>
+    <!-- Llamada al controlador del sitio privado -->
+    <script type="text/javascript" src="../controllers/utils/admin.js"></script>
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../controllers/admin/profile.js"></script>
+</body>
+
+</html>

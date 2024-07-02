@@ -57,25 +57,25 @@ class AdministradorHandler
         $sql = 'UPDATE tb_usuarios
                 SET clave = ?
                 WHERE id_usuario = ?';
-        $params = array($this->clave, $_SESSION['idadministrador']);
+        $params = array($this->clave, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
     }
 
     //editar de aqui para abajo
     public function readProfile()
     {
-        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, alias_administrador
-                FROM administrador
-                WHERE id_administrador = ?';
+        $sql = 'SELECT id_usuario, nombre, telefono, correo, usuario
+                FROM tb_usuarios
+                WHERE id_usuario = ?';
         $params = array($_SESSION['idAdministrador']);
         return Database::getRow($sql, $params);
     }
 
     public function editProfile()
     {
-        $sql = 'UPDATE administrador
-                SET nombre_administrador = ?, apellido_administrador = ?, correo_administrador = ?, alias_administrador = ?
-                WHERE id_administrador = ?';
+        $sql = 'UPDATE tb_usuarios
+                SET nombre = ?, telefono = ?, correo = ?, usuario = ?
+                WHERE id_usuario = ?';
         $params = array($this->nombre, $this->apellido, $this->correo, $this->alias, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
     }
@@ -86,10 +86,10 @@ class AdministradorHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, alias_administrador
-                FROM administrador
-                WHERE apellido_administrador LIKE ? OR nombre_administrador LIKE ?
-                ORDER BY apellido_administrador';
+        $sql = 'SELECT id_usuario, nombre, telefono, correo, usuario
+                FROM tb_usuarios
+                WHERE telefono LIKE ? OR nombre LIKE ?
+                ORDER BY nombre';
         $params = array($value, $value);
         return Database::getRows($sql, $params);
     }

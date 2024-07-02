@@ -19,15 +19,14 @@
 </head>
 
 <body id="body">
-
     <main>
-
         <div class=" container2 row d-flex justify-content-center">
             <div class="col-md-9  d-flex justify-content-center">
                 <div class="botones">
                     <a href="admin_maestro_productos.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-tag"></i> Productos</button></a>
-                    <a href="admin_maestro_clientes.html"><button type="button" class="btn1"><i class="fa-solid fa-users"></i>
+                    <a href="admin_maestro_clientes.html"><button type="button" class="btn1"><i
+                                class="fa-solid fa-users"></i>
                             Clientes</button></a>
                     <a href="admin_maestros_proveedores.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-diagram-project"></i> Proveedores</button></a>
@@ -38,114 +37,115 @@
                 </div>
             </div>
         </div>
-        
- <!-- Título del contenido principal -->
- <h3 id="mainTitle"></h3>
- <div class="row">
-     <!-- Formulario de búsqueda -->
-     <form class="col-sm-12 col-md-6" id="searchForm">
-         <div class="row">
-             <div class="col-6">
-                 <input type="search" class="form-control" name="search"
-                     placeholder="Buscar por nombre o codigo" required>
-             </div>
-             <div class="col-6">
-                 <button type="submit" class="btn btn-success">
-                     <i class="fa-solid fa-magnifying-glass"></i>
-                 </button>
-                 <button type="reset" class="btn btn-secondary" onclick="fillTable()">
-                     <i class="fa-solid fa-eraser"></i>
-                 </button>
-             </div>
-         </div>
-     </form>
-     <div class="col-sm-12 col-md-6 text-end">
-        <!-- Boton para abrir el historial de compras-->
-        <button type="button" class="btn btn-secondary" onclick="openCreate()">
-            <i class="fa-regular fa-clipboard"></i>
-        </button>
-        <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
-        <button type="button" class="btn btn-primary" onclick="openCreate()">
-            <i class="fa-solid fa-plus"></i>
-        </button>
 
-    </div>
- </div>
-
- <!-- Tabla para mostrar los registros existentes -->
- <table class="table table-hover text-center">
-     <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-     <thead>
-         <tr>
-             <td class="text-start" colspan="8" id="rowsFound"></td>
-         </tr>
-         <tr>
-             <th>CODIGO</th>
-             <th>NOMBRE DEPENDIENTE</th>
-             <th>ACCIONES</th>
-         </tr>
-     </thead>
-     <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-     <tbody id="tableBody"></tbody>
- </table>
-
- <!-- Componente Modal para guardar un registro -->
- <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-     aria-labelledby="modalTitle" aria-hidden="true">
-     <div class="modal-dialog modal-lg modal-dialog-centered">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <h1 class="modal-title fs-5" id="modalTitle"></h1>
-                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-             </div>
-             <!-- Formulario para crear o actualizar un registro -->
-             <form id="saveForm">
-                 <div class="modal-body row g-3">
-                     <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                     <input type="number" class="d-none" id="idDependiente" name="idDependiente">
-                     <div class="col-sm-12 col-md-6">
-                         <label for="nombreDependiente" class="form-label">Nombre</label>
-                         <input id="nombreDependiente" type="text" name="nombreDependiente" class="form-control"
-                             required>
-                     </div>
-                     <div class="col-sm-12 col-md-6">
-                        <label for="codigoDependiente" class="form-label">Codigo</label>
-                        <input id="codigoDependiente" type="text" name="codigoDependiente" class="form-control"
+        <!-- Título del contenido principal -->
+        <br>
+        <h3 id="mainTitle"></h3>
+        <div class="row">
+            <!-- Formulario de búsqueda -->
+            <form class="col-sm-12 col-md-6" id="searchForm">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="search" class="form-control" name="search" placeholder="Buscar por nombre o codigo"
                             required>
                     </div>
-                 </div>
-                 <div class="modal-footer">
-                     <button type="submit" class="btn btn-primary">Guardar</button>
-                 </div>
-             </form>
-         </div>
-     </div>
- </div>
-</main>
-<script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
-<script src="../controllers/utils/admin.js"></script>
-<script src="../controllers/utils/components.js"></script>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                            <i class="fa-solid fa-eraser"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-sm-12 col-md-6 text-end">
+                <!-- Boton para abrir el historial de compras-->
+                <button type="button" class="btn btn-secondary" onclick="openCreate()">
+                    <i class="fa-regular fa-clipboard"></i>
+                </button>
+                <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
+                <button type="button" class="btn btn-primary" onclick="openCreate()">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
 
-<!--Importaciones-->
-<script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
-<script src="../controllers/utils/admin.js"></script>
-<script src="../controllers/utils/components.js"></script>
+            </div>
+        </div>
 
-<!-- Llamada al kit de font awesome -->
-<script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+        <!-- Tabla para mostrar los registros existentes -->
+        <table class="table table-hover text-center">
+            <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+            <thead>
+                <tr>
+                    <td class="text-start" colspan="8" id="rowsFound"></td>
+                </tr>
+                <tr>
+                    <th>CODIGO</th>
+                    <th>NOMBRE DEPENDIENTE</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+            <tbody id="tableBody"></tbody>
+        </table>
 
-<!-- Scripts de JavaScript -->
-<!-- Agrega los enlaces a los scripts de Bootstrap y SweetAlert2 -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <!-- Componente Modal para guardar un registro -->
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para crear o actualizar un registro -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                            <input type="number" class="d-none" id="idDependiente" name="idDependiente">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreDependiente" class="form-label">Nombre</label>
+                                <input id="nombreDependiente" type="text" name="nombreDependiente" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="codigoDependiente" class="form-label">Codigo</label>
+                                <input id="codigoDependiente" type="text" name="codigoDependiente" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
+    <script src="../controllers/utils/admin.js"></script>
+    <script src="../controllers/utils/components.js"></script>
 
-<!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
-<!-- Llamada al framework y librería de mensajes -->
-<script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+    <!--Importaciones-->
+    <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
+    <script src="../controllers/utils/admin.js"></script>
+    <script src="../controllers/utils/components.js"></script>
 
-<!-- Llamada al controlador de la página web -->
-<script type="text/javascript" src="../controllers/admin/admin_maestro_dependientes.js"></script>
- 
+    <!-- Llamada al kit de font awesome -->
+    <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+
+    <!-- Scripts de JavaScript -->
+    <!-- Agrega los enlaces a los scripts de Bootstrap y SweetAlert2 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../controllers/admin/admin_maestro_dependientes.js"></script>
+
 </body>
 
 
