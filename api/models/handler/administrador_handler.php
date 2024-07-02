@@ -76,7 +76,7 @@ class AdministradorHandler
         $sql = 'UPDATE tb_usuarios
                 SET nombre = ?, telefono = ?, correo = ?, usuario = ?
                 WHERE id_usuario = ?';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->alias, $_SESSION['idAdministrador']);
+        $params = array($this->nombre, $this->telefono, $this->correo, $this->alias, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
     }
 
