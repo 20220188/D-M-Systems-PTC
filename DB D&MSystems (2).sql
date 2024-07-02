@@ -33,9 +33,9 @@ VALUES
 (3, 'ventas'),
 (4, 'caja');
 
-/*INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
+INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
 VALUES ('usuario1', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario1@example.com', 'Juan Perez', '01234567-8', '22223333', 1);
-
+/*
 INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
 VALUES ('usuario2', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario2@example.com', 'JuanPijita', '01234567-9', '22223333', 2);
 
@@ -140,9 +140,7 @@ CREATE TABLE tb_productos(
     nombre VARCHAR(250),
     descripcion VARCHAR(250),
     fecha_vencimiento DATE,
-    precio_sin_iva FLOAT CHECK (precio_sin_iva > 0),
-    precio_con_iva FLOAT CHECK (precio_con_iva > 0),
-    costo_unitario FLOAT CHECK (costo_unitario > 0)
+    presentacion VARCHAR(25)
 );
 
 SELECT * FROM tb_productos;
@@ -151,10 +149,9 @@ SELECT * FROM tb_productos;
 CREATE TABLE tb_detalle_Productos(
     /*campos de detalles de productos*/
     id_detalle_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    presentacion VARCHAR(25),
     ubicacion VARCHAR(250),
 	minimo INT,
-    maximo INT,
+   maximo INT,
 	marca VARCHAR(50),
 	periodo_existencia DATE,
 	fecha DATE,
@@ -172,7 +169,10 @@ CREATE TABLE tb_detalle_Productos(
     id_producto INT,
     CONSTRAINT fk_productos_detalle
     FOREIGN KEY (id_producto)
-    REFERENCES tb_productos (id_producto)
+    REFERENCES tb_productos (id_producto),
+    precio_sin_iva FLOAT CHECK (precio_sin_iva > 0),
+    precio_con_iva FLOAT CHECK (precio_con_iva > 0),
+    costo_unitario FLOAT CHECK (costo_unitario > 0)
     /*Campos de informacion de solo lectura
     fecha_ultima_compra DATETIME,
     entradas INT,
