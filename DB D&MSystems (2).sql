@@ -33,9 +33,9 @@ VALUES
 (3, 'ventas'),
 (4, 'caja');
 
-INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
+/*INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
 VALUES ('usuario1', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario1@example.com', 'Juan Perez', '01234567-8', '22223333', 1);
-/*
+
 INSERT INTO tb_usuarios (usuario, clave, correo, nombre, DUI, telefono, id_nivel_usuario)
 VALUES ('usuario2', '$2y$10$332eJekvWPIyZgDplzJYRux9LNmyYcdF3rd2kmZ0bdaU.BbE1MJ7S', 'usuario2@example.com', 'JuanPijita', '01234567-9', '22223333', 2);
 
