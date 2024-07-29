@@ -1,11 +1,9 @@
 // Constantes para completar las rutas de la API de USUARIO.
 const USUARIO_API = 'services/admin/admin_usuarios.php';
 
-
 /*
 *Elementos para la tabla USUARIOS
 */
-
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer el contenido de la tabla.
@@ -19,6 +17,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_USUARIO = document.getElementById('idUsuario'),
     USUARIO = document.getElementById('Usuario'),
     CLAVE = document.getElementById('Clave'),
+    CONFIRMAR_CLAVE = document.getElementById('confirmarClave'),
     CORREO = document.getElementById('correoUsuario'),
     NOMBRE_USUARIO = document.getElementById('nombreUsuario'),
     DUI = document.getElementById('DUIUsuario'),
@@ -152,7 +151,6 @@ const openUpdate = async (id) => {
         DUI.value = ROW.DUI;
         TELEFONO.value = ROW.telefono;
         ID_NIVEL_USUARIO.value = ROW.id_nivel_usuario;
-        CLAVE.disabled = true;
         fillSelect(USUARIO_API, 'readAllNiveles', 'idNivelUsuario', ROW.id_nivel_usuario);
     } else {
         sweetAlert(2, DATA.error, false);

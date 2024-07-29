@@ -12,18 +12,18 @@ if (isset($_GET['action'])) {
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
     if (isset($_SESSION['idAdministrador'])) {
-       // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
-       switch ($_GET['action']) {
-        case 'searchRows':
-            if (!Validator::validateSearch($_POST['search'])) {
-                $result['error'] = Validator::getSearchError();
-            } elseif ($result['dataset'] = $usuario->searchRows($_POST['search'])) {
-                $result['status'] = 1;
-                $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
-            } else {
-                $result['error'] = 'No hay coincidencias';
-            }
-            break;
+        // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
+        switch ($_GET['action']) {
+            case 'searchRows':
+                if (!Validator::validateSearch($_POST['search'])) {
+                    $result['error'] = Validator::getSearchError();
+                } elseif ($result['dataset'] = $usuario->searchRows($_POST['search'])) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                } else {
+                    $result['error'] = 'No hay coincidencias';
+                }
+                break;
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -36,6 +36,8 @@ if (isset($_GET['action'])) {
                     !$usuario->setIdNivelUsuario($_POST['idNivelUsuario'])
                 ) {
                     $result['error'] = $usuario->getDataError();
+                } elseif ($_POST['Clave'] != $_POST['confirmarClave']) {
+                    $result['error'] = 'Contraseñas diferentes';
                 } elseif ($usuario->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Usuario creado correctamente';
@@ -89,14 +91,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el usuario';
                 }
                 break;
-                case 'readAllNiveles':
-                    if ($result['dataset'] = $usuario->readAllNiveles()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                    } else {
-                        $result['error'] = 'No existen usuarios registrados';
-                    }
-                    break;
+            case 'readAllNiveles':
+                if ($result['dataset'] = $usuario->readAllNiveles()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen usuarios registrados';
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
@@ -112,4 +114,3 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
-?>
