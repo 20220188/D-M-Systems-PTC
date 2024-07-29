@@ -35,7 +35,7 @@ class ProveedorHandler
                 FROM tb_proveedores
                 WHERE nombre_proveedor LIKE ? OR codigo_proveedor LIKE ? 
                 ORDER BY nombre_proveedor';
-        $params = array($value, $value, $value, $value );
+        $params = array($value, $value );
         return Database::getRows($sql, $params);
     }
 
