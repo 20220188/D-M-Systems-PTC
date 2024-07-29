@@ -43,36 +43,36 @@
         <!-- Formulario para crear el primer administrador -->
         <form class="d-none" id="signupForm">
             <div class="row g-3">
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-lg-8 offset-lg-2">
                     <label for="nombreAdministrador" class="form-label">Nombre</label>
                     <input id="nombreAdministrador" type="text" name="nombreAdministrador" class="form-control"
                         required>
                 </div>
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
                     <label for="duiUsuario" class="form-label">Dui</label>
                     <input id="duiUsuario" type="text" name="duiUsuario" class="form-control"
                         required>
                 </div>
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <label for="correoAdministrador" class="form-label">Correo</label>
                     <input id="correoAdministrador" type="email" name="correoAdministrador" class="form-control"
                         required>
                 </div>
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
                     <label for="aliasAdministrador" class="form-label">Alias</label>
                     <input id="aliasAdministrador" type="text" name="aliasAdministrador" class="form-control" required>
                 </div>
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-6 col-lg-4">
                     <label for="telefonoUsuario" class="form-label">Telefono</label>
                     <input id="telefonoUsuario" type="text" name="telefonoUsuario" class="form-control"
                         required>
                 </div>
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
                     <label for="claveAdministrador" class="form-label">Contraseña</label>
                     <input id="claveAdministrador" type="password" name="claveAdministrador" class="form-control"
                         required>
                 </div>
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-6 col-lg-4 ">
                     <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
                     <input id="confirmarClave" type="password" name="confirmarClave" class="form-control" required>
                 </div>
@@ -87,6 +87,9 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+
+    <!-- Inclusión de la librería de mascaras. Para más información https://github.com/text-mask/text-mask -->
+    <script type="text/javascript" src="../resources/js/vanillaTextMask.js"></script>
     
     <!-- Llamada al kit de font awesome -->
     <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>

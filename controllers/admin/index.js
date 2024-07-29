@@ -3,6 +3,16 @@ const SIGNUP_FORM = document.getElementById('signupForm');
 // Constante para establecer el formulario de inicio de sesión.
 const LOGIN_FORM = document.getElementById('loginForm');
 
+vanillaTextMask.maskInput({
+    inputElement: document.getElementById('telefonoUsuario'),
+    mask: [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+});
+// Llamada a la función para establecer la mascara del campo DUI.
+vanillaTextMask.maskInput({
+    inputElement: document.getElementById('duiUsuario'),
+    mask: [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/]
+});
+
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
