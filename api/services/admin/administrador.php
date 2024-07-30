@@ -195,6 +195,27 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al registrar el administrador';
                 }
                 break;
+
+            case 'signUpMovil':
+                    $_POST = Validator::validateForm($_POST);
+                    if(
+                        !$administrador->setNombre($_POST['nombreAdministrador']) or
+                        !$administrador->setDUI($_POST['duiUsuario']) or
+                        !$administrador->setCorreo($_POST['correoAdministrador']) or
+                        !$administrador->setAlias($_POST['aliasAdministrador']) or
+                        !$administrador->setTelefono($_POST['telefonoUsuario']) or
+                        !$administrador->setClave($_POST['claveAdministrador'])
+                                       
+                    ){
+                        $result['error'] = $administrador ->getDataError();
+                    }elseif($administrador ->createAdminApp()){
+                        $result['status'] = 1;
+                        $result['message'] = 'Cuenta registrada correctamente';
+                    } else{
+                          $result['error'] = 'Ocurrio un problema al registrar la cuenta';
+                    }
+                break;
+
             case 'logIn':
                 $_POST = Validator::validateForm($_POST);
                 if ($administrador->checkUser($_POST['alias'], $_POST['clave'])) {
