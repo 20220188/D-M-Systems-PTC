@@ -103,15 +103,6 @@ class AdministradorHandler
         return Database::executeRow($sql, $params);
     }
 
-    public function createAdminApp()
-    {
-        // Insertar el administrador con el nivel de usuario correspondiente
-        $sql = 'INSERT INTO tb_usuarios(nombre, usuario, correo, clave, DUI, telefono, id_nivel_usuario)
-                VALUES (?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->alias, $this->correo, $this->clave, $this->DUI, $this->telefono, 1); // ID de nivel de usuario = 1
-        return Database::executeRow($sql, $params);
-    }
-
     public function readAll()
     {
         $sql = 'SELECT id_usuario, nombre, correo, usuario
