@@ -31,9 +31,7 @@ if (isset($_GET['action'])) {
                     !$Puntoventa->setClave($_POST['clavePuntoVenta'])
                 ) {
                     $result['error'] = $Puntoventa->getDataError();
-                } elseif ($_POST['clavePuntoVenta'] != $_POST['confirmarClave']) {
-                    $result['error'] = 'Contraseñas diferentes';
-                } elseif ($Puntoventa->createRow()) {
+                }  elseif ($Puntoventa->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Punto de venta creado correctamente';
                 } else {
