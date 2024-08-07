@@ -44,7 +44,7 @@ class PuntoDeVentaHandler
     // Method to read all points of sale
     public function readAll()
     {
-        $sql = 'SELECT id_punto_venta, punto_venta, clave
+        $sql = 'SELECT id_punto_venta, punto_venta
                 FROM tb_puntos_venta
                 ORDER BY punto_venta';
         return Database::getRows($sql);

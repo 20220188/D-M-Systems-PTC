@@ -83,7 +83,6 @@ const fillTable = async (form = null) => {
             TABLE_BODY.innerHTML += `
                 <tr>
                     <td>${row.punto_venta}</td>
-                    <td>${row.clave}</td>
                     <td>
                         <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_punto_venta})">
                             <i class="fa-solid fa-pen"></i>

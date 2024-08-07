@@ -28,7 +28,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$Puntoventa->setnombrePuntoVenta($_POST['nombrePuntoVenta']) or
-                    !$Puntoventa->setClave($_POST['clavePuntoVenta']) 
+                    !$Puntoventa->setClave($_POST['clavePuntoVenta'])
                 ) {
                     $result['error'] = $Puntoventa->getDataError();
                 } elseif ($_POST['clavePuntoVenta'] != $_POST['confirmarClave']) {
@@ -58,22 +58,22 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'updateRow':
-    $_POST = Validator::validateForm($_POST);
-    if (
-        !$Puntoventa->setidPuntoVenta($_POST['idPuntoVenta']) ||
-        !$Puntoventa->setnombrePuntoVenta($_POST['nombrePuntoVenta']) ||
-        !$Puntoventa->setClave($_POST['clavePuntoVenta']) 
-    ) {
-        $result['error'] = $Puntoventa->getDataError();
-    } elseif ($Puntoventa->updateRow()) {
-        $result['status'] = 1;
-        $result['message'] = 'Punto de venta modificado correctamente';
-    } else {
-        $result['error'] = 'Ocurrió un problema al modificar el punto de venta';
-    }
-    break;
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$Puntoventa->setidPuntoVenta($_POST['idPuntoVenta']) ||
+                    !$Puntoventa->setnombrePuntoVenta($_POST['nombrePuntoVenta']) ||
+                    !$Puntoventa->setClave($_POST['clavePuntoVenta'])
+                ) {
+                    $result['error'] = $Puntoventa->getDataError();
+                } elseif ($Puntoventa->updateRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Punto de venta modificado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al modificar el punto de venta';
+                }
+                break;
 
-                
+
             case 'deleteRow':
                 if (!$Puntoventa->setidPuntoVenta($_POST['idPuntoVenta'])) {
                     $result['error'] = $Puntoventa->getDataError();
