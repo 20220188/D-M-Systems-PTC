@@ -76,7 +76,8 @@ CHECK (porcentaje >0)
 
 CREATE TABLE tb_puntos_venta(
 id_punto_venta INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-punto_venta VARCHAR(10)
+punto_venta VARCHAR(10),
+clave VARCHAR (100) UNIQUE NOT NULL
 );
 
 CREATE TABLE tb_detalle_punto_ventas(
