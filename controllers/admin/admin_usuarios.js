@@ -132,30 +132,41 @@ const openCreate = () => {
 const openUpdate = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('idUsuario', id);
-    // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(USUARIO_API, 'readOne', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se muestra la caja de diálogo con su título.
-        SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar usuario';
-        // Se prepara el formulario.
-        SAVE_FORM.reset();
-        // Se inicializan los campos con los datos.
-        const ROW = DATA.dataset;
-        ID_USUARIO.value = ROW.id_usuario;
-        USUARIO.value = ROW.usuario;
-        CORREO.value = ROW.correo;
-        NOMBRE_USUARIO.value = ROW.nombre;
-        DUI.value = ROW.DUI;
-        TELEFONO.value = ROW.telefono;
-        ID_NIVEL_USUARIO.value = ROW.id_nivel_usuario;
-        fillSelect(USUARIO_API, 'readAllNiveles', 'idNivelUsuario', ROW.id_nivel_usuario);
-    } else {
-        sweetAlert(2, DATA.error, false);
+    FORM.append('idPuntoVenta', id); // Asegúrate de que el nombre del campo sea correcto.
+
+    try {
+        // Petición para obtener los datos del registro solicitado.
+        const DATA = await fetchData(PUNTO_VENTA_API, 'readOne', FORM);
+
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Se muestra la caja de diálogo con su título.
+            SAVE_MODAL.show();
+            MODAL_TITLE.textContent = 'Actualizar Punto de Venta';
+
+            // Se prepara el formulario.
+            SAVE_FORM.reset();
+
+            // Se inicializan los campos con los datos.
+            const ROW = DATA.dataset;
+            ID_PUNTO_VENTA.value = ROW.id_punto_venta; // Asegúrate de que estos IDs coincidan con los del HTML.
+            NOMBRE_PUNTO_VENTA.value = ROW.punto_venta;
+            CLAVE_PUNTO_VENTA.value = ''; // No debes mostrar la clave directamente por razones de seguridad.
+            CONFIRMAR_CLAVE.value = ''; // Puedes mantener este campo vacío hasta que el usuario ingrese una nueva clave.
+
+            NOMBRE_PUNTO_VENTA.disabled = false; // Hacer que el campo sea editable.
+            CLAVE_PUNTO_VENTA.disabled = false; // Dejar este campo editable para que el usuario ingrese una nueva clave.
+            CONFIRMAR_CLAVE.disabled = false; // Igual para confirmar la nueva clave.
+
+        } else {
+            sweetAlert(2, DATA.error, false);
+        }
+    } catch (error) {
+        console.error('Error al abrir el modal para actualizar:', error);
+        sweetAlert(2, 'Ocurrió un error al cargar los datos', false);
     }
 }
+
 
 /*
 *   Función asíncrona para eliminar un registro.

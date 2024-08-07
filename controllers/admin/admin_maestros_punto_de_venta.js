@@ -124,31 +124,30 @@ const openCreate = () => {
 *   Retorno: ninguno.
 */
 const openUpdate = async (id) => {
-    // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
     FORM.append('idPuntoVenta', id);
-    // Petición para obtener los datos del registro solicitado.
     const DATA = await fetchData(PUNTO_VENTA_API, 'readOne', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
         MODAL_TITLE.textContent = 'Actualizar Punto de Venta';
-        // Se prepara el formulario.
         SAVE_FORM.reset();
+        
+        const ROW = DATA.dataset;
+
+        ID_PUNTO_VENTA.value = ROW.id_punto_venta; // Asegúrate de que este campo esté oculto
+        NOMBRE_PUNTO_VENTA.value = ROW.punto_venta;
+        CLAVE_PUNTO_VENTA.value = ROW.clave;
+        CONFIRMAR_CLAVE.value = ROW.clave; // Este campo también se debe llenar
+
         NOMBRE_PUNTO_VENTA.disabled = false;
         CLAVE_PUNTO_VENTA.disabled = false;
         CONFIRMAR_CLAVE.disabled = false;
-
-        // Se inicializan los campos con los datos.
-        const ROW = DATA.dataset;
-        ID_PUNTO_VENTA.value = ROW.id_punto_venta;
-        NOMBRE_PUNTO_VENTA.value = ROW.punto_venta;
-        CLAVE_PUNTO_VENTA.value = ROW.clave;
     } else {
         sweetAlert(2, DATA.error, false);
     }
 }
+
+
 
 /*
 *   Función asíncrona para eliminar un registro.

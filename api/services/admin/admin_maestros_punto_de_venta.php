@@ -35,7 +35,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Contraseñas diferentes';
                 } elseif ($Puntoventa->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Usuario creado correctamente';
+                    $result['message'] = 'Punto de venta creado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
                 }
@@ -45,7 +45,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen usuarios registrados';
+                    $result['error'] = 'No existen Punto de ventas registrados';
                 }
                 break;
             case 'readOne':
@@ -54,33 +54,34 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $Puntoventa->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Usuario inexistente';
+                    $result['error'] = 'Punto de venta inexistente';
                 }
                 break;
             case 'updateRow':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$Puntoventa->setidPuntoVenta($_POST['idPuntoVenta']) or
-                    !$Puntoventa->setnombrePuntoVenta($_POST['nombrePuntoVenta'])  or
-                    !$Puntoventa->setClave($_POST['Clave'])
-                  
-                ) {
-                    $result['error'] = $Puntoventa->getDataError();
-                } elseif ($Puntoventa->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Usuario modificado correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el usuario';
-                }
-                break;
+    $_POST = Validator::validateForm($_POST);
+    if (
+        !$Puntoventa->setidPuntoVenta($_POST['idPuntoVenta']) ||
+        !$Puntoventa->setnombrePuntoVenta($_POST['nombrePuntoVenta']) ||
+        !$Puntoventa->setClave($_POST['clavePuntoVenta']) 
+    ) {
+        $result['error'] = $Puntoventa->getDataError();
+    } elseif ($Puntoventa->updateRow()) {
+        $result['status'] = 1;
+        $result['message'] = 'Punto de venta modificado correctamente';
+    } else {
+        $result['error'] = 'Ocurrió un problema al modificar el punto de venta';
+    }
+    break;
+
+                
             case 'deleteRow':
                 if (!$Puntoventa->setidPuntoVenta($_POST['idPuntoVenta'])) {
                     $result['error'] = $Puntoventa->getDataError();
                 } elseif ($Puntoventa->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Usuario eliminado correctamente';
+                    $result['message'] = 'Punto de venta eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar el usuario';
+                    $result['error'] = 'Ocurrió un problema al eliminar el Punto de venta';
                 }
                 break;
             default:
