@@ -32,6 +32,7 @@ class ProductosHandler
     protected $fecha = null;
     protected $periodo_existencia = null;
     protected $id_laboratorio = null;
+    protected $existencias = null;
 
     /*Atributos para la seccion de detalles de precios*/
     protected $descuento = null;
@@ -133,15 +134,15 @@ class ProductosHandler
 
     public function createRowDetalle()
     {
-        $sql = 'INSERT INTO tb_detalle_productos( ubicacion, minimo, maximo, marca, periodo_existencia, fecha, id_laboratorio, precio_sin_iva, precio_con_iva, costo_unitario,descuento, precio_con_descuento, precio_opcional1, precio_opcional2, precio_opcional3, precio_opcional4, id_producto)
-                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array( $this->ubicacion, $this->minimo, $this->maximo, $this->marca,$this->periodo_existencia, $this->fecha, $this->id_laboratorio,$this->precio_sin_iva, $this->precio_con_iva, $this->costo_unitario, $this->descuento, $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id);
+        $sql = 'INSERT INTO tb_detalle_productos( ubicacion, minimo, maximo, marca, periodo_existencia, fecha, existencia, id_laboratorio, precio_sin_iva, precio_con_iva, costo_unitario,descuento, precio_con_descuento, precio_opcional1, precio_opcional2, precio_opcional3, precio_opcional4, id_producto)
+                    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        $params = array( $this->ubicacion, $this->minimo, $this->maximo, $this->marca,$this->periodo_existencia, $this->fecha, $this->existencias, $this->id_laboratorio,$this->precio_sin_iva, $this->precio_con_iva, $this->costo_unitario, $this->descuento, $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id);
         return Database::executeRow($sql, $params);
     }
 
     public function readAllDetalle()
     {
-        $sql = 'SELECT dp.id_detalle_producto, p.presentacion, dp.ubicacion, dp.minimo, dp.maximo, dp.marca, dp.periodo_existencia, dp.fecha, l.nombre_laboratorio, precio_con_iva, costo_unitario, dp.descuento, dp.precio_con_descuento
+        $sql = 'SELECT dp.id_detalle_producto, p.presentacion, dp.ubicacion, dp.minimo, dp.maximo, dp.marca, dp.periodo_existencia, dp.fecha,dp.existencia, l.nombre_laboratorio, precio_con_iva, costo_unitario, dp.precio_con_descuento
         FROM tb_detalle_productos dp
         INNER JOIN tb_laboratorios l USING(id_laboratorio)
         INNER JOIN tb_productos p USING(id_producto)
@@ -152,7 +153,7 @@ class ProductosHandler
 
     public function readOneDetalle()
     {
-        $sql = 'SELECT id_detalle_producto, ubicacion, minimo, maximo, marca, periodo_existencia, fecha, id_laboratorio, precio_sin_iva, precio_con_iva, costo_unitario descuento, precio_con_descuento, precio_opcional1, precio_opcional2, precio_opcional3, precio_opcional4, id_producto
+        $sql = 'SELECT id_detalle_producto, ubicacion, minimo, maximo, marca, periodo_existencia, fecha, existencia, id_laboratorio, precio_sin_iva, precio_con_iva, costo_unitario, descuento, precio_con_descuento, precio_opcional1, precio_opcional2, precio_opcional3, precio_opcional4, id_producto
                 FROM tb_detalle_productos
                 INNER JOIN tb_laboratorios USING(id_laboratorio)
                 INNER JOIN tb_productos USING(id_producto) 
@@ -164,9 +165,9 @@ class ProductosHandler
     public function updateRowDetalle()
     {
         $sql = 'UPDATE tb_detalle_productos 
-                SET  ubicacion = ?, minimo = ?, maximo = ?, marca = ?, periodo_existencia = ?, fecha = ?, id_laboratorio = ?, precio_sin_iva = ?, precio_con_iva = ?, costo_unitario = ?, descuento = ?, precio_con_descuento = ?, precio_opcional1 = ?, precio_opcional2 = ?, precio_opcional3 = ?, precio_opcional4 = ?
+                SET  ubicacion = ?, minimo = ?, maximo = ?, marca = ?, periodo_existencia = ?, fecha = ?, existencia = ?, id_laboratorio = ?, precio_sin_iva = ?, precio_con_iva = ?, costo_unitario = ?, precio_con_descuento = ?, precio_opcional1 = ?, precio_opcional2 = ?, precio_opcional3 = ?, precio_opcional4 = ?
                 WHERE id_detalle_producto = ?';
-        $params = array($this->presentacion, $this->ubicacion, $this->minimo, $this->maximo, $this->marca,$this->periodo_existencia, $this->fecha, $this->id_laboratorio,$this->precio_sin_iva, $this->precio_con_iva, $this->costo_unitario, $this->descuento, $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id_detalle_producto);
+        $params = array( $this->ubicacion, $this->minimo, $this->maximo, $this->marca,$this->periodo_existencia, $this->fecha, $this->existencias, $this->id_laboratorio,$this->precio_sin_iva, $this->precio_con_iva, $this->costo_unitario,  $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id_detalle_producto);
         return Database::executeRow($sql, $params);
     }
 

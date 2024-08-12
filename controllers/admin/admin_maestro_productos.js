@@ -25,7 +25,12 @@ const SAVE_FORM = document.getElementById('saveForm'),
     PRECIO_SIN_IVA = document.getElementById('precioSinIVA'),
     PRECIO_CON_IVA = document.getElementById('precioVentaConIva'),
     PRECIO_UNITARIO = document.getElementById('precioUnitario');
-
+    DESCUENTO_DETALLE = document.getElementById('descuentoDetalle'),
+    PRECIO_DESCUENTO_DETALLE = document.getElementById('precioDescDetalle'),
+    PRECIO_OPCIONAL1_DETALLE = document.getElementById('precioOpc1Detalle'),
+    PRECIO_OPCIONAL2_DETALLE = document.getElementById('precioOpc2Detalle'),
+    PRECIO_OPCIONAL3_DETALLE = document.getElementById('precioOpc3Detalle'),
+    PRECIO_OPCIONAL4_DETALLE = document.getElementById('precioOpc4Detalle');
 /*
 *Elementos para la tabla DETALLE_PRODUCTO
 */
@@ -42,17 +47,13 @@ const SAVE_FORM_DETALLE = document.getElementById('saveFormDetalle'),
     ID_PRODUCTO_DETALLE = document.getElementById('idProductoDetalle');
     PRESENTACION_DETALLE = document.getElementById('presentacionDetalle'),
     UBICACION_DETALLE = document.getElementById('ubicacionDetalle'),
+    EXISTENCIAS_DETALLE = document.getElementById('existenciaDetalle'),
     MINIMO_DETALLE = document.getElementById('minimoDetalle'),
     MAXIMO_DETALLE = document.getElementById('maximoDetalle'),
     MARCA_DETALLE = document.getElementById('marcaDetalle'),
     FECHA_INGRESO_DETALLE = document.getElementById('fechaIngresoDetalle'),
     PERIODO_EXISTENCIA_DETALLE = document.getElementById('periodoEistenciaDetalle'),
-    DESCUENTO_DETALLE = document.getElementById('descuentoDetalle'),
-    PRECIO_DESCUENTO_DETALLE = document.getElementById('precioDescDetalle'),
-    PRECIO_OPCIONAL1_DETALLE = document.getElementById('precioOpc1Detalle'),
-    PRECIO_OPCIONAL2_DETALLE = document.getElementById('precioOpc2Detalle'),
-    PRECIO_OPCIONAL3_DETALLE = document.getElementById('precioOpc3Detalle'),
-    PRECIO_OPCIONAL4_DETALLE = document.getElementById('precioOpc4Detalle');
+    
 
 
 
@@ -277,11 +278,11 @@ const fillTableDetails = async (id) => {
                     <td>${row.minimo}</td>
                     <td>${row.maximo}</td>
                     <td>${row.fecha}</td>
+                    <td>${row.existencia}</td>
                     <td>${row.periodo_existencia}</td>
                     <td>${row.nombre_laboratorio}</td>
                     <td>${row.precio_con_iva}</td>
                     <td>${row.costo_unitario}</td>
-                    <td>${row.descuento}</td>
                     <td>${row.precio_con_descuento}</td>   
                     <td>
                         <button type="button" class="btn btn-info" onclick="openUpdateDetails(${row.id_detalle_producto})">
@@ -346,6 +347,8 @@ const openUpdateDetails = async (id1) => {
         MINIMO_DETALLE.value = ROW.minimo;
         MAXIMO_DETALLE.value = ROW.maximo;
         MARCA_DETALLE.value = ROW.marca;
+        PERIODO_EXISTENCIA_DETALLE.value = ROW.periodo_existencia;
+        EXISTENCIAS_DETALLE.value = ROW.existencia;
         FECHA_INGRESO_DETALLE.value = ROW.fecha;
         PRECIO_SIN_IVA.value = ROW.precio_sin_iva;
         PRECIO_CON_IVA.value = ROW.precio_con_iva;
@@ -356,7 +359,7 @@ const openUpdateDetails = async (id1) => {
         PRECIO_OPCIONAL2_DETALLE.value = ROW.precio_opcional2;
         PRECIO_OPCIONAL3_DETALLE.value = ROW.precio_opcional3;
         PRECIO_OPCIONAL4_DETALLE.value = ROW.precio_opcional4;
-        PERIODO_EXISTENCIA_DETALLE.value = ROW.periodo_existencia;
+
         
         fillSelect(LABORATORIO_API, 'readAll', 'laboratorioDetalle', ROW.id_laboratorio); 
 

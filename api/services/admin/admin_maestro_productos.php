@@ -108,6 +108,7 @@ if (isset($_GET['action'])) {
                     !$producto->setMinimo($_POST['minimoDetalle']) or
                     !$producto->setMaximo($_POST['maximoDetalle']) or
                     !$producto->setMarca($_POST['marcaDetalle']) or
+                    !$producto->setExistencias($_POST['existenciaDetalle']) or
                     !$producto->setFechaIngreso($_POST['fechaIngresoDetalle']) or
                     !$producto->setPeriodoExistencia($_POST['periodoEistenciaDetalle']) or
                     !$producto->setIdLaboratorio($_POST['laboratorioDetalle']) or
@@ -157,6 +158,7 @@ if (isset($_GET['action'])) {
                     !$producto->setMinimo($_POST['minimoDetalle']) or
                     !$producto->setMaximo($_POST['maximoDetalle']) or
                     !$producto->setMarca($_POST['marcaDetalle']) or
+                    !$producto->setExistencias($_POST['existenciaDetalle']) or
                     !$producto->setFechaIngreso($_POST['fechaIngresoDetalle']) or
                     !$producto->setPeriodoExistencia($_POST['periodoEistenciaDetalle']) or
                     !$producto->setIdLaboratorio($_POST['laboratorioDetalle']) or
