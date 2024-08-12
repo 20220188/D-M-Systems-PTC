@@ -225,6 +225,36 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Credenciales incorrectas';
                 }
                 break;
+                case 'logInApp':
+                    $_POST = Validator::validateForm($_POST);
+                    if ($administrador->checkUser($_POST['alias'], $_POST['clave'])) {
+                        // Start the database connection.
+                        $db = new Database();
+                
+                        // Retrieve the alias from the form.
+                        $alias = $_POST['alias'];
+                
+                        // Query to get the user level based on the alias.
+                        $sql = 'SELECT id_nivel_usuario FROM tb_usuarios WHERE usuario = ?';
+                        $params = array($alias);
+                        $data = $db->getRow($sql, $params);
+                
+                        if ($data) {
+                            // Save the user level and alias in the session
+                            $_SESSION['aliasAdministrador'] = $alias;
+                            $_SESSION['user_level'] = $data['id_nivel_usuario'];
+                
+                            $result['status'] = 1;
+                            $result['message'] = 'Autenticación correcta';
+                            $result['user_level'] = $data['id_nivel_usuario'];
+                        } else {
+                            $result['error'] = 'No se pudo obtener el nivel de usuario';
+                        }
+                    } else {
+                        $result['error'] = 'Credenciales incorrectas';
+                    }
+                    break;
+                
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
