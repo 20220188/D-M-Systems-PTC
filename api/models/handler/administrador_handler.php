@@ -132,7 +132,7 @@ class AdministradorHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_usuarios
-                SET nombre_administrador = ?, apellido_administrador = ?, correo_administrador = ?
+                SET nombre = ?, telefono = ?, correo = ?, usuario = ?
                 WHERE id_administrador = ?';
         $params = array($this->nombre, $this->apellido, $this->correo, $this->id);
         return Database::executeRow($sql, $params);

@@ -66,12 +66,10 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 if (
                     !$usuario->setIdUsuario($_POST['idUsuario']) or
-                    !$usuario->setUsuario($_POST['Usuario']) or
-                    !$usuario->setCorreo($_POST['correoUsuario']) or
                     !$usuario->setNombre($_POST['nombreUsuario']) or
-                    !$usuario->setDUIUpdate($_POST['DUIUsuario']) or
                     !$usuario->setTelefono($_POST['telefonoUsuario']) or
-                    !$usuario->setIdNivelUsuario($_POST['idNivelUsuario'])
+                    !$usuario->setCorreo($_POST['correoUsuario']) or
+                    !$usuario->setUsuario($_POST['Usuario'])                                         
                 ) {
                     $result['error'] = $usuario->getDataError();
                 } elseif ($usuario->updateRow()) {
