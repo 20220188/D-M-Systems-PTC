@@ -108,6 +108,17 @@ class ProductosData extends ProductosHandler
         }
     }
 
+    public function setExistencias($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->existencias = $value;
+            return true;
+        } else {
+            $this->data_error = 'La cantidad de stock debe ser un valor numérico';
+            return false;
+        }
+    }
+
     public function setFechaVencimiento($value)
     {
         if (Validator::validateDate($value)) {

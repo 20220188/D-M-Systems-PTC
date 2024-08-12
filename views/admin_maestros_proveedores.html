@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
- 
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +19,7 @@
 <body id="body">
     <main>
         <div class=" container2 row d-flex justify-content-center">
-            <div class="col-md-9  d-flex justify-content-center">
+            <div class="col-md-12  d-flex justify-content-center">
                 <div class="botones">
                     <a href="admin_maestro_productos.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-tag"></i> Productos</button></a>
@@ -32,6 +32,8 @@
                                 class="fa-solid fa-hand-holding-dollar"></i> Dependientes</button></a>
                     <a href="admin_maestro_laboratorios.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-flask-vial"></i> Laboratorios</button></a>
+                    <a href="admin_maestros_punto_de_venta.html"><button type="button" class="btn1"><i
+                        class="fa-solid fa-truck"></i> Punto de venta</button></a>
                 </div>
             </div>
         </div>
@@ -42,8 +44,8 @@
             <form class="col-sm-12 col-md-6" id="searchForm">
                 <div class="row">
                     <div class="col-6">
-                        <input type="search" class="form-control" name="search"
-                            placeholder="Buscar por nombre o código" required>
+                        <input type="search" class="form-control" name="search" placeholder="Buscar por nombre o código"
+                            required>
                     </div>
                     <div class="col-6">
                         <button type="submit" class="btn btn-success">
@@ -85,7 +87,8 @@
         </table>
 
         <!-- Componente Modal para guardar un registro -->
-        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
             <div class="modal-dialog modal-xl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -98,19 +101,23 @@
                             <input type="number" class="d-none" id="idProveedor" name="idProveedor">
                             <div class="col-sm-12 col-md-3">
                                 <label for="nombreProveedor" class="form-label">Nombre</label>
-                                <input id="nombreProveedor" type="text" name="nombreProveedor" class="form-control" required>
+                                <input id="nombreProveedor" type="text" name="nombreProveedor" class="form-control"
+                                    required>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="codigoProveedor" class="form-label">Código</label>
-                                <input id="codigoProveedor" type="text" name="codigoProveedor" class="form-control" required>
+                                <input id="codigoProveedor" type="text" name="codigoProveedor" class="form-control"
+                                    required>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="paisProveedor" class="form-label">País</label>
-                                <input id="paisProveedor" type="text" name="paisProveedor" class="form-control" required>
+                                <input id="paisProveedor" type="text" name="paisProveedor" class="form-control"
+                                    required>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="giroNegocioProveedor" class="form-label">Giro</label>
-                                <input id="giroNegocioProveedor" type="text" name="giroNegocioProveedor" class="form-control" required>
+                                <input id="giroNegocioProveedor" type="text" name="giroNegocioProveedor"
+                                    class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="duiProveedor" class="form-label">DUI</label>
@@ -118,11 +125,13 @@
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="nombreComercialProveedor" class="form-label">Nombre comercial</label>
-                                <input id="nombreComercialProveedor" type="text" name="nombreComercialProveedor" class="form-control" required>
+                                <input id="nombreComercialProveedor" type="text" name="nombreComercialProveedor"
+                                    class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="fechaProveedor" class="form-label">Fecha</label>
-                                <input id="fechaProveedor" type="date" name="fechaProveedor" class="form-control" required>
+                                <input id="fechaProveedor" type="date" name="fechaProveedor" class="form-control"
+                                    required>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="nitProveedor" class="form-label">NIT</label>
@@ -130,23 +139,28 @@
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="telefonoProveedor" class="form-label">Teléfono</label>
-                                <input id="telefonoProveedor" type="tel" name="telefonoProveedor" class="form-control" required>
+                                <input id="telefonoProveedor" type="tel" name="telefonoProveedor" class="form-control"
+                                    required>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="contactoProveedor" class="form-label">Contacto</label>
-                                <input id="contactoProveedor" type="text" name="contactoProveedor" class="form-control" required>
+                                <input id="contactoProveedor" type="text" name="contactoProveedor" class="form-control"
+                                    required>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="direccionProveedor" class="form-label">Dirección</label>
-                                <input id="direccionProveedor" type="text" name="direccionProveedor" class="form-control" required>
+                                <input id="direccionProveedor" type="text" name="direccionProveedor"
+                                    class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="departamentoProveedor" class="form-label">Departamento</label>
-                                <input id="departamentoProveedor" type="text" name="departamentoProveedor" class="form-control" required>
+                                <input id="departamentoProveedor" type="text" name="departamentoProveedor"
+                                    class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-3">
                                 <label for="municipioProveedor" class="form-label">Municipio</label>
-                                <input id="municipioProveedor" type="text" name="municipioProveedor" class="form-control" required>
+                                <input id="municipioProveedor" type="text" name="municipioProveedor"
+                                    class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-footer">
