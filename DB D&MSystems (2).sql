@@ -277,3 +277,5 @@ CONSTRAINT fk_notas_devoluciones_farmapro
 FOREIGN KEY (id_nota_credito)
 REFERENCES tb_notas_creditos (id_nota_credito)
 );
+
+COMMIT
