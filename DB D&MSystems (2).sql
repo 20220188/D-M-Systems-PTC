@@ -14,7 +14,7 @@ tipo_usuario VARCHAR(20)
 
 CREATE TABLE tb_usuarios(
 id_usuario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-usuario VARCHAR(10) unique,
+usuario VARCHAR(20) unique,
 clave VARCHAR (100) UNIQUE NOT NULL,
 correo VARCHAR(50)UNIQUE NOT NULL,
 nombre VARCHAR(25),
@@ -134,6 +134,7 @@ CREATE TABLE tb_proveedores (
 );
 
 
+
 CREATE TABLE tb_productos(
     id_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     imagen VARCHAR(30),
@@ -156,6 +157,7 @@ CREATE TABLE tb_detalle_Productos(
 	marca VARCHAR(50),
 	periodo_existencia DATE,
 	fecha DATE,
+	existencia INT CHECK(existencia >=0),
 	id_laboratorio INT,
     CONSTRAINT fk_productos_laboratorio
     FOREIGN KEY (id_laboratorio)
@@ -176,8 +178,6 @@ CREATE TABLE tb_detalle_Productos(
     costo_unitario FLOAT CHECK (costo_unitario > 0)
     /*Campos de informacion de solo lectura
     fecha_ultima_compra DATETIME,
-    entradas INT,
-    salidas INT,
     precio_ultima_compra NUMERIC(5,2) CHECK (precio_ultima_compra >= 0),
     costo_total INT CHECK (costo_total > 0),
     id_proveedor INT,
@@ -191,16 +191,70 @@ CREATE TABLE tb_detalle_Productos(
     REFERENCES tb_iva (id_iva)*/
 );
 
+CREATE TABLE tb_formas_pago(
+id_forma_pago INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+forma_pago VARCHAR(100)
+);
 
+INSERT INTO tb_formas_pago(forma_pago)
+VALUES('Efectivo'),
+('Transferencia Bancaria');
+
+CREATE TABLE tb_bodegas(
+id_bodega INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+bodega VARCHAR(30)
+);
+
+INSERT INTO tb_bodegas(bodega)
+VALUES('Bodega 1'), ('Bodega 2');
+
+CREATE TABLE tb_documentos(
+id	_documento INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+documento VARCHAR(40)
+);
+
+INSERT INTO tb_documentos(documento)
+VALUES('Ccredito Fiscal'), ('Factura comercial');
+
+CREATE TABLE tb_tipos_documento(
+id_tipo_documento INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+tipo_documento VARCHAR(40)
+);
+
+INSERT INTO tb_tipos_documento(tipo_documento)
+VALUES('Tipo 1'), ('Tipo 2');
 
 CREATE TABLE tb_compras(
 id_compra INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-id_usuario INT,
-CONSTRAINT fk_compra_usuario
-FOREIGN KEY (id_usuario)
-REFERENCES tb_usuarios (id_usuario)
+factura VARCHAR(50) UNIQUE,
+fecha DATETIME,
+serie VARCHAR(50),
+nota VARCHAR(250),
+serie_persepcion VARCHAR(50),
+NIT VARCHAR(20) UNIQUE,
+id_producto INT,
+CONSTRAINT fk_compras_Producto
+FOREIGN KEY (id_producto)
+REFERENCES tb_productos (id_producto),
+id_forma_pago INT,
+CONSTRAINT fk_compras_formapago
+FOREIGN KEY (id_forma_pago)
+REFERENCES tb_formas_pago (id_forma_pago),
+id_bodega INT,
+CONSTRAINT fk_compras_bodega
+FOREIGN KEY (id_bodega)
+REFERENCES tb_bodegas (id_bodega),
+id_documento INT,
+CONSTRAINT fk_compras_documento
+FOREIGN KEY (id_documento)
+REFERENCES tb_documentos (id_documento),
+id_tipo_documento INT,
+CONSTRAINT fk_compras_tipoDoc
+FOREIGN KEY (id_tipo_documento)
+REFERENCES tb_tipos_documento (id_tipo_documento)
 );
 
+/*
 CREATE TABLE tb_detalle_compras(
 id_detalle_compra INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 cantidad_producto INT CHECK (cantidad_producto >0),
@@ -214,7 +268,7 @@ id_compra INT,
 CONSTRAINT fk_detalle_compra_compras
 FOREIGN KEY (id_compra)
 REFERENCES tb_compras (id_compra)
-);
+);*/
 
 CREATE TABLE tb_ventas(
 id_venta INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -278,4 +332,37 @@ FOREIGN KEY (id_nota_credito)
 REFERENCES tb_notas_creditos (id_nota_credito)
 );
 
-COMMIT
+
+CREATE TABLE tb_entradas(
+id_entrada INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+nota VARCHAR(250),
+fecha DATETIME,
+tipo_entrada VARCHAR(50),
+numero_entrada INT CHECK( numero_entrada>0),
+id_detalle_producto INT,
+CONSTRAINT fk_entradas_detalleProducto
+FOREIGN KEY (id_detalle_producto)
+REFERENCES tb_detalle_productos (id_detalle_producto)
+);
+
+CREATE TABLE tb_salidas(
+id_salida INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+numero_salida INT,
+fecha DATETIME,
+entrega VARCHAR(50),
+tipo_salida VARCHAR(50),
+id_cliente INT,
+CONSTRAINT fk_salidas_cliente
+FOREIGN KEY (id_cliente)
+REFERENCES tb_clientes (id_cliente),
+id_dependiente INT,
+CONSTRAINT fk_salidas_dependientes
+FOREIGN KEY (id_dependiente)
+REFERENCES tb_dependientes (id_dependiente),
+nota VARCHAR(250),
+id_detalle_producto INT,
+CONSTRAINT fk_salidas_detalleProducto
+FOREIGN KEY (id_detalle_producto)
+REFERENCES tb_detalle_productos (id_detalle_producto),
+cantidad_salida INT CHECK(cantidad_salida >0)
+);

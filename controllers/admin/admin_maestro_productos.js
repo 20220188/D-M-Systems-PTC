@@ -21,16 +21,8 @@ const SAVE_FORM = document.getElementById('saveForm'),
     NOMBRE_PRODUCTO = document.getElementById('nombreProducto'),
     DESCRIPCION_PRODUCTO = document.getElementById('descripcionProducto'),
     CODIGO_PRODUCTO = document.getElementById('codigoProducto'),
-    FECHA_VENCIMIENTO = document.getElementById('fechaVencimiento'),
-    PRECIO_SIN_IVA = document.getElementById('precioSinIVA'),
-    PRECIO_CON_IVA = document.getElementById('precioVentaConIva'),
-    PRECIO_UNITARIO = document.getElementById('precioUnitario');
-    DESCUENTO_DETALLE = document.getElementById('descuentoDetalle'),
-    PRECIO_DESCUENTO_DETALLE = document.getElementById('precioDescDetalle'),
-    PRECIO_OPCIONAL1_DETALLE = document.getElementById('precioOpc1Detalle'),
-    PRECIO_OPCIONAL2_DETALLE = document.getElementById('precioOpc2Detalle'),
-    PRECIO_OPCIONAL3_DETALLE = document.getElementById('precioOpc3Detalle'),
-    PRECIO_OPCIONAL4_DETALLE = document.getElementById('precioOpc4Detalle');
+    FECHA_VENCIMIENTO = document.getElementById('fechaVencimiento');
+    
 /*
 *Elementos para la tabla DETALLE_PRODUCTO
 */
@@ -53,7 +45,15 @@ const SAVE_FORM_DETALLE = document.getElementById('saveFormDetalle'),
     MARCA_DETALLE = document.getElementById('marcaDetalle'),
     FECHA_INGRESO_DETALLE = document.getElementById('fechaIngresoDetalle'),
     PERIODO_EXISTENCIA_DETALLE = document.getElementById('periodoEistenciaDetalle'),
-    
+    PRECIO_SIN_IVA = document.getElementById('precioSinIVA'),
+    PRECIO_CON_IVA = document.getElementById('precioVentaConIva'),
+    PRECIO_UNITARIO = document.getElementById('precioUnitario');
+    DESCUENTO_DETALLE = document.getElementById('descuentoDetalle'),
+    PRECIO_DESCUENTO_DETALLE = document.getElementById('precioDescDetalle'),
+    PRECIO_OPCIONAL1_DETALLE = document.getElementById('precioOpc1Detalle'),
+    PRECIO_OPCIONAL2_DETALLE = document.getElementById('precioOpc2Detalle'),
+    PRECIO_OPCIONAL3_DETALLE = document.getElementById('precioOpc3Detalle'),
+    PRECIO_OPCIONAL4_DETALLE = document.getElementById('precioOpc4Detalle');
 
 
 
@@ -308,7 +308,6 @@ const fillTableDetails = async (id) => {
 *   Retorno: ninguno.
 */
 const openDetails = (id_producto) => {
-    console.log(id_producto);
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL_DETALLE.show();
     MODAL_TITLE_DETALLE.textContent = 'Detalle producto';
