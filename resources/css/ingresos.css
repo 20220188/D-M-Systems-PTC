@@ -1,92 +1,68 @@
+*{
+  font-family: 'Poppins';
+
+}
 body{
-    background-color: #E7F4F4;
-  }
-  
-  .container{
-    margin-top: 50px;
-  }
-  
-  /* Estilo general del formulario */
-  #formularioVenta {
-    margin-top: 20px;
-  }
-  
-  /* Etiquetas de los campos */
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  
-  
-  /* Campos de entrada */
-  .form-control {
-    width: 100%;
-    height: 38px;
-    padding: 8px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  /* Botones */
-  .btn {
-    color: #5D41DE;
-    background-color: #d2d9f1;
-    border-color: #d2d9f1;
-    width: 200px;
-    height: 65px;
-    font-family: 'Poppins';
-    border-radius: 15px;
-  }
-  .btn:hover {
-    color: #ebd7d6;
-    background-color: #5D41DE;
-    border-color: #ebd7d6
-  }
-  
-  /* Tabla de artículos */
-  .table {
-    margin-top: 20px;
-  }
-  
-  .table-striped tr:nth-child(odd) {
-    background-color: #f8f9fa;
-  }
-  
-  /* Totales */
-  tfoot th {
-    text-align: right;
-  }
-  
-  
-  .btn1 {
-    color: #ff342b;
-    background-color: #ebd7d6;
-    border-color: #ebd7d6;
-    width: 200px;
-    height: 65px;
-    font-family: 'Poppins';
-    border-radius: 15px;
-  }
-  .btn1:hover {
-    color: #ebd7d6;
-    background-color: #ff342b;
-    border-color: #ebd7d6
-  }
-  
-  .btn-seleccionado{
-    color: #d2d9f1;
-    background-color: #5D41DE;
-    border-color: #d2d9f1;
-    width: 200px;
-    height: 65px;
-    font-family: 'Poppins';
-    border-radius: 15px;
-  }
-  .btn-seleccionado:hover {
-    color: #5D41DE;
-    background-color: #d2d9f1;
-    border-color: #d2d9f1
-  }
-  
+  background-color: #E7F4F4;
+}
+.panel1 {
+  margin-top: 25px;
+  display: flex; /* Convertimos panel1 en un contenedor flex */
+  flex-direction: column; /* Organizamos los elementos verticalmente */
+  align-items: flex-end; /* Alineamos los elementos al borde derecho */
+}
+
+.panel1 .row {
+  display: flex; /* Convertimos cada fila en un contenedor flex */
+  align-items: center; /* Alineamos los elementos verticalmente dentro de cada fila */
+}
+
+.container1{
+  margin-top:2%;
+}
+
+.btn1 {
+  color: #ff342b;
+  background-color: #ebd7d6;
+  border-color: #ebd7d6;
+  width: 150px;
+  height: 65px;
+  font-family: 'Poppins';
+  border-radius: 15px;
+}
+.btn1:hover {
+  color: #ebd7d6;
+  background-color: #ff342b;
+  border-color: #ebd7d6
+}
+
+.btn2 {
+  color: #5D41DE;
+  background-color: #d2d9f1;
+  border-color: #d2d9f1;
+  width: 200px;
+  height: 65px;
+  font-family: 'Poppins';
+  border-radius: 15px;
+}
+.btn2:hover {
+  color: #ebd7d6;
+  background-color: #5D41DE;
+  border-color: #ebd7d6
+}
+
+
+.btn2-seleccionado{
+  color: #d2d9f1;
+  background-color: #5D41DE;
+  border-color: #d2d9f1;
+  width: 200px;
+  height: 65px;
+  font-family: 'Poppins';
+  border-radius: 15px;
+}
+.btn2-seleccionado:hover {
+  color: #5D41DE;
+  background-color: #d2d9f1;
+  border-color: #d2d9f1
+}

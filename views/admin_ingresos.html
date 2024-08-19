@@ -7,7 +7,7 @@
     <title>Ingresos</title>
     <!--Links importantes-->
     <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../resources/css/bootstrap-icons.min.css">
+
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link rel="stylesheet" href="../resources/css/dashboard.css">
     <link rel="stylesheet" href="../resources/css/ingresos.css">
@@ -22,121 +22,125 @@
         <div class=" container2 row d-flex justify-content-center">
             <div class="col-md-9  d-flex justify-content-center">
                 <div class="botones">
-                    <a href="admin_ingresos.html"><button type="button" class="btn-seleccionado"><i
-                                class="fa-solid fa-tag"></i>
+                    <a href="admin_ingresos.html"><button type="button" class="btn2-seleccionado"><i class="fa-solid fa-tag"></i>
                             Ingresos</button></a>
-                    <a href="admin_modulo_compras.html"><button type="button" class="btn"><i class="fa-solid fa-users"></i>
-                            Compras</button></a>
-                    <a href="admin_salida.html"><button type="button" class="btn"><i class="fa-solid fa-diagram-project"></i>
+                    <a href="admin_modulo_compras.html"><button type="button" class="btn2"><i
+                                class="fa-solid fa-users"></i> Compras</button></a>
+                    <a href="admin_salida.html"><button type="button" class="btn2"><i
+                                class="fa-solid fa-diagram-project"></i>
                             Salidas</button></a>
                 </div>
             </div>
         </div>
-
-        <div class="container">
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="col-12">
-                        <label for="numeroSalida">Número de entrada:</label>
-                        <input type="text" class="form-control" id="numeroSalida"
-                            placeholder="Introduzca el número de entrada">
-                    </div>
-
-
-
-                    <div class="col-12">
-                        <label for="inputNotas" class="form-label">Notas</label>
-                        <input type="text" class="form-control" id="inputNotas">
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="col-12">
-                        <label for="fecha">Fecha:</label>
-                        <input type="date" class="form-control" id="fecha">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tipo">Tipo:</label>
-                        <input type="text" class="form-control" id="tipo" placeholder="Introduzca el tipo de venta">
-                    </div>
-                </div>
-            </div>
-<!--Tabla-->
-            <div>
+    
+        <!-- Título del contenido principal -->
+        <h3 id="mainTitle"></h3>
+        <div class="row">
+            <!-- Formulario de búsqueda -->
+            <form class="col-sm-12 col-md-6" id="searchForm">
                 <div class="row">
-                    <div class="col-md-8">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Codigo</th>
-                                    <th scope="col">Descripción</th>
-                                    <th scope="col">Cantidad</th>
-                                    <th scope="col">Vencimiento</th>
-                                    <th scope="col">Precio</th>
-                                    <th scope="col">Costo</th>
-                                    <th scope="col">Costo total</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="col-6">
+                        <input type="search" class="form-control" name="search"
+                            placeholder="Buscar por nombre, código, descripción o presentación" required>
                     </div>
-
-                </div>
-
-            </div>
-            <!--Botones-->
-            <div>
-                <div class="row">
-                    <div class="d-grid gap-2 d-md-block">
-                        <button type="button" class="btn1" id="btnEditar"><i class="fa-solid fa-pen fa-1x"></i>
-                            Guardar</button>
-                        <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus fa-1x"></i>
-                            Agregar</button>
-                        <button type="button" class="btn1" id="btnEliminar"><i class="fa-solid fa-print fa-1x"></i>
-                            Eliminar</button>
-
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                            <i class="fa-solid fa-eraser"></i>
+                        </button>
                     </div>
                 </div>
+            </form>
+            <div class="col-sm-12 col-md-6 text-end">
+                <!-- Boton para abrir el historial de compras-->
+                <button type="button" class="btn btn-secondary" onclick="openCreate()">
+                    <i class="fa-regular fa-clipboard"></i>
+                </button>
+                <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
+                <button type="button" class="btn btn-primary" onclick="openCreate()">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
             </div>
-
         </div>
+        <!-- Tabla para mostrar los registros existentes -->
+        <table class="table table-hover text-center">
+            <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+            <thead>
+                <tr>
+                    <td class="text-start" colspan="4" id="rowsFound"></td>
+                </tr>
+                <tr>
+                    <th>NÚMERO INGRESO</th>
+                    <th>TIPO ENTRADA</th>
+                    <th>FECHA</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <!-- Componente Modal para guardar un registro -->
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para crear o actualizar un registro -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <input type="number" class="d-none" id="idIngreso" name="idIngreso">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="fechaEntrada" class="form-label">Número de entrada</label>
+                                <input id="fechaEntrada" type="number" name="fechaEntrada" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="notaIngreso" class="form-label">Agregue una nota sobre la entrada</label>
+                                <textarea class="form-control" id="notaIngreso" name="notaIngreso"
+                                    rows="3"></textarea>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="fechaEntrada" class="form-label">Tipo de entrada</label>
+                                <input id="fechaEntrada" type="text" name="fechaEntrada" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="fechaEntrada" class="form-label">Fecha de entrada</label>
+                                <input id="fechaEntrada" type="date" name="fechaEntrada" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </main>
+    
     <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
-    <script type="text/javascript" src="../resources/js/alertas.js"></script>
-    <!--Mandamos a llamar las librerias de Sweetalert2-->
+    <script src="../controllers/utils/admin.js"></script>
+    <script src="../controllers/utils/components.js"></script>
+
+    <!-- Llamada al kit de font awesome -->
+    <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+
+    <!-- Scripts de JavaScript -->
+    <!-- Agrega los enlaces a los scripts de Bootstrap y SweetAlert2 -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+
 </body>
 
 </html>
