@@ -56,18 +56,34 @@ class Report extends FPDF
     public function header()
     {
         // Se establece el logo.
-        $this->image('../../images/dmsystem.png', 25, 7, 40);
-        // Se ubica el título.
-        $this->cell(20);
-        $this->setFont('Arial', 'B', 15);
-        $this->cell(166, 10, $this->encodeString($this->title), 0, 1, 'C');
-        // Se ubica la fecha y hora del servidor.
-        $this->cell(20);
-        $this->setFont('Arial', '', 10);
-        $this->cell(166, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'C');
-        // Se agrega un salto de línea para mostrar el contenido principal del documento.
-        $this->ln(10);
+        $this->image('../../images/fondoreportt.png', 0, 0, 215.9, 279.4);
+    
+        // Define el ancho y la altura de las celdas
+        $cellHeight = 10;
+        $titleWidth = 0; // Ancho automático
+        $dateWidth = 10; // Ancho fijo para la fecha/hora
+    
+        // Mueve el cursor a la posición inicial del encabezado
+        $this->SetXY(5, 15); // Ajusta las coordenadas (X, Y)
+    
+        // Imprime la fecha/hora en una celda a la izquierda
+        $this->SetFont('Arial', 'B', 10);
+        $this->SetTextColor(0, 0, 0); // Establece el color del texto a negro
+        $this->Cell($dateWidth, $cellHeight, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 0, 'L');
+    
+        // Calcula la posición X para el título (después de la celda de fecha/hora)
+        $titleX = $this->GetX();
+        $titleY = $this->GetY();
+
+        // Establece el formato del título
+        $this->SetFont('Arial', 'B', 15);
+        $this->SetTextColor(0, 0, 0); // Blanco para el título
+    
+        // Imprime el título en la celda restante, centrado
+        $this->SetXY($titleX, $titleY); // Reposiciona el cursor en la posición X calculada
+        $this->Cell(0, $cellHeight, $this->encodeString($this->title), 0, 1, 'C');
     }
+    
 
     /*
     *   Se sobrescribe el método de la librería para establecer la plantilla del pie de los reportes.
@@ -75,11 +91,22 @@ class Report extends FPDF
     */
     public function footer()
     {
-        // Se establece la posición para el número de página (a 15 milímetros del final).
+        $this->setFont('Arial', 'I', 10);
         $this->setY(-15);
+
+        $this->SetTextColor(255, 255, 255); // Establece el color del texto a negro
+        $this->Cell(300, -9, "Reporte generado por el usuario : '' " . $this->encodeString($_SESSION['aliasAdministrador']) . " '' ", 0, 0, 'C');
+
+        // Se establece la posición para el número de página (a 15 milímetros del final).
+        $this->SetY(-15);
+        // Establece el color del texto a negro
+        $this->SetTextColor(0, 0, 0); // Color negro en formato RGB
+
         // Se establece la fuente para el número de página.
         $this->setFont('Arial', 'I', 8);
+
         // Se imprime una celda con el número de página.
-        $this->cell(0, 10, $this->encodeString('Página ') . $this->pageNo() . '/{nb}', 0, 0, 'C');
+        $this->SetTextColor(255, 255, 255); // Establece el color del texto a negro
+        $this->cell(380, 17, $this->encodeString('Página ') . $this->pageNo() . '/{nb}', 0, 0, 'C');
     }
 }

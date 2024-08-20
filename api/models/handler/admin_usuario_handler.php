@@ -82,11 +82,20 @@ class UsuarioHandler
         return Database::getRows($sql);
     }
     
-    public function checkDuplicate($value)
+    public function checkDuplicateDUI($value)
     {
         $sql = 'SELECT id_usuario
                 FROM tb_usuarios
                 WHERE DUI = ?';
+        $params = array($value);
+        return Database::getRow($sql, $params);
+    }
+
+    public function checkDuplicateCorreo($value)
+    {
+        $sql = 'SELECT id_usuario
+                FROM tb_usuarios
+                WHERE correo = ?';
         $params = array($value);
         return Database::getRow($sql, $params);
     }

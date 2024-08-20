@@ -98,7 +98,8 @@ class ProductosHandler
     p.codigo,
     d.costo_unitario,
     d.descuento,
-    d.precio_con_descuento
+    d.precio_con_descuento,
+    d.existencia
 FROM
     tb_productos p
 JOIN
