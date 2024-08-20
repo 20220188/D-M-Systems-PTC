@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="../resources/css/ingresos.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
-    <link rel="icon" href="../img/por el momento.jpg">
-    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="../resources/img/por el momento.jpg">
 </head>
 
 <body id="body">
@@ -69,12 +68,13 @@
             <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
             <thead>
                 <tr>
-                    <td class="text-start" colspan="4" id="rowsFound"></td>
+                    <td class="text-start" colspan="5" id="rowsFound"></td>
                 </tr>
                 <tr>
-                    <th>NÚMERO INGRESO</th>
+                    <th>NÚMERO ENTRADA</th>
                     <th>TIPO ENTRADA</th>
-                    <th>FECHA</th>
+                    <th>NOTA</th>
+                    <th>FECHA DE ENTRADA</th>
                     <th>ACCIONES</th>
                 </tr>
             </thead>
@@ -94,20 +94,20 @@
                     <!-- Formulario para crear o actualizar un registro -->
                     <form id="saveForm">
                         <div class="modal-body row g-3">
-                            <input type="number" class="d-none" id="idIngreso" name="idIngreso">
+                            <input type="number" class="d-none" id="idEntrada" name="idEntrada">
                             <div class="col-sm-12 col-md-6">
-                                <label for="fechaEntrada" class="form-label">Número de entrada</label>
-                                <input id="fechaEntrada" type="number" name="fechaEntrada" class="form-control"
+                                <label for="numeroEntrada" class="form-label">Número de entrada</label>
+                                <input id="numeroEntrada" type="number" name="numeroEntrada" class="form-control"
                                     required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="notaIngreso" class="form-label">Agregue una nota sobre la entrada</label>
-                                <textarea class="form-control" id="notaIngreso" name="notaIngreso"
+                                <label for="notaEntrada" class="form-label">Agregue una nota sobre la entrada</label>
+                                <textarea class="form-control" id="notaEntrada" name="notaEntrada"
                                     rows="3"></textarea>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="fechaEntrada" class="form-label">Tipo de entrada</label>
-                                <input id="fechaEntrada" type="text" name="fechaEntrada" class="form-control"
+                                <label for="tipoEntrada" class="form-label">Tipo de entrada</label>
+                                <input id="tipoEntrada" type="text" name="tipoEntrada" class="form-control"
                                     required>
                             </div>
                             <div class="col-sm-12 col-md-6">
@@ -140,6 +140,9 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+
+    <!-- Llamada a los scripts de la vista -->
+    <script type="text/javascript" src="../controllers/admin/admin_ingresos.js"></script>
 
 </body>
 
