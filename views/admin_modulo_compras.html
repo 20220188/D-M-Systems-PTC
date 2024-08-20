@@ -97,35 +97,65 @@
                     <!-- Formulario para crear o actualizar un registro -->
                     <form id="saveForm">
                         <div class="modal-body row g-3">
-                            <input type="number" class="d-none" id="idSalida" name="idSalida">
+                            <input type="number" class="d-none" id="idCompra" name="idCompra">
                             <div class="col-sm-12 col-md-6">
-                                <label for="fechaSalida" class="form-label">Número de Salida</label>
-                                <input id="fechaSalida" type="number" name="fechaSalida" class="form-control"
+                                <label for="idCompra" class="form-label">Numero de compra</label>
+                                <input id="idCompra" type="number" name="idCompra" class="form-control"
                                     required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="entregaSalida" class="form-label">Agregue una nota sobre la Salida</label>
-                                <textarea class="form-control" id="entregaSalida" name="entregaSalida"
-                                    rows="3"></textarea>
+                                <label for="factura" class="form-label">Factura</label>
+                                <input class="form-control" id="factura" name="factura"
+                                    ></input>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="fechaSalida" class="form-label">Tipo de Salida</label>
-                                <input id="fechaSalida" type="text" name="fechaSalida" class="form-control"
+                                <label for="fecha" class="form-label">Fecha</label>
+                                <input id="fecha" type="date" name="fecha" class="form-control"
                                     required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="fechaSalida" class="form-label">Fecha de Salida</label>
-                                <input id="fechaSalida" type="date" name="fechaSalida" class="form-control"
+                                <label for="serie" class="form-label">Serie</label>
+                                <input id="serie" type="text" name="serie" class="form-control"
                                     required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="cliente" class="form-label">Cliente</label>
-                                <select id="cliente" name="cliente" class="form-select" required>
+                                <label for="nota" class="form-label">nota</label>
+                                <textarea id="nota" name="nota" class="form-select" required>
+                                </textarea>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="seriePersepcion" class="form-label">Serie persepción</label>
+                                <input id="seriePersepcion" type="text" name="seriePersepcion" class="form-select" required>
+                            </input>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="NIT" class="form-label"> NIT</label>
+                                <input id="NIT"  type="text" name="NIT" class="form-select" required>
+                            </input>
+                            </div>
+                             <div class="col-sm-12 col-md-6">
+                                <label for="idProducto" class="form-label">Producto</label>
+                                <select id="idProducto" name="idProducto" class="form-select" required>
                                 </select>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="Dependiente" class="form-label">Dependiente</label>
-                                <select id="Dependiente" name="Dependiente" class="form-select" required>
+                                <label for="idFormaPago" class="form-label">Forma de pago</label>
+                                <select id="idFormaPago" name="idFormaPago" class="form-select" required>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="idBodega" class="form-label">Bodega</label>
+                                <select id="idBodega" name="idBodega" class="form-select" required>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="idDocumento" class="form-label">Documento</label>
+                                <select id="idDocumento" name="idDocumento" class="form-select" required>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="idTipoDocumento" class="form-label">Tipo de documento</label>
+                                <select id="idTipoDocumento" name="idTipoDocumento" class="form-select" required>
                                 </select>
                             </div>
                         </div>
@@ -153,6 +183,9 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+
+      <!-- Llamada al controlador de la página web -->
+      <script type="text/javascript" src="../controllers/admin/admin_modulo_compras.js"></script>
 
 </body>
 
