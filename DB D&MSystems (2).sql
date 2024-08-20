@@ -366,5 +366,3 @@ FOREIGN KEY (id_detalle_producto)
 REFERENCES tb_detalle_productos (id_detalle_producto),
 cantidad_salida INT CHECK(cantidad_salida >0)
 );
-
-COMMIT;
