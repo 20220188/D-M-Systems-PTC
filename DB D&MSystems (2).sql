@@ -209,7 +209,7 @@ INSERT INTO tb_bodegas(bodega)
 VALUES('Bodega 1'), ('Bodega 2');
 
 CREATE TABLE tb_documentos(
-id	_documento INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+id_documento INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 documento VARCHAR(40)
 );
 
@@ -366,3 +366,5 @@ FOREIGN KEY (id_detalle_producto)
 REFERENCES tb_detalle_productos (id_detalle_producto),
 cantidad_salida INT CHECK(cantidad_salida >0)
 );
+
+COMMIT;

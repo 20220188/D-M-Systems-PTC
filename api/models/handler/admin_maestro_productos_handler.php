@@ -91,6 +91,21 @@ class ProductosHandler
         return Database::getRows($sql);
     }
 
+    public function productosReport()
+    {
+        $sql = 'SELECT
+    p.nombre,
+    p.codigo,
+    d.costo_unitario,
+    d.descuento,
+    d.precio_con_descuento
+FROM
+    tb_productos p
+JOIN
+    tb_detalle_Productos d ON p.id_producto = d.id_producto';
+        return Database::getRows($sql);
+    }
+
     public function readOne()
     {
         $sql = 'SELECT id_producto, imagen, codigo, nombre, descripcion, fecha_vencimiento, presentacion
@@ -129,7 +144,6 @@ class ProductosHandler
     /*
     *  Método para los registros de la tabla de detalles de productos.
     */
-
 
 
     public function createRowDetalle()
