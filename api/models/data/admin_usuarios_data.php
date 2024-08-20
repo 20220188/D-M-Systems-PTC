@@ -58,9 +58,12 @@ class UsuarioData extends UsuarioHandler
         if (Validator::validateEmail($value)) {
             $this->correo = $value;
             return true;
-        } else {
-            $this->data_error = 'El correo es incorrecto';
+        } elseif($this->checkDuplicateCorreo($value)) {
+            $this->data_error = 'El correo ingresado ya existe';
             return false;
+        } else {
+            $this->correo = $value;
+            return true;
         }
     }
 
@@ -83,7 +86,7 @@ class UsuarioData extends UsuarioHandler
         if (!Validator::validateDUI($value)) {
             $this->data_error = 'El DUI debe tener el formato ########-#';
             return false;
-        } elseif($this->checkDuplicate($value)) {
+        } elseif($this->checkDuplicateDUI($value)) {
             $this->data_error = 'El DUI ingresado ya existe';
             return false;
         } else {
