@@ -46,16 +46,16 @@
             <div class="panel1 col-md-4">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label for="inputFecha" class="form-label">Fecha</label>
+                        <label for="inputFecha" class="form-label" style="color: red;">Fecha*</label>
                         <input type="date" class="form-control" id="inputFecha">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputVendedor" class="form-label">Vendedor</label>
+                        <label for="inputVendedor" class="form-label"style="color: red;">Vendedor* (este es el valor del dependiente de la tabla del dependiente. tiene que ser un buscador por medio del codigo o del nombre. tenes que agregarle otro espacio de escritura, el primero que sea el codigo y el otro el nombre como tal)</label>
                         <input type="text" class="form-control" id="inputVendedor">
                     </div>
 
                     <div class="col-md-6">
-                        <label for="inputPago" class="form-label">Forma de pago</label>
+                        <label for="inputPago" class="form-label"style="color: red;">Forma de pago* (las formas de pago vienen desde la base)</label>
                         <select id="inputPago" name="inputPago" class="form-select" required>
                             <option value="">Seleccionar </option>
                             <option value="Zapatillas">Efectivo </option>
@@ -64,7 +64,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="inputBodega" class="form-label">Bodega</label>
+                        <label for="inputBodega" class="form-label"style="color: red;">Bodega* (la bodega viene desde la base)</label>
                         <select id="inputBodega" name="inputBodega" class="form-select" required>
                             <option value="">Seleccionar </option>
                             <option value="Zapatillas">Bodega 1</option>
@@ -77,7 +77,7 @@
             <div class="panel2 col-md-4">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label for="inputDocumento" class="form-label">Documento</label>
+                        <label for="inputDocumento" class="form-label"style="color: red;">Documento*  (el documento tiene que venir desde la base, eso ya esta creado)</label>
                         <select id="inputDocumento" name="inputDocumento" class="form-select" required>
                             <option value="">Seleccionar </option>
                             <option value="Zapatillas">Documento 1</option>
@@ -85,63 +85,21 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="inputSerie" class="form-label">Serie</label>
-                        <input type="text" class="form-control" id="inputSerie">
+                        <label for="inputVendedor" class="form-label"style="color: red;">Cliente* (aqui tenes que hacer un buscador para clientes, solo debe funcionar con el nombre)</label>
+                        <input type="text" class="form-control" id="inputVendedor">
                     </div>
 
-                    <div class="col-12">
-                        <label for="inputCliente" class="form-label">Cliente</label>
-                        <div class="input-group">
-                            <input type="text" aria-label="First name" class="form-control">
-                            <input type="text" aria-label="Last name" class="form-control" disabled>
-                        </div>
-                    </div>
-
-                    <div class="col-12">
-                        <label for="inputNotas" class="form-label">Notas</label>
+                    <div class="col-6">
+                        <label for="inputNotas" class="form-label">Notas (las notas no son obligatorias, puede recibir valores nulos)</label>
                         <input type="text" class="form-control" id="inputNotas">
                     </div>
                 </div>
             </div>
-
-
-            <!--Bloque de inputs 3-->
-            <div class="panel2 col-md-4">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="inputDireccion" class="form-label">Dirección</label>
-                        <input type="text" class="form-control" id="inputDireccion">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputNIT" class="form-label">NIT</label>
-                        <input type="text" class="form-control" id="inputNIT">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="inputDepartamento" class="form-label">Departamento</label>
-                        <select id="inputDepartamento" name="inputDepartamento" class="form-select" required>
-                            <option value="">Seleccionar </option>
-                            <option value="Zapatillas">Departamento 1</option>
-                            <option value="Jerseys">Departamento 2</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inpuMunicipio" class="form-label">Municipio</label>
-                        <input type="text" class="form-control" id="inpuMunicipio">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="inputPais" class="form-label">País</label>
-                        <input type="text" class="form-control" id="inputPais">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputordenCompra" class="form-label">Orden de compra</label>
-                        <input type="text" class="form-control" id="inputordenCompra">
-                    </div>
-                </div>
-            </div>
         </div>
-
+<p>NOTA:
+    Aqui en este apartado tenes que hacer un buscador para buscar los productos que se van a vender. Usando el codigo se tiene que cargar el resto de la informacion del producto en los campos de abajo, asi como el precio unitario, cantidad, etc.
+    Los precios opcionales pueden quedar de igual forma vacios. En la tabla tenes que hacer que donde aparece el # se pueda buscar por el nombre o por el codigo del producto y se llene lo demas.
+</p>
         <!--Linea meramente estetica para separar las secciones de la pagina-->
         <hr class="hr">  
 
