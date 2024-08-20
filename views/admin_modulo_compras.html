@@ -84,6 +84,58 @@
             <!-- Cuerpo de la tabla para mostrar un registro por fila -->
             <tbody id="tableBody"></tbody>
         </table>
+
+        <!-- Componente Modal para guardar un registro -->
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para crear o actualizar un registro -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <input type="number" class="d-none" id="idSalida" name="idSalida">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="fechaSalida" class="form-label">Número de Salida</label>
+                                <input id="fechaSalida" type="number" name="fechaSalida" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="entregaSalida" class="form-label">Agregue una nota sobre la Salida</label>
+                                <textarea class="form-control" id="entregaSalida" name="entregaSalida"
+                                    rows="3"></textarea>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="fechaSalida" class="form-label">Tipo de Salida</label>
+                                <input id="fechaSalida" type="text" name="fechaSalida" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="fechaSalida" class="form-label">Fecha de Salida</label>
+                                <input id="fechaSalida" type="date" name="fechaSalida" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="cliente" class="form-label">Cliente</label>
+                                <select id="cliente" name="cliente" class="form-select" required>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Dependiente" class="form-label">Dependiente</label>
+                                <select id="Dependiente" name="Dependiente" class="form-select" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
     
     <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
