@@ -176,19 +176,6 @@ CREATE TABLE tb_detalle_Productos(
     precio_sin_iva FLOAT CHECK (precio_sin_iva > 0),
     precio_con_iva FLOAT CHECK (precio_con_iva > 0),
     costo_unitario FLOAT CHECK (costo_unitario > 0)
-    /*Campos de informacion de solo lectura
-    fecha_ultima_compra DATETIME,
-    precio_ultima_compra NUMERIC(5,2) CHECK (precio_ultima_compra >= 0),
-    costo_total INT CHECK (costo_total > 0),
-    id_proveedor INT,
-    CONSTRAINT fk_producto_proveedor
-    FOREIGN KEY (id_proveedor)
-    REFERENCES tb_proveedores (id_proveedor),
-    existencias_actuales INT CHECK (existencias_actuales > 0),
-    id_iva INT,
-    CONSTRAINT fk_producto_iva
-    FOREIGN KEY (id_iva)
-    REFERENCES tb_iva (id_iva)*/
 );
 
 CREATE TABLE tb_formas_pago(
@@ -366,3 +353,5 @@ FOREIGN KEY (id_detalle_producto)
 REFERENCES tb_detalle_productos (id_detalle_producto),
 cantidad_salida INT CHECK(cantidad_salida >0)
 );
+
+commit;
