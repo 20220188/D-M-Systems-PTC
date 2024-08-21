@@ -1,12 +1,51 @@
 <?php
+// Se incluye la clase para validar los datos de salida.
 require_once('../../helpers/validator.php');
-require_once('../../models/handler/salidas_handler.php');
-
+// Se incluye la clase padre.
+require_once('../../models/handler/admin_salida_handler.php');
+/*
+ *	Clase para manejar el encapsulamiento de los datos de la tabla PRODUCTO.
+ */
 class SalidasData extends SalidasHandler
 {
+    /*
+     *  Atributos adicionales.
+     */
     private $data_error = null;
 
-    public function setFechaSalida($value)
+
+    /*
+     *   Métodos para validar y establecer los datos.
+     */
+
+    // Métodos para el manejo de la tabla PRODUCTO.
+    public function setId($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la salida es incorrecto';
+            
+            return false;
+        }
+    }
+
+    public function setNota($value, $min = 2, $max = 250)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'La nota de la salida debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->nota = $value;
+            return true;
+        } else {
+            $this->data_error = 'La nota de la salida debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setFecha($value)
     {
         if (Validator::validateDate($value)) {
             $this->fecha_salida = $value;
@@ -17,18 +56,54 @@ class SalidasData extends SalidasHandler
         }
     }
 
+    public function setTipoSalida($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El tipo de salida debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->tipo_salida = $value;
+            return true;
+        } else {
+            $this->data_error = 'El tipo de salida debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setNumeroSalida($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->numero_salida = $value;
+            return true;
+        } else {
+            $this->data_error = 'El número de salida es incorrecto';
+            return false;
+        }
+    }
+
+    public function setEntrega($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->entrega = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la entrega es incorrecto';
+            return false;
+        }
+    }
+
     public function setCantidad($value)
     {
         if (Validator::validateNaturalNumber($value)) {
             $this->cantidad = $value;
             return true;
         } else {
-            $this->data_error = 'La cantidad es incorrecta';
+            $this->data_error = 'La cantidad de salida es incorrecta';
             return false;
         }
     }
 
-    public function setIdCliente($value)
+    public function setCliente($value)
     {
         if (Validator::validateNaturalNumber($value)) {
             $this->id_cliente = $value;
@@ -39,7 +114,7 @@ class SalidasData extends SalidasHandler
         }
     }
 
-    public function setIdDependiente($value)
+    public function setDependiente($value)
     {
         if (Validator::validateNaturalNumber($value)) {
             $this->id_dependiente = $value;
@@ -50,20 +125,14 @@ class SalidasData extends SalidasHandler
         }
     }
 
-    public function setIdProducto($value)
-    {
-        if (Validator::validateNaturalNumber($value)) {
-            $this->id_producto = $value;
-            return true;
-        } else {
-            $this->data_error = 'El identificador del producto es incorrecto';
-            return false;
-        }
-    }
 
+    
+    /*
+     *  Métodos para obtener los atributos adicionales.
+     */
     public function getDataError()
     {
         return $this->data_error;
     }
+
 }
-?>

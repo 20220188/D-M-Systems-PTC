@@ -1,4 +1,4 @@
-const SALIDAS_API = 'services/admin/salidas_service.php';
+const SALIDAS_API = 'services/admin/admin_salida.php';
 
 const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
@@ -8,11 +8,13 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 
 const SAVE_FORM = document.getElementById('saveForm'),
     ID_SALIDA = document.getElementById('idSalida'),
+    NUMERO_SALIDA = document.getElementById('numeroSalida'),
+    TIPO_SALIDA = document.getElementById('tipoSalida'),
+    CANTIDAD = document.getElementById('cantidadSalida'),
+    ENTREGA_SALIDA = document.getElementById('entregaSalida'),
     FECHA_SALIDA = document.getElementById('fechaSalida'),
-    CANTIDAD = document.getElementById('cantidad'),
-    ID_CLIENTE = document.getElementById('idCliente'),
-    ID_DEPENDIENTE = document.getElementById('idDependiente'),
-    ID_PRODUCTO = document.getElementById('idProducto');
+    ID_CLIENTE = document.getElementById('cliente'),
+    ID_DEPENDIENTE = document.getElementById('Dependiente');
 
 document.addEventListener('DOMContentLoaded', () => {
     loadTemplate();
