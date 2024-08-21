@@ -19,7 +19,7 @@ class clienteHandler
     protected $direccion = null;
     protected $telefono = null;
     protected $correo = null;
-    
+
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
      */
@@ -35,12 +35,24 @@ class clienteHandler
     }
 
     public function createRow()
-{
-    $sql = 'INSERT INTO tb_clientes(nombre, NIT, NRC, tipo, nombre_comercial, codigo, direccion, telefono, correo)
+    {
+        $sql = 'INSERT INTO tb_clientes(nombre, NIT, NRC, tipo, nombre_comercial, codigo, direccion, telefono, correo)
             VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    $params = array($this->nombre, $this->NIT, $this->NRC, $this->tipo, $this->nombrec, $this->codigo, $this->direccion, $this->telefono, $this->correo);
-    return Database::executeRow($sql, $params);
-}
+        $params = array($this->nombre, $this->NIT, $this->NRC, $this->tipo, $this->nombrec, $this->codigo, $this->direccion, $this->telefono, $this->correo);
+        return Database::executeRow($sql, $params);
+    }
+
+    public function ClientesReport()
+    {
+        $sql = 'SELECT
+    nombre,
+    codigo,
+    direccion,
+    nombre_comercial,
+    telefono
+    FROM tb_clientes';
+        return Database::getRows($sql);
+    }
 
 
     public function readAll()
@@ -65,7 +77,7 @@ class clienteHandler
         $sql = 'UPDATE tb_clientes
                 SET nombre = ?, NIT = ?, NRC = ?, tipo = ?, nombre_comercial = ?, codigo = ?, direccion = ?, telefono = ?, correo = ?
                 WHERE id_cliente = ?';
-        $params = array($this->nombre, $this->NIT, $this->NRC, $this->tipo, $this->nombrec, $this->codigo,$this->direccion,$this->telefono,$this->correo,$this->id);
+        $params = array($this->nombre, $this->NIT, $this->NRC, $this->tipo, $this->nombrec, $this->codigo, $this->direccion, $this->telefono, $this->correo, $this->id);
         return Database::executeRow($sql, $params);
     }
 

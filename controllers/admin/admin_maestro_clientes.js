@@ -194,7 +194,7 @@ const openDelete = async (id) => {
 */
 const openReport = (id) => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/cliente.php`);
+    const PATH = new URL(`${SERVER_URL}reports/admin/clientes.php`);
     // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
     PATH.searchParams.append('idCliente', id);
     // Se abre el reporte en una nueva pestaña.

@@ -151,7 +151,7 @@ JOIN
     {
         $sql = 'INSERT INTO tb_detalle_productos( ubicacion, minimo, maximo, marca, periodo_existencia, fecha, existencia, id_laboratorio, precio_sin_iva, precio_con_iva, costo_unitario,descuento, precio_con_descuento, precio_opcional1, precio_opcional2, precio_opcional3, precio_opcional4, id_producto)
                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array( $this->ubicacion, $this->minimo, $this->maximo, $this->marca,$this->periodo_existencia, $this->fecha, $this->existencias, $this->id_laboratorio,$this->precio_sin_iva, $this->precio_con_iva, $this->costo_unitario, $this->descuento, $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id);
+        $params = array($this->ubicacion, $this->minimo, $this->maximo, $this->marca, $this->periodo_existencia, $this->fecha, $this->existencias, $this->id_laboratorio, $this->precio_sin_iva, $this->precio_con_iva, $this->costo_unitario, $this->descuento, $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id);
         return Database::executeRow($sql, $params);
     }
 
@@ -182,7 +182,7 @@ JOIN
         $sql = 'UPDATE tb_detalle_productos 
                 SET  ubicacion = ?, minimo = ?, maximo = ?, marca = ?, periodo_existencia = ?, fecha = ?, existencia = ?, id_laboratorio = ?, precio_sin_iva = ?, precio_con_iva = ?, costo_unitario = ?, precio_con_descuento = ?, precio_opcional1 = ?, precio_opcional2 = ?, precio_opcional3 = ?, precio_opcional4 = ?
                 WHERE id_detalle_producto = ?';
-        $params = array( $this->ubicacion, $this->minimo, $this->maximo, $this->marca,$this->periodo_existencia, $this->fecha, $this->existencias, $this->id_laboratorio,$this->precio_sin_iva, $this->precio_con_iva, $this->costo_unitario,  $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id_detalle_producto);
+        $params = array($this->ubicacion, $this->minimo, $this->maximo, $this->marca, $this->periodo_existencia, $this->fecha, $this->existencias, $this->id_laboratorio, $this->precio_sin_iva, $this->precio_con_iva, $this->costo_unitario,  $this->precio_con_descuento, $this->precio_opcional1, $this->precio_opcional2, $this->precio_opcional3, $this->precio_opcional4, $this->id_detalle_producto);
         return Database::executeRow($sql, $params);
     }
 
