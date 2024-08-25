@@ -45,11 +45,13 @@ const asideHTML = `
         <a href="profile.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-user" title="Editar perfil"></i>
+                <h4>Editar Perfil</h4>
             </div>
         </a>
         <a href="#" class="menu-option" onclick="logOut()">
             <div class="option">
                 <i class="fa-solid fa-right-from-bracket" title="Cerrar sesión"></i>
+                <h4>Cerrar sesión</h4>
             </div>
         </a>
     </div>
