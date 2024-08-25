@@ -1,7 +1,29 @@
-//Plantilla para el footer del sitio privado
-const asideHTML = `
+/* Plantilla para el footer del sitio privado */
 
-<header class="header">
+
+// Constante para completar la ruta de la API.
+const USER_API = 'services/admin/administrador.php';
+
+// Constante para establecer el elemento del título principal.
+const MAIN_TITLE = document.getElementById('mainTitle');
+MAIN_TITLE.classList.add('text-center', 'py-3');
+
+/*  Función asíncrona para cargar el encabezado y pie del documento.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const loadTemplate = async () => {
+    // Petición para obtener el nombre del usuario que ha iniciado sesión.
+    const DATA = await fetchData(USER_API, 'getUser');
+    // Se verifica si el usuario está autenticado, de lo contrario se envía a iniciar sesión.
+    if (DATA.session) {
+        // Se comprueba si existe un alias definido para el usuario, de lo contrario se muestra un mensaje con la excepción.
+        if (DATA.status) {
+            // Generar el contenido del header según el nivel de usuario
+            let navOptions = '';
+            if (DATA.user_level == 1) {
+                navOptions = `
+                    <header class="header">
         
         <div class="icon__menu">
             <i class="fas fa-bars" id="btn_open"></i>
@@ -9,71 +31,110 @@ const asideHTML = `
         <div><img src="" alt="">
         </div>
         </header>
-<div class="menu__side" id="menu_side">
-
-    <a href="dashboard.html"><div class="name__page">
-    <i class="fa-solid fa-user-tie"></i>
+                    <div class="menu__side" id="menu_side">
+    <div class="name__page">
+        <i class="fa-solid fa-user-tie"></i>
         <h4>Admin</h4>
-    </div></a>
-
+    </div>
+   
     <div class="options__menu">    
-        <a href="admin_maestro_productos.html" class="menu-option">
+        <a href="admin_modulo_compras.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-star" title="Maestros"></i>
-                <h4>Maestros</h4>
             </div>
         </a>
-        <a href="admin_ingresos.html" class="menu-option">
+        <a href="modulo_compras.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
-                <h4>Movimientos</h4>
             </div>
         </a>
         <a href="admin_reporte_ventas.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-file" title="Reportes"></i>
-                <h4>Reportes</h4>
             </div>
         </a>
         <a href="admin_usuarios.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-eye" title="Utilidades"></i>
-                <h4>Utilidades</h4>
             </div>
         </a>
-        </a>
-        <a href="profile.html" class="menu-option">
+                <a href="profile.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-user" title="Editar perfil"></i>
-                <h4>Editar Perfil</h4>
             </div>
         </a>
-        <a href="#" class="menu-option" onclick="logOut()">
+        <a href="admin_usuarios.html" class="menu-option" onclick="logOut()">
             <div class="option">
                 <i class="fa-solid fa-right-from-bracket" title="Cerrar sesión"></i>
-                <h4>Cerrar sesión</h4>
             </div>
         </a>
     </div>
-
 </div>
-</aside>
+                `;
+            
+            }else if (DATA.user_level == 2) {
+                navOptions = `
+                    <li class="nav-item px-2 py-2 dropdown">
+                        <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                            <li><a class="dropdown-item" href="../admin/producto.html">Productos</a></li>
+                            <li><a class="dropdown-item" href="../admin/categoria.html">Categorías</a></li>
+                            <li><a class="dropdown-item" href="../admin/genero.html">Género</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../admin/colores.html">Colores</a></li>
+                            <li><a class="dropdown-item" href="../admin/marcas.html">Marcas</a></li>
+                            <li><a class="dropdown-item" href="../admin/tallas.html">Tallas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-dark" href="../admin/descuento.html">Descuentos</a>
+                    </li>
+                `;
+            } else if (DATA.user_level == 3) {
+                navOptions = `
+                   <li class="nav-item px-2 py-2 dropdown">
+                        <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                            <li><a class="dropdown-item" href="../admin/producto.html">Productos</a></li>
+                            <li><a class="dropdown-item" href="../admin/categoria.html">Categorías</a></li>
+                            <li><a class="dropdown-item" href="../admin/genero.html">Género</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="../admin/colores.html">Colores</a></li>
+                            <li><a class="dropdown-item" href="../admin/marcas.html">Marcas</a></li>
+                            <li><a class="dropdown-item" href="../admin/tallas.html">Tallas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item px-2 py-2">
+                        <a class="nav-link text-uppercase text-dark" href="../admin/descuento.html">Descuentos</a>
+                    </li>
+                `;
+            }
 
-  
-`;
-
-
-
-// Create a new element
-const asideElement = document.createElement('aside');
-asideElement.classList.add('aside'); // Add class for styling
-
-// Set the inner HTML of the element
-asideElement.innerHTML = asideHTML;
-
-// Append the element to the desired location in your HTML
-document.body.appendChild(asideElement);
-
+            // Se agrega el footer de la página web después del contenido principal.
+            const asideElement = document.createElement('aside');
+            asideElement.classList.add('aside'); // Add class for styling
+            asideElement.innerHTML = asideHTML;
+            document.body.appendChild(asideElement);
+        } else {
+            sweetAlert(3, DATA.error, false, 'index.html');
+        }
+    } else {
+        // Se comprueba si la página web es la principal, de lo contrario se direcciona a iniciar sesión.
+        if (location.pathname.endsWith('index.html')) {
+            // Se agrega el footer de la página web después del contenido principal.
+            const asideElement = document.createElement('aside');
+            asideElement.classList.add('aside'); // Add class for styling
+            asideElement.innerHTML = asideHTML;
+            document.body.appendChild(asideElement);
+        } else {
+            location.href = 'index.html';
+        }
+    }
+}
 
 
 
@@ -116,3 +177,5 @@ window.addEventListener("resize", function(){
     }
 
 });
+
+
