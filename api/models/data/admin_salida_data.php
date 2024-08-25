@@ -83,11 +83,11 @@ class SalidasData extends SalidasHandler
 
     public function setEntrega($value)
     {
-        if (Validator::validateNaturalNumber($value)) {
+        if (Validator::validateAlphanumeric($value)) {
             $this->entrega = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la entrega es incorrecto';
+            $this->data_error = 'La entrega es incorrecto';
             return false;
         }
     }
