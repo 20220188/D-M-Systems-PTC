@@ -100,6 +100,19 @@ class UsuarioHandler
         return Database::getRow($sql, $params);
     }
 
+    public function UsuarioReport()
+    {
+        $sql = 'SELECT
+    usuario,
+    nombre,
+    telefono,
+    correo,
+    DUI,
+    id_nivel_usuario
+    FROM tb_usuarios';
+        return Database::getRows($sql);
+    }
+
 }
 
 
