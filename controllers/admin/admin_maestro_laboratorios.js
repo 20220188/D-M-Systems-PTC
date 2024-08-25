@@ -92,7 +92,8 @@ const fillTable = async (form = null) => {
                         </button>
                         <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_laboratorio})">
                         <i class="fa-regular fa-trash-can"></i>
-                        </button>
+                        </button> 
+
                     </td>
                 </tr>
             `;
@@ -171,21 +172,21 @@ const openDelete = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
+    
+}
+
+/*
+*   Función para abrir un reporte automático de laboratorios.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/laboratorios.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }
 
 
 
 
-
-/*
-*   Función para abrir un reporte automático de productos por categoría.
-*   Parámetros: ninguno.
-*   Retorno: ninguno.
-*/
-/*
-const openReport = () => {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/productos.php`);
-    // Se abre el reporte en una nueva pestaña.
-    window.open(PATH.href);
-}*/
