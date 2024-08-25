@@ -76,7 +76,15 @@ class LaboratoriosHandler
         return Database::executeRow($sql, $params);
     }
 
-    /*
-    *  Método para los registros de la tabla de detalles de productos.
-    */
+/*
+ *   Método para generar el reporte de laboratorios.
+ */
+public function reporteLaboratorios()
+{
+    $sql = 'SELECT id_laboratorio, codigo, nombre_laboratorio
+            FROM tb_laboratorios
+            ORDER BY nombre_laboratorio';
+    $params = array();
+    return Database::getRows($sql, $params);
+}
 }
