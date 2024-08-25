@@ -75,6 +75,14 @@ class DependientesHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
+    
+    public function reporteDependientes()
+{
+    $sql = 'SELECT id_dependiente, codigo, nombre_dependiente
+            FROM tb_dependientes
+            ORDER BY nombre_dependiente';
+    return Database::getRows($sql);
+}
 }
 
 ?>
