@@ -76,6 +76,17 @@ class SalidasHandler
     /*
     *  Método para los registros de la tabla de detalles de productos.
     */
+
+    public function reportNS()
+    {
+        $sql = 'SELECT id_salida, numero_salida, fecha, tipo_salida, cantidad_salida, nombre, nombre_dependiente
+                FROM tb_salidas
+                INNER JOIN tb_clientes USING(id_cliente)
+                INNER JOIN tb_dependientes USING(id_dependiente)
+                WHERE numero_salida = ?';
+        $params = array($this->numero_salida);
+        return Database::getRows($sql, $params);
+    }
 }
 
 

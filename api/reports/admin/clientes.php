@@ -22,7 +22,7 @@ function printTableHeader($pdf) {
     $pdf->SetFont('Arial', 'B', 10); // Establece el tamaño de la fuente para los encabezados
     $pdf->cell(40, 10, 'Nombre', 1, 0, 'C', 1);    
     $pdf->cell(30, 10, 'Codigo', 1, 0, 'C', 1);
-    $pdf->cell(50, 10, 'Dirección', 1, 0, 'C', 1);
+    $pdf->cell(50, 10, $pdf->encodeString('Dirección'), 1, 0, 'C', 1);
     $pdf->cell(40, 10, 'Nombre comercial', 1, 0, 'C', 1);
     $pdf->cell(30, 10, 'Telefono', 1, 1, 'C', 1); // Cambiar el último parámetro a 1 para el salto de línea
 }

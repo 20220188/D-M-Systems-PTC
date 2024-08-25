@@ -11,6 +11,11 @@ const TABLE_BODY = document.getElementById('tableBody'),
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 
+const SAVE_FORM_REPORT = document.getElementById('saveFormReport')
+
+const SAVE_MODAL_REPORT = new bootstrap.Modal('#saveModalReport'),
+    MODAL_TITLE_REPORT = document.getElementById('modalTitleReport');
+
 const SAVE_FORM = document.getElementById('saveForm'),
     ID_SALIDA = document.getElementById('idSalida'),
     NUMERO_SALIDA = document.getElementById('numeroSalida'),
@@ -195,11 +200,36 @@ const openDelete = async (id) => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openReport = (id) => {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/cliente.php`);
-    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
-    PATH.searchParams.append('idCliente', id);
-    // Se abre el reporte en una nueva pestaña.
+SAVE_FORM_REPORT.addEventListener('submit', (event) => {
+    event.preventDefault();
+    openReport();
+});
+
+
+const openCreateR = () => {
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL_REPORT.show();
+    MODAL_TITLE_REPORT.textContent = 'Generar reporte';
+    // Se prepara el formulario.
+    SAVE_FORM_REPORT.reset();
+
+// Establece el número de salida en el campo oculto.
+document.getElementById('numeroSalidaReport').value = numeroSalida;
+
+}
+
+const openReport = () => {
+    // Obtén el número de salida del campo oculto
+    const numeroSalida = document.getElementById('numeroSalidaReport').value;
+    // Asegúrate de que el valor esté disponible
+    if (!numeroSalida) {
+        alert('Número de salida no disponible.');
+        return;
+    }
+    // Declara la constante tipo objeto con la ruta específica del reporte en el servidor
+    const PATH = new URL(`${SERVER_URL}reports/admin/salidas_numerosalida.php`);
+    // Agrega un parámetro a la ruta con el valor del número de salida
+    PATH.searchParams.append('numeroSalida', numeroSalida);
+    // Abre el reporte en una nueva pestaña
     window.open(PATH.href);
 }
