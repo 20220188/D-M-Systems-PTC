@@ -84,5 +84,17 @@ class ProveedorHandler
         $params = array($this->id_proveedor);
         return Database::executeRow($sql, $params);
     }
+
+    public function ProveedorReport()
+    {
+        $sql = 'SELECT
+    nombre_proveedor,
+    nombre_comercial_proveedor,
+    telefono_proveedor,
+    codigo_proveedor,
+    contacto_proveedor
+    FROM tb_proveedores';
+        return Database::getRows($sql);
+    }
 }
 ?>

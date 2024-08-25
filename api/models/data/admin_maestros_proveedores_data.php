@@ -118,7 +118,7 @@ class ProveedorData extends ProveedorHandler
 
     public function setNitProveedor($value)
     {
-        if (Validator::validateAlphanumeric($value)) {
+        if (Validator::validateDUI($value)) {
             $this->nit_proveedor = $value;
             return true;
         } else {
