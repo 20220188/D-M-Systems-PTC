@@ -186,6 +186,34 @@ const openReport = () => {
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }
+// Función para generar el gráfico de barras de laboratorios
+const graficoLaboratoriosRecientes = async () => {
+    try {
+        // Petición para obtener los datos del gráfico.
+        const DATA = await fetchData(LABORATORIO_API, 'laboratoriosRecientes');
+        console.log(DATA); // Verificar el contenido de DATA
+        // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+        if (DATA.status) {
+            AbrirModalGrafico(); // Asegúrate de tener esta función para abrir el modal del gráfico
+            // Se declaran los arreglos para guardar los datos a graficar.
+            let nombre_laboratorio  = [];
+            let codigo = [];
+            // Se recorre el conjunto de registros fila por fila a través del objeto row.
+            DATA.dataset.forEach(row => {
+                // Se agregan los datos a los arreglos.
+                nombre_laboratorio .push(row.nombre_laboratorio);
+                codigo.push(row.fecha_registro); 
+            });
+            barGraph('chartLaboratorios', codigo, nombre_laboratorio , 'Fcodigo', 'Laboratorios Recientes');
+        } else {
+            document.getElementById('chartLaboratorios').remove();
+            console.log(DATA.error);
+        }
+    } catch (error) {
+        console.error('Error fetching data for laboratories chart:', error);
+    }
+};
+
 
 
 

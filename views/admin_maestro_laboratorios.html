@@ -71,8 +71,10 @@
                 <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
                 <button type="button" class="btn btn-primary" onclick="openCreate()">
                     <i class="fa-solid fa-plus"></i>
-                    
                 </button>
+                <div class="agregar">
+                    <button class="btn btn-primary" onclick="graficoLaboratoriosRecientes()"><i class="fa-regular fa-file-pdf"></i></button>
+                </div>
 
                 
                 
@@ -144,6 +146,8 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+      <!-- Llamada a la librería para generar los gráficos. Para más información https://www.chartjs.org/ -->
+      <script type="text/javascript" src="../../resources/js/chart.umd.min.js"></script>
 
     <!-- Llamada al controlador de la página web -->
     <script type="text/javascript" src="../controllers/admin/admin_maestro_laboratorios.js"></script>
