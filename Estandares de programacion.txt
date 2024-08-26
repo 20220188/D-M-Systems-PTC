@@ -1,0 +1,23 @@
+1. Uso de Clases y Métodos:
+   - El código está organizado en una clase `ProductosHandler` que encapsula las operaciones relacionadas con los productos y detalles de productos. Los métodos están diseñados para realizar operaciones específicas de CRUD (Create, Read, Update, Delete) y manejo de datos.
+
+2. Encapsulamiento:
+   - Los atributos están protegidos (`protected`), lo que significa que solo pueden ser accedidos por la clase misma y sus subclases. Esto ayuda a mantener la integridad de los datos.
+
+3. Uso de Constantes:
+   - La constante `RUTA_IMAGEN` (SNAKE_CASE) se utiliza para definir la ruta base para las imágenes de productos, lo que hace que el código sea más mantenible.
+
+4. Preparación de Consultas SQL:
+   - Las consultas SQL se preparan con parámetros para prevenir inyecciones SQL y mejorar la seguridad.
+
+5. Separación de Funcionalidades:
+   - Los métodos están separados según la funcionalidad (por ejemplo, `createRow`, `readAll`, `updateRow`, etc.), lo que mejora la organización y legibilidad del código.
+
+6. Uso de Métodos Genéricos:
+   - Métodos genéricos como `searchRows` y `productosReport` permiten realizar búsquedas y generar reportes de manera flexible.
+
+7. Uso de Comentarios:
+   - El código contiene comentarios que describen la funcionalidad y los propósitos de las secciones y métodos, lo que facilita la comprensión y mantenimiento del código.
+
+8. Uso de Métodos de la Clase `Database`:
+   - Se utilizan métodos de la clase `Database` para ejecutar consultas y obtener resultados, lo que centraliza la lógica de acceso a datos.
