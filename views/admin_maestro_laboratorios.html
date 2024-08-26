@@ -72,9 +72,8 @@
                 <button type="button" class="btn btn-primary" onclick="openCreate()">
                     <i class="fa-solid fa-plus"></i>
                 </button>
-                <div class="agregar">
-                    <button class="btn btn-primary" onclick="graficoLaboratoriosRecientes()"><i class="fa-regular fa-file-pdf"></i></button>
-                </div>
+                <button class="btn btn-primary" onclick="graficoLaboratoriosRecientes()"><i class="fa fa-chart-simple"></i></button>
+                
 
                 
                 
@@ -128,6 +127,24 @@
                 </div>
             </div>
         </div>
+
+          <!-- Componente Modal para mostrar un gráfico -->
+          <div class="modal fade" id="chartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="chartTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="chartTitle">Gráfico de laboratorios</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <!-- Contenedor para mostrar el gráfico -->
+                  <div class="modal-body" id="chartContainer"></div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
     </main>
 
     <!--Importaciones-->
