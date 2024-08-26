@@ -1,4 +1,3 @@
-@ -1,76 +1,74 @@
 <?php
 // Se incluye la clase con las plantillas para generar reportes.
 require_once('../../helpers/report.php');
