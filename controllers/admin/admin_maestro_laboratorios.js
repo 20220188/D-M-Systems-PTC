@@ -2,9 +2,7 @@
 const LABORATORIO_API = 'services/admin/admin_maestro_laboratorios.php';
 
 
-/*
-*Elementos para la tabla PRODUCTOS
-*/
+
 
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
@@ -209,7 +207,7 @@ const graficoLaboratoriosRecientes = async () => {
             codigo.push(row.codigo); 
         });
         // Se agrega la etiqueta canvas al contenedor de la modal.
-        document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
+        document.getElementById('chart').innerHTML = `<canvas id="chart"></canvas>`;
         // Llamada a la función para generar y mostrar un gráfico de pastel.
         barGraph('chart', nombre_laboratorio, codigo, 'Ultimos 3 laboratorios creados');
     } else {
