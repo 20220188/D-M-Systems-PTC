@@ -87,4 +87,14 @@ public function reporteLaboratorios()
     $params = array();
     return Database::getRows($sql, $params);
 }
+
+public function getUltimosLaboratorios()
+{
+    $sql = 'SELECT id_laboratorio, codigo, nombre_laboratorio 
+            FROM tb_laboratorios 
+            ORDER BY id_laboratorio DESC 
+            LIMIT 3';
+    $params = null;
+    return Database::getRows($sql, $params);
+}
 }

@@ -36,7 +36,7 @@ if (isset($_GET['action'])) {
                     $result['message'] = 'Laboratorio creado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
-                    $result['error'] = 'Codigo ya existente';
+                    $result['error'] = 'Código ya existente';
                 }
                 break;
             case 'readAll':
@@ -83,7 +83,17 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el laboratorio';
                 }
                 break;
-                
+
+
+            case 'getUltimosLaboratorios':
+                if ($result['dataset'] = $laboratorio->getUltimosLaboratorios()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Datos obtenidos correctamente';
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
+
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
@@ -99,3 +109,4 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
+?>
