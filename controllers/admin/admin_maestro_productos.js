@@ -418,19 +418,22 @@ const openproveedorchart = async () => {
 
         // Declara arreglos para guardar los datos a graficar
         let producto = [];
-        let idsProducto = [];
+       
+        let existencia = [];
 
         // Recorre el conjunto de registros fila por fila
         DATA.dataset.forEach(row => {
             producto.push(row.nombre_producto);
-            idsProducto.push(row.id_producto);  // Puedes incluir los IDs si los necesitas
+           
+            existencia.push(row.existencia);
+
         });
 
         // Agrega la etiqueta canvas al contenedor del modal
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
 
         // Llama a la función para generar y mostrar el gráfico de barras
-        barGraph('chart', producto,idsProducto, 'Últimos 3 Puntos de Venta');
+        pieGraph('chart', producto, existencia, 'Top 5 Productos con más existencias');
     } else {
         sweetAlert(4, DATA.error, true);
     }
