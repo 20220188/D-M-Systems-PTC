@@ -250,7 +250,7 @@ const openproveedorchart = async () => {
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
 
         // Llama a la función para generar y mostrar el gráfico de barras
-        pieGraph('chart', proveedor,idsProveedor, 'Últimos 3 Puntos de Venta');
+        pieGraph('chart', proveedor,idsProveedor, 'Últimos 3 Proveedores');
     } else {
         sweetAlert(4, DATA.error, true);
     }
