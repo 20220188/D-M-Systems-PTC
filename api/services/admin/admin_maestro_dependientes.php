@@ -93,6 +93,13 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el dependiente';
                 }
                 break;
+                case 'getUltimosDependientes1':
+                    if ($result['dataset'] = $dependientes->getUltimosDependientes()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'No hay datos disponibles';
+                    }
+                    break;
                 
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';

@@ -19,6 +19,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_DEPENDIENTE = document.getElementById('idDependiente'),
     NOMBRE_DEPENDIENTE = document.getElementById('nombreDependiente'),
     CODIGO_DEPENDIENTE = document.getElementById('codigoDependiente');
+    CHART_MODAL = new bootstrap.Modal('#chartModal');
 
 
 // Método del evento para cuando el documento ha cargado.
@@ -184,30 +185,33 @@ const openDependientesReporte = () => {
 
 
 
-
-// Función para generar el gráfico de barras de dependientes recientes
 const graficoDependientesRecientes = async () => {
-    // Petición para obtener los datos de los últimos 3 dependientes.
-    const DATA = await fetchData(DEPENDIENTE_API, 'getUltimosDependientes', null);
-    console.log(DATA); // Verificar el contenido de DATA
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con el error.
+    // Petición para obtener los datos de los puntos de venta
+    const DATA = await fetchData(DEPENDIENTE_API, 'getUltimosDependientes1', null);
+
+    
     if (DATA.status) {
-        // Se muestra la caja de diálogo con su título.
+        // Muestra la caja de diálogo con su título
+        const CHART_MODAL = new bootstrap.Modal(document.getElementById('chartModal'));
         CHART_MODAL.show();
-        // Se declaran los arreglos para guardar los datos a graficar.
+
+        // Declara arreglos para guardar los datos a graficar
         let nombre_dependiente = [];
-        let codigo_dependiente = [];
-        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        let idsdependiente = [];
+
+        // Recorre el conjunto de registros fila por fila
         DATA.dataset.forEach(row => {
-            // Se agregan los datos a los arreglos.
             nombre_dependiente.push(row.nombre_dependiente);
-            codigo_dependiente.push(row.codigo_dependiente);
+            idsdependiente.push(row.id_dependiente);  // Puedes incluir los IDs si los necesitas
         });
-        // Se agrega la etiqueta canvas al contenedor de la modal.
-        document.getElementById('chart').innerHTML = `<canvas id="chart"></canvas>`;
-        // Llamada a la función para generar y mostrar un gráfico de barras.
-        barGraph('chart', nombre_dependiente, codigo_dependiente, 'Últimos 3 dependientes creados');
+
+        // Agrega la etiqueta canvas al contenedor del modal
+        document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
+
+        // Llama a la función para generar y mostrar el gráfico de barras
+        barGraph('chart', nombre_dependiente,idsdependiente, 'Últimos 3 dependientes creados');
     } else {
         sweetAlert(4, DATA.error, true);
     }
-}
+};
+

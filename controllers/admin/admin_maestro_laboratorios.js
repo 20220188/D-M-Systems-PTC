@@ -199,17 +199,17 @@ const graficoLaboratoriosRecientes = async () => {
         CHART_MODAL.show();
         // Se declaran los arreglos para guardar los datos a graficar.
         let nombre_laboratorio  = [];
-        let codigo = [];
+        let id = [];
         // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
             // Se agregan los datos a los arreglos.
             nombre_laboratorio .push(row.nombre_laboratorio);
-            codigo.push(row.codigo); 
+            id.push(row.id_laboratorio); 
         });
         // Se agrega la etiqueta canvas al contenedor de la modal.
         document.getElementById('chart').innerHTML = `<canvas id="chart"></canvas>`;
         // Llamada a la función para generar y mostrar un gráfico de pastel.
-        barGraph('chart', nombre_laboratorio, codigo, 'Ultimos 3 laboratorios creados');
+        barGraph('chart', nombre_laboratorio, id, 'Ultimos 3 laboratorios creados');
     } else {
         sweetAlert(4, DATA.error, true);
     }

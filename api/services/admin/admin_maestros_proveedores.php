@@ -108,7 +108,19 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el Proveedor';
                 }
                 break;
+            
+            case 'getUltimosProveedor':
+                if ($result['dataset'] = $proveedor->getUltimosProveedor()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Datos obtenidos correctamente';
+                } else {
+                    $result['error'] = 'No hay datos disponibles';
+                }
+                break;
+                default:
+                $result['error'] = 'Acción no disponible dentro de la sesión';
             }
+
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();
         // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
