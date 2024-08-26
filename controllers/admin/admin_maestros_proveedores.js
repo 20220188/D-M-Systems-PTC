@@ -107,7 +107,7 @@ const fillTable = async () => {
                         <i class="fa-regular fa-trash-can"></i>
                         </button>
                         <button type="button" class="btn btn-warning" onclick="openReport1(${row.id_proveedor})">
-                            <i class="bi bi-filetype-pdf"></i>
+                            <i class="fa-solid fa-chart-simple"></i>
                         </button>
                     </td>
                 </tr>

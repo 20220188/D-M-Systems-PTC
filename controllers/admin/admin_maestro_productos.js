@@ -418,14 +418,12 @@ const openproveedorchart = async () => {
 
         // Declara arreglos para guardar los datos a graficar
         let producto = [];
-       
-        let existencia = [];
+        let existencia1 = [];
 
         // Recorre el conjunto de registros fila por fila
         DATA.dataset.forEach(row => {
-            producto.push(row.nombre_producto);
-           
-            existencia.push(row.existencia);
+            producto.push(row.nombre);
+            existencia1.push(row.existencia);
 
         });
 
@@ -433,7 +431,7 @@ const openproveedorchart = async () => {
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
 
         // Llama a la función para generar y mostrar el gráfico de barras
-        pieGraph('chart', producto, existencia, 'Top 5 Productos con más existencias');
+        pieGraph('chart', producto, existencia1,'Top 5 Productos con más existencias');
     } else {
         sweetAlert(4, DATA.error, true);
     }
