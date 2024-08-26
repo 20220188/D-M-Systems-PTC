@@ -79,6 +79,13 @@ class PuntoDeVentaHandler
         return Database::executeRow($sql, $params);
     }
 
+    public function PuntoVentaReport()
+    {
+        $sql = 'SELECT id_punto_venta, punto_venta 
+                FROM tb_puntos_venta
+                ORDER BY punto_venta';
+        return Database::getRows($sql);
+    }
    
 }
 ?>
