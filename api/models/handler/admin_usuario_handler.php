@@ -75,13 +75,14 @@ class UsuarioHandler
         return Database::executeRow($sql, $params);
     }
 
-    public function readAllNiveles(){
+    public function readAllNiveles()
+    {
         $sql = 'SELECT  id_nivel_usuario,tipo_usuario
                 FROM tb_niveles_usuarios
                 ORDER BY tipo_usuario';
         return Database::getRows($sql);
     }
-    
+
     public function checkDuplicateDUI($value)
     {
         $sql = 'SELECT id_usuario
@@ -113,7 +114,19 @@ class UsuarioHandler
         return Database::getRows($sql);
     }
 
+    public function UsuarioReportNivel($id_nivel_usuario)
+    {
+        $sql = 'SELECT
+            usuario,
+    nombre,
+    telefono,
+    correo,
+    DUI,
+    id_nivel_usuario
+    FROM tb_usuarios
+    WHERE id_nivel_usuario = ?';
+
+        $params = array($id_nivel_usuario); // El ID del usuario pasado como parámetro
+        return Database::getRows($sql, $params);
+    }
 }
-
-
-?>

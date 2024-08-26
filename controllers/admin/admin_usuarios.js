@@ -6,12 +6,20 @@ const USUARIO_API = 'services/admin/admin_usuarios.php';
 */
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
+
 // Constantes para establecer el contenido de la tabla.
 const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
+
+    const SAVE_FORM_REPORT = document.getElementById('saveFormReport')
+//Constantes para establecer los elementos del componente Modal para reporte parametrizado.
+const SAVE_MODAL_REPORT = new bootstrap.Modal('#saveModalReport'),
+    MODAL_TITLE_REPORT = document.getElementById('modalTitleReport');
+
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
+
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
     ID_USUARIO = document.getElementById('idUsuario'),
@@ -199,5 +207,34 @@ const openReport = () => {
     // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
     const PATH = new URL(`${SERVER_URL}reports/admin/usuarios.php`);
     // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
+
+/*
+*   Función para abrir un reporte parametrizado de productos de una categoría.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+SAVE_FORM_REPORT.addEventListener('submit', (event) => {
+    event.preventDefault();
+    openReporte();
+});
+
+
+const openCreateR = () => {
+    SAVE_MODAL_REPORT.show();
+    MODAL_TITLE_REPORT.textContent = 'Generar reporte';
+    SAVE_FORM_REPORT.reset();
+    document.getElementById('nivelUsuario').value = nivelUsuario;
+}
+
+const openReporte = () => {
+    const nivelUsuario = document.getElementById('nivelUsuario').value;
+    if (!nivelUsuario) {
+        alert('Nivel no disponible.');
+        return;
+    }
+    const PATH = new URL(`${SERVER_URL}reports/admin/usuario_por_nivel.php`);
+    PATH.searchParams.append('nivelUsuario', nivelUsuario);
     window.open(PATH.href);
 }

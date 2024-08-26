@@ -52,9 +52,13 @@
                 </div>
             </form>
             <div class="col-sm-12 col-md-6 text-end">
-                 <!-- Boton para abrir el historial de compras-->
+                 <!-- Boton para abrir el reporte-->
                  <button type="button" class="btn btn-secondary" onclick="openReport()">
                     <i class="fa-regular fa-clipboard"></i>
+                </button>
+                <!-- Boton para abrir el reporte-->
+                <button type="button" class="btn btn-secondary" onclick="openCreateR()">
+                    <i class="fa-regular fa-paste"></i>
                 </button>
                 <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
                 <button type="button" class="btn btn-primary" onclick="openCreate()">
@@ -137,6 +141,30 @@
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Componente Modal para guardar un registro -->
+        <div class="modal fade" id="saveModalReport" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitleReport"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para crear o actualizar un registro -->
+                    <form id="saveFormReport">
+                        <div class="modal-body row g-3">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nivelUsuario" class="form-label">Ingrese el nivel de usuario</label>
+                                <input id="nivelUsuario" type="number" name="nivelUsuario" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Generar reporte</button>
                         </div>
                     </form>
                 </div>
