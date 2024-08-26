@@ -206,7 +206,7 @@ const graficoLaboratoriosRecientes = async () => {
         DATA.dataset.forEach(row => {
             // Se agregan los datos a los arreglos.
             nombre_laboratorio .push(row.nombre_laboratorio);
-            codigo.push(row.fecha_registro); 
+            codigo.push(row.codigo); 
         });
         // Se agrega la etiqueta canvas al contenedor de la modal.
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
