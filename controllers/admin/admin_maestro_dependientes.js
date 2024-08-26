@@ -185,16 +185,29 @@ const openDependientesReporte = () => {
 
 
 
-
-/*
-*   Función para abrir un reporte automático de productos por categoría.
-*   Parámetros: ninguno.
-*   Retorno: ninguno.
-*/
-/*
-const openReport = () => {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/productos.php`);
-    // Se abre el reporte en una nueva pestaña.
-    window.open(PATH.href);
-}*/
+// Función para generar el gráfico de barras de dependientes recientes
+const graficoDependientesRecientes = async () => {
+    // Petición para obtener los datos de los últimos 3 dependientes.
+    const DATA = await fetchData(DEPENDIENTE_API, 'getUltimosDependientes', null);
+    console.log(DATA); // Verificar el contenido de DATA
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con el error.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        CHART_MODAL.show();
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let nombre_dependiente = [];
+        let codigo_dependiente = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            nombre_dependiente.push(row.nombre_dependiente);
+            codigo_dependiente.push(row.codigo_dependiente);
+        });
+        // Se agrega la etiqueta canvas al contenedor de la modal.
+        document.getElementById('chart').innerHTML = `<canvas id="chart"></canvas>`;
+        // Llamada a la función para generar y mostrar un gráfico de barras.
+        barGraph('chart', nombre_dependiente, codigo_dependiente, 'Últimos 3 dependientes creados');
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}

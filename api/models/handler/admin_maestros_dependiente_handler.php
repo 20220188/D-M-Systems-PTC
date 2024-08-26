@@ -83,6 +83,17 @@ class DependientesHandler
             ORDER BY nombre_dependiente';
     return Database::getRows($sql);
 }
+public function getUltimosDependientes()
+{
+    $sql = 'SELECT id_dependiente, codigo, nombre_dependiente 
+            FROM tb_dependientes 
+            ORDER BY id_dependiente DESC 
+            LIMIT 3';
+    $params = null;
+    return Database::getRows($sql, $params);
 }
+
+}
+
 
 ?>

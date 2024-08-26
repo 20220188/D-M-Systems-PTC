@@ -35,7 +35,7 @@
                     <a href="admin_maestro_laboratorios.html"><button type="button" class="btn1"><i
                                 class="fa-solid fa-flask-vial"></i> Laboratorios</button></a>
                     <a href="admin_maestros_punto_de_venta.html"><button type="button" class="btn1"><i
-                        class="fa-solid fa-truck"></i> Punto de venta</button></a>
+                                class="fa-solid fa-truck"></i> Punto de venta</button></a>
                 </div>
             </div>
         </div>
@@ -70,7 +70,10 @@
                 <button type="button" class="btn btn-primary" onclick="openCreate()">
                     <i class="fa-solid fa-plus"></i>
                 </button>
-               
+                <button class="btn btn-primary" onclick="graficoDependientesRecientes()"><i
+                        class="fa fa-chart-simple"></i></button>
+
+
             </div>
         </div>
 
@@ -123,6 +126,25 @@
                 </div>
             </div>
         </div>
+
+        <!-- Componente Modal para mostrar un gráfico -->
+        <div class="modal fade" id="chartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="chartTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="chartTitle">Gráfico de dependientes</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Contenedor para mostrar el gráfico -->
+                    <canvas id="chart"></canvas>
+                    <div class="modal-body" id="chartContainer"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
     <script src="../controllers/utils/admin.js"></script>
@@ -144,6 +166,8 @@
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+       <!-- Llamada a la librería para generar los gráficos. Para más información https://www.chartjs.org/ -->
+       <script type="text/javascript" src="../../resources/js/chart.umd.min.js"></script>
 
     <!-- Llamada al controlador de la página web -->
     <script type="text/javascript" src="../controllers/admin/admin_maestro_dependientes.js"></script>

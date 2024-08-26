@@ -15,6 +15,15 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idAdministrador'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
+            // Caso para recuperar los últimos 3 registros de dependientes.
+            case 'getUltimosDependientes':
+                if ($result['dataset'] = $dependientes->getUltimosDependientes()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Se han obtenido los últimos 3 dependientes';
+                } else {
+                    $result['error'] = 'No se encontraron dependientes';
+                }
+                break;
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
@@ -34,10 +43,10 @@ if (isset($_GET['action'])) {
                     $result['error'] = $dependientes->getDataError();
                 } elseif ($dependientes->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'dependiente creado correctamente';
+                    $result['message'] = 'Dependiente creado correctamente';
                 } else {
                     $result['exception'] = Database::getException();
-                    $result['error'] = 'Codigo ya existente';
+                    $result['error'] = 'Código ya existente';
                 }
                 break;
             case 'readAll':
@@ -54,7 +63,7 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $dependientes->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'dependiente inexistente';
+                    $result['error'] = 'Dependiente inexistente';
                 }
                 break;
             case 'updateRow':
@@ -67,7 +76,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $dependientes->getDataError();
                 } elseif ($dependientes->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'dependiente modificado correctamente';
+                    $result['message'] = 'Dependiente modificado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al modificar el dependiente';
                 }
@@ -79,7 +88,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = $dependientes->getDataError();
                 } elseif ($dependientes->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'dependiente eliminado correctamente';
+                    $result['message'] = 'Dependiente eliminado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al eliminar el dependiente';
                 }
