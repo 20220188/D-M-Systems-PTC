@@ -82,6 +82,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el Punto de venta';
                 }
                 break;
+
+                    case 'PuntoVentaGrafico':
+                        if ($result['dataset'] = $Puntoventa->PuntoVentaGrafico()) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['error'] = 'No hay datos disponibles';
+                        }
+                        break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

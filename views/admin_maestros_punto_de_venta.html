@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="../resources/css/dashboard.css">
     <link rel="stylesheet" href="../resources/css/maestro_laboratorios.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
 <body id="body">
@@ -73,7 +75,9 @@
                 <button type="button" class="btn btn-primary" onclick="openCreate()">
                     <i class="fa-solid fa-plus"></i>
                 </button>
-                
+                <button type="button" class="btn btn-primary" onclick="openPuntoVentaChart()">
+                    <i class="fa-solid fa-chart-simple"></i>
+                </button>
 
             </div>
         </div>
@@ -128,7 +132,25 @@
             </div>
         </div>
 
-        
+        <!-- Componente Modal para mostrar un gráfico -->
+<div class="modal fade" id="chartModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+aria-labelledby="chartTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="chartTitle">Gráfico de Punto de venta</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- Contenedor para mostrar el gráfico -->
+        <div class="modal-body" id="chartContainer">
+            <!-- Aquí se agregará el canvas para el gráfico -->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+        </div>
+    </div>
+</div>
+</div>
     </main>
 
     <!--Importaciones-->
@@ -150,6 +172,13 @@
 
     <!-- Llamada al controlador de la página web -->
     <script type="text/javascript" src="../controllers/admin/admin_maestros_punto_de_venta.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </body>
 
 </html>

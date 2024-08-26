@@ -86,6 +86,19 @@ class PuntoDeVentaHandler
                 ORDER BY punto_venta';
         return Database::getRows($sql);
     }
+
+
+    public function PuntoVentaGrafico(){
+        $sql = 'SELECT id_punto_venta, punto_venta
+FROM tb_puntos_venta
+ORDER BY id_punto_venta DESC
+LIMIT 3;
+';
+        return Database::getRows($sql);
+    }
+
+   
+
    
 }
 ?>
