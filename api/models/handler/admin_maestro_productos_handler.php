@@ -193,4 +193,15 @@ JOIN
         $params = array($this->id_detalle_producto);
         return Database::executeRow($sql, $params);
     }
+    public function getProductosConMasExistencias()
+{
+    $sql = 'SELECT p.nombre, dp.existencia 
+            FROM tb_productos p
+            JOIN tb_detalle_productos dp ON p.id_producto = dp.id_producto
+            ORDER BY dp.existencia DESC 
+            LIMIT 5';
+    $params = null;
+    return Database::getRows($sql, $params);
+}
+
 }

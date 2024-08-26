@@ -190,6 +190,14 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el detalle';
                 }
                 break;
+                case 'getProductosConMasExistencias':
+                    if ($result['dataset'] = $producto->getProductosConMasExistencias()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Productos obtenidos correctamente';
+                    } else {
+                        $result['error'] = 'No se pudieron obtener los productos con más existencias';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

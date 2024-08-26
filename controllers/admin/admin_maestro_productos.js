@@ -406,3 +406,32 @@ const openReport = () => {
     // Se abre el reporte en una nueva pestaña.
     window.open(PATH.href);
 }
+const openproveedorchart = async () => {
+    // Petición para obtener los datos de los puntos de venta
+    const DATA = await fetchData(PRODUCTO_API, 'getProductosConMasExistencias', null);
+
+    
+    if (DATA.status) {
+        // Muestra la caja de diálogo con su título
+        const CHART_MODAL = new bootstrap.Modal(document.getElementById('chartModal'));
+        CHART_MODAL.show();
+
+        // Declara arreglos para guardar los datos a graficar
+        let producto = [];
+        let idsProducto = [];
+
+        // Recorre el conjunto de registros fila por fila
+        DATA.dataset.forEach(row => {
+            producto.push(row.nombre_producto);
+            idsProducto.push(row.id_producto);  // Puedes incluir los IDs si los necesitas
+        });
+
+        // Agrega la etiqueta canvas al contenedor del modal
+        document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
+
+        // Llama a la función para generar y mostrar el gráfico de barras
+        barGraph('chart', producto,idsProducto, 'Últimos 3 Puntos de Venta');
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+};
