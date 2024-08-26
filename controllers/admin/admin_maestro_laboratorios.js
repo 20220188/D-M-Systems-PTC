@@ -211,7 +211,7 @@ const graficoLaboratoriosRecientes = async () => {
         // Se agrega la etiqueta canvas al contenedor de la modal.
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
         // Llamada a la función para generar y mostrar un gráfico de pastel.
-        grafiProducto('chart', nombre_laboratorio, codigo, 'Ultimos 3 laboratorios creados');
+        barGraph('chart', nombre_laboratorio, codigo, 'Ultimos 3 laboratorios creados');
     } else {
         sweetAlert(4, DATA.error, true);
     }
