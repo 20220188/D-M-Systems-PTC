@@ -16,7 +16,6 @@ $pdf->startReport('Reporte de salida N° ' . $_GET['numeroSalida']);
 function printTableHeader($pdf) {
     // Ajuste de la posición para los encabezados de la tabla
     $pdf->SetXY(10, 35); // Mueve a la posición (10, 35) para los encabezados de la tabla
-
     // Establece el color de fondo para los encabezados
     $pdf->setFillColor(225);
 
@@ -42,7 +41,6 @@ if ($dataSalidas = $salida->reportNS()) {
 
     // Imprime el encabezado de la tabla
     printTableHeader($pdf);
-
     // Contador de filas impresas
     $rowCount = 0;
 
