@@ -9,12 +9,21 @@ const TABLE_BODY = document.getElementById('tableBody'),
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORM = document.getElementById('saveForm'),
+const SAVE_FORM = document.getElementById('saveForm');
+
+const SAVE_FORM_REPORT = document.getElementById('saveFormReport')
+
+const SAVE_MODAL_REPORT = new bootstrap.Modal('#saveModalReport'),
+    MODAL_TITLE_REPORT = document.getElementById('modalTitleReport');
     ID_ENTRADA = document.getElementById('idEntrada'),
     NOTA_ENTRADA = document.getElementById('notaEntrada'),
     FECHA_ENTRADA = document.getElementById('fechaEntrada'),
     NUMERO_ENTRADA = document.getElementById('numeroEntrada'),
     TIPO_ENTRADA = document.getElementById('tipoEntrada');
+
+const CB_FILTRO = document.getElementById('filtro'),
+    NUMERO_ENTRADA1 = document.getElementById('numeroEntradaReport'),
+    FECHA_ENTRADA1 = document.getElementById('fechaEntradaReport');
 
 
 // Método del evento para cuando el documento ha cargado.
@@ -139,7 +148,7 @@ const openUpdate = async (id) => {
         NOTA_ENTRADA.value = ROW.nota;
         FECHA_ENTRADA.value = ROW.fecha;
         NUMERO_ENTRADA.value = ROW.numero_entrada;
-        TIPO_ENTRADA.value = ROW.tipo_entrada;           
+        TIPO_ENTRADA.value = ROW.tipo_entrada;
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -177,11 +186,90 @@ const openDelete = async (id) => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-const openReport = (id) => {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/cliente.php`);
-    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
-    PATH.searchParams.append('idCliente', id);
-    // Se abre el reporte en una nueva pestaña.
+// Oculta inicialmente los inputs.
+NUMERO_ENTRADA1.classList.add('d-none');
+FECHA_ENTRADA1.classList.add('d-none');
+
+SAVE_FORM_REPORT.addEventListener('submit', (event) => {
+    event.preventDefault();
+    
+    let selectedValue = '';
+
+    // Determina qué valor enviar basado en el input visible.
+    if (!NUMERO_ENTRADA1.classList.contains('d-none')) {
+        selectedValue = NUMERO_ENTRADA1.value;
+        console.log('Valor seleccionado (Número de Entrada):', selectedValue);
+    } else if (!FECHA_ENTRADA1.classList.contains('d-none')) {
+        selectedValue = FECHA_ENTRADA1.value;
+        console.log('Valor seleccionado (Fecha de Entrada):', selectedValue);
+    }
+
+    // Llama a la función openCreateR con el valor seleccionado.
+    openCreateR(selectedValue);
+    openReport(selectedValue);
+});
+
+const openCreateR = (selectedValue) => {
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL_REPORT.show();
+    MODAL_TITLE_REPORT.textContent = 'Generar reporte';
+    // Se prepara el formulario.
+    SAVE_FORM_REPORT.reset();
+
+    CB_FILTRO.addEventListener('change', () => {
+
+        // Dependiendo del valor seleccionado, muestra u oculta los inputs correspondientes.
+        if (CB_FILTRO.value === 'numeroEntrada') { // Muestra el input de número de entrada.
+            NUMERO_ENTRADA1.classList.remove('d-none');
+            NUMERO_ENTRADA1.required = true;
+            FECHA_ENTRADA1.classList.add('d-none');
+            FECHA_ENTRADA1.required = false;
+
+            console.log('Filtro seleccionado: Número de Entrada');
+        } else if (CB_FILTRO.value === 'fechaEntrada') { // Muestra el input de fecha de entrada.
+            FECHA_ENTRADA1.classList.remove('d-none');
+            FECHA_ENTRADA1.required = true;
+            NUMERO_ENTRADA1.classList.add('d-none');
+            NUMERO_ENTRADA1.required = false;
+
+            console.log('Filtro seleccionado: Fecha de Entrada');
+        } else {
+            // Si no se selecciona una opción válida, oculta ambos inputs.
+            NUMERO_ENTRADA1.classList.add('d-none');
+            NUMERO_ENTRADA1.required = false;
+            FECHA_ENTRADA1.classList.add('d-none');
+            FECHA_ENTRADA1.required = false;
+
+            console.log('Ningún filtro válido seleccionado');
+        }
+    });
+}
+
+const openReport = (selectedValue) => {
+    // Obtén el número de entrada o la fecha de entrada.
+    const numeroEntrada = NUMERO_ENTRADA1.value;
+    const fechaEntrada = FECHA_ENTRADA1.value;
+
+    // Asegúrate de que el valor esté disponible
+    if (!selectedValue) {
+        alert('Valor de entrada no disponible.');
+        return;
+    }
+
+    console.log('Valor enviado al reporte:', selectedValue);
+
+    // Declara la constante tipo objeto con la ruta específica del reporte en el servidor
+    const PATH = new URL(`${SERVER_URL}reports/admin/salidas_numerosalida.php`);
+
+    // Agrega un parámetro a la ruta con el valor seleccionado
+    if (CB_FILTRO.value === 'numeroEntrada') {
+        PATH.searchParams.append('numeroSalida', numeroEntrada);
+    } else if (CB_FILTRO.value === 'fechaEntrada') {
+        PATH.searchParams.append('fechaSalida', fechaEntrada);
+    }
+
+    console.log('Ruta del reporte:', PATH.href);
+
+    // Abre el reporte en una nueva pestaña
     window.open(PATH.href);
 }

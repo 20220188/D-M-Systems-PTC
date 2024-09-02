@@ -16,6 +16,8 @@ const SAVE_FORM_REPORT = document.getElementById('saveFormReport')
 const SAVE_MODAL_REPORT = new bootstrap.Modal('#saveModalReport'),
     MODAL_TITLE_REPORT = document.getElementById('modalTitleReport');
 
+
+
 const SAVE_FORM = document.getElementById('saveForm'),
     ID_SALIDA = document.getElementById('idSalida'),
     NUMERO_SALIDA = document.getElementById('numeroSalida'),
@@ -26,6 +28,8 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_CLIENTE = document.getElementById('cliente'),
     ID_DEPENDIENTE = document.getElementById('Dependiente'),
     NOTA_SALIDA = document.getElementById('notaSalida');
+
+    CB_FILTRO = document.getElementById('filtro');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
