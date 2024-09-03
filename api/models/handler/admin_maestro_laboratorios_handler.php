@@ -76,25 +76,25 @@ class LaboratoriosHandler
         return Database::executeRow($sql, $params);
     }
 
-/*
+    /*
  *   Método para generar el reporte de laboratorios.
  */
-public function reporteLaboratorios()
-{
-    $sql = 'SELECT id_laboratorio, codigo, nombre_laboratorio
+    public function reporteLaboratorios()
+    {
+        $sql = 'SELECT id_laboratorio, codigo, nombre_laboratorio
             FROM tb_laboratorios
             ORDER BY nombre_laboratorio';
-    $params = array();
-    return Database::getRows($sql, $params);
-}
+        $params = array();
+        return Database::getRows($sql, $params);
+    }
 
-public function getUltimosLaboratorios()
-{
-    $sql = 'SELECT id_laboratorio, codigo, nombre_laboratorio 
+    public function getUltimosLaboratorios()
+    {
+        $sql = 'SELECT id_laboratorio, codigo, nombre_laboratorio 
             FROM tb_laboratorios 
             ORDER BY id_laboratorio DESC 
             LIMIT 3';
-    $params = null;
-    return Database::getRows($sql, $params);
-}
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
 }
