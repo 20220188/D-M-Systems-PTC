@@ -186,90 +186,57 @@ const openDelete = async (id) => {
 *   Parámetros: id (identificador del registro seleccionado).
 *   Retorno: ninguno.
 */
-// Oculta inicialmente los inputs.
-NUMERO_ENTRADA1.classList.add('d-none');
-FECHA_ENTRADA1.classList.add('d-none');
-
 SAVE_FORM_REPORT.addEventListener('submit', (event) => {
     event.preventDefault();
-    
-    let selectedValue = '';
-
-    // Determina qué valor enviar basado en el input visible.
-    if (!NUMERO_ENTRADA1.classList.contains('d-none')) {
-        selectedValue = NUMERO_ENTRADA1.value;
-        console.log('Valor seleccionado (Número de Entrada):', selectedValue);
-    } else if (!FECHA_ENTRADA1.classList.contains('d-none')) {
-        selectedValue = FECHA_ENTRADA1.value;
-        console.log('Valor seleccionado (Fecha de Entrada):', selectedValue);
-    }
-
-    // Llama a la función openCreateR con el valor seleccionado.
-    openCreateR(selectedValue);
-    openReport(selectedValue);
+    openReport();
 });
 
-const openCreateR = (selectedValue) => {
-    // Se muestra la caja de diálogo con su título.
+const openCreateR = () => {
     SAVE_MODAL_REPORT.show();
     MODAL_TITLE_REPORT.textContent = 'Generar reporte';
-    // Se prepara el formulario.
     SAVE_FORM_REPORT.reset();
-
-    CB_FILTRO.addEventListener('change', () => {
-
-        // Dependiendo del valor seleccionado, muestra u oculta los inputs correspondientes.
-        if (CB_FILTRO.value === 'numeroEntrada') { // Muestra el input de número de entrada.
-            NUMERO_ENTRADA1.classList.remove('d-none');
-            NUMERO_ENTRADA1.required = true;
-            FECHA_ENTRADA1.classList.add('d-none');
-            FECHA_ENTRADA1.required = false;
-
-            console.log('Filtro seleccionado: Número de Entrada');
-        } else if (CB_FILTRO.value === 'fechaEntrada') { // Muestra el input de fecha de entrada.
-            FECHA_ENTRADA1.classList.remove('d-none');
-            FECHA_ENTRADA1.required = true;
-            NUMERO_ENTRADA1.classList.add('d-none');
-            NUMERO_ENTRADA1.required = false;
-
-            console.log('Filtro seleccionado: Fecha de Entrada');
-        } else {
-            // Si no se selecciona una opción válida, oculta ambos inputs.
-            NUMERO_ENTRADA1.classList.add('d-none');
-            NUMERO_ENTRADA1.required = false;
-            FECHA_ENTRADA1.classList.add('d-none');
-            FECHA_ENTRADA1.required = false;
-
-            console.log('Ningún filtro válido seleccionado');
-        }
-    });
 }
 
-const openReport = (selectedValue) => {
-    // Obtén el número de entrada o la fecha de entrada.
-    const numeroEntrada = NUMERO_ENTRADA1.value;
-    const fechaEntrada = FECHA_ENTRADA1.value;
-
-    // Asegúrate de que el valor esté disponible
-    if (!selectedValue) {
-        alert('Valor de entrada no disponible.');
+const openReport = () => {
+    const filtro = document.getElementById('filtro').value;
+    let valor;
+    
+    if (filtro === 'numeroEntrada') {
+        valor = document.getElementById('numeroEntradaReport').value;
+    } else if (filtro === 'fechaEntrada') {
+        valor = document.getElementById('fechaEntradaReport').value;
+    }
+    
+    if (!valor) {
+        alert('Por favor, ingrese un valor válido para el filtro seleccionado.');
         return;
     }
-
-    console.log('Valor enviado al reporte:', selectedValue);
-
-    // Declara la constante tipo objeto con la ruta específica del reporte en el servidor
-    const PATH = new URL(`${SERVER_URL}reports/admin/salidas_numerosalida.php`);
-
-    // Agrega un parámetro a la ruta con el valor seleccionado
-    if (CB_FILTRO.value === 'numeroEntrada') {
-        PATH.searchParams.append('numeroSalida', numeroEntrada);
-    } else if (CB_FILTRO.value === 'fechaEntrada') {
-        PATH.searchParams.append('fechaSalida', fechaEntrada);
-    }
-
-    console.log('Ruta del reporte:', PATH.href);
-
-    // Abre el reporte en una nueva pestaña
+    
+    const PATH = new URL(`${SERVER_URL}reports/admin/admin_entradas.php`);
+    PATH.searchParams.append('filtro', filtro);
+    PATH.searchParams.append('valor', valor);
     window.open(PATH.href);
 }
+
+// JavaScript adicional para manejar la visualización de los campos según la selección
+document.getElementById('filtro').addEventListener('change', function() {
+    const numeroEntradaContainer = document.getElementById('numeroEntradaContainer');
+    const fechaEntradaContainer = document.getElementById('fechaEntradaContainer');
+    
+    if (this.value === 'numeroEntrada') {
+        numeroEntradaContainer.style.display = 'block';
+        fechaEntradaContainer.style.display = 'none';
+        document.getElementById('numeroEntradaReport').required = true;
+        document.getElementById('fechaEntradaReport').required = false;
+    } else if (this.value === 'fechaEntrada') {
+        numeroEntradaContainer.style.display = 'none';
+        fechaEntradaContainer.style.display = 'block';
+        document.getElementById('numeroEntradaReport').required = false;
+        document.getElementById('fechaEntradaReport').required = true;
+    } else {
+        numeroEntradaContainer.style.display = 'none';
+        fechaEntradaContainer.style.display = 'none';
+        document.getElementById('numeroEntradaReport').required = false;
+        document.getElementById('fechaEntradaReport').required = false;
+    }
+});

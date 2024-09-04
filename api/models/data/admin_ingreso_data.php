@@ -26,7 +26,7 @@ class EntradasData extends EntradasHandler
             return true;
         } else {
             $this->data_error = 'El identificador de la entrada es incorrecto';
-            
+
             return false;
         }
     }
@@ -45,17 +45,6 @@ class EntradasData extends EntradasHandler
         }
     }
 
-    public function setFecha($value)
-    {
-        if (Validator::validateDate($value)) {
-            $this->fecha = $value;
-            return true;
-        } else {
-            $this->data_error = 'La fecha es incorrecta';
-            return false;
-        }
-    }
-
     public function setTipoEntrada($value, $min = 2, $max = 50)
     {
         if (!Validator::validateAlphanumeric($value)) {
@@ -70,18 +59,49 @@ class EntradasData extends EntradasHandler
         }
     }
 
+
     public function setNumeroEntrada($value)
     {
         if (Validator::validateNaturalNumber($value)) {
             $this->numero_entrada = $value;
             return true;
         } else {
+            $this->numero_entrada = null;
             $this->data_error = 'El número de entrada es incorrecto';
             return false;
         }
     }
 
-    
+    public function setFecha($value)
+    {
+        if (Validator::validateDate($value)) {
+            $this->fecha = $value;
+            return true;
+        } else {
+            $this->fecha = null;
+            $this->data_error = 'La fecha es incorrecta';
+            return false;
+        }
+    }
+
+    public function setFiltro($value)
+    {
+        if ($value === 'numeroEntrada' || $value === 'fechaEntrada') {
+            $this->filtro = $value;
+            return true;
+        } else {
+            $this->filtro = null;
+            return false;
+        }
+    }
+
+    public function getFiltro()
+    {
+        return $this->filtro;
+    }
+
+
+
     /*
      *  Métodos para obtener los atributos adicionales.
      */

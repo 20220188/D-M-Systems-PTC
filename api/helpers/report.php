@@ -20,22 +20,16 @@ class Report extends FPDF
     */
     public function startReport($title)
     {
-        // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en los reportes.
         session_start();
-        // Se verifica si un administrador ha iniciado sesión para generar el documento, de lo contrario se direcciona a la página web principal.
         if (isset($_SESSION['idAdministrador'])) {
-            // Se asigna el título del documento a la propiedad de la clase.
             $this->title = $title;
-            // Se establece el título del documento (true = utf-8).
-            $this->setTitle('D-M-SYSTEM - Reporte', true);
-            // Se establecen los margenes del documento (izquierdo, superior y derecho).
+            $this->setTitle('DM-SYSTEM - Reporte', true);
             $this->setMargins(15, 15, 15);
-            // Se añade una nueva página al documento con orientación vertical y formato carta, llamando implícitamente al método header()
             $this->addPage('p', 'letter');
-            // Se define un alias para el número total de páginas que se muestra en el pie del documento.
             $this->aliasNbPages();
         } else {
             header('location:' . self::CLIENT_URL);
+            exit; // Asegura que no se sigue ejecutando el script después de redireccionar
         }
     }
 
@@ -90,23 +84,25 @@ class Report extends FPDF
     *   Se llama automáticamente en el método output()
     */
     public function footer()
-    {
-        $this->setFont('Arial', 'I', 10);
-        $this->setY(-15);
+{
+    $this->setFont('Arial', 'I', 10);
+    $this->setY(-15);
 
-        $this->SetTextColor(255, 255, 255); // Establece el color del texto a negro
-        $this->Cell(300, -9, "Reporte generado por el usuario : '' " . $this->encodeString($_SESSION['aliasAdministrador']) . " '' ", 0, 0, 'C');
+    $usuario = isset($_SESSION['aliasAdministrador']) ? $this->encodeString($_SESSION['aliasAdministrador']) : 'Desconocido';
 
-        // Se establece la posición para el número de página (a 15 milímetros del final).
-        $this->SetY(-15);
-        // Establece el color del texto a negro
-        $this->SetTextColor(0, 0, 0); // Color negro en formato RGB
+    $this->SetTextColor(255, 255, 255); // Establece el color del texto a blanco
+    $this->Cell(300, -9, "Reporte generado por el usuario: " . $usuario, 0, 0, 'C');
 
-        // Se establece la fuente para el número de página.
-        $this->setFont('Arial', 'I', 8);
+    // Se establece la posición para el número de página (a 15 milímetros del final).
+    $this->SetY(-15);
+    // Establece el color del texto a negro
+    $this->SetTextColor(0, 0, 0); // Color negro en formato RGB
 
-        // Se imprime una celda con el número de página.
-        $this->SetTextColor(255, 255, 255); // Establece el color del texto a negro
-        $this->cell(380, 17, $this->encodeString('Página ') . $this->pageNo() . '/{nb}', 0, 0, 'C');
-    }
+    // Se establece la fuente para el número de página.
+    $this->setFont('Arial', 'I', 8);
+
+    // Se imprime una celda con el número de página.
+    $this->SetTextColor(255, 255, 255); // Establece el color del texto a blanco
+    $this->cell(380, 17, $this->encodeString('Página ') . $this->pageNo() . '/{nb}', 0, 0, 'C');
+}
 }

@@ -21,7 +21,8 @@
         <div class=" container2 row d-flex justify-content-center">
             <div class="col-md-9  d-flex justify-content-center">
                 <div class="botones">
-                    <a href="admin_ingresos.html"><button type="button" class="btn2-seleccionado"><i class="fa-solid fa-tag"></i>
+                    <a href="admin_ingresos.html"><button type="button" class="btn2-seleccionado"><i
+                                class="fa-solid fa-tag"></i>
                             Ingresos</button></a>
                     <a href="admin_modulo_compras.html"><button type="button" class="btn2"><i
                                 class="fa-solid fa-users"></i> Compras</button></a>
@@ -31,7 +32,7 @@
                 </div>
             </div>
         </div>
-    
+
         <!-- Título del contenido principal -->
         <h3 id="mainTitle"></h3>
         <div class="row">
@@ -102,18 +103,15 @@
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="notaEntrada" class="form-label">Agregue una nota sobre la entrada</label>
-                                <textarea class="form-control" id="notaEntrada" name="notaEntrada"
-                                    rows="3"></textarea>
+                                <textarea class="form-control" id="notaEntrada" name="notaEntrada" rows="3"></textarea>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="tipoEntrada" class="form-label">Tipo de entrada</label>
-                                <input id="tipoEntrada" type="text" name="tipoEntrada" class="form-control"
-                                    required>
+                                <input id="tipoEntrada" type="text" name="tipoEntrada" class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="fechaEntrada" class="form-label">Fecha de entrada</label>
-                                <input id="fechaEntrada" type="date" name="fechaEntrada" class="form-control"
-                                    required>
+                                <input id="fechaEntrada" type="date" name="fechaEntrada" class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -138,34 +136,34 @@
                     <form id="saveFormReport">
                         <div class="modal-body row g-3">
                             <div class="col-sm-12 col-md-12">
-                                <label for="filtro" class="form-label">En base a que quiere cear su reporte?</label>
-                                <select class="form-select form-select-sm" aria-label="Small select example" id="filtro" name="filtro">
-                                    <option selected>Seleccione una de las opciones</option>
+                                <label for="filtro" class="form-label">¿En base a qué quiere crear su reporte?</label>
+                                <select class="form-select" id="filtro" name="filtro" required>
+                                    <option value="">Seleccione una opción</option>
                                     <option value="numeroEntrada">Número de entrada</option>
                                     <option value="fechaEntrada">Fecha de entrada</option>
                                 </select>
                             </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="numeroEntradaReport" class="form-label">Ingrese el numero de entrada</label>
-                                <input id="numeroEntradaReport" type="number" name="numeroEntradaReport" class="form-control" required>
+                            <div class="col-sm-12 col-md-6" id="numeroEntradaContainer" style="display: none;">
+                                <label for="numeroEntradaReport" class="form-label">Ingrese el número de entrada</label>
+                                <input id="numeroEntradaReport" type="number" name="numeroEntradaReport"
+                                    class="form-control">
                             </div>
-
-                            <div class="col-sm-12 col-md-6">
+                            <div class="col-sm-12 col-md-6" id="fechaEntradaContainer" style="display: none;">
                                 <label for="fechaEntradaReport" class="form-label">Fecha de entrada</label>
                                 <input id="fechaEntradaReport" type="date" name="fechaEntradaReport"
-                                    class="form-control" required>
+                                    class="form-control">
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Generar reporte</button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
     </main>
-    
+
     <script type="text/javascript" src="../resources/js/dashboardAdminPlantilla.js"></script>
     <script src="../controllers/utils/admin.js"></script>
     <script src="../controllers/utils/components.js"></script>

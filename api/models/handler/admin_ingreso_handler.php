@@ -17,6 +17,7 @@ class EntradasHandler
     protected $tipo_entrada = null;
     protected $numero_entrada = null;
     protected $id_detalle_producto = null;
+    protected $filtro = null;
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -82,4 +83,40 @@ class EntradasHandler
     /*
     *  Método para los registros de la tabla de detalles de productos.
     */
+
+    public function reportNE()
+    {
+        $sql = 'SELECT id_entrada, numero_entrada, fecha, tipo_entrada, nota
+                FROM tb_entradas
+                WHERE ';
+        
+        $params = array();
+        
+        if ($this->filtro === 'numeroEntrada' && $this->numero_entrada !== null) {
+            $sql .= 'numero_entrada = ?';
+            $params[] = $this->numero_entrada;
+        } elseif ($this->filtro === 'fechaEntrada' && $this->fecha !== null) {
+            $sql .= 'fecha = ?';
+            $params[] = $this->fecha;
+        } else {
+            // Si no hay filtro válido, retorna false
+            return false;
+        }
+        
+        // Añade depuración
+        //echo "SQL: $sql<br>";
+        //echo "Params: ";
+        //print_r($params);
+        //echo "<br>";
+
+        $result = Database::getRows($sql, $params);
+        
+        // Añade depuración
+        //echo "Resultado de la consulta: ";
+        //var_dump($result);
+        //echo "<br>";
+
+        return $result;
+    }
+
 }
