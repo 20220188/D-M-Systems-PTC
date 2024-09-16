@@ -7,10 +7,16 @@ if (MAIN_TITLE) {
     MAIN_TITLE.classList.add('text-center', 'py-3');
 }
 
+const asideContent = `
+    <footer>
+        <p>&copy; 2024 Mi Proyecto. Todos los derechos reservados.</p>
+    </footer>
+`;
+
 /* Función asíncrona para cargar el encabezado y pie del documento.
-* Parámetros: ninguno.
-* Retorno: ninguno.
-*/
+ * Parámetros: ninguno.
+ * Retorno: ninguno.
+ */
 const loadTemplate = async () => {
     try {
         // Petición para obtener el nombre del usuario que ha iniciado sesión.
@@ -28,15 +34,16 @@ const loadTemplate = async () => {
         <div class="icon__menu">
             <i class="fas fa-bars" id="btn_open"></i>
         </div>
-        <div><img src="" alt="">
-        </div>
-        </header>
+        <div><img src="" alt=""></div>
+</header>
 <div class="menu__side" id="menu_side">
 
-    <a href="dashboard.html"><div class="name__page">
-    <i class="fa-solid fa-user-tie"></i>
-        <h4>Admin</h4>
-    </div></a>
+    <a href="dashboard.html">
+        <div class="name__page">
+            <i class="fa-solid fa-user-tie"></i>
+            <h4>Admin</h4>
+        </div>
+    </a>
 
     <div class="options__menu">    
         <a href="admin_maestro_productos.html" class="menu-option">
@@ -63,7 +70,6 @@ const loadTemplate = async () => {
                 <h4>Utilidades</h4>
             </div>
         </a>
-        </a>
         <a href="profile.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-user" title="Editar perfil"></i>
@@ -79,9 +85,7 @@ const loadTemplate = async () => {
     </div>
 
 </div>
-</aside>
-
- `;
+`;
                 } else if (DATA.user_level == 2) {
                     navOptions = `
 <header class="header">
@@ -89,15 +93,16 @@ const loadTemplate = async () => {
         <div class="icon__menu">
             <i class="fas fa-bars" id="btn_open"></i>
         </div>
-        <div><img src="" alt="">
-        </div>
-        </header>
+        <div><img src="" alt=""></div>
+</header>
 <div class="menu__side" id="menu_side">
 
-    <a href="dashboard.html"><div class="name__page">
-    <i class="fa-solid fa-user-tie"></i>
-        <h4>Admin</h4>
-    </div></a>
+    <a href="dashboard.html">
+        <div class="name__page">
+            <i class="fa-solid fa-user-tie"></i>
+            <h4>Inventario</h4>
+        </div>
+    </a>
 
     <div class="options__menu">    
         <a href="admin_maestro_productos.html" class="menu-option">
@@ -133,9 +138,7 @@ const loadTemplate = async () => {
     </div>
 
 </div>
-</aside>
-
- `;
+`;
                 } else if (DATA.user_level == 3) {
                     navOptions = `
 <header class="header">
@@ -143,15 +146,16 @@ const loadTemplate = async () => {
         <div class="icon__menu">
             <i class="fas fa-bars" id="btn_open"></i>
         </div>
-        <div><img src="" alt="">
-        </div>
-        </header>
+        <div><img src="" alt=""></div>
+</header>
 <div class="menu__side" id="menu_side">
 
-    <a href="dashboard.html"><div class="name__page">
-    <i class="fa-solid fa-user-tie"></i>
-        <h4>Admin</h4>
-    </div></a>
+    <a href="dashboard.html">
+        <div class="name__page">
+            <i class="fa-solid fa-user-tie"></i>
+            <h4>Ventas</h4>
+        </div>
+    </a>
 
     <div class="options__menu">    
         <a href="admin_maestro_productos.html" class="menu-option">
@@ -160,24 +164,11 @@ const loadTemplate = async () => {
                 <h4>Maestros</h4>
             </div>
         </a>
-        <a href="admin_ingresos.html" class="menu-option">
-            <div class="option">
-                <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
-                <h4>Movimientos</h4>
-            </div>
-        </a>
         <a href="admin_reporte_ventas.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-file" title="Reportes"></i>
                 <h4>Reportes</h4>
             </div>
-        </a>
-        <a href="admin_usuarios.html" class="menu-option">
-            <div class="option">
-                <i class="fa-solid fa-eye" title="Utilidades"></i>
-                <h4>Utilidades</h4>
-            </div>
-        </a>
         </a>
         <a href="profile.html" class="menu-option">
             <div class="option">
@@ -194,11 +185,9 @@ const loadTemplate = async () => {
     </div>
 
 </div>
-</aside>
-
-    `;
+`;
                 }
-
+                
                 // Se agrega el contenido del menú.
                 const menuElement = document.createElement('div');
                 menuElement.classList.add('menu');
@@ -213,7 +202,7 @@ const loadTemplate = async () => {
                 // Agregar el footer
                 const asideElement = document.createElement('aside');
                 asideElement.classList.add('aside'); // Add class for styling
-                asideElement.innerHTML = asideHTML;
+                asideElement.innerHTML = asideContent; // Cambiado asideHTML a asideContent
                 document.body.appendChild(asideElement);
             } else {
                 location.href = 'index.html';
@@ -223,6 +212,4 @@ const loadTemplate = async () => {
         console.error('Error loading template:', error);
         location.href = 'index.html';
     }
-}
-
-// Ejecutar
+};
