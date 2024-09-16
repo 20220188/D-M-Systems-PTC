@@ -46,16 +46,16 @@
             <div class="panel1 col-md-4">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label for="inputFecha" class="form-label" style="color: red;">Fecha*</label>
+                        <label for="inputFecha" class="form-label" style="color: black;">Fecha</label>
                         <input type="date" class="form-control" id="inputFecha">
                     </div>
                     <div class="col-md-6">
-                        <label for="inputVendedor" class="form-label"style="color: red;">Vendedor* (este es el valor del dependiente de la tabla del dependiente. tiene que ser un buscador por medio del codigo o del nombre. tenes que agregarle otro espacio de escritura, el primero que sea el codigo y el otro el nombre como tal)</label>
+                        <label for="inputVendedor" class="form-label"style="color:black;">Vendedor</label>
                         <input type="text" class="form-control" id="inputVendedor">
                     </div>
 
                     <div class="col-md-6">
-                        <label for="inputPago" class="form-label"style="color: red;">Forma de pago* (las formas de pago vienen desde la base)</label>
+                        <label for="inputPago" class="form-label"style="color: black;">Forma de pago</label>
                         <select id="inputPago" name="inputPago" class="form-select" required>
                             <option value="">Seleccionar </option>
                             <option value="Zapatillas">Efectivo </option>
@@ -64,7 +64,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="inputBodega" class="form-label"style="color: red;">Bodega* (la bodega viene desde la base)</label>
+                        <label for="inputBodega" class="form-label"style="color: black;">Bodega</label>
                         <select id="inputBodega" name="inputBodega" class="form-select" required>
                             <option value="">Seleccionar </option>
                             <option value="Zapatillas">Bodega 1</option>
@@ -77,7 +77,7 @@
             <div class="panel2 col-md-4">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label for="inputDocumento" class="form-label"style="color: red;">Documento*  (el documento tiene que venir desde la base, eso ya esta creado)</label>
+                        <label for="inputDocumento" class="form-label"style="color: black;">Documento</label>
                         <select id="inputDocumento" name="inputDocumento" class="form-select" required>
                             <option value="">Seleccionar </option>
                             <option value="Zapatillas">Documento 1</option>
@@ -85,12 +85,12 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label for="inputVendedor" class="form-label"style="color: red;">Cliente* (aqui tenes que hacer un buscador para clientes, solo debe funcionar con el nombre)</label>
+                        <label for="inputVendedor" class="form-label"style="color: black;">Cliente</label>
                         <input type="text" class="form-control" id="inputVendedor">
                     </div>
 
                     <div class="col-6">
-                        <label for="inputNotas" class="form-label">Notas (las notas no son obligatorias, puede recibir valores nulos)</label>
+                        <label for="inputNotas" class="form-label">Notas </label>
                         <input type="text" class="form-control" id="inputNotas">
                     </div>
                 </div>
@@ -104,55 +104,19 @@
         <hr class="hr">  
 
         <!--Codigo de la tabla donde se mostraran las ventas-->
-        <div class="container1 row">
-            <div class="  col-md-10 col-sm-12">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">6</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <table class="table table-hover text-center">
+            <thead>
+                <tr>
+                    <td class="text-start" colspan="2" id="rowsFound"></td>
+                </tr>
+                <tr>
+                    <th>PUNTO DE VENTA</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
 
             <!--Inputs donde se calculará el precio de la venta y donde se mostrarán otros precios de venta sugeridos -->
             <div class="col-md-2">
