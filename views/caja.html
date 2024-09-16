@@ -11,18 +11,17 @@
   <link rel="stylesheet" href="../resources/css/dashboard.css">
   <link rel="stylesheet" href="../resources/css/caja.css">
   <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-
   <link rel="icon" href="../resources/img/por el momento.jpg">
   <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
 </head>
-<!--Plantilla de dashboard-->
 
 <body id="body">
   <!--Main donde se trabajará-->
   <main>
     <h1 class="text-center">Por vender</h1>
+
     <!--Tabla donde se cargará la información de "Por vender"-->
-    <table class="table">
+    <table class="table" id="ventaTable">
       <thead class="table-light">
         <tr>
           <th scope="col">Cliente</th>
@@ -32,24 +31,10 @@
           <th scope="col">ID Venta</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <th scope="row">0195648-2</th>
-          <td>Venta de contado</td>
-          <td>35.5</td>
-          <td>Kevin</td>
-          <td>45</td>
-        </tr>
-        <tr>
-          <th scope="row">0896328-2</th>
-          <td>Venta de contado</td>
-          <td>1.5</td>
-          <td>Rodrigo</td>
-          <td>46</td>
-        </tr>
+      <tbody id="ventaBody">
+        <!-- Aquí se cargan dinámicamente los datos -->
       </tbody>
     </table>
-
 
     <!--Botones-->
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -58,9 +43,10 @@
     </div>
     <!--Division-->
     <hr>
+
     <!--Tabla donde se cargará la información de "Venta"-->
     <h1 class="text-center">Venta</h1>
-    <table class="table">
+    <table class="table" id="detalleTable">
       <thead class="table-light">
         <tr>
           <th scope="col">Código</th>
@@ -72,91 +58,56 @@
           <th scope="col">Valor</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <th scope="row">000</th>
-          <td>ACETAMINOFEN MK</td>
-          <td>6</td>
-          <td>$0.10</td>
-          <td>0</td>
-          <td>.10</td>
-          <td>$0.60</td>
-        </tr>
-        <tr>
-          <th scope="row">001</th>
-          <td>ACETAMINOFEN JARABE</td>
-          <td>1</td>
-          <td>$10</td>
-          <td>5</td>
-          <td>$10</td>
-          <td>$8.55</td>
-        </tr>
+      <tbody id="detalleBody">
+        <!-- Aquí se cargan dinámicamente los detalles de la venta -->
       </tbody>
     </table>
 
-
-    
-<!--Informacón para precios-->
-
-<div class="row d-grid gap-2 d-md-flex justify-content-md-end">
-  <div class="col-md-6 ">
+    <!--Informacón para precios-->
     <div class="row d-grid gap-2 d-md-flex justify-content-md-end">
-      <div class="col-md-4">
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default">Sub total</span>
-          <input type="text" class="form-control" aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default">IVA</span>
-          <input type="text" class="form-control" aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-default">
-        </div>
+      <div class="col-md-6">
+        <div class="row d-grid gap-2 d-md-flex justify-content-md-end">
+          <div class="col-md-4">
+            <div class="input-group mb-3">
+              <span class="input-group-text">Sub total</span>
+              <input type="text" class="form-control">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">IVA</span>
+              <input type="text" class="form-control">
+            </div>
 
-        <!--Checkbox solicitado para reporteria si por tarjeta o efectivo-->
+            <!--Checkbox solicitado para reporteria si por tarjeta o efectivo-->
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="tarjetaRadio">
+              <label class="form-check-label" for="tarjetaRadio">Tarjeta</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="efectivoRadio" checked>
+              <label class="form-check-label" for="efectivoRadio">Efectivo</label>
+            </div>
+          </div>
 
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-          <label class="form-check-label" for="flexRadioDefault1">
-            Tarjeta
-          </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-          <label class="form-check-label" for="flexRadioDefault2">
-            Efectivo
-          </label>
-        </div>
-      </div>
-
-      <!--Información de pago-->
-
-      <div class="col-md-4">
-        <div class="input-group input-group-lg mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-lg">Total</span>
-          <input type="text" class="form-control" aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-lg">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default">Efectivo</span>
-          <input type="text" class="form-control" aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-default">
-        </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text" id="inputGroup-sizing-default">Cambio</span>
-          <input type="text" class="form-control" aria-label="Sizing example input"
-            aria-describedby="inputGroup-sizing-default">
+          <!--Información de pago-->
+          <div class="col-md-4">
+            <div class="input-group input-group-lg mb-3">
+              <span class="input-group-text">Total</span>
+              <input type="text" class="form-control">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Efectivo</span>
+              <input type="text" class="form-control">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Cambio</span>
+              <input type="text" class="form-control">
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-
-    
-
-
     </div>
     <!--Botones-->
-    <div class=" container2 row">
+    <div class="container2 row">
       <div class="col-md-6">
         <div class="botones">
           <button type="button" class="btn" id="btnEditar"><i class="fa-solid fa-pen fa-1x"></i> Editar</button>
@@ -165,54 +116,64 @@
         </div>
       </div>
     </div>
-
-    <div class=" container1 row">
-      <div class="col-md-6">
-        <div class="botones">
-
-          <div class="precio2">
-            <div class="inputsss"><input type="text" class="form-control" id="autoSizingInput" placeholder=""></div>
-            <button type="button" class="botones1"><i class="fa-solid fa-print fa-1x"></i> Precio 2</button>
-          </div>
-
-          <div class="precio3">
-            <div class="inputsss"><input type="text" class="form-control" id="autoSizingInput" placeholder=""></div>
-            <button type="button" class="botones1"><i class="fa-solid fa-print fa-1x"></i> Precio 3</button>
-          </div>
-
-          <div class="precio4">
-            <div class="inputsss"><input type="text" class="form-control" id="autoSizingInput" placeholder=""></div>
-            <button type="button" class="botones1"><i class="fa-solid fa-print fa-1x"></i> Precio 4</button>
-          </div>
-
-          <div class="precio5">
-            <div class="inputsss"><input type="text" class="form-control" id="autoSizingInput" placeholder=""></div>
-            <button type="button" class="botones1"><i class="fa-solid fa-print fa-1x"></i> Precio 5</button>
-          </div>
-
-          <div class="precio6">
-            <div class="inputsss"><input type="text" class="form-control" id="autoSizingInput" placeholder=""></div>
-            <button type="button" class="botones1"><i class="fa-solid fa-print fa-1x"></i> Otro precio</button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    
-
   </main>
-
-
-
-
-</body>
-
 
 <script type="text/javascript" src="../resources/js/cajaDashboard.js"></script>
 <script type="text/javascript" src="../resources/js/alertas.js"></script>
-<!--Mandamos a llamar las librerias de Sweetalert2-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
 
+<!-- Script para cargar y manejar la tabla -->
+<script>
+  // Función para cargar las ventas en la tabla superior
+  function loadVentas() {
+    fetch('ruta-api-ventas')
+      .then(response => response.json())
+      .then(data => {
+        const ventaBody = document.getElementById('ventaBody');
+        ventaBody.innerHTML = '';
+
+        data.forEach(venta => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${venta.cliente}</td>
+            <td>${venta.tipo_venta}</td>
+            <td>${venta.total}</td>
+            <td>${venta.dependiente}</td>
+            <td><button class="btn btn-link" onclick="loadDetalle(${venta.id_venta})">${venta.id_venta}</button></td>
+          `;
+          ventaBody.appendChild(row);
+        });
+      });
+  }
+
+  // Función para cargar los detalles de una venta en la tabla inferior
+  function loadDetalle(idVenta) {
+    fetch(`ruta-api-detalles-venta?id=${idVenta}`)
+      .then(response => response.json())
+      .then(data => {
+        const detalleBody = document.getElementById('detalleBody');
+        detalleBody.innerHTML = '';
+
+        data.forEach(detalle => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${detalle.codigo}</td>
+            <td>${detalle.descripcion}</td>
+            <td>${detalle.cantidad}</td>
+            <td>${detalle.precio_sin_descuento}</td>
+            <td>${detalle.descuento}</td>
+            <td>${detalle.precio_unitario}</td>
+            <td>${detalle.valor}</td>
+          `;
+          detalleBody.appendChild(row);
+        });
+      });
+  }
+
+  // Cargar las ventas cuando la página esté lista
+  document.addEventListener('DOMContentLoaded', loadVentas);
+</script>
+
+</body>
 </html>
