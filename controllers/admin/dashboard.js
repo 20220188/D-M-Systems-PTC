@@ -1,4 +1,4 @@
-const USER_API = 'services/admin/admin_usuarios.php';
+//const USER_API = 'services/admin/admin_usuarios.php';
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
