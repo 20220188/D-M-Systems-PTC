@@ -64,8 +64,8 @@ TOGGLE_CONFIRM_PASSWORD.addEventListener('click', () => togglePasswordVisibility
 
 // Función para verificar la fortaleza de la contraseña
 const isPasswordStrong = (password) => {
-    if (password.length < 8) {
-        return 'La contraseña debe tener al menos 8 caracteres.';
+    if (password.length < 8 || password.length > 24) {
+        return 'La contraseña debe tener entre 8 y 24 caracteres.';
     }
     
     const hasLowerCase = /[a-z]/.test(password);
