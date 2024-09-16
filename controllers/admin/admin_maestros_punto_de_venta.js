@@ -17,7 +17,76 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_PUNTO_VENTA = document.getElementById('idPuntoVenta'),
     NOMBRE_PUNTO_VENTA = document.getElementById('nombrePuntoVenta'),
     CLAVE_PUNTO_VENTA = document.getElementById('clavePuntoVenta');
-    CONFIRMAR_CLAVE = document.getElementById('confirmarClave');
+CONFIRMAR_CLAVE = document.getElementById('confirmarClave');
+
+// Constantes para los mensajes de error
+const PASSWORD_ERROR = document.getElementById('passwordError');
+const CONFIRM_PASSWORD_ERROR = document.getElementById('confirmPasswordError');
+
+const TOGGLE_PASSWORD = document.getElementById('togglePassword');
+const TOGGLE_CONFIRM_PASSWORD = document.getElementById('toggleConfirmPassword');
+
+// Función para alternar la visibilidad de la contraseña
+const togglePasswordVisibility = (inputField, toggleButton) => {
+    const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
+    inputField.setAttribute('type', type);
+    toggleButton.querySelector('i').classList.toggle('fa-eye');
+    toggleButton.querySelector('i').classList.toggle('fa-eye-slash');
+};
+
+// Evento para mostrar/ocultar la contraseña
+TOGGLE_PASSWORD.addEventListener('click', () => togglePasswordVisibility(CLAVE_PUNTO_VENTA, TOGGLE_PASSWORD));
+
+TOGGLE_CONFIRM_PASSWORD.addEventListener('click', () => togglePasswordVisibility(CONFIRMAR_CLAVE, TOGGLE_CONFIRM_PASSWORD));
+
+// Función para verificar la fortaleza de la contraseña
+const isPasswordStrong = (password) => {
+    if (password.length < 8) {
+        return 'La contraseña debe tener al menos 8 caracteres.';
+    }
+
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
+
+    if (!(hasLowerCase && hasUpperCase && hasNumber && hasSpecialChar)) {
+        return 'La contraseña debe incluir mayúsculas, minúsculas, números y caracteres especiales.';
+    }
+
+    return ''; // Contraseña válida
+}
+
+// Función para mostrar mensajes de error
+const showError = (element, message) => {
+    element.textContent = message;
+    element.style.display = 'block';
+}
+
+// Función para ocultar mensajes de error
+const hideError = (element) => {
+    element.textContent = '';
+    element.style.display = 'none';
+}
+
+// Evento para validar la contraseña mientras se escribe
+CLAVE_PUNTO_VENTA.addEventListener('input', () => {
+    const errorMessage = isPasswordStrong(CLAVE_PUNTO_VENTA.value);
+    if (errorMessage) {
+        showError(PASSWORD_ERROR, errorMessage);
+    } else {
+        hideError(PASSWORD_ERROR);
+    }
+});
+
+// Evento para validar la confirmación de contraseña mientras se escribe
+CONFIRMAR_CLAVE.addEventListener('input', () => {
+    if (CLAVE_PUNTO_VENTA.value !== CONFIRMAR_CLAVE.value) {
+        showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
+    } else {
+        hideError(CONFIRM_PASSWORD_ERROR);
+    }
+});
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -37,12 +106,30 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     const FORM = new FormData(SEARCH_FORM);
     // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
+
+    CLAVE_PUNTO_VENTA.setAttribute('type', 'password');
+    CONFIRMAR_CLAVE.setAttribute('type', 'password');
+    TOGGLE_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+    TOGGLE_PASSWORD.querySelector('i').classList.add('fa-eye');
+    TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+    TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.add('fa-eye');
 });
 
 // Método del evento para cuando se envía el formulario de guardar.
 SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
+
+    const passwordError = isPasswordStrong(CLAVE_PUNTO_VENTA.value);
+    if (passwordError) {
+        showError(PASSWORD_ERROR, passwordError);
+        return;
+    }
+
+    if (CLAVE_PUNTO_VENTA.value !== CONFIRMAR_CLAVE.value) {
+        showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
+        return;
+    }
     // Se verifica la acción a realizar.
     (ID_PUNTO_VENTA.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
@@ -112,9 +199,14 @@ const openCreate = () => {
     MODAL_TITLE.textContent = 'Crear Punto de Venta';
     // Se prepara el formulario.
     SAVE_FORM.reset();
-    NOMBRE_PUNTO_VENTA.disabled = false;
     CLAVE_PUNTO_VENTA.disabled = false;
-    CONFIRMAR_CLAVE.disabled = false;
+
+    CLAVE_PUNTO_VENTA.setAttribute('type', 'password');
+    CONFIRMAR_CLAVE.setAttribute('type', 'password');
+    TOGGLE_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+    TOGGLE_PASSWORD.querySelector('i').classList.add('fa-eye');
+    TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+    TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.add('fa-eye');
 }
 
 /*
@@ -130,17 +222,24 @@ const openUpdate = async (id) => {
         SAVE_MODAL.show();
         MODAL_TITLE.textContent = 'Actualizar Punto de Venta';
         SAVE_FORM.reset();
-        
-        const ROW = DATA.dataset;
 
+        const ROW = DATA.dataset;
         ID_PUNTO_VENTA.value = ROW.id_punto_venta; // Asegúrate de que este campo esté oculto
         NOMBRE_PUNTO_VENTA.value = ROW.punto_venta;
         CLAVE_PUNTO_VENTA.value = ROW.clave;
         CONFIRMAR_CLAVE.value = ROW.clave; // Este campo también se debe llenar
 
-        NOMBRE_PUNTO_VENTA.disabled = false;
-        CLAVE_PUNTO_VENTA.disabled = false;
-        CONFIRMAR_CLAVE.disabled = false;
+        // Se bloquea el campo de contraseña
+        CLAVE_PUNTO_VENTA.disabled = true;
+        hideError(PASSWORD_ERROR);
+        hideError(CONFIRM_PASSWORD_ERROR);
+
+        CLAVE_PUNTO_VENTA.setAttribute('type', 'password');
+        CONFIRMAR_CLAVE.setAttribute('type', 'password');
+        TOGGLE_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+        TOGGLE_PASSWORD.querySelector('i').classList.add('fa-eye');
+        TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+        TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.add('fa-eye');
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -180,7 +279,7 @@ const openPuntoVentaChart = async () => {
     // Petición para obtener los datos de los puntos de venta
     const DATA = await fetchData(PUNTO_VENTA_API, 'PuntoVentaGrafico', null);
 
-    
+
     if (DATA.status) {
         // Muestra la caja de diálogo con su título
         const CHART_MODAL = new bootstrap.Modal(document.getElementById('chartModal'));
@@ -200,7 +299,7 @@ const openPuntoVentaChart = async () => {
         document.getElementById('chartContainer').innerHTML = `<canvas id="chart"></canvas>`;
 
         // Llama a la función para generar y mostrar el gráfico de barras
-        barGraph('chart', puntosVenta,idsPuntoVenta, 'Últimos 3 Puntos de Venta');
+        barGraph('chart', puntosVenta, idsPuntoVenta, 'Últimos 3 Puntos de Venta');
     } else {
         sweetAlert(4, DATA.error, true);
     }

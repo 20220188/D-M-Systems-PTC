@@ -114,13 +114,24 @@
                                     required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="clavePuntoVenta" class="form-label">clave</label>
-                                <input id="clavePuntoVenta" type="password" name="clavePuntoVenta"
-                                    class="form-control" required>
+                                <label for="Clave">Contraseña:</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="clavePuntoVenta" name="clavePuntoVenta" autocomplete="new-password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div id="passwordError" class="text-danger" style="display: none;"></div>
                             </div>
-                            <div class="col-sm-12 col-md-6 col-lg-4 ">
-                                <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
-                                <input id="confirmarClave" type="password" name="confirmarClave" class="form-control" required>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="confirmarClave">Confirmar Contraseña:</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="confirmarClave" name="confirmarClave" autocomplete="new-password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div id="confirmPasswordError" class="text-danger" style="display: none;"></div>
                             </div>
                         </div>
                         <div class="modal-footer">
