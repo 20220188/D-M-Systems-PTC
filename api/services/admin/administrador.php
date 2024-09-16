@@ -152,7 +152,10 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Contraseña actual incorrecta';
                 } elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
                     $result['error'] = 'Confirmación de contraseña diferente';
-                } elseif (!$administrador->setClave($_POST['claveNueva'])) {
+                }elseif ($_POST['claveNueva'] == $_POST['claveActual']) {
+                    $result['error'] = 'La nueva contraseña no puede ser igual a la actual';
+                } 
+                elseif (!$administrador->setClave($_POST['claveNueva'])) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->changePassword()) {
                     $result['status'] = 1;

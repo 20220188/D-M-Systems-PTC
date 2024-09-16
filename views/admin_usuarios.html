@@ -125,19 +125,31 @@
                                 <input id="DUIUsuario" type="text" name="DUIUsuario" class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="Clave" class="form-label">Clave</label>
-                                <input id="Clave" type="password" name="Clave" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
-                                <input id="confirmarClave" type="password" name="confirmarClave" class="form-control"
-                                    required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
                                 <label for="idNivelUsuario" class="form-label">Nivel</label>
                                 <select id="idNivelUsuario" name="idNivelUsuario" class="form-select" required>
                                 </select>
                             </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Clave">Contraseña:</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="Clave" name="Clave" autocomplete="new-password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div id="passwordError" class="text-danger" style="display: none;"></div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="confirmarClave">Confirmar Contraseña:</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="confirmarClave" name="confirmarClave" autocomplete="new-password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div id="confirmPasswordError" class="text-danger" style="display: none;"></div>
+                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary">Guardar</button>
@@ -180,6 +192,9 @@
 
     <!-- Llamada al kit de font awesome -->
     <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+
+    <!-- Inclusión de la librería de mascaras. Para más información https://github.com/text-mask/text-mask -->
+    <script type="text/javascript" src="../resources/js/vanillaTextMask.js"></script>
 
     <!-- Scripts de JavaScript -->
     <!-- Agrega los enlaces a los scripts de Bootstrap y SweetAlert2 -->

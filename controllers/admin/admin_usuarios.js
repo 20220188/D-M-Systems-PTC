@@ -11,7 +11,7 @@ const SEARCH_FORM = document.getElementById('searchForm');
 const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
 
-    const SAVE_FORM_REPORT = document.getElementById('saveFormReport')
+const SAVE_FORM_REPORT = document.getElementById('saveFormReport')
 //Constantes para establecer los elementos del componente Modal para reporte parametrizado.
 const SAVE_MODAL_REPORT = new bootstrap.Modal('#saveModalReport'),
     MODAL_TITLE_REPORT = document.getElementById('modalTitleReport');
@@ -32,6 +32,85 @@ const SAVE_FORM = document.getElementById('saveForm'),
     TELEFONO = document.getElementById('telefonoUsuario'),
     ID_NIVEL_USUARIO = document.getElementById('idNivelUsuario');
 
+// Constantes para los mensajes de error
+const PASSWORD_ERROR = document.getElementById('passwordError');
+const CONFIRM_PASSWORD_ERROR = document.getElementById('confirmPasswordError');
+
+const TOGGLE_PASSWORD = document.getElementById('togglePassword');
+const TOGGLE_CONFIRM_PASSWORD = document.getElementById('toggleConfirmPassword');
+
+vanillaTextMask.maskInput({
+    inputElement: document.getElementById('telefonoUsuario'),
+    mask: [/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
+});
+// Llamada a la función para establecer la mascara del campo DUI.
+vanillaTextMask.maskInput({
+    inputElement: document.getElementById('DUIUsuario'),
+    mask: [/\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/]
+});
+
+// Función para alternar la visibilidad de la contraseña
+const togglePasswordVisibility = (inputField, toggleButton) => {
+    const type = inputField.getAttribute('type') === 'password' ? 'text' : 'password';
+    inputField.setAttribute('type', type);
+    toggleButton.querySelector('i').classList.toggle('fa-eye');
+    toggleButton.querySelector('i').classList.toggle('fa-eye-slash');
+};
+
+// Evento para mostrar/ocultar la contraseña
+TOGGLE_PASSWORD.addEventListener('click', () => togglePasswordVisibility(CLAVE, TOGGLE_PASSWORD));
+
+TOGGLE_CONFIRM_PASSWORD.addEventListener('click', () => togglePasswordVisibility(CONFIRMAR_CLAVE, TOGGLE_CONFIRM_PASSWORD));
+
+// Función para verificar la fortaleza de la contraseña
+const isPasswordStrong = (password) => {
+    if (password.length < 8) {
+        return 'La contraseña debe tener al menos 8 caracteres.';
+    }
+    
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
+    
+    if (!(hasLowerCase && hasUpperCase && hasNumber && hasSpecialChar)) {
+        return 'La contraseña debe incluir mayúsculas, minúsculas, números y caracteres especiales.';
+    }
+
+    return ''; // Contraseña válida
+}
+
+// Función para mostrar mensajes de error
+const showError = (element, message) => {
+    element.textContent = message;
+    element.style.display = 'block';
+}
+
+// Función para ocultar mensajes de error
+const hideError = (element) => {
+    element.textContent = '';
+    element.style.display = 'none';
+}
+
+// Evento para validar la contraseña mientras se escribe
+CLAVE.addEventListener('input', () => {
+    const errorMessage = isPasswordStrong(CLAVE.value);
+    if (errorMessage) {
+        showError(PASSWORD_ERROR, errorMessage);
+    } else {
+        hideError(PASSWORD_ERROR);
+    }
+});
+
+// Evento para validar la confirmación de contraseña mientras se escribe
+CONFIRMAR_CLAVE.addEventListener('input', () => {
+    if (CLAVE.value !== CONFIRMAR_CLAVE.value) {
+        showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
+    } else {
+        hideError(CONFIRM_PASSWORD_ERROR);
+    }
+});
+
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para llenar la tabla con los registros existentes.
@@ -46,25 +125,37 @@ SEARCH_FORM.addEventListener('submit', (event) => {
     const FORM = new FormData(SEARCH_FORM);
     // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
     fillTable(FORM);
+
+    CLAVE.setAttribute('type', 'password');
+    CONFIRMAR_CLAVE.setAttribute('type', 'password');
+    TOGGLE_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+    TOGGLE_PASSWORD.querySelector('i').classList.add('fa-eye');
+    TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+    TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.add('fa-eye');
 });
 
 // Método del evento para cuando se envía el formulario de guardar.
 SAVE_FORM.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    // Se verifica la acción a realizar.
+
+    const passwordError = isPasswordStrong(CLAVE.value);
+    if (passwordError) {
+        showError(PASSWORD_ERROR, passwordError);
+        return;
+    }
+    
+    if (CLAVE.value !== CONFIRMAR_CLAVE.value) {
+        showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
+        return;
+    }
+
     (ID_USUARIO.value) ? action = 'updateRow' : action = 'createRow';
-    // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
-    // Petición para guardar los datos del formulario.
     const DATA = await fetchData(USUARIO_API, action, FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+
     if (DATA.status) {
-        // Se cierra la caja de diálogo.
         SAVE_MODAL.hide();
-        // Se muestra un mensaje de éxito.
         sweetAlert(1, DATA.message, true);
-        // Se carga nuevamente la tabla para visualizar los cambios.
         fillTable();
     } else {
         sweetAlert(2, DATA.error, false);
@@ -77,21 +168,16 @@ SAVE_FORM.addEventListener('submit', async (event) => {
 *   Retorno: ninguno.
 */
 const fillTable = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
     ROWS_FOUND.textContent = '';
     TABLE_BODY.innerHTML = '';
-    // Se verifica la acción a realizar.
+
     (form) ? action = 'searchRows' : action = 'readAll';
-    // Petición para obtener los registros disponibles.
     const DATA = await fetchData(USUARIO_API, action, form);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+
     if (DATA.status) {
-        // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    
                     <td>${row.usuario}</td>
                     <td>${row.nombre}</td>
                     <td>${row.telefono}</td>
@@ -109,7 +195,6 @@ const fillTable = async (form = null) => {
                 </tr>
             `;
         });
-        // Se muestra un mensaje de acuerdo con el resultado.
         ROWS_FOUND.textContent = DATA.message;
     } else {
         sweetAlert(4, DATA.error, true);
@@ -118,88 +203,64 @@ const fillTable = async (form = null) => {
 
 /*
 *   Función para preparar el formulario al momento de insertar un registro.
-*   Parámetros: ninguno.
-*   Retorno: ninguno.
 */
 const openCreate = () => {
-    // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
     MODAL_TITLE.textContent = 'Crear usuario';
-    // Se prepara el formulario.
     SAVE_FORM.reset();
     CLAVE.disabled = false;
     fillSelect(USUARIO_API, 'readAllNiveles', 'idNivelUsuario');
     fillTable();
+
+    CLAVE.setAttribute('type', 'password');
+    CONFIRMAR_CLAVE.setAttribute('type', 'password');
+    TOGGLE_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+    TOGGLE_PASSWORD.querySelector('i').classList.add('fa-eye');
+    TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+    TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.add('fa-eye');
 }
 
 /*
 *   Función asíncrona para preparar el formulario al momento de actualizar un registro.
-*   Parámetros: id (identificador del registro seleccionado).
-*   Retorno: ninguno.
 */
 const openUpdate = async (id) => {
-    // Se define un objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('idPuntoVenta', id); // Asegúrate de que el nombre del campo sea correcto.
+    FORM.append('idUsuario', id);
 
     try {
-        // Petición para obtener los datos del registro solicitado.
-        const DATA = await fetchData(PUNTO_VENTA_API, 'readOne', FORM);
+        const DATA = await fetchData(USUARIO_API, 'readOne', FORM);
 
-        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
-            // Se muestra la caja de diálogo con su título.
             SAVE_MODAL.show();
-            MODAL_TITLE.textContent = 'Actualizar Punto de Venta';
-
-            // Se prepara el formulario.
+            MODAL_TITLE.textContent = 'Actualizar usuario';
             SAVE_FORM.reset();
 
-            // Se inicializan los campos con los datos.
             const ROW = DATA.dataset;
-            ID_PUNTO_VENTA.value = ROW.id_punto_venta; // Asegúrate de que estos IDs coincidan con los del HTML.
-            NOMBRE_PUNTO_VENTA.value = ROW.punto_venta;
-            CLAVE_PUNTO_VENTA.value = ''; // No debes mostrar la clave directamente por razones de seguridad.
-            CONFIRMAR_CLAVE.value = ''; // Puedes mantener este campo vacío hasta que el usuario ingrese una nueva clave.
+            ID_USUARIO.value = ROW.id_usuario;
+            USUARIO.value = ROW.usuario;
+            CORREO.value = ROW.correo;
+            NOMBRE_USUARIO.value = ROW.nombre;
+            DUI.value = ROW.DUI;
+            TELEFONO.value = ROW.telefono;
+            fillSelect(USUARIO_API, 'readAllNiveles', 'idNivelUsuario', ROW.id_nivel_usuario);
 
-            NOMBRE_PUNTO_VENTA.disabled = false; // Hacer que el campo sea editable.
-            CLAVE_PUNTO_VENTA.disabled = false; // Dejar este campo editable para que el usuario ingrese una nueva clave.
-            CONFIRMAR_CLAVE.disabled = false; // Igual para confirmar la nueva clave.
+            // Se bloquea el campo de contraseña
+            CLAVE.disabled = true;
+            hideError(PASSWORD_ERROR);
+            hideError(CONFIRM_PASSWORD_ERROR);
+
+            CLAVE.setAttribute('type', 'password');
+            CONFIRMAR_CLAVE.setAttribute('type', 'password');
+            TOGGLE_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+            TOGGLE_PASSWORD.querySelector('i').classList.add('fa-eye');
+            TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.remove('fa-eye-slash');
+            TOGGLE_CONFIRM_PASSWORD.querySelector('i').classList.add('fa-eye');
 
         } else {
             sweetAlert(2, DATA.error, false);
         }
     } catch (error) {
-        console.error('Error al abrir el modal para actualizar:', error);
-        sweetAlert(2, 'Ocurrió un error al cargar los datos', false);
-    }
-}
-
-
-/*
-*   Función asíncrona para eliminar un registro.
-*   Parámetros: id (identificador del registro seleccionado).
-*   Retorno: ninguno.
-*/
-const openDelete = async (id) => {
-    // Llamada a la función para mostrar un mensaje de confirmación, capturando la respuesta en una constante.
-    const RESPONSE = await confirmAction('¿Desea eliminar el usuario de forma permanente?');
-    // Se verifica la respuesta del mensaje.
-    if (RESPONSE) {
-        // Se define una constante tipo objeto con los datos del registro seleccionado.
-        const FORM = new FormData();
-        FORM.append('idUsuario', id);
-        // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(USUARIO_API, 'deleteRow', FORM);
-        // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-        if (DATA.status) {
-            // Se muestra un mensaje de éxito.
-            await sweetAlert(1, DATA.message, true);
-            // Se carga nuevamente la tabla para visualizar los cambios.
-            fillTable();
-        } else {
-            sweetAlert(2, DATA.error, false);
-        }
+        console.error(error);
     }
 }
 
@@ -219,7 +280,6 @@ SAVE_FORM_REPORT.addEventListener('submit', (event) => {
     event.preventDefault();
     openReporte();
 });
-
 
 const openCreateR = () => {
     SAVE_MODAL_REPORT.show();
