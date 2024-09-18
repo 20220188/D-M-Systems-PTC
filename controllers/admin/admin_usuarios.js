@@ -141,16 +141,16 @@ SEARCH_FORM.addEventListener('submit', (event) => {
 SAVE_FORM.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const passwordError = isPasswordStrong(CLAVE.value);
-    if (passwordError) {
-        showError(PASSWORD_ERROR, passwordError);
-        return;
-    }
-    
-    if (CLAVE.value !== CONFIRMAR_CLAVE.value) {
-        showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
-        return;
-    }
+        const passwordError = isPasswordStrong(CLAVE.value);
+        if (passwordError) {
+            showError(PASSWORD_ERROR, passwordError);
+            return;
+        }
+        
+        if (CLAVE.value !== CONFIRMAR_CLAVE.value) {
+            showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
+            return;
+        }
 
     (ID_USUARIO.value) ? action = 'updateRow' : action = 'createRow';
     const FORM = new FormData(SAVE_FORM);

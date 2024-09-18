@@ -24,7 +24,7 @@
         <br>
         <h3 id="mainTitle"></h3>
         <img src="../api/images/dmsystem.png" class="mx-auto d-block" width="200">
-        
+
         <!-- Formulario para iniciar sesión -->
         <form class="d-none" id="loginForm">
             <div class="row g-3">
@@ -33,11 +33,19 @@
                     <input id="alias" type="text" name="alias" class="form-control" required>
                 </div>
                 <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
-                    <label for="clave" class="form-label">Contraseña</label>
-                    <input id="clave" type="password" name="clave" class="form-control" required>
+                    <label for="clave">Contraseña:</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="clave" name="clave" autocomplete="new-password"
+                            required>
+                        <button class="btn btn-outline-secondary" type="button" id="togglePasswordLogin">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <div id="passwordError" class="text-danger" style="display: none;"></div>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i> Enviar</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i>
+                        Enviar</button>
                 </div>
             </div>
         </form>
@@ -51,8 +59,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
                     <label for="duiUsuario" class="form-label">Dui</label>
-                    <input id="duiUsuario" type="text" name="duiUsuario" class="form-control"
-                        required>
+                    <input id="duiUsuario" type="text" name="duiUsuario" class="form-control" required>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
                     <label for="correoAdministrador" class="form-label">Correo</label>
@@ -65,21 +72,34 @@
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
                     <label for="telefonoUsuario" class="form-label">Telefono</label>
-                    <input id="telefonoUsuario" type="text" name="telefonoUsuario" class="form-control"
-                        required>
+                    <input id="telefonoUsuario" type="text" name="telefonoUsuario" class="form-control" required>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
-                    <label for="claveAdministrador" class="form-label">Contraseña</label>
-                    <input id="claveAdministrador" type="password" name="claveAdministrador" class="form-control"
-                        required>
+                    <label for="claveAdministrador">Contraseña:</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="claveAdministrador" name="claveAdministrador"
+                            autocomplete="new-password" required>
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <div id="passwordError" class="text-danger" style="display: none;"></div>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 ">
-                    <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
-                    <input id="confirmarClave" type="password" name="confirmarClave" class="form-control" required>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <label for="confirmarClave">Confirmar Contraseña:</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="confirmarClave" name="confirmarClave"
+                            autocomplete="new-password" required>
+                        <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="text-center">
-                    <button type="reset" class="btn btn-secondary"><i class="fa-solid fa-xmark"></i> Cancelar</button>
-                    <button type="submit" class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i> Guardar</button>
+                    <button type="reset" class="btn btn-secondary"><i class="fa-solid fa-xmark"></i>
+                        Cancelar</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i>
+                        Guardar</button>
                 </div>
             </div>
         </form>
@@ -89,13 +109,14 @@
     <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
 
-    <!-- Inclusión de la librería de mascaras. Para más información https://github.com/text-mask/text-mask -->
-    <script type="text/javascript" src="../resources/js/vanillaTextMask.js"></script>
-    
-    <!-- Llamada al kit de font awesome -->
-    <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
     <!-- Llamada al controlador general de la aplicación -->
     <script type="text/javascript" src="../controllers/utils/components.js"></script>
+    <!-- Inclusión de la librería de mascaras. Para más información https://github.com/text-mask/text-mask -->
+    <script type="text/javascript" src="../resources/js/vanillaTextMask.js"></script>
+
+    <!-- Llamada al kit de font awesome -->
+    <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+
     <!-- Llamada al controlador del sitio privado -->
     <script type="text/javascript" src="../controllers/utils/admin.js"></script>
     <!-- Llamada al controlador de la página web -->
