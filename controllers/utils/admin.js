@@ -105,12 +105,6 @@ const loadTemplate = async () => {
     </a>
 
     <div class="options__menu">    
-        <a href="admin_maestro_productos.html" class="menu-option">
-            <div class="option">
-                <i class="fa-solid fa-star" title="Maestros"></i>
-                <h4>Maestros</h4>
-            </div>
-        </a>
         <a href="admin_ingresos.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
@@ -148,6 +142,7 @@ const loadTemplate = async () => {
         </div>
         <div><img src="" alt=""></div>
 </header>
+
 <div class="menu__side" id="menu_side">
 
     <a href="dashboard.html">
@@ -158,24 +153,21 @@ const loadTemplate = async () => {
     </a>
 
     <div class="options__menu">    
-        <a href="admin_maestro_productos.html" class="menu-option">
+
+        <a href="ventas_modulo_ventas.html" class="menu-option">
             <div class="option">
-                <i class="fa-solid fa-star" title="Maestros"></i>
-                <h4>Maestros</h4>
+            <i class="fa-solid fa-cart-shopping" title="Ventas"></i>
+                <h5>Ventas</h5>
             </div>
         </a>
-        <a href="admin_reporte_ventas.html" class="menu-option">
-            <div class="option">
-                <i class="fa-solid fa-file" title="Reportes"></i>
-                <h4>Reportes</h4>
-            </div>
-        </a>
+
         <a href="profile.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-user" title="Editar perfil"></i>
                 <h4>Editar Perfil</h4>
             </div>
         </a>
+        
         <a href="#" class="menu-option" onclick="logOut()">
             <div class="option">
                 <i class="fa-solid fa-right-from-bracket" title="Cerrar sesión"></i>
@@ -187,13 +179,13 @@ const loadTemplate = async () => {
 </div>
 `;
                 }
-                
+
                 // Se agrega el contenido del menú.
                 const menuElement = document.createElement('div');
                 menuElement.classList.add('menu');
                 menuElement.innerHTML = navOptions;
                 document.body.appendChild(menuElement);
-                
+
             } else {
                 sweetAlert(3, DATA.error, false, 'index.html');
             }
