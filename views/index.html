@@ -30,18 +30,18 @@
             <div class="row g-3">
                 <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
                     <label for="alias" class="form-label">Alias</label>
-                    <input id="alias" type="text" name="alias" class="form-control" required>
+                    <input id="alias" type="text" name="alias" class="form-control" autocomplete="off" required>
                 </div>
                 <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
                     <label for="clave">Contraseña:</label>
                     <div class="input-group">
-                        <input type="password" class="form-control" id="clave" name="clave" autocomplete="new-password"
+                        <input type="password" class="form-control" id="clave" name="clave" autocomplete="off"
                             required>
                         <button class="btn btn-outline-secondary" type="button" id="togglePasswordLogin">
                             <i class="fa-solid fa-eye"></i>
                         </button>
                     </div>
-                    <div id="passwordError" class="text-danger" style="display: none;"></div>
+                    <div id="passwordErrorLogin" class="text-danger" style="display: none;"></div>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i>
@@ -88,12 +88,12 @@
                 <div class="col-sm-12 col-md-6 col-lg-4">
                     <label for="confirmarClave">Confirmar Contraseña:</label>
                     <div class="input-group">
-                        <input type="password" class="form-control" id="confirmarClave" name="confirmarClave"
-                            autocomplete="new-password" required>
+                        <input type="password" class="form-control" id="confirmarClave" name="confirmarClave" autocomplete="new-password" required>
                         <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
                             <i class="fa-solid fa-eye"></i>
                         </button>
                     </div>
+                    <div id="confirmPasswordError" class="text-danger" style="display: none;"></div>
                 </div>
                 <div class="text-center">
                     <button type="reset" class="btn btn-secondary"><i class="fa-solid fa-xmark"></i>

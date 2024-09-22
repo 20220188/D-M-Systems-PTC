@@ -3,15 +3,19 @@ const SIGNUP_FORM = document.getElementById('signupForm');
 // Constante para establecer el formulario de inicio de sesión.
 const LOGIN_FORM = document.getElementById('loginForm');
 
-const CLAVE = document.getElementById('claveAdministrador'); // ID corregido para coincidir con el HTML
+const CLAVE = document.getElementById('claveAdministrador');
 const CONFIRMAR_CLAVE = document.getElementById('confirmarClave');
+
+const CLAVE_LOGIN = document.getElementById('clave');
 
 // Constantes para los mensajes de error
 const PASSWORD_ERROR = document.getElementById('passwordError');
 const CONFIRM_PASSWORD_ERROR = document.getElementById('confirmPasswordError');
+const PASSWORD_ERROR_LOGIN = document.getElementById('passwordErrorLogin');
 
 const TOGGLE_PASSWORD = document.getElementById('togglePassword');
 const TOGGLE_CONFIRM_PASSWORD = document.getElementById('toggleConfirmPassword');
+const TOGGLE_PASSWORD_LOGIN = document.getElementById('togglePasswordLogin');
 
 vanillaTextMask.maskInput({
     inputElement: document.getElementById('telefonoUsuario'),
@@ -34,6 +38,7 @@ const togglePasswordVisibility = (inputField, toggleButton) => {
 // Evento para mostrar/ocultar la contraseña
 TOGGLE_PASSWORD.addEventListener('click', () => togglePasswordVisibility(CLAVE, TOGGLE_PASSWORD));
 TOGGLE_CONFIRM_PASSWORD.addEventListener('click', () => togglePasswordVisibility(CONFIRMAR_CLAVE, TOGGLE_CONFIRM_PASSWORD));
+TOGGLE_PASSWORD_LOGIN.addEventListener('click', () => togglePasswordVisibility(CLAVE_LOGIN, TOGGLE_PASSWORD_LOGIN));
 
 // Función para verificar la fortaleza de la contraseña
 const isPasswordStrong = (password) => {
@@ -65,7 +70,7 @@ const hideError = (element) => {
     element.style.display = 'none';
 }
 
-// Evento para validar la contraseña mientras se escribe
+// Evento para validar la contraseña mientras se escribe (formulario de registro)
 CLAVE.addEventListener('input', () => {
     const errorMessage = isPasswordStrong(CLAVE.value);
     if (errorMessage) {
@@ -75,12 +80,22 @@ CLAVE.addEventListener('input', () => {
     }
 });
 
-// Evento para validar la confirmación de contraseña mientras se escribe
+// Evento para validar la confirmación de contraseña mientras se escribe (formulario de registro)
 CONFIRMAR_CLAVE.addEventListener('input', () => {
     if (CLAVE.value !== CONFIRMAR_CLAVE.value) {
         showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
     } else {
         hideError(CONFIRM_PASSWORD_ERROR);
+    }
+});
+
+// Evento para validar la contraseña mientras se escribe (formulario de inicio de sesión)
+CLAVE_LOGIN.addEventListener('input', () => {
+    const errorMessage = isPasswordStrong(CLAVE_LOGIN.value);
+    if (errorMessage) {
+        showError(PASSWORD_ERROR_LOGIN, errorMessage);
+    } else {
+        hideError(PASSWORD_ERROR_LOGIN);
     }
 });
 
@@ -142,6 +157,12 @@ LOGIN_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     
+    const passwordError = isPasswordStrong(CLAVE_LOGIN.value);
+    if (passwordError) {
+        showError(PASSWORD_ERROR_LOGIN, passwordError);
+        return;
+    }
+
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(LOGIN_FORM);
     // Petición para iniciar sesión.
