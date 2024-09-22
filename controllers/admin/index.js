@@ -41,11 +41,15 @@ TOGGLE_CONFIRM_PASSWORD.addEventListener('click', () => togglePasswordVisibility
 TOGGLE_PASSWORD_LOGIN.addEventListener('click', () => togglePasswordVisibility(CLAVE_LOGIN, TOGGLE_PASSWORD_LOGIN));
 
 // Función para verificar la fortaleza de la contraseña
-const isPasswordStrong = (password) => {
+const isPasswordStrong = (password, userData = {}) => {
     if (password.length < 8 || password.length > 24) {
         return 'La contraseña debe tener entre 8 y 24 caracteres.';
     }
     
+    if (/\s/.test(password)) {
+        return 'La contraseña no debe contener espacios en blanco.';
+    }
+
     const hasLowerCase = /[a-z]/.test(password);
     const hasUpperCase = /[A-Z]/.test(password);
     const hasNumber = /\d/.test(password);
@@ -53,6 +57,17 @@ const isPasswordStrong = (password) => {
     
     if (!(hasLowerCase && hasUpperCase && hasNumber && hasSpecialChar)) {
         return 'La contraseña debe incluir mayúsculas, minúsculas, números y caracteres especiales.';
+    }
+
+    // Verificar que la contraseña no contenga datos del usuario
+    for (const [key, value] of Object.entries(userData)) {
+        if (typeof value === 'string' && value.length > 2) {
+            const lowercaseValue = value.toLowerCase();
+            const lowercasePassword = password.toLowerCase();
+            if (lowercasePassword.includes(lowercaseValue)) {
+                return `La contraseña no debe contener información personal (${key}).`;
+            }
+        }
     }
 
     return ''; // Contraseña válida
@@ -70,9 +85,21 @@ const hideError = (element) => {
     element.style.display = 'none';
 }
 
+// Función para obtener los datos del usuario del formulario de registro
+const getUserDataFromForm = () => {
+    return {
+        nombre: document.getElementById('nombreAdministrador').value,
+        dui: document.getElementById('duiUsuario').value,
+        correo: document.getElementById('correoAdministrador').value,
+        alias: document.getElementById('aliasAdministrador').value,
+        telefono: document.getElementById('telefonoUsuario').value
+    };
+}
+
 // Evento para validar la contraseña mientras se escribe (formulario de registro)
 CLAVE.addEventListener('input', () => {
-    const errorMessage = isPasswordStrong(CLAVE.value);
+    const userData = getUserDataFromForm();
+    const errorMessage = isPasswordStrong(CLAVE.value, userData);
     if (errorMessage) {
         showError(PASSWORD_ERROR, errorMessage);
     } else {
@@ -129,7 +156,8 @@ SIGNUP_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
 
-    const passwordError = isPasswordStrong(CLAVE.value);
+    const userData = getUserDataFromForm();
+    const passwordError = isPasswordStrong(CLAVE.value, userData);
     if (passwordError) {
         showError(PASSWORD_ERROR, passwordError);
         return;
