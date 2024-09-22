@@ -208,7 +208,6 @@ if (isset($_GET['action'])) {
 
                 ) {
                     $result['error'] = $administrador->getDataError();
-                    
                 } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
                     $result['error'] = 'Contraseñas diferentes';
                 } elseif ($administrador->createAdminApp()) {
@@ -224,40 +223,89 @@ if (isset($_GET['action'])) {
                 if ($administrador->checkUser($_POST['alias'], $_POST['clave'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Autenticación correcta';
+                } else 
+                {
+
+                    $alias = $_POST['alias'];
+                    $clave = $_POST['clave'];
+
+                    // Verificar si el usuario está bloqueado
+                    $checkBlockSql = 'SELECT intentos_fallidos, tiempo_bloqueo FROM tb_usuarios WHERE usuario = ?';
+                    $checkBlockParams = array($alias);
+                    $blockData = Database::getRow($checkBlockSql, $checkBlockParams);
+
+                    if ($blockData) {
+                        // Verificar si la cuenta está bloqueada
+                        if ($blockData['tiempo_bloqueo'] && new DateTime() < new DateTime($blockData['tiempo_bloqueo'])) {
+                            $result['error'] = 'Cuenta bloqueada. Intenta de nuevo después de ' . (new DateTime($blockData['tiempo_bloqueo']))->diff(new DateTime())->format('%H:%I:%S') . ' horas.';
+                            break;
+                        }
+
+                        // Verificar las credenciales del usuario
+                        $checkUserResult = $administrador->checkUser($alias, $clave);
+
+                        if ($checkUserResult['status']) {
+                            // Resetear intentos fallidos y bloqueo
+                            $updateSql = 'UPDATE tb_usuarios SET intentos_fallidos = 0, tiempo_bloqueo = NULL WHERE usuario = ?';
+                            Database::executeRow($updateSql, array($alias));
+
+                            $result['status'] = 1;
+                            $result['message'] = 'Autenticación correcta';
+                        } else {
+                            // Manejo del error basado en el mensaje devuelto
+                            $errorMessage = $checkUserResult['message'];
+
+                            // Incrementar intentos fallidos
+                            $newAttempts = $blockData['intentos_fallidos'] + 1;
+
+                            if ($newAttempts >= 3) {
+                                $bloqueoHasta = (new DateTime())->modify('+24 hours')->format('Y-m-d H:i:s');
+                                $updateSql = 'UPDATE tb_usuarios SET intentos_fallidos = ?, tiempo_bloqueo = ? WHERE usuario = ?';
+                                Database::executeRow($updateSql, array($newAttempts, $bloqueoHasta, $alias));
+
+                                $result['error'] = 'Cuenta bloqueada por 24 horas debido a múltiples intentos fallidos. Intenta de nuevo después de 24 horas.';
+                            } else {
+                                $updateSql = 'UPDATE tb_usuarios SET intentos_fallidos = ? WHERE usuario = ?';
+                                Database::executeRow($updateSql, array($newAttempts, $alias));
+
+                                $result['error'] = $errorMessage . ' Intentos fallidos: ' . $newAttempts . '/3';
+                            }
+                        }
+                    } else {
+                        $result['error'] = 'Ocurrio un error, verifique las credenciales.';
+                    }
+                }
+                break;
+            case 'logInApp':
+                $_POST = Validator::validateForm($_POST);
+                if ($administrador->checkUser($_POST['alias'], $_POST['clave'])) {
+                    // Start the database connection.
+                    $db = new Database();
+
+                    // Retrieve the alias from the form.
+                    $alias = $_POST['alias'];
+
+                    // Query to get the user level based on the alias.
+                    $sql = 'SELECT id_nivel_usuario FROM tb_usuarios WHERE usuario = ?';
+                    $params = array($alias);
+                    $data = $db->getRow($sql, $params);
+
+                    if ($data) {
+                        // Save the user level and alias in the session
+                        $_SESSION['aliasAdministrador'] = $alias;
+                        $_SESSION['user_level'] = $data['id_nivel_usuario'];
+
+                        $result['status'] = 1;
+                        $result['message'] = 'Autenticación correcta';
+                        $result['user_level'] = $data['id_nivel_usuario'];
+                    } else {
+                        $result['error'] = 'No se pudo obtener el nivel de usuario';
+                    }
                 } else {
                     $result['error'] = 'Credenciales incorrectas';
                 }
                 break;
-                case 'logInApp':
-                    $_POST = Validator::validateForm($_POST);
-                    if ($administrador->checkUser($_POST['alias'], $_POST['clave'])) {
-                        // Start the database connection.
-                        $db = new Database();
-                
-                        // Retrieve the alias from the form.
-                        $alias = $_POST['alias'];
-                
-                        // Query to get the user level based on the alias.
-                        $sql = 'SELECT id_nivel_usuario FROM tb_usuarios WHERE usuario = ?';
-                        $params = array($alias);
-                        $data = $db->getRow($sql, $params);
-                
-                        if ($data) {
-                            // Save the user level and alias in the session
-                            $_SESSION['aliasAdministrador'] = $alias;
-                            $_SESSION['user_level'] = $data['id_nivel_usuario'];
-                
-                            $result['status'] = 1;
-                            $result['message'] = 'Autenticación correcta';
-                            $result['user_level'] = $data['id_nivel_usuario'];
-                        } else {
-                            $result['error'] = 'No se pudo obtener el nivel de usuario';
-                        }
-                    } else {
-                        $result['error'] = 'Credenciales incorrectas';
-                    }
-                    break;
-                
+
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
