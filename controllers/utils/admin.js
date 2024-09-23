@@ -27,7 +27,7 @@ const loadTemplate = async () => {
             let navOptions = '';
             if (DATA.status) {
                 // Generar el contenido del header según el nivel de usuario
-                if (DATA.user_level == 1) {
+                if (DATA.user_level == 1) { //NavBar para el nivel de administrador
                     navOptions = `
 <header class="header">
         
@@ -86,7 +86,7 @@ const loadTemplate = async () => {
 
 </div>
 `;
-                } else if (DATA.user_level == 2) {
+                } else if (DATA.user_level == 2) {  //NavBar para el nivel de inventario
                     navOptions = `
 <header class="header">
         
@@ -133,7 +133,7 @@ const loadTemplate = async () => {
 
 </div>
 `;
-                } else if (DATA.user_level == 3) {
+                } else if (DATA.user_level == 3) { //NavBar para el nivel de ventas
                     navOptions = `
 <header class="header">
         
@@ -178,8 +178,55 @@ const loadTemplate = async () => {
 
 </div>
 `;
+                } else if (DATA.user_level == 4) {   //NavBar para el nivel de caja
+                    navOptions = `
+<header class="header">
 
-            }
+<div class="icon__menu">
+<i class="fas fa-bars" id="btn_open"></i>
+</div>
+<div><img src="" alt=""></div>
+</header>
+<div class="menu__side" id="menu_side">
+
+<a href="dashboard.html">
+<div class="name__page">
+<i class="fa-solid fa-user-tie"></i>
+<h4>Inventario</h4>
+</div>
+</a>
+
+<div class="options__menu">    
+<a href="admin_ingresos.html" class="menu-option">
+<div class="option">
+<i class="fa-solid fa-share-nodes" title="Movimientos"></i>
+<h4>Movimientos</h4>
+</div>
+</a>
+<a href="admin_reporte_ventas.html" class="menu-option">
+<div class="option">
+<i class="fa-solid fa-file" title="Reportes"></i>
+<h4>Reportes</h4>
+</div>
+</a>
+<a href="profile.html" class="menu-option">
+<div class="option">
+<i class="fa-solid fa-user" title="Editar perfil"></i>
+<h4>Editar Perfil</h4>
+</div>
+</a>
+<a href="#" class="menu-option" onclick="logOut()">
+<div class="option">
+<i class="fa-solid fa-right-from-bracket" title="Cerrar sesión"></i>
+<h4>Cerrar sesión</h4>
+</div>
+</a>
+</div>
+
+</div>
+`;
+
+                }
 
                 // Se agrega el contenido del menú.
                 const menuElement = document.createElement('div');
@@ -206,42 +253,42 @@ const loadTemplate = async () => {
         location.href = 'index.html';
     }
 
-    
-//Ejecutar función en el evento click
-document.getElementById("btn_open").addEventListener("click", open_close_menu);
 
-// Asignar el botón de abrir/cerrar menú y el cuerpo del documento.
-const btnOpen = document.getElementById("btn_open");
-const sideMenu = document.getElementById("menu_side");
-const body = document.getElementById("body");
+    //Ejecutar función en el evento click
+    document.getElementById("btn_open").addEventListener("click", open_close_menu);
 
-// Verificar si btnOpen, sideMenu y body existen antes de agregar el evento.
-if (btnOpen && sideMenu && body) {
-    // Evento para mostrar y ocultar menú
-    function open_close_menu() {
-        body.classList.toggle("body_move");
-        sideMenu.classList.toggle("menu__side_move");
-    }
+    // Asignar el botón de abrir/cerrar menú y el cuerpo del documento.
+    const btnOpen = document.getElementById("btn_open");
+    const sideMenu = document.getElementById("menu_side");
+    const body = document.getElementById("body");
 
-    // Asignar el evento click al botón de abrir/cerrar menú
-    btnOpen.addEventListener("click", open_close_menu);
+    // Verificar si btnOpen, sideMenu y body existen antes de agregar el evento.
+    if (btnOpen && sideMenu && body) {
+        // Evento para mostrar y ocultar menú
+        function open_close_menu() {
+            body.classList.toggle("body_move");
+            sideMenu.classList.toggle("menu__side_move");
+        }
 
-    // Si el ancho de la página es menor a 760px, ocultará el menú al recargar la página
-    if (window.innerWidth < 760) {
-        body.classList.add("body_move");
-        sideMenu.classList.add("menu__side_move");
-    }
+        // Asignar el evento click al botón de abrir/cerrar menú
+        btnOpen.addEventListener("click", open_close_menu);
 
-    // Haciendo el menú responsive (adaptable)
-    window.addEventListener("resize", function () {
-        if (window.innerWidth > 760) {
-            body.classList.remove("body_move");
-            sideMenu.classList.remove("menu__side_move");
-        } else {
+        // Si el ancho de la página es menor a 760px, ocultará el menú al recargar la página
+        if (window.innerWidth < 760) {
             body.classList.add("body_move");
             sideMenu.classList.add("menu__side_move");
         }
-    });
-}
+
+        // Haciendo el menú responsive (adaptable)
+        window.addEventListener("resize", function () {
+            if (window.innerWidth > 760) {
+                body.classList.remove("body_move");
+                sideMenu.classList.remove("menu__side_move");
+            } else {
+                body.classList.add("body_move");
+                sideMenu.classList.add("menu__side_move");
+            }
+        });
+    }
 
 };
