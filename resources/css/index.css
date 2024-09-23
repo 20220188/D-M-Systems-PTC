@@ -21,3 +21,23 @@
     margin-top: 20px !important;
     margin-left: 45% !important;
 }
+
+html, body {
+    height: 100%; /* Hacer que la página tenga el 100% del alto */
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* Hacer que el contenido principal ocupe todo el espacio disponible */
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
