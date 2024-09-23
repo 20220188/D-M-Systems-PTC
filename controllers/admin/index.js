@@ -180,9 +180,7 @@ SIGNUP_FORM.addEventListener('submit', async (event) => {
     }
 });
 
-// Método del evento para cuando se envía el formulario de inicio de sesión.
 LOGIN_FORM.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     
     const passwordError = isPasswordStrong(CLAVE_LOGIN.value);
@@ -191,13 +189,50 @@ LOGIN_FORM.addEventListener('submit', async (event) => {
         return;
     }
 
-    // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(LOGIN_FORM);
-    // Petición para iniciar sesión.
     const DATA = await fetchData(USER_API, 'logIn', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    
     if (DATA.status) {
-        sweetAlert(1, DATA.message, true, 'dashboard.html');
+        if (DATA.passwordExpired) {
+            sweetAlert(2, 'Tu contraseña ha expirado. Por favor, cámbiala ahora.', false);
+            showPasswordChangeModal();
+        } else {
+            sweetAlert(1, DATA.message, true, 'dashboard.html');
+        }
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+});
+
+// Función para mostrar el modal de cambio de contraseña
+function showPasswordChangeModal() {
+    const passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
+    passwordModal.show();
+}
+
+// Evento para manejar el envío del formulario de cambio de contraseña
+document.getElementById('passwordForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    
+    const newPassword = document.getElementById('claveNueva').value;
+    const confirmPassword = document.getElementById('confirmarClave').value;
+    
+    if (newPassword !== confirmPassword) {
+        showError(document.getElementById('confirmPasswordError'), 'Las contraseñas no coinciden.');
+        return;
+    }
+    
+    const passwordError = isPasswordStrong(newPassword);
+    if (passwordError) {
+        showError(document.getElementById('NewPasswordError'), passwordError);
+        return;
+    }
+    
+    const FORM = new FormData(event.target);
+    const DATA = await fetchData(USER_API, 'changePassword', FORM);
+    
+    if (DATA.status) {
+        sweetAlert(1, 'Contraseña cambiada con éxito. Por favor, inicia sesión nuevamente.', true, 'index.html');
     } else {
         sweetAlert(2, DATA.error, false);
     }

@@ -103,6 +103,65 @@
                 </div>
             </div>
         </form>
+
+        <div class="modal fade" id="passwordModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <!-- Contenido del componente Modal -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle">Cambiar contraseña</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para actualizar contraseña -->
+                    <form id="passwordForm">
+                        <div class="modal-body">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="claveActual">Contraseña:</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="claveActual" name="claveActual" autocomplete="new-password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div id="passwordError" class="text-danger" style="display: none;"></div>
+                            </div>
+                            <hr>
+                            <div class="row g-3">
+                                <div class="col-12 text-center">
+                                    <h5>CONTRASEÑA NUEVA</h5>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="claveNueva">Nueva Contraseña:</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="claveNueva" name="claveNueva" autocomplete="new-password" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleNewPassword">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div id="NewPasswordError" class="text-danger" style="display: none;"></div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="confirmarClave">Confirmar Contraseña:</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="confirmarClave" name="confirmarClave" autocomplete="new-password" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div id="confirmPasswordError" class="text-danger" style="display: none;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
     </main>
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
     <!-- Llamada al framework y librería de mensajes -->

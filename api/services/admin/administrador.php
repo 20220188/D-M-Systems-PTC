@@ -226,64 +226,59 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            case 'logIn':
-                $_POST = Validator::validateForm($_POST);
-                if ($administrador->checkUser($_POST['alias'], $_POST['clave'])) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Autenticación correcta';
-                } else 
-                {
-
-                    $alias = $_POST['alias'];
-                    $clave = $_POST['clave'];
-
-                    // Verificar si el usuario está bloqueado
-                    $checkBlockSql = 'SELECT intentos_fallidos, tiempo_bloqueo FROM tb_usuarios WHERE usuario = ?';
-                    $checkBlockParams = array($alias);
-                    $blockData = Database::getRow($checkBlockSql, $checkBlockParams);
-
-                    if ($blockData) {
-                        // Verificar si la cuenta está bloqueada
-                        if ($blockData['tiempo_bloqueo'] && new DateTime() < new DateTime($blockData['tiempo_bloqueo'])) {
-                            $result['error'] = 'Cuenta bloqueada. Intenta de nuevo después de ' . (new DateTime($blockData['tiempo_bloqueo']))->diff(new DateTime())->format('%H:%I:%S') . ' horas.';
-                            break;
-                        }
-
-                        // Verificar las credenciales del usuario
-                        $checkUserResult = $administrador->checkUser($alias, $clave);
-
-                        if ($checkUserResult['status']) {
-                            // Resetear intentos fallidos y bloqueo
-                            $updateSql = 'UPDATE tb_usuarios SET intentos_fallidos = 0, tiempo_bloqueo = NULL WHERE usuario = ?';
-                            Database::executeRow($updateSql, array($alias));
-
-                            $result['status'] = 1;
-                            $result['message'] = 'Autenticación correcta';
+                case 'logIn':
+                    $_POST = Validator::validateForm($_POST);
+                    $checkUserResult = $administrador->checkUser($_POST['alias'], $_POST['clave']);
+                    if ($checkUserResult['status']) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Autenticación correcta';
+                        
+                        // Verificar si han pasado más de 90 días desde el último cambio de contraseña
+                        $lastPasswordChange = $checkUserResult['ultimo_cambio_clave'];
+                        $daysSinceLastChange = (time() - strtotime($lastPasswordChange)) / (60 * 60 * 24);
+                        
+                        if ($daysSinceLastChange >= 90) {
+                            $result['passwordExpired'] = true;
                         } else {
-                            // Manejo del error basado en el mensaje devuelto
-                            $errorMessage = $checkUserResult['message'];
-
+                            $result['passwordExpired'] = false;
+                        }
+                    } else {
+                        $alias = $_POST['alias'];
+                        $clave = $_POST['clave'];
+                
+                        // Verificar si el usuario está bloqueado
+                        $checkBlockSql = 'SELECT intentos_fallidos, tiempo_bloqueo FROM tb_usuarios WHERE usuario = ?';
+                        $checkBlockParams = array($alias);
+                        $blockData = Database::getRow($checkBlockSql, $checkBlockParams);
+                
+                        if ($blockData && is_array($blockData)) {
+                            // Verificar si la cuenta está bloqueada
+                            if ($blockData['tiempo_bloqueo'] && new DateTime() < new DateTime($blockData['tiempo_bloqueo'])) {
+                                $result['error'] = 'Cuenta bloqueada. Intenta de nuevo después de ' . (new DateTime($blockData['tiempo_bloqueo']))->diff(new DateTime())->format('%H:%I:%S') . ' horas.';
+                                break;
+                            }
+                        
                             // Incrementar intentos fallidos
                             $newAttempts = $blockData['intentos_fallidos'] + 1;
-
+                        
                             if ($newAttempts >= 3) {
                                 $bloqueoHasta = (new DateTime())->modify('+24 hours')->format('Y-m-d H:i:s');
                                 $updateSql = 'UPDATE tb_usuarios SET intentos_fallidos = ?, tiempo_bloqueo = ? WHERE usuario = ?';
                                 Database::executeRow($updateSql, array($newAttempts, $bloqueoHasta, $alias));
-
+                        
                                 $result['error'] = 'Cuenta bloqueada por 24 horas debido a múltiples intentos fallidos. Intenta de nuevo después de 24 horas.';
                             } else {
                                 $updateSql = 'UPDATE tb_usuarios SET intentos_fallidos = ? WHERE usuario = ?';
                                 Database::executeRow($updateSql, array($newAttempts, $alias));
-
-                                $result['error'] = $errorMessage . ' Intentos fallidos: ' . $newAttempts . '/3';
+                        
+                                $result['error'] = $checkUserResult['message'] . ' Intentos fallidos: ' . $newAttempts . '/3';
                             }
+                        } else {
+                            $result['error'] = 'Ocurrió un error, verifique las credenciales.';
                         }
-                    } else {
-                        $result['error'] = 'Ocurrio un error, verifique las credenciales.';
+                        
                     }
-                }
-                break;
+                    break;
             case 'logInApp':
                 $_POST = Validator::validateForm($_POST);
                 if ($administrador->checkUser($_POST['alias'], $_POST['clave'])) {

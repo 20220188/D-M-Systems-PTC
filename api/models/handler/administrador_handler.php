@@ -21,11 +21,12 @@ class AdministradorHandler
     /*
      *  Métodos para gestionar la cuenta del administrador.
      */
+
     public function checkUser($username, $password)
     {
-        $sql = 'SELECT id_usuario, usuario, clave
+        $sql = 'SELECT id_usuario, usuario, clave, fecha_registro, ultimo_cambio_clave
                 FROM tb_usuarios
-                WHERE  usuario = ?';
+                WHERE usuario = ?';
         $params = array($username);
         $data = Database::getRow($sql, $params);
         if (password_verify($password, $data['clave'])) {
@@ -55,7 +56,7 @@ class AdministradorHandler
     public function changePassword()
     {
         $sql = 'UPDATE tb_usuarios
-                SET clave = ?
+                SET clave = ?, ultimo_cambio_clave = CURRENT_TIMESTAMP
                 WHERE id_usuario = ?';
         $params = array($this->clave, $_SESSION['idAdministrador']);
         return Database::executeRow($sql, $params);
@@ -128,7 +129,7 @@ class AdministradorHandler
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
-//seguir despues
+    //seguir despues
     public function updateRow()
     {
         $sql = 'UPDATE tb_usuarios
