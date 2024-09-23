@@ -18,7 +18,7 @@ async function cerrarSesion() {
 function reiniciarTemporizador() {
     clearTimeout(timeout);
     // Establecer un nuevo temporizador de 5 minutos (300000 ms)
-    timeout = setTimeout(cerrarSesion, 5000); // 5 minutos
+    timeout = setTimeout(cerrarSesion, 300000); // 5 minutos
 }
 
 // Eventos para reiniciar el temporizador
