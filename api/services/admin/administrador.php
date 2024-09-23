@@ -4,16 +4,13 @@ require_once('../../models/data/administrador_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
-    // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
-    // Se instancia la clase correspondiente.
     $administrador = new AdministradorData;
-    // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'session' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'username' => null);
-    // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
+
     if (isset($_SESSION['idAdministrador'])) {
         $result['session'] = 1;
-        // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
+
         switch ($_GET['action']) {
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
@@ -28,11 +25,11 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$administrador->setNombre($_POST['nombreAdministrador']) or
-                    !$administrador->setDUI($_POST['duiUsuario']) or
-                    !$administrador->setCorreo($_POST['correoAdministrador']) or
-                    !$administrador->setAlias($_POST['aliasAdministrador']) or
-                    !$administrador->setTelefono($_POST['telefonoUsuario']) or
+                    !$administrador->setNombre($_POST['nombreAdministrador']) ||
+                    !$administrador->setDUI($_POST['duiUsuario']) ||
+                    !$administrador->setCorreo($_POST['correoAdministrador']) ||
+                    !$administrador->setAlias($_POST['aliasAdministrador']) ||
+                    !$administrador->setTelefono($_POST['telefonoUsuario']) ||
                     !$administrador->setClave($_POST['claveAdministrador'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -65,9 +62,9 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$administrador->setId($_POST['idAdministrador']) or
-                    !$administrador->setNombre($_POST['nombreAdministrador']) or
-                    !$administrador->setApellido($_POST['apellidoAdministrador']) or
+                    !$administrador->setId($_POST['idAdministrador']) ||
+                    !$administrador->setNombre($_POST['nombreAdministrador']) ||
+                    !$administrador->setApellido($_POST['apellidoAdministrador']) ||
                     !$administrador->setCorreo($_POST['correoAdministrador'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -92,13 +89,8 @@ if (isset($_GET['action'])) {
                 break;
             case 'getUser':
                 if (isset($_SESSION['aliasAdministrador'])) {
-                    // Inicia la conexión a la base de datos.
                     $db = new Database();
-
-                    // Obtener el alias del administrador de la sesión.
                     $alias = $_SESSION['aliasAdministrador'];
-
-                    // Consulta para obtener el nivel de usuario basado en el alias.
                     $sql = 'SELECT id_nivel_usuario FROM tb_usuarios WHERE usuario = ?';
                     $params = array($alias);
                     $data = $db->getRow($sql, $params);
@@ -115,20 +107,13 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'logOut':
+            case 'logOutInactividad':
                 if (session_destroy()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Sesión eliminada correctamente';
+                    $result['message'] = 'Sesión cerrada correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al cerrar la sesión';
                 }
-                break;
-                case 'logOutInactividad':
-                    if (session_destroy()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Sesión cerrada por inactividad';
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al cerrar la sesión';
-                    }
                 break;
             case 'readProfile':
                 if ($result['dataset'] = $administrador->readProfile()) {
@@ -140,9 +125,9 @@ if (isset($_GET['action'])) {
             case 'editProfile':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$administrador->setNombre($_POST['nombreAdministrador']) or
-                    !$administrador->setTelefono($_POST['apellidoAdministrador']) or
-                    !$administrador->setCorreo($_POST['correoAdministrador']) or
+                    !$administrador->setNombre($_POST['nombreAdministrador']) ||
+                    !$administrador->setTelefono($_POST['telefonoAdministrador']) ||
+                    !$administrador->setCorreo($_POST['correoAdministrador']) ||
                     !$administrador->setAlias($_POST['aliasAdministrador'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -163,6 +148,7 @@ if (isset($_GET['action'])) {
                 } elseif (!$administrador->setClave($_POST['claveNueva'])) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->changePassword()) {
+                    $administrador->updateLastPasswordChange();
                     $result['status'] = 1;
                     $result['message'] = 'Contraseña cambiada correctamente';
                 } else {
@@ -173,7 +159,6 @@ if (isset($_GET['action'])) {
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
     } else {
-        // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
         switch ($_GET['action']) {
             case 'readUsers':
                 if ($administrador->readAll()) {
@@ -186,11 +171,11 @@ if (isset($_GET['action'])) {
             case 'signUp':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$administrador->setNombre($_POST['nombreAdministrador']) or
-                    !$administrador->setDUI($_POST['duiUsuario']) or
-                    !$administrador->setCorreo($_POST['correoAdministrador']) or
-                    !$administrador->setAlias($_POST['aliasAdministrador']) or
-                    !$administrador->setTelefono($_POST['telefonoUsuario']) or
+                    !$administrador->setNombre($_POST['nombreAdministrador']) ||
+                    !$administrador->setDUI($_POST['duiUsuario']) ||
+                    !$administrador->setCorreo($_POST['correoAdministrador']) ||
+                    !$administrador->setAlias($_POST['aliasAdministrador']) ||
+                    !$administrador->setTelefono($_POST['telefonoUsuario']) ||
                     !$administrador->setClave($_POST['claveAdministrador'])
                 ) {
                     $result['error'] = $administrador->getDataError();
@@ -203,17 +188,15 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al registrar el administrador';
                 }
                 break;
-
             case 'signUpMovil':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$administrador->setNombre($_POST['nombreAdministrador']) or
-                    !$administrador->setDUI($_POST['duiUsuario']) or
-                    !$administrador->setCorreo($_POST['correoAdministrador']) or
-                    !$administrador->setAlias($_POST['aliasAdministrador']) or
-                    !$administrador->setTelefono($_POST['telefonoUsuario']) or
+                    !$administrador->setNombre($_POST['nombreAdministrador']) ||
+                    !$administrador->setDUI($_POST['duiUsuario']) ||
+                    !$administrador->setCorreo($_POST['correoAdministrador']) ||
+                    !$administrador->setAlias($_POST['aliasAdministrador']) ||
+                    !$administrador->setTelefono($_POST['telefonoUsuario']) ||
                     !$administrador->setClave($_POST['claveAdministrador'])
-
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
@@ -222,79 +205,70 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Cuenta registrada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrio un problema al registrar la cuenta';
+                    $result['error'] = 'Ocurrió un problema al registrar la cuenta';
                 }
                 break;
 
-                case 'logIn':
-                    $_POST = Validator::validateForm($_POST);
-                    $checkUserResult = $administrador->checkUser($_POST['alias'], $_POST['clave']);
-                    if ($checkUserResult['status']) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Autenticación correcta';
-                        
-                        // Verificar si han pasado más de 90 días desde el último cambio de contraseña
-                        $lastPasswordChange = $checkUserResult['ultimo_cambio_clave'];
-                        $daysSinceLastChange = (time() - strtotime($lastPasswordChange)) / (60 * 60 * 24);
-                        
-                        if ($daysSinceLastChange >= 90) {
-                            $result['passwordExpired'] = true;
-                        } else {
-                            $result['passwordExpired'] = false;
-                        }
+            case 'logIn':
+                $_POST = Validator::validateForm($_POST);
+                $checkUserResult = $administrador->checkUser($_POST['alias'], $_POST['clave']);
+
+                if ($checkUserResult['status']) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Autenticación correcta';
+
+                    // Verificar si han pasado más de 90 días desde el último cambio de contraseña
+                    $lastPasswordChange = $checkUserResult['ultimo_cambio_clave'];
+                    $daysSinceLastChange = (time() - strtotime($lastPasswordChange)) / (60 * 60 * 24);
+
+                    if ($daysSinceLastChange >= 90) {
+                        $result['passwordExpired'] = true;
+                        $result['message'] = 'La contraseña ha expirado. Debe cambiarla.';
                     } else {
-                        $alias = $_POST['alias'];
-                        $clave = $_POST['clave'];
-                
-                        // Verificar si el usuario está bloqueado
-                        $checkBlockSql = 'SELECT intentos_fallidos, tiempo_bloqueo FROM tb_usuarios WHERE usuario = ?';
-                        $checkBlockParams = array($alias);
-                        $blockData = Database::getRow($checkBlockSql, $checkBlockParams);
-                
-                        if ($blockData && is_array($blockData)) {
-                            // Verificar si la cuenta está bloqueada
-                            if ($blockData['tiempo_bloqueo'] && new DateTime() < new DateTime($blockData['tiempo_bloqueo'])) {
-                                $result['error'] = 'Cuenta bloqueada. Intenta de nuevo después de ' . (new DateTime($blockData['tiempo_bloqueo']))->diff(new DateTime())->format('%H:%I:%S') . ' horas.';
-                                break;
-                            }
-                        
-                            // Incrementar intentos fallidos
+                        $result['passwordExpired'] = false;
+                        // Establecer la sesión del usuario aquí, si es necesario
+                    }
+                } else {
+                    $alias = $_POST['alias'];
+
+                    // Verificar si el usuario está bloqueado
+                    $checkBlockSql = 'SELECT intentos_fallidos, tiempo_bloqueo FROM tb_usuarios WHERE usuario = ?';
+                    $checkBlockParams = array($alias);
+                    $blockData = Database::getRow($checkBlockSql, $checkBlockParams);
+
+                    if ($blockData && is_array($blockData)) {
+                        if ($blockData['tiempo_bloqueo'] && new DateTime() < new DateTime($blockData['tiempo_bloqueo'])) {
+                            $result['error'] = 'Cuenta bloqueada. Intenta de nuevo después de ' . (new DateTime($blockData['tiempo_bloqueo']))->diff(new DateTime())->format('%H:%I:%S') . ' horas.';
+                        } else {
                             $newAttempts = $blockData['intentos_fallidos'] + 1;
-                        
+
                             if ($newAttempts >= 3) {
                                 $bloqueoHasta = (new DateTime())->modify('+24 hours')->format('Y-m-d H:i:s');
                                 $updateSql = 'UPDATE tb_usuarios SET intentos_fallidos = ?, tiempo_bloqueo = ? WHERE usuario = ?';
                                 Database::executeRow($updateSql, array($newAttempts, $bloqueoHasta, $alias));
-                        
                                 $result['error'] = 'Cuenta bloqueada por 24 horas debido a múltiples intentos fallidos. Intenta de nuevo después de 24 horas.';
                             } else {
                                 $updateSql = 'UPDATE tb_usuarios SET intentos_fallidos = ? WHERE usuario = ?';
                                 Database::executeRow($updateSql, array($newAttempts, $alias));
-                        
-                                $result['error'] = $checkUserResult['message'] . ' Intentos fallidos: ' . $newAttempts . '/3';
+                                $result['error'] = 'Credenciales incorrectas. Intentos fallidos: ' . $newAttempts . '/3';
                             }
-                        } else {
-                            $result['error'] = 'Ocurrió un error, verifique las credenciales.';
                         }
-                        
+                    } else {
+                        $result['error'] = 'Ocurrió un error, verifique las credenciales.';
                     }
-                    break;
+                }
+                break;
+
             case 'logInApp':
                 $_POST = Validator::validateForm($_POST);
                 if ($administrador->checkUser($_POST['alias'], $_POST['clave'])) {
-                    // Start the database connection.
                     $db = new Database();
-
-                    // Retrieve the alias from the form.
                     $alias = $_POST['alias'];
-
-                    // Query to get the user level based on the alias.
                     $sql = 'SELECT id_nivel_usuario FROM tb_usuarios WHERE usuario = ?';
                     $params = array($alias);
                     $data = $db->getRow($sql, $params);
 
                     if ($data) {
-                        // Save the user level and alias in the session
                         $_SESSION['aliasAdministrador'] = $alias;
                         $_SESSION['user_level'] = $data['id_nivel_usuario'];
 
@@ -308,16 +282,13 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Credenciales incorrectas';
                 }
                 break;
-
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
     }
-    // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
+
     $result['exception'] = Database::getException();
-    // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
     header('Content-type: application/json; charset=utf-8');
-    // Se imprime el resultado en formato JSON y se retorna al controlador.
     print(json_encode($result));
 } else {
     print(json_encode('Recurso no disponible'));

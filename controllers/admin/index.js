@@ -8,6 +8,15 @@ const CONFIRMAR_CLAVE = document.getElementById('confirmarClave');
 
 const CLAVE_LOGIN = document.getElementById('clave');
 
+
+const CLAVE_ACTUAL = document.getElementById('claveActual'),
+CONFIRMAR_CLAVE_NUEVA = document.getElementById('confirmarClave'),
+CLAVE_NUEVA = document.getElementById('claveNueva');
+// Constante para establecer la modal de cambiar contraseña.
+const PASSWORD_MODAL = new bootstrap.Modal('#passwordModal');
+// Constante para establecer el formulario de cambiar contraseña.
+const PASSWORD_FORM = document.getElementById('passwordForm');
+
 // Constantes para los mensajes de error
 const PASSWORD_ERROR = document.getElementById('passwordError');
 const CONFIRM_PASSWORD_ERROR = document.getElementById('confirmPasswordError');
@@ -16,6 +25,15 @@ const PASSWORD_ERROR_LOGIN = document.getElementById('passwordErrorLogin');
 const TOGGLE_PASSWORD = document.getElementById('togglePassword');
 const TOGGLE_CONFIRM_PASSWORD = document.getElementById('toggleConfirmPassword');
 const TOGGLE_PASSWORD_LOGIN = document.getElementById('togglePasswordLogin');
+
+//Constantes para manejar los errores del modal de contraseña
+const PASSWORD_ERROR_FORM = document.getElementById('passwordErrorFrom');
+const NEW_PASSWORD_ERROR_FORM = document.getElementById('NewPasswordError');
+const CONFIRM_PASSWORD_ERROR_FORM = document.getElementById('confirmPasswordError');
+
+const TOGGLE_PASSWORD_FORM = document.getElementById('togglePasswordFrom');
+const TOGGLE_NEW_PASSWORD_FORM = document.getElementById('toggleNewPassword');
+const TOGGLE_CONFIRM_PASSWORD_FORM = document.getElementById('toggleConfirmPassword');
 
 vanillaTextMask.maskInput({
     inputElement: document.getElementById('telefonoUsuario'),
@@ -39,6 +57,12 @@ const togglePasswordVisibility = (inputField, toggleButton) => {
 TOGGLE_PASSWORD.addEventListener('click', () => togglePasswordVisibility(CLAVE, TOGGLE_PASSWORD));
 TOGGLE_CONFIRM_PASSWORD.addEventListener('click', () => togglePasswordVisibility(CONFIRMAR_CLAVE, TOGGLE_CONFIRM_PASSWORD));
 TOGGLE_PASSWORD_LOGIN.addEventListener('click', () => togglePasswordVisibility(CLAVE_LOGIN, TOGGLE_PASSWORD_LOGIN));
+
+
+// Evento para mostrar/ocultar la contraseña en el formulario de contraseña
+TOGGLE_PASSWORD_FORM.addEventListener('click', () => togglePasswordVisibility(CLAVE_ACTUAL, TOGGLE_PASSWORD_FORM));
+TOGGLE_NEW_PASSWORD_FORM.addEventListener('click', () => togglePasswordVisibility(CLAVE_NUEVA, TOGGLE_NEW_PASSWORD_FORM));
+TOGGLE_CONFIRM_PASSWORD_FORM.addEventListener('click', () => togglePasswordVisibility(CONFIRMAR_CLAVE_NUEVA, TOGGLE_CONFIRM_PASSWORD_FORM));
 
 // Función para verificar la fortaleza de la contraseña
 const isPasswordStrong = (password, userData = {}) => {
@@ -126,6 +150,37 @@ CLAVE_LOGIN.addEventListener('input', () => {
     }
 });
 
+// Evento para validar la contraseña mientras se escribe (formulario de registro)
+CLAVE_ACTUAL.addEventListener('input', () => {
+    const userData = getUserDataFromForm();
+    const errorMessage = isPasswordStrong(CLAVE_ACTUAL.value, userData);
+    if (errorMessage) {
+        showError(PASSWORD_ERROR, errorMessage);
+    } else {
+        hideError(PASSWORD_ERROR);
+    }
+});
+
+// Evento para validar la confirmación de contraseña mientras se escribe (formulario de registro)
+CONFIRMAR_CLAVE_NUEVA.addEventListener('input', () => {
+    if (CLAVE.value !== CONFIRMAR_CLAVE.value) {
+        showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
+    } else {
+        hideError(CONFIRM_PASSWORD_ERROR);
+    }
+});
+
+// Evento para validar la contraseña mientras se escribe (formulario de inicio de sesión)
+CLAVE_NUEVA.addEventListener('input', () => {
+    const userData = getUserDataFromForm();
+    const errorMessage = isPasswordStrong(CLAVE_NUEVA.value, userData);
+    if (errorMessage) {
+        showError(NEW_PASSWORD_ERROR, errorMessage);
+    } else {
+        hideError(NEW_PASSWORD_ERROR);
+    }
+});
+
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -210,30 +265,52 @@ function showPasswordChangeModal() {
     passwordModal.show();
 }
 
-// Evento para manejar el envío del formulario de cambio de contraseña
-document.getElementById('passwordForm').addEventListener('submit', async (event) => {
+// Mètodo del evento para cuando se envía el formulario de cambiar contraseña.
+PASSWORD_FORM.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
-    
-    const newPassword = document.getElementById('claveNueva').value;
-    const confirmPassword = document.getElementById('confirmarClave').value;
-    
-    if (newPassword !== confirmPassword) {
-        showError(document.getElementById('confirmPasswordError'), 'Las contraseñas no coinciden.');
-        return;
-    }
-    
-    const passwordError = isPasswordStrong(newPassword);
+
+    const userData = getUserDataFromForm();
+    const passwordError = isPasswordStrong(CLAVE_ACTUAL.value, userData);
     if (passwordError) {
-        showError(document.getElementById('NewPasswordError'), passwordError);
+        showError(PASSWORD_ERROR, passwordError);
+        return;
+    }
+
+    const userData1 = getUserDataFromForm();
+    const passwordError1 = isPasswordStrong(CLAVE_NUEVA.value, userData1);
+    if (passwordError1) {
+        showError(NEW_PASSWORD_ERROR, passwordError1);
         return;
     }
     
-    const FORM = new FormData(event.target);
+    if (CLAVE_NUEVA.value !== CONFIRMAR_CLAVE.value) {
+        showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
+        return;
+    }
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(PASSWORD_FORM);
+    // Petición para actualizar la constraseña.
     const DATA = await fetchData(USER_API, 'changePassword', FORM);
-    
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        sweetAlert(1, 'Contraseña cambiada con éxito. Por favor, inicia sesión nuevamente.', true, 'index.html');
+        // Se cierra la caja de diálogo.
+        PASSWORD_MODAL.hide();
+        // Se muestra un mensaje de éxito.
+        sweetAlert(1, DATA.message, true);
     } else {
         sweetAlert(2, DATA.error, false);
     }
 });
+
+/*
+*   Función para preparar el formulario al momento de cambiar la constraseña.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const openPassword = () => {
+    // Se abre la caja de diálogo que contiene el formulario.
+    PASSWORD_MODAL.show();
+    // Se restauran los elementos del formulario.
+    PASSWORD_FORM.reset();
+}

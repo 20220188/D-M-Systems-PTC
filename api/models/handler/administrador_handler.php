@@ -22,21 +22,35 @@ class AdministradorHandler
      *  Métodos para gestionar la cuenta del administrador.
      */
 
-    public function checkUser($username, $password)
-    {
-        $sql = 'SELECT id_usuario, usuario, clave, fecha_registro, ultimo_cambio_clave
-                FROM tb_usuarios
-                WHERE usuario = ?';
-        $params = array($username);
-        $data = Database::getRow($sql, $params);
-        if (password_verify($password, $data['clave'])) {
-            $_SESSION['idAdministrador'] = $data['id_usuario'];
-            $_SESSION['aliasAdministrador'] = $data['usuario'];
-            return true;
-        } else {
-            return false;
-        }
-    }
+     public function checkUser($username, $password)
+     {
+         $sql = 'SELECT id_usuario, usuario, clave, ultimo_cambio_clave
+                 FROM tb_usuarios
+                 WHERE usuario = ?';
+         $params = array($username);
+         $data = Database::getRow($sql, $params);
+         
+         // Depuración: Verifica si se obtuvo algún dato
+         if ($data) {
+             // Depuración: Verifica el hash de la contraseña
+             if (password_verify($password, $data['clave'])) {
+                 $_SESSION['idAdministrador'] = $data['id_usuario'];
+                 $_SESSION['aliasAdministrador'] = $data['usuario'];
+                 return [
+                     'status' => true,
+                     'ultimo_cambio_clave' => $data['ultimo_cambio_clave']
+                 ];
+             } else {
+                 // Contraseña incorrecta
+                 return ['status' => false, 'message' => 'Contraseña incorrecta'];
+             }
+         }
+         
+         // Usuario no encontrado
+         return ['status' => false, 'message' => 'Usuario no encontrado'];
+     }
+     
+     
 
     public function checkPassword($password)
     {
@@ -52,16 +66,28 @@ class AdministradorHandler
             return false;
         }
     }
-
+//actualice el array con el id
     public function changePassword()
     {
         $sql = 'UPDATE tb_usuarios
                 SET clave = ?, ultimo_cambio_clave = CURRENT_TIMESTAMP
                 WHERE id_usuario = ?';
+                //aqui se hace la inyeccion de array
         $params = array($this->clave, $_SESSION['idAdministrador']);
-        return Database::executeRow($sql, $params);
+        
+        // Ejecutar el cambio de contraseña
+        if (Database::executeRow($sql, $params)) {
+            // Actualizar la fecha del último cambio de contraseña
+            return $this->updateLastPasswordChange();
+        }
+        return false;
     }
-
+    //este metodo sirve para los noventa dias de expiracion de contra
+    public function updateLastPasswordChange() {
+        $sql = 'UPDATE tb_usuarios SET ultimo_cambio_clave = NOW() WHERE id_usuario = ?';
+        return Database::executeRow($sql, array($_SESSION['idAdministrador'])); // Usar el ID de usuario de la sesión
+    }
+    
     //editar de aqui para abajo
     public function readProfile()
     {
