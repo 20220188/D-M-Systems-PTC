@@ -70,11 +70,15 @@
                     <!-- Formulario para actualizar contraseña -->
                     <form id="passwordForm">
                         <div class="modal-body">
-                            <div class="row g-3">
-                                <div class="col-sm-12 col-md-6 offset-md-3">
-                                    <label for="claveActual" class="form-label">Contraseña actual</label>
-                                    <input id="claveActual" type="password" name="claveActual" class="form-control" required>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="claveActual">Contraseña:</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="claveActual" name="claveActual" autocomplete="new-password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
                                 </div>
+                                <div id="passwordError" class="text-danger" style="display: none;"></div>
                             </div>
                             <hr>
                             <div class="row g-3">
@@ -82,12 +86,24 @@
                                     <h5>CONTRASEÑA NUEVA</h5>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <label for="claveNueva" class="form-label">Nueva contraseña</label>
-                                    <input id="claveNueva" type="password" name="claveNueva" class="form-control" required>
+                                    <label for="claveNueva">Nueva Contraseña:</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="claveNueva" name="claveNueva" autocomplete="new-password" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleNewPassword">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div id="NewPasswordError" class="text-danger" style="display: none;"></div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
-                                    <input id="confirmarClave" type="password" name="confirmarClave" class="form-control" required>
+                                    <label for="confirmarClave">Confirmar Contraseña:</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="confirmarClave" name="confirmarClave" autocomplete="new-password" required>
+                                        <button class="btn btn-outline-secondary" type="button" id="toggleConfirmPassword">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </button>
+                                    </div>
+                                    <div id="confirmPasswordError" class="text-danger" style="display: none;"></div>
                                 </div>
                             </div>
                         </div>
@@ -110,6 +126,10 @@
 
     <!-- Llamada al kit de font awesome -->
     <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
+
+        <!-- Inclusión de la librería de mascaras. Para más información https://github.com/text-mask/text-mask -->
+        <script type="text/javascript" src="../resources/js/vanillaTextMask.js"></script>
+        
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
 
