@@ -19,7 +19,9 @@ clave VARCHAR (100) UNIQUE NOT NULL,
 correo VARCHAR(50)UNIQUE NOT NULL,
 nombre VARCHAR(25),
 DUI VARCHAR (10)UNIQUE NOT NULL,
-telefono VARCHAR(10) unique,
+telefono VARCHAR(10) UNIQUE,
+intentos_fallidos INT DEFAULT 0,
+tiempo_bloqueo DATETIME DEFAULT NULL,
 id_nivel_usuario INT,
 CONSTRAINT fk_usuarios_niveles_usuarios
 FOREIGN KEY (id_nivel_usuario)
