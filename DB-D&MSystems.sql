@@ -358,4 +358,8 @@ REFERENCES tb_detalle_productos (id_detalle_producto),
 cantidad_salida INT CHECK(cantidad_salida >0)
 );
 
-commit;
+ALTER TABLE tb_usuarios 
+ADD COLUMN codigo_2fa VARCHAR(6), 
+ADD COLUMN expiracion_2fa DATETIME;
+
+COMMIT;
