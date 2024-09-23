@@ -5,216 +5,194 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulo de ventas</title>
-    
+    <title>Módulo de Ventas</title>
+
+    <!-- External CSS files -->
     <link type="text/css" rel="stylesheet" href="../resources/css/bootstrap.min.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
     <link type="text/css" rel="stylesheet" href="../resources/css/dashboard.css">
     <link rel="stylesheet" href="../resources/css/modulo_ventas.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+    <style>
+        .dropdown-content {
+            display: block;
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            z-index: 1;
+            max-height: 200px;
+            overflow-y: auto;
+            width: calc(100% - 1rem); /* Adjust width to match input */
+        }
+
+        .dropdown-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 
 <body id="body">
 
+    <main class="container mt-4">
 
-
-
-    <main>
-        <!--Formulario de busqueda -->
-        <div>
-            <form class="col-sm-12 col-md-6" id="searchForm">
-                <div class="row">
-                    <div class="col-6">
-                        <input type="search" class="form-control" name="search" placeholder="Buscar producto" required>
-                    </div>
-                    <div class="col-6">
-                        <button type="submit" class="btn btn-success">
-                            <i class="lni lni-search-alt"></i>
-                        </button>
-                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
-                            <i class="lni lni-eraser"></i>
-                        </button>
+        <!-- Block of Inputs for Sales Information -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="FechaVenta" class="form-label" style="color: black;">Fecha</label>
+                            <input type="date" name="FechaVenta" class="form-control" id="FechaVenta">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Vendedor" class="form-label" style="color:black;">Vendedor</label>
+                            <input type="text" name="Vendedor" class="form-control" id="Vendedor" oninput="buscarVendedor(this.value)">
+                            <div id="resultadoVendedor" class="dropdown-content"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="FromaPagoVenta" class="form-label" style="color: black;">Forma de Pago</label>
+                            <select id="FromaPagoVenta" name="FromaPagoVenta" class="form-select" required>
+                                <!-- Opciones de forma de pago serán llenadas desde la base de datos -->
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="BodegaVenta" class="form-label" style="color: black;">Bodega</label>
+                            <select id="BodegaVenta" name="BodegaVenta" class="form-select" required>
+                                <!-- Opciones de bodega serán llenadas desde la base de datos -->
+                            </select>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card p-3">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="DocumentoVenta" class="form-label" style="color: black;">Documento</label>
+                            <select id="DocumentoVenta" name="DocumentoVenta" class="form-select" required>
+                                <!-- Opciones de documento serán llenadas desde la base de datos -->
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="ClienteVenta" class="form-label" style="color: black;">Cliente</label>
+                            <input type="text" class="form-control" id="ClienteVenta" oninput="buscarCliente(this.value)">
+                            <div id="resultadoCliente" class="dropdown-content"></div>
+                        </div>
+                        <div class="col-12">
+                            <label for="Notasventa" class="form-label">Notas</label>
+                            <input type="text" class="form-control" id="Notasventa">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Search Form -->
+        <div class="row mb-4">
+            <form class="col-md-12" id="searchForm" onsubmit="buscarProducto(event)">
+                <div class="input-group">
+                    <input type="search" class="form-control" name="search" id="searchProducto" placeholder="Buscar producto" required>
+                    <button type="submit" class="btn btn-success">
+                        <i class="lni lni-search-alt"></i>
+                    </button>
+                </div>
+                <div id="resultadoProducto" class="dropdown-content"></div>
             </form>
         </div>
-        <!--DIV para separar los 3 loques de inputs-->
-        <div class="row">
-            <!--Primer bloque de inputs-->
-            <div class="panel1 col-md-4">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="inputFecha" class="form-label" style="color: black;">Fecha</label>
-                        <input type="date" class="form-control" id="inputFecha">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputVendedor" class="form-label"style="color:black;">Vendedor</label>
-                        <input type="text" class="form-control" id="inputVendedor">
-                    </div>
 
-                    <div class="col-md-6">
-                        <label for="inputPago" class="form-label"style="color: black;">Forma de pago</label>
-                        <select id="inputPago" name="inputPago" class="form-select" required>
-                            <option value="">Seleccionar </option>
-                            <option value="Zapatillas">Efectivo </option>
-                            <option value="Jerseys">Tarjeta de credito</option>
-                            <option value="Jerseys">Tarjeta de debito</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputBodega" class="form-label"style="color: black;">Bodega</label>
-                        <select id="inputBodega" name="inputBodega" class="form-select" required>
-                            <option value="">Seleccionar </option>
-                            <option value="Zapatillas">Bodega 1</option>
-                            <option value="Jerseys">Bodega 2</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <!--Bloque de inputs 2-->
-            <div class="panel2 col-md-4">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="inputDocumento" class="form-label"style="color: black;">Documento</label>
-                        <select id="inputDocumento" name="inputDocumento" class="form-select" required>
-                            <option value="">Seleccionar </option>
-                            <option value="Zapatillas">Documento 1</option>
-                            <option value="Jerseys">Documento 2</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="inputVendedor" class="form-label"style="color: black;">Cliente</label>
-                        <input type="text" class="form-control" id="inputVendedor">
-                    </div>
+        <!-- Divider -->
+        <hr class="hr">
 
-                    <div class="col-6">
-                        <label for="inputNotas" class="form-label">Notas </label>
-                        <input type="text" class="form-control" id="inputNotas">
-                    </div>
-                </div>
-            </div>
-        </div>
-<p>NOTA:
-    Aqui en este apartado tenes que hacer un buscador para buscar los productos que se van a vender. Usando el codigo se tiene que cargar el resto de la informacion del producto en los campos de abajo, asi como el precio unitario, cantidad, etc.
-    Los precios opcionales pueden quedar de igual forma vacios. En la tabla tenes que hacer que donde aparece el # se pueda buscar por el nombre o por el codigo del producto y se llene lo demas.
-</p>
-        <!--Linea meramente estetica para separar las secciones de la pagina-->
-        <hr class="hr">  
-
-        <!--Codigo de la tabla donde se mostraran las ventas-->
+        <!-- Sales Table -->
         <table class="table table-hover text-center">
             <thead>
                 <tr>
                     <td class="text-start" colspan="2" id="rowsFound"></td>
                 </tr>
                 <tr>
-                    <th>PUNTO DE VENTA</th>
-                    <th>ACCIONES</th>
+                    <th>Código</th>
+                    <th>Descripción Artículo</th>
+                    <th>Cantidad</th>
+                    <th>Precio sin Descuento</th>
+                    <th>% Descuento</th>
+                    <th>P.U</th>
+                    <th>Valor</th>
+                    <th>Exento</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="tableBody"></tbody>
         </table>
 
-
-            <!--Inputs donde se calculará el precio de la venta y donde se mostrarán otros precios de venta sugeridos -->
-            <div class="col-md-2">
+        <!-- Pricing Inputs -->
+        <div class="row">
+            <div class="col-md-4">
                 <div class="input-group mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">TOTAL $</span>
-                    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    <span class="input-group-text">TOTAL $</span>
+                    <input type="number" class="form-control">
                 </div>
-
                 <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Precio 2</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    <span class="input-group-text">Precio 2</span>
+                    <input type="text" class="form-control">
                 </div>
-
                 <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Precio 3</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Precio 4</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Precio 5</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                </div>
-
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Otro precio</span>
-                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                    <span class="input-group-text">Precio 3</span>
+                    <input type="text" class="form-control">
                 </div>
             </div>
         </div>
-        
-        <div class=" container2 row">
+
+        <!-- Action Buttons and Totals -->
+        <div class="row mt-4">
             <div class="col-md-6">
-                <div class="d-grid gap-2 d-md-block">
-                    <button type="button" class="btn1" id="btnEditar"><i class="fa-solid fa-pen fa-1x"></i> Editar</button>
-                    <button type="button" class="btn1" id="btnAgregar"><i class="fa-solid fa-circle-plus fa-1x"></i> Agregar</button>
-                    <button type="button" class="btn1" id="btnImprimir"><i class="fa-solid fa-print fa-1x"></i> Imprimir</button>
-                </div>
+                <button type="button" class="btn btn-primary me-2" id="btnAgregar">
+                    <i class="fa-solid fa-circle-plus"></i> Agregar
+                </button>
+                <button type="button" class="btn btn-warning me-2" id="btnEditar">
+                    <i class="fa-solid fa-pen"></i> Editar
+                </button>
+                <button type="button" class="btn btn-info" id="btnImprimir">
+                    <i class="fa-solid fa-print"></i> Imprimir
+                </button>
             </div>
 
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">N. Lineas</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Sub total</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">IVA</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Retención</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Exento</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Efectivo</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                        <div class="input-group input-group-sm mb-3">
-                            <span class="input-group-text" id="inputGroup-sizing-sm">Cambio</span>
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                        </div>
-                    </div>
+            <div class="col-md-6 text-end">
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Sub Total</span>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">IVA</span>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Efectivo</span>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <span class="input-group-text">Cambio</span>
+                    <input type="text" class="form-control">
                 </div>
             </div>
         </div>
+
     </main>
 
-
-<!--Mandamos a llamar los archivos js del sitio-->
-<script type="text/javascript" src="../controllers/utils/admin.js"></script>
-<script src="../controllers/utils/components.js"></script>
-
-
-<script type="text/javascript" src="../resources/js/modulo_ventasDashboard.js"></script>
-<script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
-
-<!--Mandamos a llamar las librerias de Sweetalert2-->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- External JS files -->
+    <script type="text/javascript" src="../controllers/utils/admin.js"></script>
+    <script src="../controllers/utils/components.js"></script>
+    <script type="text/javascript" src="../resources/js/modulo_ventasDashboard.js"></script>
+    <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script type="text/javascript" src="../controllers/admin/admin_maestro_productos.js"></script>
 </body>
 
 </html>
