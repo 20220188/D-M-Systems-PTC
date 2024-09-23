@@ -43,12 +43,30 @@
                     </div>
                     <div id="passwordErrorLogin" class="text-danger" style="display: none;"></div>
                 </div>
+                
+                <!-- Checkbox para omitir 2FA -->
+                <div class="mb-3">
+                    <input id="omit2FA" type="checkbox" name="omit2FA">
+                    <label for="omit2FA">Omitir verificación 2FA</label>
+                </div>
+
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary"><i class="fa-regular fa-paper-plane"></i>
                         Enviar</button>
                 </div>
             </div>
         </form>
+
+        <!-- Nuevo formulario para 2FA -->
+        <form class="d-none" id="twoFactorForm" autocomplete="off">
+            <div class="mb-3">
+                <label for="codigo2FA" class="form-label">Código de verificación</label>
+                <input id="codigo2FA" type="text" name="codigo2FA" class="form-control" required
+                    autocomplete="off">
+            </div>
+            <button type="submit" class="btn btn-primary">Verificar</button>
+        </form>
+
         <!-- Formulario para crear el primer administrador -->
         <form class="d-none" id="signupForm" autocomplete="off">
             <div class="row g-3">
