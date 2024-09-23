@@ -150,7 +150,7 @@ CREATE TABLE tb_productos(
 SELECT * FROM tb_productos;
 
 	
-CREATE TABLE tb_detalle_Productos(
+CREATE TABLE tb_detalle_productos(
     /*campos de detalles de productos*/
     id_detalle_producto INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     ubicacion VARCHAR(250),
