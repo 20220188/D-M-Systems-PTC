@@ -3,12 +3,12 @@ let timeout;
 
 // Función para cerrar sesión
 async function cerrarSesion() {
-    console.log("Cerrando sesión..."); // Esto te ayudará a saber si la función se llama
+
     const DATA = await fetchData(USER_API2, 'logOutInactividad'); // Verifica que `fetchData` funcione
     console.log(DATA); // Muestra la respuesta en la consola
 
     if (DATA.status) {
-        sweetAlert(1, DATA.message, true, 'index.html');
+        sweetAlert(3, DATA.message, true, 'index.html');
     } else {
         sweetAlert(2, DATA.exception, false);
     }
