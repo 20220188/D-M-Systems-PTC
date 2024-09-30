@@ -1,6 +1,7 @@
 <?php
 // Se incluye la clase del modelo.
 require_once('../../models/data/administrador_data.php');
+require_once('../../services/admin/mail_config.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -213,6 +214,7 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 $checkUserResult = $administrador->checkUser($_POST['alias'], $_POST['clave']);
 
+                // Si las credenciales son correctas
                 if ($checkUserResult['status']) {
                     $result['status'] = 1;
                     $result['message'] = 'Autenticación correcta';
@@ -226,9 +228,31 @@ if (isset($_GET['action'])) {
                         $result['message'] = 'La contraseña ha expirado. Debe cambiarla.';
                     } else {
                         $result['passwordExpired'] = false;
-                        // Establecer la sesión del usuario aquí, si es necesario
+
+                        // Verificar si se ha omitido el 2FA
+                        $omit2FA = isset($_POST['omit2FA']) && $_POST['omit2FA'] == '1';
+                        if ($omit2FA) {
+                            $_SESSION['idAdministrador'] = $checkUserResult['id_usuario'];
+                            $_SESSION['aliasAdministrador'] = $administrador->getAliasById($checkUserResult['id_usuario']);
+                            $result['status'] = 1;
+                            $result['message'] = 'Inicio de sesión exitoso. Bienvenido.';
+                        } else {
+                            // Si no se ha omitido, proceder con 2FA
+                            $email = $administrador->getEmailById($checkUserResult['id_usuario']);
+                            $subject = "Código de verificación 2FA - D-M-System";
+                            $body = "Tu código de verificación es: {$checkUserResult['codigo2FA']}";
+                            if (sendEmail($email, $subject, $body)) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Primer paso de autenticación correcto. Se ha enviado un código a tu correo.';
+                                $result['id_administrador'] = $checkUserResult['id_usuario'];
+                                $result['twoFactorRequired'] = true;
+                            } else {
+                                $result['error'] = 'Error al enviar el código de verificación. Inténtalo de nuevo.';
+                            }
+                        }
                     }
                 } else {
+                    // Contraseña o usuario incorrectos
                     $alias = $_POST['alias'];
 
                     // Verificar si el usuario está bloqueado
@@ -256,6 +280,21 @@ if (isset($_GET['action'])) {
                     } else {
                         $result['error'] = 'Ocurrió un error, verifique las credenciales.';
                     }
+                }
+                break;
+
+            case 'verify2FA':
+                $_POST = Validator::validateForm($_POST);
+                $id_administrador = $_POST['id_administrador'];
+                $codigo = $_POST['codigo2FA'];
+
+                if ($administrador->verify2FACode($id_administrador, $codigo)) {
+                    $_SESSION['idAdministrador'] = $id_administrador;
+                    $_SESSION['aliasAdministrador'] = $administrador->getAliasById($id_administrador);
+                    $result['status'] = 1;
+                    $result['message'] = 'Autenticación completa. Bienvenido.';
+                } else {
+                    $result['error'] = 'Código 2FA inválido o expirado.';
                 }
                 break;
 

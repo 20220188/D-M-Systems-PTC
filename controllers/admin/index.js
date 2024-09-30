@@ -235,29 +235,71 @@ SIGNUP_FORM.addEventListener('submit', async (event) => {
     }
 });
 
+const TWO_FACTOR_FORM = document.getElementById('twoFactorForm');
+let currentAdminId = null; // Almacena temporalmente el id del usuario autenticado
+
+// Método del evento para cuando se envía el formulario de inicio de sesión.
 LOGIN_FORM.addEventListener('submit', async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Previene el comportamiento predeterminado antes de hacer la petición.
     
+    const FORM = new FormData(LOGIN_FORM);
+    const omit2FA = document.getElementById('omit2FA').checked;
+    FORM.append('omit2FA', omit2FA ? '1' : '0');
+
+    // Verificar la fortaleza de la contraseña antes de continuar.
     const passwordError = isPasswordStrong(CLAVE_LOGIN.value);
     if (passwordError) {
         showError(PASSWORD_ERROR_LOGIN, passwordError);
         return;
     }
 
-    const FORM = new FormData(LOGIN_FORM);
+    // Petición para iniciar sesión.
     const DATA = await fetchData(USER_API, 'logIn', FORM);
-    
+
     if (DATA.status) {
+        // Si la contraseña ha expirado, mostrar el modal de cambio de contraseña.
         if (DATA.passwordExpired) {
             sweetAlert(2, 'Tu contraseña ha expirado. Por favor, cámbiala ahora.', false);
-            showPasswordChangeModal();
-        } else {
+            showPasswordChangeModal();  // Mostrar modal para cambiar la contraseña.
+        } 
+        // Si se requiere 2FA, cambiar la vista al formulario de 2FA.
+        else if (DATA.twoFactorRequired) {
+            currentAdminId = DATA.id_usuario;  // Guardar el ID del usuario autenticado
+            sweetAlert(1, 'Autenticación exitosa. Se requiere verificación de 2FA.', false);
+            LOGIN_FORM.classList.add('d-none');  // Ocultar el formulario de inicio de sesión.
+            TWO_FACTOR_FORM.classList.remove('d-none');  // Mostrar el formulario de 2FA.
+        } 
+        // Si no es necesario el cambio de contraseña ni el 2FA, inicio exitoso.
+        else {
             sweetAlert(1, DATA.message, true, 'dashboard.html');
         }
     } else {
-        sweetAlert(2, DATA.error, false);
+        sweetAlert(2, DATA.error || 'Error durante el inicio de sesión', false);
     }
 });
+
+// Nuevo método para manejar la verificación del código 2FA
+TWO_FACTOR_FORM.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    
+    // Verificar si se ha guardado el ID del usuario antes de continuar
+    if (!currentAdminId) {
+        sweetAlert(2, 'Error: No se ha encontrado un ID de usuario para la verificación 2FA.', false);
+        return;
+    }
+
+    const FORM = new FormData(TWO_FACTOR_FORM);
+    FORM.append('id_usuario', currentAdminId);  // Agregar el ID del usuario autenticado
+    const DATA = await fetchData(USER_API, 'verify2FA', FORM);
+
+    if (DATA.status) {
+        sweetAlert(1, DATA.message, true, 'dashboard.html');
+    } else {
+        sweetAlert(2, DATA.error || 'Código de verificación incorrecto.', false);
+    }
+});
+
+
 
 // Función para mostrar el modal de cambio de contraseña
 function showPasswordChangeModal() {
