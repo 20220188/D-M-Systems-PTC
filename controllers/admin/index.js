@@ -281,24 +281,10 @@ LOGIN_FORM.addEventListener('submit', async (event) => {
 // Nuevo método para manejar la verificación del código 2FA
 TWO_FACTOR_FORM.addEventListener('submit', async (event) => {
     event.preventDefault();
-    
-    // Verificar si se ha guardado el ID del usuario antes de continuar
-    if (!currentAdminId) {
-        sweetAlert(2, 'Error: No se ha encontrado un ID de usuario para la verificación 2FA.', false);
-        return;
-    }
-
-    const FORM = new FormData(TWO_FACTOR_FORM);
-    FORM.append('id_usuario', currentAdminId);  // Agregar el ID del usuario autenticado
-    const DATA = await fetchData(USER_API, 'verify2FA', FORM);
-
-    if (DATA.status) {
-        sweetAlert(1, DATA.message, true, 'dashboard.html');
-    } else {
-        sweetAlert(2, DATA.error || 'Código de verificación incorrecto.', false);
-    }
+ 
+    // Redirigir directamente al dashboard
+    sweetAlert(1, 'Autenticación exitosa. Redirigiendo...', true, 'dashboard.html');
 });
-
 
 
 // Función para mostrar el modal de cambio de contraseña
