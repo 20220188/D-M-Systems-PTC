@@ -4,7 +4,7 @@ document.querySelectorAll('#btnEliminar').forEach(button => {
     button.addEventListener('click', function () {
         // Muestra la alerta de SweetAlert2
         Swal.fire({
-            title: "¿Estas seguro?",
+            title: "Estás seguro?",
             text: "No podras revertir esto!",
             icon: "warning",
             showCancelButton: true,
