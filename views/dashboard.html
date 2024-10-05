@@ -16,11 +16,73 @@
   <link rel="stylesheet" href="../resources/css/maestro_laboratorios.css">
   <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
   
+  <!-- Estilos personalizados -->
+  <style>
+      /* Centrar el botón y el contenido */
+      .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin-top: 20px;
+      }
+
+      /* Ocultar el embed inicialmente */
+      #embed-content {
+          display: none;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 1000;
+          width: 80%;
+          height: 80%;
+          max-width: 1000px;
+          max-height: 900px;
+      }
+
+      /* Botón estilizado */
+      .btn {
+          padding: 10px 20px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          cursor: pointer;
+          border-radius: 5px;
+          font-size: 16px;
+      }
+
+      .btn:hover {
+          background-color: #0056b3;
+      }
+
+      /* Fondo oscuro para cuando se muestra el PDF */
+      .overlay {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.7);
+          z-index: 999;
+      }
+  </style>
 
 </head>
 
 <body id="body">
 
+  <!-- Contenedor para centrar el botón -->
+  <div class="container">
+      <button class="btn" onclick="toggleEmbed()">Mostrar Manual de Usuario</button>
+  </div>
+
+  <!-- Overlay para oscurecer el fondo -->
+  <div id="overlay" class="overlay" onclick="toggleEmbed()"></div>
+
+  <!-- Contenido Embed, inicialmente oculto -->
+  <embed id="embed-content" src="../Docs/Manual de usuario PTC Web.pdf" type="application/pdf"/>
 
   <!-- Contenido principal del documento -->
   <main>
@@ -32,21 +94,22 @@
       <main class="main p-3">
           <!-- Título del contenido principal -->
           <h3 id="mainTitle"></h3>
+          
           <!-- Contenedor de gráficos -->
           <div class="row">
               <div class="col-sm-12 col-md-6 col-lg-4">
+                
                   <!-- Se muestra un gráfico con la cantidad de productos por categoría -->
                   <canvas id="chart1"></canvas>
               </div> 
           </div>
           <!-- Importación de la librería para generar los gráficos. Para más información https://www.chartjs.org/ -->
-          <script type="text/javascript" src="../resources/js/chart.umd.min.js"></script>
+          
       </main>
   </div>
   </main>
 
   <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
-
 
   <!--Importaciones-->
   
@@ -54,7 +117,6 @@
   <script type="text/javascript" src="../controllers/utils/admin.js"></script>
   <script src="../controllers/utils/components.js"></script>
   <script type="text/javascript" src="../controllers/admin/dashboard.js"></script>
-
 
   <!-- Llamada al framework y librería de mensajes -->
   <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
@@ -66,11 +128,25 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-
   <!-- Llamada al kit de font awesome -->
   <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
 
   <script src="../controllers/admin/inactividad.js"></script>
+
+  <!-- Función para mostrar/ocultar el contenido del embed -->
+  <script>
+      function toggleEmbed() {
+          var embed = document.getElementById("embed-content");
+          var overlay = document.getElementById("overlay");
+          if (embed.style.display === "none") {
+              embed.style.display = "block";
+              overlay.style.display = "block";
+          } else {
+              embed.style.display = "none";
+              overlay.style.display = "none";
+          }
+      }
+  </script>
 
 </body>
 
