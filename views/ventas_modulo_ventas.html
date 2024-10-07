@@ -80,6 +80,13 @@
                                 <!-- Opciones de documento serán llenadas desde la base de datos -->
                             </select>
                         </div>
+                        <div class="col-md-6"></div>
+                            <label for="DocumentoVenta" class="form-label" style="color: black;">Tipo Documento</label>
+                            <select id="DocumentoVenta" name="DocumentoVenta" class="form-select" required>
+                                <!-- Opciones de documento serán llenadas desde la base de datos -->
+                            </select>
+                        </div>
+                        
                         <div class="col-md-6">
                             <label for="ClienteVenta" class="form-label" style="color: black;">Cliente</label>
                             <input type="text" class="form-control" id="ClienteVenta" oninput="buscarCliente(this.value)">

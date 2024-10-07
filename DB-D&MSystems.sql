@@ -261,19 +261,52 @@ FOREIGN KEY (id_compra)
 REFERENCES tb_compras (id_compra)
 );*/
 
-CREATE TABLE tb_ventas(
-id_venta INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-monto_venta FLOAT,
-fecha_venta DATE,
-id_cliente INT,
-CONSTRAINT fk_venta_cliente
-FOREIGN KEY (id_cliente)
-REFERENCES tb_clientes (id_cliente),
-id_producto INT,
-CONSTRAINT fk_venta_producto
-FOREIGN KEY (id_producto)
-REFERENCES tb_productos (id_producto)
+CREATE TABLE tb_ventas (
+    id_venta INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    fecha_venta DATE,
+    id_dependiente INT,
+    CONSTRAINT fk_venta_dependiente
+    FOREIGN KEY (id_dependiente)
+    REFERENCES tb_dependientes (id_dependiente),
+    id_cliente INT,
+    CONSTRAINT fk_venta_cliente
+    FOREIGN KEY (id_cliente)
+    REFERENCES tb_clientes (id_cliente),
+    id_forma_pago INT,
+    CONSTRAINT fk_venta_formapago
+    FOREIGN KEY (id_forma_pago)
+    REFERENCES tb_formas_pago (id_forma_pago),
+    id_documento INT,
+    CONSTRAINT fk_venta_documento
+    FOREIGN KEY (id_documento)
+    REFERENCES tb_documentos (id_documento),
+    id_tipo_documento INT,
+    CONSTRAINT fk_ventas_tipoDoc
+    FOREIGN KEY (id_tipo_documento)
+    REFERENCES tb_tipos_documento (id_tipo_documento),
+    id_bodega INT,
+    CONSTRAINT fk_venta_bodega
+    FOREIGN KEY (id_bodega)
+    REFERENCES tb_bodegas (id_bodega),
+    subtotal float
 );
+
+CREATE TABLE tb_detalle_venta (
+    id_detalle_venta INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    id_venta INT,
+    CONSTRAINT fk_venta
+    FOREIGN KEY (id_venta)
+    REFERENCES tb_ventas (id_venta),
+    id_producto INT,
+    CONSTRAINT fk_detalle_venta_Producto
+    FOREIGN KEY (id_producto)
+    REFERENCES tb_productos (id_producto),
+    cantidad INT,
+    precio_con_iva FLOAT
+);
+
+
+
 
 CREATE TABLE tb_facturas(
 id_factura_consumidor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
