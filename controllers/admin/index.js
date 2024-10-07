@@ -10,7 +10,7 @@ const CLAVE_LOGIN = document.getElementById('clave');
 
 
 const CLAVE_ACTUAL = document.getElementById('claveActual'),
-CONFIRMAR_CLAVE_NUEVA = document.getElementById('confirmarClave'),
+CONFIRMAR_CLAVE_NUEVA = document.getElementById('confirmarClaveForm'),
 CLAVE_NUEVA = document.getElementById('claveNueva');
 // Constante para establecer la modal de cambiar contraseña.
 const PASSWORD_MODAL = new bootstrap.Modal('#passwordModal');
@@ -27,13 +27,13 @@ const TOGGLE_CONFIRM_PASSWORD = document.getElementById('toggleConfirmPassword')
 const TOGGLE_PASSWORD_LOGIN = document.getElementById('togglePasswordLogin');
 
 //Constantes para manejar los errores del modal de contraseña
-const PASSWORD_ERROR_FORM = document.getElementById('passwordErrorFrom');
+const PASSWORD_ERROR_FORM = document.getElementById('passwordErrorForm');
 const NEW_PASSWORD_ERROR_FORM = document.getElementById('NewPasswordError');
-const CONFIRM_PASSWORD_ERROR_FORM = document.getElementById('confirmPasswordError');
+const CONFIRM_PASSWORD_ERROR_FORM = document.getElementById('confirmPasswordErrorForm');
 
 const TOGGLE_PASSWORD_FORM = document.getElementById('togglePasswordFrom');
 const TOGGLE_NEW_PASSWORD_FORM = document.getElementById('toggleNewPassword');
-const TOGGLE_CONFIRM_PASSWORD_FORM = document.getElementById('toggleConfirmPassword');
+const TOGGLE_CONFIRM_PASSWORD_FORM = document.getElementById('toggleConfirmPasswordForm');
 
 vanillaTextMask.maskInput({
     inputElement: document.getElementById('telefonoUsuario'),
@@ -155,18 +155,18 @@ CLAVE_ACTUAL.addEventListener('input', () => {
     const userData = getUserDataFromForm();
     const errorMessage = isPasswordStrong(CLAVE_ACTUAL.value, userData);
     if (errorMessage) {
-        showError(PASSWORD_ERROR, errorMessage);
+        showError(PASSWORD_ERROR_FORM, errorMessage);
     } else {
-        hideError(PASSWORD_ERROR);
+        hideError(PASSWORD_ERROR_FORM);
     }
 });
 
 // Evento para validar la confirmación de contraseña mientras se escribe (formulario de registro)
 CONFIRMAR_CLAVE_NUEVA.addEventListener('input', () => {
-    if (CLAVE.value !== CONFIRMAR_CLAVE.value) {
-        showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
+    if (CLAVE_NUEVA.value !== CONFIRMAR_CLAVE_NUEVA.value) {
+        showError(CONFIRM_PASSWORD_ERROR_FORM, 'Las contraseñas no coinciden.');
     } else {
-        hideError(CONFIRM_PASSWORD_ERROR);
+        hideError(CONFIRM_PASSWORD_ERROR_FORM);
     }
 });
 
@@ -175,9 +175,9 @@ CLAVE_NUEVA.addEventListener('input', () => {
     const userData = getUserDataFromForm();
     const errorMessage = isPasswordStrong(CLAVE_NUEVA.value, userData);
     if (errorMessage) {
-        showError(NEW_PASSWORD_ERROR, errorMessage);
+        showError(NEW_PASSWORD_ERROR_FORM, errorMessage);
     } else {
-        hideError(NEW_PASSWORD_ERROR);
+        hideError(NEW_PASSWORD_ERROR_FORM);
     }
 });
 
@@ -281,7 +281,7 @@ LOGIN_FORM.addEventListener('submit', async (event) => {
 // Nuevo método para manejar la verificación del código 2FA
 TWO_FACTOR_FORM.addEventListener('submit', async (event) => {
     event.preventDefault();
- 
+
     // Redirigir directamente al dashboard
     sweetAlert(1, 'Autenticación exitosa. Redirigiendo...', true, 'dashboard.html');
 });
@@ -301,19 +301,19 @@ PASSWORD_FORM.addEventListener('submit', async (event) => {
     const userData = getUserDataFromForm();
     const passwordError = isPasswordStrong(CLAVE_ACTUAL.value, userData);
     if (passwordError) {
-        showError(PASSWORD_ERROR, passwordError);
+        showError(PASSWORD_ERROR_FORM, passwordError);
         return;
     }
 
     const userData1 = getUserDataFromForm();
     const passwordError1 = isPasswordStrong(CLAVE_NUEVA.value, userData1);
     if (passwordError1) {
-        showError(NEW_PASSWORD_ERROR, passwordError1);
+        showError(NEW_PASSWORD_ERROR_FORM, passwordError1);
         return;
     }
     
-    if (CLAVE_NUEVA.value !== CONFIRMAR_CLAVE.value) {
-        showError(CONFIRM_PASSWORD_ERROR, 'Las contraseñas no coinciden.');
+    if (CLAVE_NUEVA.value !== CONFIRMAR_CLAVE_NUEVA.value) {
+        showError(CONFIRM_PASSWORD_ERROR_FORM, 'Las contraseñas no coinciden.');
         return;
     }
     // Constante tipo objeto con los datos del formulario.

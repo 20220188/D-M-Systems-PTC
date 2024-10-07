@@ -6,7 +6,7 @@ const PROFILE_FORM = document.getElementById('profileForm'),
     ALIAS_ADMINISTRADOR = document.getElementById('aliasAdministrador');
 
     const CLAVE_ACTUAL = document.getElementById('claveActual'),
-    CONFIRMAR_CLAVE = document.getElementById('confirmarClave'),
+    CONFIRMAR_CLAVE = document.getElementById('confirmarClaveForm'),
     CLAVE_NUEVA = document.getElementById('claveNueva');
 // Constante para establecer la modal de cambiar contraseña.
 const PASSWORD_MODAL = new bootstrap.Modal('#passwordModal');
