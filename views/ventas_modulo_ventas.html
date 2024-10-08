@@ -46,6 +46,7 @@
             <div class="col-md-6">
                 <div class="card p-3">
                     <div class="row g-3">
+                        <input type="number" class="d-none" id="idProducto" name="idProducto">
                         <div class="col-md-6">
                             <label for="FechaVenta" class="form-label" style="color: black;">Fecha</label>
                             <input type="date" name="FechaVenta" class="form-control" id="FechaVenta">
@@ -53,7 +54,7 @@
                         <div class="col-md-6">
                             <label for="Vendedor" class="form-label" style="color:black;">Vendedor</label>
                             <input type="text" name="Vendedor" class="form-control" id="Vendedor" oninput="buscarVendedor(this.value)">
-                            <div id="resultadoVendedor" class="dropdown-content"></div>
+                            <div id="idVendedor" class="dropdown-content"></div>
                         </div>
                         <div class="col-md-6">
                             <label for="FromaPagoVenta" class="form-label" style="color: black;">Forma de Pago</label>
@@ -102,17 +103,7 @@
         </div>
 
         <!-- Product Search Form -->
-        <div class="row mb-4">
-            <form class="col-md-12" id="searchForm" onsubmit="buscarProducto(event)">
-                <div class="input-group">
-                    <input type="search" class="form-control" name="search" id="searchProducto" placeholder="Buscar producto" required>
-                    <button type="submit" class="btn btn-success">
-                        <i class="lni lni-search-alt"></i>
-                    </button>
-                </div>
-                <div id="resultadoProducto" class="dropdown-content"></div>
-            </form>
-        </div>
+    
 
         <!-- Divider -->
         <hr class="hr">
@@ -124,14 +115,14 @@
                     <td class="text-start" colspan="2" id="rowsFound"></td>
                 </tr>
                 <tr>
-                    <th>Código</th>
-                    <th>Descripción Artículo</th>
-                    <th>Cantidad</th>
-                    <th>Precio sin Descuento</th>
-                    <th>% Descuento</th>
-                    <th>P.U</th>
-                    <th>Valor</th>
-                    <th>Exento</th>
+                    <th>FECHA</th>
+                    <th>VENDEDOR</th>
+                    <th>FORMA DE PAGO</th>
+                    <th>BODEGA</th>
+                    <th>DOCUMENTO</th>
+                    <th>TIPO DE DOCUMENTO</th>
+                    <th>CLIENTE</th>
+                    <th>SUBTOTAL</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -179,14 +170,7 @@
                     <span class="input-group-text">IVA</span>
                     <input type="text" class="form-control">
                 </div>
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text">Efectivo</span>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text">Cambio</span>
-                    <input type="text" class="form-control">
-                </div>
+        
             </div>
         </div>
 
