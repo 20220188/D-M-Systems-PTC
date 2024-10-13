@@ -13,7 +13,7 @@ const asideHTML = `
     
     <div class="name__page">
     <i class="fa-solid fa-user-tie"></i>
-    <a href="inventario.html"> <h4>Inventario</h4> </a>
+    <a href=""> <h4>Inventario</h4> </a>
     </div>
 
     <div class="options__menu">	

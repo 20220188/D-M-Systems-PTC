@@ -104,7 +104,15 @@ const loadTemplate = async () => {
         </div>
     </a>
 
-    <div class="options__menu">    
+    <div class="options__menu">  
+    <a href="admin_maestro_productos.html">
+        <div class="maestros">
+            <div class="option">
+            <i class="fa-solid fa-star" title="Maestros"></i>
+                <h4>Maestros</h4>
+            </div>
+        </div>
+        </a>  
         <a href="admin_ingresos.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-share-nodes" title="Movimientos"></i>
