@@ -14,27 +14,7 @@
     <link rel="stylesheet" href="../resources/css/modulo_ventas.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
-    <style>
-        .dropdown-content {
-            display: block;
-            position: absolute;
-            background-color: white;
-            border: 1px solid #ccc;
-            z-index: 1;
-            max-height: 200px;
-            overflow-y: auto;
-            width: calc(100% - 1rem); /* Adjust width to match input */
-        }
-
-        .dropdown-item {
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .dropdown-item:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
+    
 </head>
 
 <body id="body">
@@ -106,28 +86,38 @@
     
 
         <!-- Divider -->
-        <hr class="hr">
+
 
         <!-- Sales Table -->
-        <table class="table table-hover text-center">
-            <thead>
-                <tr>
-                    <td class="text-start" colspan="2" id="rowsFound"></td>
-                </tr>
-                <tr>
-                    <th>FECHA</th>
-                    <th>VENDEDOR</th>
-                    <th>FORMA DE PAGO</th>
-                    <th>BODEGA</th>
-                    <th>DOCUMENTO</th>
-                    <th>TIPO DE DOCUMENTO</th>
-                    <th>CLIENTE</th>
-                    <th>SUBTOTAL</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-        </table>
+        <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>CÓDIGO</th>
+                        <th>PRODUCTO</th>
+                        <th>CANTIDAD</th>
+                        <th>PRECIO UNITARIO</th>
+                        <th>SUBTOTAL</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Aquí se agregarán dinámicamente las filas de productos -->
+                </tbody>
+                <tfoot>
+                    <tr id="searchRow">
+                        <td colspan="2">
+                            <input type="text" class="form-control productSearch" placeholder="Buscar por código o nombre">
+                            <div class="searchResults dropdown-content"></div>
+                        </td>
+                        <td><input type="number" class="form-control quantity" value="1" min="1"></td>
+                        <td><input type="number" class="form-control unitPrice" readonly></td>
+                        <td><input type="number" class="form-control subtotal" readonly></td>
+                        <td><button class="btn btn-primary btn-sm addProduct">Agregar</button></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
 
         <!-- Pricing Inputs -->
         <div class="row">
@@ -184,6 +174,10 @@
     <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script type="text/javascript" src="../controllers/admin/admin_maestro_productos.js"></script>
+    <script type="text/javascript" src="../controllers/admin/modulo_ventas.js"></script>
+
+
+    
 </body>
 
 </html>
