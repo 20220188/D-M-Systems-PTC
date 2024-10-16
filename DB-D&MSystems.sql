@@ -288,8 +288,11 @@ CREATE TABLE tb_ventas (
     CONSTRAINT fk_venta_bodega
     FOREIGN KEY (id_bodega)
     REFERENCES tb_bodegas (id_bodega),
-    subtotal float
+    notas VARCHAR(250),
+    subtotal FLOAT null
 );
+
+
 
 CREATE TABLE tb_detalle_venta (
     id_detalle_venta INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
