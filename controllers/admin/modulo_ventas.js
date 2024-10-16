@@ -115,27 +115,26 @@ const fillTable = async (form = null) => {
     if (DATA.status) {
         // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
                     <td>${row.fecha_venta}</td>
-                    <td>${row.id_dependiente}</td>
-                    <td>${row.id_cliente}</td>
-                    <td>${row.id_forma_pago}</td>
-                    <td>${row.id_documento}</td>
-                      <td>${row.id_tipo_documento}</td>
-                        <td>${row.id_bodega}</td>
-                        <td>${row.notas}</td>
-                          <td>${row.subtotal}</td>
+                    <td>${row.vendedor}</td>
+                    <td>${row.cliente}</td>
+                    <td>${row.forma_pago}</td>
+                    <td>${row.documento}</td>
+                    <td>${row.tipo_documento}</td>
+                    <td>${row.bodega}</td>
+                    <td>${row.notas}</td>
+                    <td>${row.subtotal}</td>
                     <td>
                         <button type="button" class="btn btn-success" onclick="openDetails(${row.id_venta})">
-                        <i class="fa-regular fa-square-plus"></i>
+                            <i class="fa-regular fa-square-plus"></i>
                         </button>
                         <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_venta})">
-                        <i class="fa-solid fa-pencil"></i>
+                            <i class="fa-solid fa-pencil"></i>
                         </button>
                         <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_venta})">
-                        <i class="fa-regular fa-trash-can"></i>
+                            <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </td>
                 </tr>
@@ -147,6 +146,8 @@ const fillTable = async (form = null) => {
         sweetAlert(4, DATA.error, true);
     }
 }
+
+
 
 /*
 *   Función para preparar el formulario al momento de insertar un registro.

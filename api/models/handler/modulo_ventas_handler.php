@@ -35,22 +35,37 @@ class VentasHandler
     // Create a new row in the tb_ventas table
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_ventas(fecha_venta, id_dependiente, id_cliente, id_forma_pago, id_documento,notas,  id_tipo_documento, id_bodega, subtotal)
+        $sql = 'INSERT INTO tb_ventas(fecha_venta, id_dependiente, id_cliente, id_forma_pago, id_documento, id_tipo_documento, id_bodega, notas, subtotal)
                 VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $params = array($this->fecha_venta, $this->id_dependiente, $this->id_cliente, $this->id_forma_pago, $this->nota, $this->id_documento, $this->id_tipo_documento, $this->id_bodega, $this->subtotal);
+        $params = array($this->fecha_venta, $this->id_dependiente, $this->id_cliente, $this->id_forma_pago, $this->id_documento, $this->id_tipo_documento, $this->id_bodega, $this->nota, $this->subtotal);
         return Database::executeRow($sql, $params);
     }
 
     // Read all sales records
     public function readAll()
     {
-        $sql = 'SELECT id_venta, fecha_venta, nombre_cliente, nombre_dependiente, forma_pago, documento, subtotal
-                FROM tb_ventas
-                INNER JOIN tb_clientes USING(id_cliente)
-                INNER JOIN tb_dependientes USING(id_dependiente)
-                INNER JOIN tb_formas_pago USING(id_forma_pago)
-                INNER JOIN tb_documentos USING(id_documento)
-                ORDER BY fecha_venta DESC';
+        $sql = 'SELECT 
+                    v.id_venta, 
+                    v.fecha_venta, 
+                    d.nombre_dependiente AS vendedor,
+                    c.nombre AS cliente,
+                    fp.forma_pago,
+                    doc.documento,
+                    td.tipo_documento,
+                    b.bodega,
+                    v.notas,
+                    v.subtotal
+                FROM 
+                    tb_ventas v
+                    INNER JOIN tb_dependientes d ON v.id_dependiente = d.id_dependiente
+                    INNER JOIN tb_clientes c ON v.id_cliente = c.id_cliente
+                    INNER JOIN tb_formas_pago fp ON v.id_forma_pago = fp.id_forma_pago
+                    INNER JOIN tb_documentos doc ON v.id_documento = doc.id_documento
+                    INNER JOIN tb_tipos_documento td ON v.id_tipo_documento = td.id_tipo_documento
+                    INNER JOIN tb_bodegas b ON v.id_bodega = b.id_bodega
+                ORDER BY 
+                    v.fecha_venta DESC';
+        
         return Database::getRows($sql);
     }
 
