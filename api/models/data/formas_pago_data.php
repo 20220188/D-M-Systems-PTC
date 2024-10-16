@@ -28,19 +28,6 @@ class FormaPagoData extends FormasPagoHandler
         }
     }
 
-    public function setFormaPago($value, $min = 2, $max = 100)
-    {
-        if (!Validator::validateAlphanumeric($value)) {
-            $this->data_error = 'La forma de pago debe ser un valor alfanumérico';
-            return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->forma_pago = $value;
-            return true;
-        } else {
-            $this->data_error = 'La forma de pago debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
-    }
 
     /*
      * Métodos para obtener el valor de los atributos adicionales.

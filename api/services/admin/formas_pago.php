@@ -1,6 +1,6 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/ventas_modulo_ventas_data.php');
+require_once('../../models/data/formas_pago_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -14,29 +14,7 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idAdministrador'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
-            case 'searchRows':
-                if (!Validator::validateSearch($_POST['search'])) {
-                    $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $FormaPago->searchRows()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
-                } else {
-                    $result['error'] = 'No hay coincidencias';
-                }
-                break;
-
-            case 'createRow':
-                $_POST = Validator::validateForm($_POST);
-                if (!$FormaPago->setFormaPago($_POST['forma_pago'])) {
-                    $result['error'] = $FormaPago->getDataError();
-                } elseif ($FormaPago->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Forma de pago creada correctamente';
-                } else {
-                    $result['exception'] = Database::getException();
-                }
-                break;
-
+          
             case 'readAll':
                 if ($result['dataset'] = $FormaPago->readAll()) {
                     $result['status'] = 1;
@@ -46,41 +24,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
 
-            case 'readOne':
-                if (!$FormaPago->setIdFormaPago($_POST['id_forma_pago'])) {
-                    $result['error'] = $FormaPago->getDataError();
-                } elseif ($result['dataset'] = $FormaPago->readOne()) {
-                    $result['status'] = 1;
-                } else {
-                    $result['error'] = 'Forma de pago inexistente';
-                }
-                break;
-
-            case 'updateRow':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$FormaPago->setIdFormaPago($_POST['id_forma_pago']) ||
-                    !$FormaPago->setFormaPago($_POST['forma_pago'])
-                ) {
-                    $result['error'] = $FormaPago->getDataError();
-                } elseif ($FormaPago->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Forma de pago modificada correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al modificar la forma de pago';
-                }
-                break;
-
-            case 'deleteRow':
-                if (!$FormaPago->setIdFormaPago($_POST['id_forma_pago'])) {
-                    $result['error'] = $FormaPago->getDataError();
-                } elseif ($FormaPago->deleteRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Forma de pago eliminada correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar la forma de pago';
-                }
-                break;
+           
 
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
