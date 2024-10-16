@@ -294,6 +294,9 @@ CREATE TABLE tb_ventas (
 
 
 
+
+
+
 CREATE TABLE tb_detalle_venta (
     id_detalle_venta INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     id_venta INT,
@@ -307,6 +310,8 @@ CREATE TABLE tb_detalle_venta (
     cantidad INT,
     precio_con_iva FLOAT
 );
+
+
 
 
 
