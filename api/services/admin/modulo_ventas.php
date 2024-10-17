@@ -88,7 +88,17 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al eliminar la venta';
                 }
                 break;
-
+                case 'getProductByCode':
+                    // Validamos el código del producto que viene desde el frontend
+                    if (!$producto->setCodigo($_POST['codigoProducto'])) {
+                        $result['error'] = $producto->getDataError();
+                    } elseif ($result['dataset'] = $producto->getProductByCode()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Producto encontrado';
+                    } else {
+                        $result['error'] = 'Producto no encontrado';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

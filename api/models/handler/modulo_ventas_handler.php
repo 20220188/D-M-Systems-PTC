@@ -11,10 +11,15 @@ class VentasHandler
     protected $id_documento = null;
     protected $id_tipo_documento = null;
     protected $id_bodega = null;
-
     protected $nota = null;
-
     protected $subtotal = null;
+    protected $total_venta = null;
+    protected $iva_venta = null;
+    protected $id_detalle_venta = null;
+    protected $cantidad = null;
+    protected $precio_unitario = null;
+    protected $descuento = null;
+    protected $codigo = null;
 
     // Search rows based on different fields
     public function searchRows()
@@ -98,6 +103,23 @@ class VentasHandler
         return Database::executeRow($sql, $params);
     }
 
-    
+     //Acciones dentro de ventas
+     public function getProductByCode()
+     {
+             $sql = 'SELECT 
+         p.codigo,
+         p.nombre,
+         p.descripcion,
+         d.precio_con_iva AS precio
+     FROM 
+         tb_productos p
+     INNER JOIN 
+         tb_detalle_productos d
+     ON 
+         p.id_producto = d.id_producto
+                 WHERE codigo = ?';
+         $params = array($this->codigo);
+         return Database::getRow($sql, $params);
+     }
 }
 ?>

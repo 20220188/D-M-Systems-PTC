@@ -16,19 +16,15 @@
 
 <body id="body">
     <main>
-       
         <!-- Título del contenido principal -->
         <h3 id="mainTitle"></h3>
         <div class="row">
             <!-- Formulario de búsqueda -->
-           
-        
             <div class="col-sm-12 col-md-6 text-end">
-                 <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
-                 <button type="button" class="btn btn-primary" onclick="openCreate()">
+                <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
+                <button type="button" class="btn btn-primary" onclick="openCreate()">
                     <i class="fa-solid fa-plus"></i>
                 </button>
-           
             </div>
         </div>
 
@@ -46,124 +42,227 @@
                     <th>DOCUMENTO</th>
                     <th>TIPO DE DOCUMENTO</th>
                     <th>CLIENTE</th>
-                    <th>SUBTOTAL</th>
+                    <th>NOTA</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody id="tableBody"></tbody>
         </table>
 
-      <!-- Componente Modal para guardar un registro -->
-      <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="modalTitle" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="modalTitle"></h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <!-- Formulario para crear o actualizar un registro -->
-              <form id="saveForm">
-                  <div class="modal-body row g-3">
-                     <!-- Inputs Ocultos -->
-                     <input type="number" class="d-none" id="idVenta" name="idVenta">
-                     <!-- Fecha -->
-                     <div class="col-md-6">
-                         <label for="FechaVenta" class="form-label">Fecha</label>
-                         <input type="date" id="FechaVenta" name="FechaVenta" required>
-                     </div>
-                     <!-- Vendedor -->
-                     <div class="col-md-6">
-                        <label for="Vendedor" class="form-label">Vendedor</label>
-                        <select id="Vendedor" name="Vendedor" class="form-select" required>
-                            <!-- Opciones de tipo de documento serán llenadas desde la base de datos -->
-                        </select>
+        <!-- Componente Modal para guardar un registro -->
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                     <!-- Forma de Pago -->
-                     <div class="col-md-6">
-                         <label for="FormaPagoVenta" class="form-label">Forma de Pago</label>
-                         <select id="FormaPagoVenta" name="FormaPagoVenta" class="form-select" required>
-                             <!-- Opciones de forma de pago serán llenadas desde la base de datos -->
-                         </select>
-                     </div>
-                     <!-- Bodega -->
-                     <div class="col-md-6">
-                         <label for="BodegaVenta" class="form-label">Bodega</label>
-                         <select id="BodegaVenta" name="BodegaVenta" class="form-select" required>
-                             <!-- Opciones de bodega serán llenadas desde la base de datos -->
-                         </select>
-                     </div>
-                     <!-- Documento -->
-                     <div class="col-md-6">
-                        <label for="DocumentoVenta" class="form-label">Documento</label>
-                        <select id="DocumentoVenta" name="DocumentoVenta" class="form-select" required>
-                            <!-- Opciones de documento serán llenadas desde la base de datos -->
-                        </select>
-                    </div>
-                    <!-- Tipo de Documento -->
-                    <div class="col-md-6">
-                        <label for="TipoDocumentoVenta" class="form-label">Tipo Documento</label>
-                        <select id="TipoDocumentoVenta" name="TipoDocumentoVenta" class="form-select" required>
-                            <!-- Opciones de tipo de documento serán llenadas desde la base de datos -->
-                        </select>
-                    </div>
-                    <!-- Cliente -->
-                
-                    <div class="col-md-6">
-                        <label for="ClienteVenta" class="form-label">Cliente</label>
-                        <select id="ClienteVenta" name="ClienteVenta" class="form-select" required>
-                            <!-- Opciones de tipo de documento serán llenadas desde la base de datos -->
-                        </select>
-                    </div>
-                    <!-- Notas -->
-                    <div class="col-md-6">
-                        <label for="Notasventa" class="form-label">Notas</label>
-                        <input type="text" class="form-control" name="Notasventa" id="Notasventa">
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="submit" class="btn btn-primary">Guardar</button>
-                  </div>
-              </form>
-          </div>
-      </div>
-  </div>
+                    <!-- Formulario para crear o actualizar un registro -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <!-- Inputs Ocultos -->
+                            <input type="number" class="d-none" id="idVenta" name="idVenta">
+                            <!-- Fecha -->
+                            <div class="col-md-6">
+                                <label for="FechaVenta" class="form-label">Fecha</label>
+                                <input type="date" id="FechaVenta" name="FechaVenta" required>
+                            </div>
+                            <!-- Vendedor -->
+                            <div class="col-md-6">
+                                <label for="Vendedor" class="form-label">Vendedor</label>
+                                <select id="Vendedor" name="Vendedor" class="form-select" required>
+                                    <!-- Opciones de tipo de documento serán llenadas desde la base de datos -->
+                                </select>
+                            </div>
+                            <!-- Forma de Pago -->
+                            <div class="col-md-6">
+                                <label for="FormaPagoVenta" class="form-label">Forma de Pago</label>
+                                <select id="FormaPagoVenta" name="FormaPagoVenta" class="form-select" required>
+                                    <!-- Opciones de forma de pago serán llenadas desde la base de datos -->
+                                </select>
+                            </div>
+                            <!-- Bodega -->
+                            <div class="col-md-6">
+                                <label for="BodegaVenta" class="form-label">Bodega</label>
+                                <select id="BodegaVenta" name="BodegaVenta" class="form-select" required>
+                                    <!-- Opciones de bodega serán llenadas desde la base de datos -->
+                                </select>
+                            </div>
+                            <!-- Documento -->
+                            <div class="col-md-6">
+                                <label for="DocumentoVenta" class="form-label">Documento</label>
+                                <select id="DocumentoVenta" name="DocumentoVenta" class="form-select" required>
+                                    <!-- Opciones de documento serán llenadas desde la base de datos -->
+                                </select>
+                            </div>
+                            <!-- Tipo de Documento -->
+                            <div class="col-md-6">
+                                <label for="TipoDocumentoVenta" class="form-label">Tipo Documento</label>
+                                <select id="TipoDocumentoVenta" name="TipoDocumentoVenta" class="form-select" required>
+                                    <!-- Opciones de tipo de documento serán llenadas desde la base de datos -->
+                                </select>
+                            </div>
+                            <!-- Cliente -->
+                            <div class="col-md-6">
+                                <label for="ClienteVenta" class="form-label">Cliente</label>
+                                <select id="ClienteVenta" name="ClienteVenta" class="form-select" required>
+                                    <!-- Opciones de tipo de documento serán llenadas desde la base de datos -->
+                                </select>
+                            </div>
+                            <!-- Notas -->
+                            <div class="col-md-6">
+                                <label for="Notasventa" class="form-label">Notas</label>
+                                <input type="text" class="form-control" name="Notasventa" id="Notasventa">
+                            </div>
 
-      
+                              <!-- Sección para agregar productos -->
+               <!-- Sección para agregar productos -->
+               <div class="col-md-12">
+                <button type="button" class="btn btn-secondary" id="addProductButton">Agregar Producto</button>
+            </div>
+            <!-- Contenedor para las filas de productos agregados -->
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descripción</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Descuento</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productRows">
+                        <!-- Aquí se agregarán dinámicamente las filas -->
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
     </main>
+    <script>
+        // Función para agregar una nueva fila de producto
+        document.getElementById('addProductButton').addEventListener('click', function() {
+            const tableBody = document.getElementById('productRows');
+            const newRow = document.createElement('tr');
 
+            newRow.innerHTML = `
+                <td>
+                    <input type="text" class="form-control codigo-producto" name="codigoProducto[]" placeholder="Código del producto" required>
+                </td>
+                <td>
+                    <input type="text" class="form-control" name="nombreProducto[]" readonly disabled>
+                </td>
+                <td>
+                    <input type="number" class="form-control cantidad-producto" name="cantidadProducto[]" placeholder="Cantidad" required disabled>
+                </td>
+                <td>
+                    <input type="number" class="form-control" name="precioProducto[]" placeholder="Precio" readonly disabled>
+                </td>
+                <td>
+                    <input type="number" class="form-control" name="descuentoProducto[]" placeholder="Descuento" readonly disabled>
+                </td>
+                <td>
+                    <input type="number" class="form-control" name="totalProducto[]" placeholder="Total" readonly disabled>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="removeProductRow(this)">Eliminar</button>
+                </td>
+            `;
+
+            tableBody.appendChild(newRow);
+
+            // Añadir evento para buscar producto al ingresar código
+            newRow.querySelector('.codigo-producto').addEventListener('blur', buscarProducto);
+            
+            // Añadir evento para calcular total al cambiar cantidad
+            newRow.querySelector('.cantidad-producto').addEventListener('input', calcularTotal);
+        });
+
+        // Función para eliminar una fila de producto
+        function removeProductRow(button) {
+            button.closest('tr').remove();
+        }
+
+        // Función para buscar producto por código
+        async function buscarProducto(event) {
+            const codigoInput = event.target;
+            const row = codigoInput.closest('tr');
+            const codigo = codigoInput.value;
+
+            if (codigo) {
+                try {
+                    const response = await fetch(MODULO_VENTAS_API, {
+                        method: 'POST',
+                        body: JSON.stringify({ action: 'getProductByCode', codigo: codigo })
+                    });
+                    const data = await response.json();
+
+                    if (data.status) {
+                        row.querySelector('[name="nombreProducto[]"]').value = data.dataset.nombre;
+                        row.querySelector('[name="precioProducto[]"]').value = data.dataset.precio;
+                        row.querySelector('[name="descuentoProducto[]"]').value = data.dataset.descuento;
+                        row.querySelector('[name="cantidadProducto[]"]').max = data.dataset.cantidad;
+                        
+                        // Habilitar campos después de encontrar el producto
+                        row.querySelector('[name="nombreProducto[]"]').disabled = false;
+                        row.querySelector('[name="cantidadProducto[]"]').disabled = false;
+                        row.querySelector('[name="precioProducto[]"]').disabled = false;
+                        row.querySelector('[name="descuentoProducto[]"]').disabled = false;
+                        row.querySelector('[name="totalProducto[]"]').disabled = false;
+                        
+                        // Enfocar el campo de cantidad
+                        row.querySelector('[name="cantidadProducto[]"]').focus();
+                    } else {
+                        sweetAlert(2, 'Producto no encontrado', false);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    sweetAlert(2, 'Error al buscar el producto', false);
+                }
+            }
+        }
+
+        // Función para calcular el total
+        function calcularTotal(event) {
+            const cantidadInput = event.target;
+            const row = cantidadInput.closest('tr');
+            const cantidad = parseFloat(cantidadInput.value);
+            const precio = parseFloat(row.querySelector('[name="precioProducto[]"]').value);
+            const descuento = parseFloat(row.querySelector('[name="descuentoProducto[]"]').value);
+
+            if (!isNaN(cantidad) && !isNaN(precio)) {
+                const total = cantidad * precio * (1 - descuento / 100);
+                row.querySelector('[name="totalProducto[]"]').value = total.toFixed(2);
+            }
+        }
+    </script>
+    
     <!--Importaciones-->
-        <script src="../controllers/utils/admin.js"></script>
+    <script src="../controllers/utils/admin.js"></script>
     <script src="../controllers/utils/components.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-
-        <script type="text/javascript" src="../resources/js/modulo_ventasDashboard.js"></script>
+    <script type="text/javascript" src="../resources/js/modulo_ventasDashboard.js"></script>
 
     <!-- Llamada al kit de font awesome -->
     <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
 
-    <!-- Scripts de JavaScript -->
-    <!-- Agrega los enlaces a los scripts de Bootstrap y SweetAlert2 -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
-    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
-    
- 
-
-
     <!-- Llamada a jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-        <!-- Llamada al controlador de la página web -->
-        <script  src="../controllers/admin/modulo_ventas.js"></script>
+    <!-- Llamada al controlador de la página web -->
+    <script src="../controllers/admin/modulo_ventas.js"></script>
+
+    
 
 </body>
 

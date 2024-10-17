@@ -198,7 +198,20 @@ if (isset($_GET['action'])) {
                         $result['error'] = 'No se pudieron obtener los productos con más existencias';
                     }
                     break;
+                    case 'getProductByCode':
+                        // Validamos el código del producto que viene desde el frontend
+                        if (!$producto->setCodigo($_POST['codigoProducto'])) {
+                            $result['error'] = $producto->getDataError();
+                        } elseif ($result['dataset'] = $producto->getProductByCode()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Producto encontrado';
+                        } else {
+                            $result['error'] = 'Producto no encontrado';
+                        }
+                        break;
             default:
+            
+            
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.

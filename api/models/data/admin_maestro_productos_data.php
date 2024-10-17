@@ -33,7 +33,7 @@ class ProductosData extends ProductosHandler
 
     public function setCodigo($value, $min = 2, $max = 15)
     {
-        if (!Validator::validateAlphanumeric($value)) {
+        if (!Validator::validateNaturalNumber($value)) {
             $this->data_error = 'El codigo debe ser un valor alfanumérico';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {

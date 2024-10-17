@@ -125,16 +125,9 @@ const fillTable = async (form = null) => {
                     <td>${row.tipo_documento}</td>
                     <td>${row.bodega}</td>
                     <td>${row.notas}</td>
-                    <td>${row.subtotal}</td>
                     <td>
-                        <button type="button" class="btn btn-success" onclick="openDetails(${row.id_venta})">
-                            <i class="fa-regular fa-square-plus"></i>
-                        </button>
-                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_venta})">
-                            <i class="fa-solid fa-pencil"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_venta})">
-                            <i class="fa-regular fa-trash-can"></i>
+                        <button type="button" class="btn btn-info" onclick="openDetails(${row.id_venta})">
+                            <i class="fa-regular fa-paper-plane"></i>
                         </button>
                     </td>
                 </tr>
@@ -169,7 +162,44 @@ const openCreate = () => {
 
 }
 
+// Función para buscar producto por código
+async function buscarProducto(codigo) {
+    try {
+        const FORM = new FormData();
+        FORM.append('action', 'getProductByCode');
+        FORM.append('codigoProducto', codigo);
+        console.log(MODULO_VENTAS_API);
+        console.log(codigo);
 
+        const response = await fetch(MODULO_VENTAS_API, {
+            method: 'POST',
+            body: FORM
+            
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            throw new TypeError("Oops, we haven't got JSON!");
+        }
+
+        const DATA = await response.json();
+        
+        if (DATA.status) {
+            return DATA.dataset;
+        } else {
+            sweetAlert(2, DATA.error || 'Producto no encontrado', false);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        sweetAlert(2, `Error al buscar el producto: ${error.message}`, false);
+        return null;
+    }
+}
 
 
 

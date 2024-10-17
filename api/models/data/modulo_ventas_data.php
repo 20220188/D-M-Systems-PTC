@@ -17,7 +17,7 @@ class VentasData extends VentasHandler
 public function setIdVenta($value)
 {
     if (Validator::validateNaturalNumber($value)) {
-        $this->id_venta = $value;
+        $this->id = $value;
         return true;
     } else {
         $this->data_error = 'El identificador de la venta es incorrecto';
@@ -162,6 +162,19 @@ public function setIdProducto($value)
         return false;
     }
 }
+public function setCodigo($value, $min = 2, $max = 15)
+    {
+        if (!Validator::validateNaturalNumber($value)) {
+            $this->data_error = 'El codigo debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->codigo = $value;
+            return true;
+        } else {
+            $this->data_error = 'El codigo debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
 
 public function setCantidad($value)
 {

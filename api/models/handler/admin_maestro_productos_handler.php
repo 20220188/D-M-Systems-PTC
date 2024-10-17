@@ -194,14 +194,33 @@ JOIN
         return Database::executeRow($sql, $params);
     }
     public function getProductosConMasExistencias()
-{
-    $sql = 'SELECT p.nombre, dp.existencia 
+    {
+        $sql = 'SELECT p.nombre, dp.existencia 
             FROM tb_productos p
             JOIN tb_detalle_productos dp ON p.id_producto = dp.id_producto
             ORDER BY dp.existencia DESC 
             LIMIT 5';
-    $params = null;
-    return Database::getRows($sql, $params);
-}
+        $params = null;
+        return Database::getRows($sql, $params);
+    }
+    
 
+    //Acciones dentro de ventas
+    public function getProductByCode()
+    {
+            $sql = 'SELECT 
+        p.codigo,
+        p.nombre,
+        p.descripcion,
+        d.precio_con_iva AS precio
+    FROM 
+        tb_productos p
+    INNER JOIN 
+        tb_detalle_productos d
+    ON 
+        p.id_producto = d.id_producto
+                WHERE codigo = ?';
+        $params = array($this->codigo);
+        return Database::getRow($sql, $params);
+    }
 }
