@@ -50,6 +50,12 @@ ID_VENTA = document.getElementById('idVenta'),
     ID_DETALLE = document.getElementById('idDetalle'),
     ID_VENTA_DETALLE = document.getElementById('idVentaDetalle');
 
+
+    //constantes para el funcionamiento del modal de detalle
+    const NOMBRE_DETALLE = document.getElementById('NombreDetalle');
+    const PRESENTACION_DETALLE = document.getElementById('PresentacionDetalle');
+    const PRECIO_UNITARIO_DETALLE = document.getElementById('precioUnitarioDetalle');
+
 /*
 *Elementos para la tabla DETALLE_VENTA
 */
@@ -232,4 +238,25 @@ const openDetail = () => {
     SAVE_FORM_DETALLE.reset();
     fillTables();
 }
+
+//Funcion para autocompletar la infmormacion del producto a partir del codigo
+document.getElementById('codigoDetalle').addEventListener('input', async function() {
+    const codigo = this.value;
+    if (codigo) {
+        const FORM = new FormData();
+        FORM.append('codigo', codigo);
+        const DATA = await fetchData(MODULO_VENTAS_API, 'searchByCode', FORM);
+        if (DATA.status) {
+            const producto = DATA.dataset[0];
+            NOMBRE_DETALLE.value = producto.nombre;
+            PRESENTACION_DETALLE.value = producto.presentacion;
+            PRECIO_UNITARIO_DETALLE.value = producto.precio_con_iva;
+        } else {
+            // Limpiar los campos si no se encuentra el producto
+            NOMBRE_DETALLE.value = '';
+            PRESENTACION_DETALLE.value = '';
+            PRECIO_UNITARIO_DETALLE.value = '';
+        }
+    }
+});
 

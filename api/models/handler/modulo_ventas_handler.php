@@ -117,8 +117,28 @@ class VentasHandler
          tb_detalle_productos d
      ON 
          p.id_producto = d.id_producto
-                 WHERE codigo = ?';
+            WHERE codigo = ?';
         $params = array($this->codigo);
         return Database::getRow($sql, $params);
     }
+
+
+    public function searchByCode($codigo)
+    {
+        $sql = 'SELECT 
+                    p.id_producto, 
+                    p.codigo, 
+                    p.nombre, 
+                    p.presentacion,
+                    d.precio_con_iva
+                FROM 
+                    tb_productos p
+                    INNER JOIN tb_detalle_productos d USING(id_producto)
+                WHERE 
+                    p.codigo = ?
+                LIMIT 1';
+        $params = array($codigo);
+        return Database::getRow($sql, $params);
+    }
+
 }

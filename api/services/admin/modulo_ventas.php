@@ -15,8 +15,8 @@ if (isset($_GET['action'])) {
     if (isset($_SESSION['idAdministrador'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
-           
-                
+
+
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
@@ -24,9 +24,9 @@ if (isset($_GET['action'])) {
                     !$venta->setIdCliente($_POST['ClienteVenta']) or
                     !$venta->setIdVendedor($_POST['Vendedor']) or
                     !$venta->setFormaPago($_POST['FormaPagoVenta']) or
-                    !$venta->setIdDocumento($_POST['DocumentoVenta'])or
-                    !$venta->setIdTipoDocumento($_POST['TipoDocumentoVenta'])or
-                    !$venta->setNotas($_POST['Notasventa'])or
+                    !$venta->setIdDocumento($_POST['DocumentoVenta']) or
+                    !$venta->setIdTipoDocumento($_POST['TipoDocumentoVenta']) or
+                    !$venta->setNotas($_POST['Notasventa']) or
                     !$venta->setIdBodega($_POST['BodegaVenta'])
                 ) {
                     $result['error'] = $venta->getDataError();
@@ -64,9 +64,9 @@ if (isset($_GET['action'])) {
                     !$venta->setIdCliente($_POST['ClienteVenta']) or
                     !$venta->setIdVendedor($_POST['Vendedor']) or
                     !$venta->setFormaPago($_POST['formaPago']) or
-                    !$venta->setIdDocumento($_POST['DocumentoVenta'])or
-                    !$venta->setIdTipoDocumento($_POST['TipoDocumentoVenta'])or
-                    !$venta->setIdBodega($_POST['BodegaVenta'])or
+                    !$venta->setIdDocumento($_POST['DocumentoVenta']) or
+                    !$venta->setIdTipoDocumento($_POST['TipoDocumentoVenta']) or
+                    !$venta->setIdBodega($_POST['BodegaVenta']) or
                     !$venta->setSubtotal($_POST['subtotalVenta'])
                 ) {
                     $result['error'] = $venta->getDataError();
@@ -88,17 +88,13 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al eliminar la venta';
                 }
                 break;
-                case 'getProductByCode':
-                    // Validamos el código del producto que viene desde el frontend
-                    if (!$producto->setCodigo($_POST['codigoProducto'])) {
-                        $result['error'] = $producto->getDataError();
-                    } elseif ($result['dataset'] = $producto->getProductByCode()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Producto encontrado';
-                    } else {
-                        $result['error'] = 'Producto no encontrado';
-                    }
-                    break;
+            case 'searchByCode':
+                if (!isset($_POST['codigo'])) {
+                    $result['exception'] = 'Código no proporcionado';
+                } elseif (!$result['dataset'] = $venta->searchByCode($_POST['codigo'])) {
+                    $result['exception'] = 'venta no encontrado';
+                }
+                break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }
