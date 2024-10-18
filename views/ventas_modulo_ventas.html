@@ -115,56 +115,57 @@
                                 <label for="Notasventa" class="form-label">Notas</label>
                                 <input type="text" class="form-control" name="Notasventa" id="Notasventa">
                             </div>
-                        </form>
+                    </form>
 
-            <!-- Contenedor para las filas de productos agregados -->
-            <div class="col-md-12">
-                 <!-- Formulario de búsqueda -->
-            <form class="col-sm-12 col-md-6" id="searchForm">
-                <div class="row">
-                    <div class="col-6">
-                        <input type="search" class="form-control" name="search"
-                            placeholder="Buscar por nombre, código, descripción o presentación" required>
-                    </div>
-                    <div class="col-6">
-                        <button type="submit" class="btn btn-success" onclick="fillTables()">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
-                            <i class="fa-solid fa-eraser"></i>
-                        </button>
+                    <!-- Contenedor para las filas de productos agregados -->
+                    <div class="col-md-12">
+                        <!-- Formulario de búsqueda -->
+                        <form class="col-sm-12 col-md-6" id="searchForm">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="search" class="form-control" name="search"
+                                        placeholder="Buscar por nombre o código" required>
+                                </div>
+                                <div class="col-6">
+                                    <button type="submit" class="btn btn-success" onclick="fillTables()">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary" onclick="fillTables()">
+                                        <i class="fa-solid fa-eraser"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <table class="table table-hover text-center">
+                            <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                            <thead>
+                                <tr>
+                                    <td class="text-start" colspan="5" id="rowsFoundForm"></td>
+                                </tr>
+                                <tr>
+                                    <th>CóDIGO</th>
+                                    <th>NOMBRE</th>
+                                    <th>PRESENTACIÓN</th>
+                                    <th>PRECIO</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                            <tbody id="tableBodyForm"></tbody>
+                        </table>
+                        <tbody id="productRows">
+                            <!-- Aquí se agregarán dinámicamente las filas -->
+                        </tbody>
+                        </table>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
                     </div>
                 </div>
-            </form>
-                <table class="table table-hover text-center">
-                    <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-                    <thead>
-                        <tr>
-                            <td class="text-start" colspan="7" id="rowsFound"></td>
-                        </tr>
-                        <tr>
-                            <th>CóDIGO</th>
-                            <th>NOMBRE</th>
-                            <th>PRECIO</th>
-                            <th>ACCIONES</th>
-                        </tr>
-                    </thead>
-                    <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                    <tbody id="tableBody"></tbody>
-                </table>
-                    <tbody id="productRows">
-                        <!-- Aquí se agregarán dinámicamente las filas -->
-                    </tbody>
-                </table>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
-                </div>
             </div>
-            </div>
-        </div>
 
     </main>
-    
+
     <!--Importaciones-->
     <script src="../controllers/utils/admin.js"></script>
     <script src="../controllers/utils/components.js"></script>
@@ -174,7 +175,7 @@
     <script src="https://kit.fontawesome.com/f6e8d56735.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
     <!-- Llamada al framework y librería de mensajes -->
     <script type="text/javascript" src="../resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../resources/js/sweetalert.min.js"></script>
@@ -185,7 +186,7 @@
     <!-- Llamada al controlador de la página web -->
     <script src="../controllers/admin/modulo_ventas.js"></script>
 
-    
+
 
 </body>
 

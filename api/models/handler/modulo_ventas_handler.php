@@ -70,7 +70,7 @@ class VentasHandler
                     INNER JOIN tb_bodegas b ON v.id_bodega = b.id_bodega
                 ORDER BY 
                     v.fecha_venta DESC';
-        
+
         return Database::getRows($sql);
     }
 
@@ -103,10 +103,10 @@ class VentasHandler
         return Database::executeRow($sql, $params);
     }
 
-     //Acciones dentro de ventas
-     public function getProductByCode()
-     {
-             $sql = 'SELECT 
+    //Acciones dentro de ventas
+    public function getProductByCode()
+    {
+        $sql = 'SELECT 
          p.codigo,
          p.nombre,
          p.descripcion,
@@ -118,8 +118,7 @@ class VentasHandler
      ON 
          p.id_producto = d.id_producto
                  WHERE codigo = ?';
-         $params = array($this->codigo);
-         return Database::getRow($sql, $params);
-     }
+        $params = array($this->codigo);
+        return Database::getRow($sql, $params);
+    }
 }
-?>

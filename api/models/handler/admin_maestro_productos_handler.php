@@ -93,10 +93,10 @@ class ProductosHandler
 
     public function readAllWithPrice()
     {
-        $sql = 'SELECT p.id_producto, p.imagen, p.codigo, p.nombre, p.descripcion, p.fecha_vencimiento, p.presentacion, 
-                       d.precio_sin_iva, d.precio_con_iva, d.precio_con_descuento, d.descuento, d.existencia
+        $sql = 'SELECT p.id_producto, p.codigo, p.nombre, p.presentacion, 
+                    d.precio_con_iva
                 FROM tb_productos p
-                LEFT JOIN tb_detalle_productos d ON p.id_producto = d.id_producto
+                INNER JOIN tb_detalle_productos d USING(id_producto)
                 ORDER BY p.nombre';
         return Database::getRows($sql);
     }

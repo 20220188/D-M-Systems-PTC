@@ -20,6 +20,9 @@ const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer el contenido de la tabla.
 const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
+
+    const TABLE_BODY_F = document.getElementById('tableBodyForm'),
+    ROWS_FOUND_F = document.getElementById('rowsFoundForm');
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
@@ -143,8 +146,8 @@ const fillTable = async (form = null) => {
 
 const fillTables = async (form = null) => {
     // Se inicializa el contenido de la tabla.
-    ROWS_FOUND.textContent = '';
-    TABLE_BODY.innerHTML = '';
+    ROWS_FOUND_F.textContent = '';
+    TABLE_BODY_F.innerHTML = '';
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAllWithPrice';
     // Petición para obtener los registros disponibles.
@@ -154,18 +157,22 @@ const fillTables = async (form = null) => {
         // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-            TABLE_BODY.innerHTML += `
+            TABLE_BODY_F.innerHTML += `
                 <tr>
                     <td>${row.codigo}</td>
                     <td>${row.nombre}</td>
                     <td>${row.presentacion}</td>
                     <td>${row.precio_con_iva}</td>
-                    
+                    <td>
+                        <button type="button" class="btn btn-info" onclick="openDetails(${row.id_venta})">
+                            <i class="fa-regular fa-paper-plane"></i>
+                        </button>
+                    </td>
                 </tr>
             `;
         });
         // Se muestra un mensaje de acuerdo con el resultado.
-        ROWS_FOUND.textContent = DATA.message;
+        ROWS_FOUND_F.textContent = DATA.message;
     } else {
         sweetAlert(4, DATA.error, true);
     }
