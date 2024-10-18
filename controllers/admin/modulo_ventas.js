@@ -21,13 +21,21 @@ const SEARCH_FORM = document.getElementById('searchForm');
 const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
 
-    const TABLE_BODY_F = document.getElementById('tableBodyForm'),
-    ROWS_FOUND_F = document.getElementById('rowsFoundForm');
 // Constantes para establecer los elementos del componente Modal.
-const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
+const SAVE_MODAL = new bootstrap.Modal(document.getElementById('saveModal')),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORM = document.getElementById('saveForm'),
+const SAVE_FORM = document.getElementById('saveForm');
+
+// Constantes para establecer los elementos del formulario de detalle de ventas.
+const TABLE_BODY_DETALLE = document.getElementById('tableBodyDetalle'),
+ROWS_FOUND_DETALLE = document.getElementById('rowsFoundDetalle');
+
+const SAVE_MODAL_DETALLE = new bootstrap.Modal(document.getElementById('saveModalDetalle')),
+MODAL_TITLE_DETALLE = document.getElementById('modalTitleDetalle');
+
+const SAVE_FORM_DETALLE = document.getElementById('saveFormDetalle'),
+
 ID_VENTA = document.getElementById('idVenta'),
     FECHA_VENTA = document.getElementById('FechaVenta'),
     ID_VENDEDOR = document.getElementById('Vendedor'),
@@ -36,29 +44,15 @@ ID_VENTA = document.getElementById('idVenta'),
     DOCUMENTO_VENTA = document.getElementById('DocumentoVenta'),
     TIPO_DOCUMENTO_VENTA = document.getElementById('TipoDocumentoVenta'),
     BODEGA_VENTA = document.getElementById('BodegaVenta'),
-    NOTAS_VENTA = document.getElementById('Notasventa');
+    NOTAS_VENTA = document.getElementById('Notasventa'),
+
+    //constantes para el funcionamiento de la tabla detalle
+    ID_DETALLE = document.getElementById('idDetalle'),
+    ID_VENTA_DETALLE = document.getElementById('idVentaDetalle');
 
 /*
 *Elementos para la tabla DETALLE_VENTA
 */
-/*
-// Constantes para establecer el contenido de la tabla.
-const TABLE_BODY_DETALLE_VENTA = document.getElementById('tableBodyDetalleVenta'),
-    ROWS_FOUND_DETALLE_VENTA = document.getElementById('rowsFoundDetalleVenta');
-// Constantes para establecer los elementos del componente Modal.
-const SAVE_MODAL_DETALLE_VENTA = new bootstrap.Modal('#saveModalDetalleVenta'),
-    MODAL_TITLE_DETALLE_VENTA = document.getElementById('modalTitleDetalleVenta');
-// Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORM_DETALLE_VENTA = document.getElementById('saveFormDetalleVenta'),
-    ID_DETALLE_VENTA = document.getElementById('idDetalleVenta'),
-    ID_PRODUCTO_DETALLE_VENTA = document.getElementById('idProductoDetalleVenta'),
-    CANTIDAD_DETALLE_VENTA = document.getElementById('cantidadDetalleVenta'),
-    PRECIO_UNITARIO_VENTA = document.getElementById('precioUnitarioVenta'),
-    DESCUENTO_DETALLE_VENTA = document.getElementById('descuentoDetalleVenta'),
-    PRECIO_TOTAL_VENTA = document.getElementById('precioTotalVenta');
-*/
-
-
 
 
 // Event Listeners
@@ -72,19 +66,20 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTemplate();
     
     // Se establece el título del contenido principal.
-    MAIN_TITLE.textContent = 'Gestionar ventas';
+    document.getElementById('mainTitle').textContent = 'Gestionar ventas';
     
  fillTable();
     
 });
 
-    // Método del evento para cuando se envía el formulario de buscar
+
+// Método del evento para cuando se envía el formulario de buscar
 
 SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_VENTA.value) ? action = 'updateRow' : action = 'createRow';
+    const action = (ID_VENTA.value) ? 'updateRow' : 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
@@ -112,7 +107,7 @@ const fillTable = async (form = null) => {
     ROWS_FOUND.textContent = '';
     TABLE_BODY.innerHTML = '';
     // Se verifica la acción a realizar.
-    (form) ? action = 'searchRows' : action = 'readAll';
+    const action = (form) ? 'searchRows' : 'readAll';
     // Petición para obtener los registros disponibles.
     const DATA = await fetchData(MODULO_VENTAS_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
@@ -130,6 +125,9 @@ const fillTable = async (form = null) => {
                     <td>${row.bodega}</td>
                     <td>${row.notas}</td>
                     <td>
+                    <button type="button" class="btn btn-success" onclick="openDetail(${row.id_venta})">
+                            <i class="fa-regular fa-square-plus"></i>
+                        </button>
                         <button type="button" class="btn btn-info" onclick="openDetails(${row.id_venta})">
                             <i class="fa-regular fa-paper-plane"></i>
                         </button>
@@ -143,42 +141,6 @@ const fillTable = async (form = null) => {
         sweetAlert(4, DATA.error, true);
     }
 }
-
-const fillTables = async (form = null) => {
-    // Se inicializa el contenido de la tabla.
-    ROWS_FOUND_F.textContent = '';
-    TABLE_BODY_F.innerHTML = '';
-    // Se verifica la acción a realizar.
-    (form) ? action = 'searchRows' : action = 'readAllWithPrice';
-    // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(PRODUCTO_API, action, form);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
-        DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-            TABLE_BODY_F.innerHTML += `
-                <tr>
-                    <td>${row.codigo}</td>
-                    <td>${row.nombre}</td>
-                    <td>${row.presentacion}</td>
-                    <td>${row.precio_con_iva}</td>
-                    <td>
-                        <button type="button" class="btn btn-info" onclick="openDetails(${row.id_venta})">
-                            <i class="fa-regular fa-paper-plane"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-        });
-        // Se muestra un mensaje de acuerdo con el resultado.
-        ROWS_FOUND_F.textContent = DATA.message;
-    } else {
-        sweetAlert(4, DATA.error, true);
-    }
-}
-
-
 
 /*
 *   Función para preparar el formulario al momento de insertar un registro.
@@ -200,41 +162,74 @@ const openCreate = () => {
 
 }
 
-// Función para buscar producto por código
-async function buscarProducto(codigo) {
-    try {
-        const FORM = new FormData();
-        FORM.append('action', 'getProductByCode');
-        FORM.append('codigoProducto', codigo);
-        console.log(MODULO_VENTAS_API);
-        console.log(codigo);
+SAVE_FORM_DETALLE.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Se verifica la acción a realizar.
+    const action = (ID_DETALLE.value) ? 'updateRow' : 'createRow';
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(SAVE_FORM_DETALLE);
+    // Petición para guardar los datos del formulario.
+    const DATA = await fetchData(MODULO_VENTAS_API, action, FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se cierra la caja de diálogo.
+        SAVE_MODAL_DETALLE.hide();
+        // Se muestra un mensaje de éxito.
+        sweetAlert(1, DATA.message, true);
+        // Se carga nuevamente la tabla para visualizar los cambios.
+        fillTables();
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+});
 
-        const response = await fetch(MODULO_VENTAS_API, {
-            method: 'POST',
-            body: FORM
-            
+
+const fillTables = async (form = null) => {
+    // Se inicializa el contenido de la tabla.
+    ROWS_FOUND_DETALLE.textContent = '';
+    TABLE_BODY_DETALLE.innerHTML = '';
+    // Se verifica la acción a realizar.
+    const action = (form) ? 'searchRows' : 'readAllWithPrice';
+    // Petición para obtener los registros disponibles.
+    const DATA = await fetchData(PRODUCTO_API, action, form);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            TABLE_BODY_DETALLE.innerHTML += `
+                <tr>
+                    <td>${row.codigo}</td>
+                    <td>${row.nombre}</td>
+                    <td>${row.presentacion}</td>
+                    <td>${row.precio_con_iva}</td>
+                    <td>
+                        <button type="button" class="btn btn-info" onclick="openDetails(${row.id_venta})">
+                            <i class="fa-solid fa-info-circle"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
         });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-            throw new TypeError("Oops, we haven't got JSON!");
-        }
-
-        const DATA = await response.json();
-        
-        if (DATA.status) {
-            return DATA.dataset;
-        } else {
-            sweetAlert(2, DATA.error || 'Producto no encontrado', false);
-            return null;
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        sweetAlert(2, `Error al buscar el producto: ${error.message}`, false);
-        return null;
+        // Se muestra un mensaje de acuerdo con el resultado.
+        ROWS_FOUND_DETALLE.textContent = DATA.message;
+    } else {
+        sweetAlert(4, DATA.exception, true);
     }
 }
+
+/*
+*   Función para preparar el formulario al momento de insertar un detalle.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const openDetail = () => {
+    // Se muestra la caja de diálogo con su título.
+    SAVE_MODAL_DETALLE.show();
+    MODAL_TITLE_DETALLE.textContent = 'Añadir productos a la venta';
+    // Se prepara el formulario.
+    SAVE_FORM_DETALLE.reset();
+    fillTables();
+}
+

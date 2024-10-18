@@ -117,54 +117,96 @@
                             </div>
                     </form>
 
-                    <!-- Contenedor para las filas de productos agregados -->
-                    <div class="col-md-12">
-                        <!-- Formulario de búsqueda -->
-                        <form class="col-sm-12 col-md-6" id="searchForm">
-                            <div class="row">
-                                <div class="col-6">
-                                    <input type="search" class="form-control" name="search"
-                                        placeholder="Buscar por nombre o código" required>
-                                </div>
-                                <div class="col-6">
-                                    <button type="submit" class="btn btn-success" onclick="fillTables()">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                    </button>
-                                    <button type="reset" class="btn btn-secondary" onclick="fillTables()">
-                                        <i class="fa-solid fa-eraser"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                        <table class="table table-hover text-center">
-                            <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-                            <thead>
-                                <tr>
-                                    <td class="text-start" colspan="5" id="rowsFoundForm"></td>
-                                </tr>
-                                <tr>
-                                    <th>CóDIGO</th>
-                                    <th>NOMBRE</th>
-                                    <th>PRESENTACIÓN</th>
-                                    <th>PRECIO</th>
-                                    <th>ACCIONES</th>
-                                </tr>
-                            </thead>
-                            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                            <tbody id="tableBodyForm"></tbody>
-                        </table>
-                        <tbody id="productRows">
-                            <!-- Aquí se agregarán dinámicamente las filas -->
-                        </tbody>
-                        </table>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
             </div>
+        </div>
 
+
+
+        </div>
+        <!-- Modal para agregar productos a la venta -->
+        <div class="modal fade" id="saveModalDetalle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitleDetalle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <!-- Encabezado del modal -->
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleDetalle"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Cuerpo del modal -->
+                    <div class="modal-body">
+                        <form id="saveFormDetalle">
+                            <div class="modal-body row g-3">
+                                <!-- Inputs Ocultos -->
+                                <input type="number" class="d-none" id="idVentaDetalle" name="idVentaDetalle">
+                                <input type="number" class="d-none" id="idDetalle" name="idDetalle">
+
+
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="codigoDetalle" class="form-label">Codigo</label>
+                                    <input type="number" class="form-control" id="codigoDetalle" name="codigoDetalle"
+                                        required>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="cantidadDetalle" class="form-label">Cantidad</label>
+                                    <input type="number" class="form-control" id="cantidadDetalle"
+                                        name="cantidadDetalle" required>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="NombreDetalle" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="NombreDetalle" name="NombreDetalle"
+                                        readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="PresentacionDetalle" class="form-label">Presentacion</label>
+                                    <input type="text" class="form-control" id="PresentacionDetalle"
+                                        name="PresentacionDetalle" readonly>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <label for="precioUnitarioDetalle" class="form-label">Precio Unitario</label>
+                                    <input type="number" class="form-control" id="precioUnitarioDetalle"
+                                        name="precioUnitarioDetalle" readonly>
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                        <!-- Tabla para mostrar los productos disponibles -->
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <!-- Muestra la cantidad de filas encontradas -->
+                                    <td class="text-start" colspan="5" id="rowsFoundDetalle"></td>
+                                </tr>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Nombre</th>
+                                    <th>Presentación</th>
+                                    <th>Precio</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBodyDetalle"></tbody>
+                        </table>
+
+                    </div>
+
+                    <!-- Pie del modal -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" form="saveFormDetalle">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+
+
 
     <!--Importaciones-->
     <script src="../controllers/utils/admin.js"></script>
