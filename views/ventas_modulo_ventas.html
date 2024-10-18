@@ -115,26 +115,43 @@
                                 <label for="Notasventa" class="form-label">Notas</label>
                                 <input type="text" class="form-control" name="Notasventa" id="Notasventa">
                             </div>
+                        </form>
 
-                              <!-- Sección para agregar productos -->
-               <!-- Sección para agregar productos -->
-               <div class="col-md-12">
-                <button type="button" class="btn btn-secondary" id="addProductButton">Agregar Producto</button>
-            </div>
             <!-- Contenedor para las filas de productos agregados -->
             <div class="col-md-12">
-                <table class="table table-bordered">
+                 <!-- Formulario de búsqueda -->
+            <form class="col-sm-12 col-md-6" id="searchForm">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="search" class="form-control" name="search"
+                            placeholder="Buscar por nombre, código, descripción o presentación" required>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success" onclick="fillTables()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                            <i class="fa-solid fa-eraser"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+                <table class="table table-hover text-center">
+                    <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
                     <thead>
                         <tr>
-                            <th>Código</th>
-                            <th>Descripción</th>
-                            <th>Cantidad</th>
-                            <th>Precio</th>
-                            <th>Descuento</th>
-                            <th>Total</th>
-                            <th>Acciones</th>
+                            <td class="text-start" colspan="7" id="rowsFound"></td>
+                        </tr>
+                        <tr>
+                            <th>CóDIGO</th>
+                            <th>NOMBRE</th>
+                            <th>PRECIO</th>
+                            <th>ACCIONES</th>
                         </tr>
                     </thead>
+                    <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                    <tbody id="tableBody"></tbody>
+                </table>
                     <tbody id="productRows">
                         <!-- Aquí se agregarán dinámicamente las filas -->
                     </tbody>
@@ -147,103 +164,6 @@
         </div>
 
     </main>
-    <script>
-        // Función para agregar una nueva fila de producto
-        document.getElementById('addProductButton').addEventListener('click', function() {
-            const tableBody = document.getElementById('productRows');
-            const newRow = document.createElement('tr');
-
-            newRow.innerHTML = `
-                <td>
-                    <input type="text" class="form-control codigo-producto" name="codigoProducto[]" placeholder="Código del producto" required>
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="nombreProducto[]" readonly disabled>
-                </td>
-                <td>
-                    <input type="number" class="form-control cantidad-producto" name="cantidadProducto[]" placeholder="Cantidad" required disabled>
-                </td>
-                <td>
-                    <input type="number" class="form-control" name="precioProducto[]" placeholder="Precio" readonly disabled>
-                </td>
-                <td>
-                    <input type="number" class="form-control" name="descuentoProducto[]" placeholder="Descuento" readonly disabled>
-                </td>
-                <td>
-                    <input type="number" class="form-control" name="totalProducto[]" placeholder="Total" readonly disabled>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="removeProductRow(this)">Eliminar</button>
-                </td>
-            `;
-
-            tableBody.appendChild(newRow);
-
-            // Añadir evento para buscar producto al ingresar código
-            newRow.querySelector('.codigo-producto').addEventListener('blur', buscarProducto);
-            
-            // Añadir evento para calcular total al cambiar cantidad
-            newRow.querySelector('.cantidad-producto').addEventListener('input', calcularTotal);
-        });
-
-        // Función para eliminar una fila de producto
-        function removeProductRow(button) {
-            button.closest('tr').remove();
-        }
-
-        // Función para buscar producto por código
-        async function buscarProducto(event) {
-            const codigoInput = event.target;
-            const row = codigoInput.closest('tr');
-            const codigo = codigoInput.value;
-
-            if (codigo) {
-                try {
-                    const response = await fetch(MODULO_VENTAS_API, {
-                        method: 'POST',
-                        body: JSON.stringify({ action: 'getProductByCode', codigo: codigo })
-                    });
-                    const data = await response.json();
-
-                    if (data.status) {
-                        row.querySelector('[name="nombreProducto[]"]').value = data.dataset.nombre;
-                        row.querySelector('[name="precioProducto[]"]').value = data.dataset.precio;
-                        row.querySelector('[name="descuentoProducto[]"]').value = data.dataset.descuento;
-                        row.querySelector('[name="cantidadProducto[]"]').max = data.dataset.cantidad;
-                        
-                        // Habilitar campos después de encontrar el producto
-                        row.querySelector('[name="nombreProducto[]"]').disabled = false;
-                        row.querySelector('[name="cantidadProducto[]"]').disabled = false;
-                        row.querySelector('[name="precioProducto[]"]').disabled = false;
-                        row.querySelector('[name="descuentoProducto[]"]').disabled = false;
-                        row.querySelector('[name="totalProducto[]"]').disabled = false;
-                        
-                        // Enfocar el campo de cantidad
-                        row.querySelector('[name="cantidadProducto[]"]').focus();
-                    } else {
-                        sweetAlert(2, 'Producto no encontrado', false);
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    sweetAlert(2, 'Error al buscar el producto', false);
-                }
-            }
-        }
-
-        // Función para calcular el total
-        function calcularTotal(event) {
-            const cantidadInput = event.target;
-            const row = cantidadInput.closest('tr');
-            const cantidad = parseFloat(cantidadInput.value);
-            const precio = parseFloat(row.querySelector('[name="precioProducto[]"]').value);
-            const descuento = parseFloat(row.querySelector('[name="descuentoProducto[]"]').value);
-
-            if (!isNaN(cantidad) && !isNaN(precio)) {
-                const total = cantidad * precio * (1 - descuento / 100);
-                row.querySelector('[name="totalProducto[]"]').value = total.toFixed(2);
-            }
-        }
-    </script>
     
     <!--Importaciones-->
     <script src="../controllers/utils/admin.js"></script>

@@ -1,5 +1,6 @@
 const MODULO_VENTAS_API = 'services/admin/modulo_ventas.php';
 const FORMAS_DE_PAGO_API = 'services/admin/formas_pago.php';
+const PRODUCTO_API = 'services/admin/admin_maestro_productos.php';
 
 // Constantes para completar las rutas de la API de VENTA.
 
@@ -140,6 +141,36 @@ const fillTable = async (form = null) => {
     }
 }
 
+const fillTables = async (form = null) => {
+    // Se inicializa el contenido de la tabla.
+    ROWS_FOUND.textContent = '';
+    TABLE_BODY.innerHTML = '';
+    // Se verifica la acción a realizar.
+    (form) ? action = 'searchRows' : action = 'readAllWithPrice';
+    // Petición para obtener los registros disponibles.
+    const DATA = await fetchData(PRODUCTO_API, action, form);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            TABLE_BODY.innerHTML += `
+                <tr>
+                    <td>${row.codigo}</td>
+                    <td>${row.nombre}</td>
+                    <td>${row.presentacion}</td>
+                    <td>${row.precio_con_iva}</td>
+                    
+                </tr>
+            `;
+        });
+        // Se muestra un mensaje de acuerdo con el resultado.
+        ROWS_FOUND.textContent = DATA.message;
+    } else {
+        sweetAlert(4, DATA.error, true);
+    }
+}
+
 
 
 /*
@@ -200,15 +231,3 @@ async function buscarProducto(codigo) {
         return null;
     }
 }
-
-
-
-
-   
-
-    
-    
-   
-  
-    
-   

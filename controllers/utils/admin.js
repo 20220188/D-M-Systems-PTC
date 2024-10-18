@@ -113,18 +113,12 @@ const loadTemplate = async () => {
                 <h4>Movimientos</h4>
             </div>
         </a>
-        <a href="admin_reporte_ventas.html" class="menu-option">
-            <div class="option">
-                <i class="fa-solid fa-file" title="Reportes"></i>
-                <h4>Reportes</h4>
-            </div>
-        </a>
         <a href="profile.html" class="menu-option">
             <div class="option">
                 <i class="fa-solid fa-user" title="Editar perfil"></i>
                 <h4>Editar Perfil</h4>
             </div>
-        </a>
+        </a>  
         <a href="#" class="menu-option" onclick="logOut()">
             <div class="option">
                 <i class="fa-solid fa-right-from-bracket" title="Cerrar sesión"></i>

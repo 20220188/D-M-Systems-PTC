@@ -91,6 +91,18 @@ class ProductosHandler
         return Database::getRows($sql);
     }
 
+    public function readAllWithPrice()
+    {
+        $sql = 'SELECT p.id_producto, p.imagen, p.codigo, p.nombre, p.descripcion, p.fecha_vencimiento, p.presentacion, 
+                       d.precio_sin_iva, d.precio_con_iva, d.precio_con_descuento, d.descuento, d.existencia
+                FROM tb_productos p
+                LEFT JOIN tb_detalle_productos d ON p.id_producto = d.id_producto
+                ORDER BY p.nombre';
+        return Database::getRows($sql);
+    }
+    
+
+
     public function productosReport()
     {
         $sql = 'SELECT
