@@ -159,17 +159,17 @@
                                 <div class="col-sm-12 col-md-6">
                                     <label for="NombreDetalle" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="NombreDetalle" name="NombreDetalle"
-                                        readonly>
+                                        >
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <label for="PresentacionDetalle" class="form-label">Presentacion</label>
                                     <input type="text" class="form-control" id="PresentacionDetalle"
-                                        name="PresentacionDetalle" readonly>
+                                        name="PresentacionDetalle" >
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <label for="precioUnitarioDetalle" class="form-label">Precio Unitario</label>
                                     <input type="number" class="form-control" id="precioUnitarioDetalle"
-                                        name="precioUnitarioDetalle" readonly>
+                                        name="precioUnitarioDetalle" >
                                 </div>
 
                             </div>
@@ -186,14 +186,15 @@
                                 <tr>
                                     <th>Código</th>
                                     <th>Nombre</th>
-                                    <th>Presentación</th>
-                                    <th>Precio</th>
-                                    <th>Acción</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio unitario</th>
+                                    <th>subtotal</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="tableBodyDetalle"></tbody>
                         </table>
-
+                        <p class="text-end">TOTAL A PAGAR (US$) <b id="pago"></b></p>
                     </div>
 
                     <!-- Pie del modal -->

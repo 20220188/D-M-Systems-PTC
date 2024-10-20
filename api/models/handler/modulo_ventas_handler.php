@@ -103,24 +103,6 @@ class VentasHandler
         return Database::executeRow($sql, $params);
     }
 
-    //Acciones dentro de ventas
-    public function getProductByCode()
-    {
-        $sql = 'SELECT 
-         p.codigo,
-         p.nombre,
-         p.descripcion,
-         d.precio_con_iva AS precio
-     FROM 
-         tb_productos p
-     INNER JOIN 
-         tb_detalle_productos d
-     ON 
-         p.id_producto = d.id_producto
-            WHERE codigo = ?';
-        $params = array($this->codigo);
-        return Database::getRow($sql, $params);
-    }
 
 
     public function searchByCode($codigo)
@@ -139,6 +121,31 @@ class VentasHandler
                 LIMIT 1';
         $params = array($codigo);
         return Database::getRow($sql, $params);
+    }
+
+    public function createDetalleVenta()
+    {
+        $sql = 'INSERT INTO tb_detalle_venta(id_venta, id_producto, cantidad, precio_con_iva)
+                VALUES(?, (SELECT id_producto FROM tb_productos WHERE codigo = ?), ?, ?)';
+        $params = array($this->id, $this->codigo, $this->cantidad, $this->precio_unitario);
+        return Database::executeRow($sql, $params);
+        print_r($params);
+    }
+
+    public function readDetalleVenta()
+    {
+        $sql = 'SELECT 
+                    p.codigo, 
+                    p.nombre, 
+                    dv.cantidad, 
+                    dv.precio_con_iva
+                FROM 
+                    tb_detalle_venta dv
+                    INNER JOIN tb_productos p USING(id_producto)
+                WHERE 
+                    dv.id_venta = ?';
+        $params = array($this->id);
+        return Database::getRows($sql, $params);
     }
 
 }
