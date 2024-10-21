@@ -3,7 +3,7 @@ require_once('../../helpers/database.php');
 
 class VentasHandler
 {
-    protected $id = null;
+    protected $id_venta = null;
     protected $fecha_venta = null;
     protected $id_dependiente = null;
     protected $id_cliente = null;
@@ -118,34 +118,71 @@ class VentasHandler
                     INNER JOIN tb_detalle_productos d USING(id_producto)
                 WHERE 
                     p.codigo = ?
-                LIMIT 1';
+                ';
         $params = array($codigo);
         return Database::getRow($sql, $params);
     }
 
     public function createDetalleVenta()
     {
+        // Corrección: Usar this->id_venta en lugar de this->id
         $sql = 'INSERT INTO tb_detalle_venta(id_venta, id_producto, cantidad, precio_con_iva)
                 VALUES(?, (SELECT id_producto FROM tb_productos WHERE codigo = ?), ?, ?)';
-        $params = array($this->id, $this->codigo, $this->cantidad, $this->precio_unitario);
+        // Corrección: Usar this->id_venta
+        $params = array($this->id_venta, $this->codigo, $this->cantidad, $this->precio_unitario);
         return Database::executeRow($sql, $params);
-        print_r($params);
     }
 
+    
+
     public function readDetalleVenta()
+{
+    // Corrección: Usar this->id_venta
+    $sql = 'SELECT 
+                dv.id_detalle_venta,
+                p.codigo, 
+                p.nombre, 
+                dv.cantidad, 
+                dv.precio_con_iva
+            FROM 
+                tb_detalle_venta dv
+                INNER JOIN tb_productos p USING(id_producto)
+            WHERE 
+                dv.id_venta = ?';
+    $params = array($this->id_venta);
+    return Database::getRows($sql, $params);
+}
+
+    public function readOneDetalle()
     {
-        $sql = 'SELECT 
-                    p.codigo, 
-                    p.nombre, 
-                    dv.cantidad, 
-                    dv.precio_con_iva
-                FROM 
-                    tb_detalle_venta dv
-                    INNER JOIN tb_productos p USING(id_producto)
-                WHERE 
-                    dv.id_venta = ?';
-        $params = array($this->id);
-        return Database::getRows($sql, $params);
+        $sql = 'SELECT dv.id_detalle_venta,dv.id_venta, p.codigo, p.nombre, dv.cantidad, dv.precio_con_iva, p.presentacion
+                FROM tb_detalle_venta dv
+                INNER JOIN tb_productos p USING(id_producto)
+                WHERE dv.id_detalle_venta = ?';
+        $params = array($this->id_detalle_venta);
+        return Database::getRow($sql, $params);
     }
+
+    public function updateRowDetalle()
+{
+    // Corrección: Usar this->id_venta
+    $sql = 'UPDATE tb_detalle_venta
+            SET cantidad = ?
+            WHERE id_detalle_venta = ? 
+            AND id_venta = ?';
+    $params = array($this->cantidad, $this->id_detalle_venta, $this->id_venta);
+    return Database::executeRow($sql, $params);
+}
+    
+        // Delete a sale record by its ID
+        public function deleteRowDetalle()
+        {
+            $sql = 'DELETE FROM tb_detalle_venta
+                    WHERE id_detalle_venta = ?';
+            $params = array($this->id_detalle_venta);
+            return Database::executeRow($sql, $params);
+        }
+
+
 
 }

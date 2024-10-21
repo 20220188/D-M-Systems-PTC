@@ -17,7 +17,7 @@ class VentasData extends VentasHandler
 public function setIdVenta($value)
 {
     if (Validator::validateNaturalNumber($value)) {
-        $this->id = $value;
+        $this->id_venta = $value;
         return true;
     } else {
         $this->data_error = 'El identificador de la venta es incorrecto';

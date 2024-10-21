@@ -170,117 +170,114 @@ const openCreate = () => {
 
 }
 
-// SAVE_FORM_DETALLE.addEventListener('submit', async (event) => {
-//     // Se evita recargar la página web después de enviar el formulario.
-//     event.preventDefault();
-//     // Se verifica la acción a realizar.
-//     const action = (ID_DETALLE.value) ? 'updateRow' : 'createRow';
-//     // Constante tipo objeto con los datos del formulario.
-//     const FORM = new FormData(SAVE_FORM_DETALLE);
-//     // Petición para guardar los datos del formulario.
-//     const DATA = await fetchData(MODULO_VENTAS_API, action, FORM);
-//     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-//     if (DATA.status) {
-//         // Se cierra la caja de diálogo.
-//         SAVE_MODAL_DETALLE.hide();
-//         // Se muestra un mensaje de éxito.
-//         sweetAlert(1, DATA.message, true);
-//         // Se carga nuevamente la tabla para visualizar los cambios.
-//         fillTables();
-//     } else {
-//         sweetAlert(2, DATA.error, false);
-//     }
-// });
 
 
-// const fillTables = async (form = null) => {
-//     // Se inicializa el contenido de la tabla.
-//     ROWS_FOUND_DETALLE.textContent = '';
-//     TABLE_BODY_DETALLE.innerHTML = '';
-//     // Se verifica la acción a realizar.
-//     const action = (form) ? 'searchRows' : 'readAllWithPrice';
-//     // Petición para obtener los registros disponibles.
-//     const DATA = await fetchData(PRODUCTO_API, action, form);
-//     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-//     if (DATA.status) {
-//         // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
-//         DATA.dataset.forEach(row => {
-//             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-//             TABLE_BODY_DETALLE.innerHTML += `
-//                 <tr>
-//                     <td>${row.codigo}</td>
-//                     <td>${row.nombre}</td>
-//                     <td>${row.presentacion}</td>
-//                     <td>${row.precio_con_iva}</td>
-//                     <td>
-//                         <button type="button" class="btn btn-info" onclick="openDetails(${row.id_venta})">
-//                             <i class="fa-solid fa-info-circle"></i>
-//                         </button>
-//                     </td>
-//                 </tr>
-//             `;
-//         });
-//         // Se muestra un mensaje de acuerdo con el resultado.
-//         ROWS_FOUND_DETALLE.textContent = DATA.message;
-//     } else {
-//         sweetAlert(4, DATA.exception, true);
-//     }
-// }
 
-// /*
-// *   Función para preparar el formulario al momento de insertar un detalle.
-// *   Parámetros: ninguno.
-// *   Retorno: ninguno.
-// */
-// const openDetail = () => {
-//     // Se muestra la caja de diálogo con su título.
-//     SAVE_MODAL_DETALLE.show();
-//     MODAL_TITLE_DETALLE.textContent = 'Añadir productos a la venta';
+
+
+SAVE_FORM_DETALLE.addEventListener('submit', async (event) => {
+    event.preventDefault();
     
+    // Guardamos el ID de la venta antes del reset
+    const currentVentaId = ID_VENTA_DETALLE.value;
+    
+    const action = ID_DETALLE.value ? 'updateRowDetalle' : 'createDetalleVenta';
+    
+    const FORM = new FormData(SAVE_FORM_DETALLE);
+    // Aseguramos que el ID de la venta está en el FormData
+    FORM.append('idVentaDetalle', currentVentaId);
+    
+    const DATA = await fetchData(MODULO_VENTAS_API, action, FORM);
+    if (DATA.status) {
+        sweetAlert(1, DATA.message, true);
+        await fillTableDetalle(currentVentaId);
+        
+        if (action === 'createDetalleVenta') {
+            // Guardamos el ID actual
+            const ventaId = currentVentaId;
+            // Reseteamos el formulario
+            SAVE_FORM_DETALLE.reset();
+            // Restauramos el ID después del reset
+            ID_VENTA_DETALLE.value = ventaId;
+            document.getElementById('idVentaDetalle').value = ventaId;
+        }
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+});
 
-//     //Funcion para autocompletar la infmormacion del producto a partir del codigo
-// document.getElementById('codigoDetalle').addEventListener('input', async function() {
-//     const codigo = this.value;
-//     if (codigo) {
-//         const FORM = new FormData();
-//         FORM.append('codigo', codigo);
-//         const DATA = await fetchData(MODULO_VENTAS_API, 'searchByCode', FORM);
-//         if (DATA.status) {
+const fillTableDetalle = async (id) => {
+    try {
+        let subtotal = 0;
+        let total = 0;
+        const FORM = new FormData();
+        FORM.append('idVentaDetalle', id);
+        const DATA = await fetchData(MODULO_VENTAS_API, 'readDetalleVenta', FORM);
+        
+        TABLE_BODY_DETALLE.innerHTML = '';
+        
+        if (DATA.status && DATA.dataset && DATA.dataset.length > 0) {
+            DATA.dataset.forEach(row => {
+                subtotal = parseFloat(row.precio_con_iva) * parseInt(row.cantidad);
+                total += subtotal;
+                TABLE_BODY_DETALLE.innerHTML += `
+                    <tr>
+                        <td>${row.codigo}</td>
+                        <td>${row.nombre}</td>
+                        <td>${row.cantidad}</td>
+                        <td>${parseFloat(row.precio_con_iva).toFixed(2)}</td>
+                        <td>${subtotal.toFixed(2)}</td>
+                        <td>
+                            <button type="button" class="btn btn-info" onclick="openUpdateDetail(${row.id_detalle_venta})">
+                                <i class="fa-solid fa-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="openDeleteDetail(${row.id_detalle_venta}, ${id})">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            document.getElementById('pago').textContent = total.toFixed(2);
+            ROWS_FOUND_DETALLE.textContent = DATA.message;
+        } else {
+            TABLE_BODY_DETALLE.innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center">No hay productos en el detalle</td>
+                </tr>
+            `;
+            document.getElementById('pago').textContent = '0.00';
+            ROWS_FOUND_DETALLE.textContent = 'No hay productos registrados';
+        }
+    } catch (error) {
+        console.error('Error al cargar detalles:', error);
+        sweetAlert(2, 'Error al cargar los detalles de la venta', false);
+    }
+};
 
-//             // Se prepara el formulario.
-//     SAVE_FORM_DETALLE.reset();
-//             const producto = DATA.dataset;
-//             NOMBRE_DETALLE.value = producto.nombre;
-//             PRESENTACION_DETALLE.value = producto.presentacion;
-//             PRECIO_UNITARIO_DETALLE.value = producto.precio_con_iva;
-//         } else {
-//             // Limpiar los campos si no se encuentra el producto
-//             sweetAlert(2, DATA.error, false);
-//         }
-//     }
-// });
-//     fillTables();
-// }
-// Variable global para almacenar el ID de la venta actual
-let currentVentaId = null;
+
+
 
 const openDetail = (idVenta) => {
     // Guardamos el ID de la venta actual
-    currentVentaId = idVenta;
+    ID_VENTA_DETALLE.value = idVenta;
 
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL_DETALLE.show();
     MODAL_TITLE_DETALLE.textContent = 'Añadir productos a la venta';
-    // Se prepara el formulario.
-    SAVE_FORM_DETALLE.reset();
 
+    // Se prepara el formulario pero manteniendo el ID de la venta
+    const currentVentaId = ID_VENTA_DETALLE.value; // Guardamos el ID actual
+    SAVE_FORM_DETALLE.reset();
+    ID_VENTA_DETALLE.value = currentVentaId; // Restauramos el ID después del reset
+    
     // Asignamos el ID de la venta al campo oculto
-    document.getElementById('idVentaDetalle').value = currentVentaId;
+    document.getElementById('idVentaDetalle').value = idVenta;
 
     // Evento para autocompletar la información del producto a partir del código
-    document.getElementById('codigoDetalle').addEventListener('input', async function() {
+    document.getElementById('codigoDetalle').addEventListener('keypress', async function(event) {
         const codigo = this.value;
-        if (codigo) {
+        if (event.key === 'Enter') {
             const FORM = new FormData();
             FORM.append('codigo', codigo);
             const DATA = await fetchData(MODULO_VENTAS_API, 'searchByCode', FORM);
@@ -296,55 +293,56 @@ const openDetail = (idVenta) => {
     });
 
     // Llamamos a fillTableDetalle para cargar los detalles existentes
-    fillTableDetalle();
+    fillTableDetalle(idVenta);
 }
 
-// Evento para guardar el detalle de la venta
-SAVE_FORM_DETALLE.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const FORM = new FormData(SAVE_FORM_DETALLE);
-    // Aseguramos que el ID de la venta esté incluido en el formulario
-    FORM.append('idVentaDetalle', currentVentaId);
-
-    const DATA = await fetchData(MODULO_VENTAS_API, 'createDetalleVenta', FORM);
-    if (DATA.status) {
-        sweetAlert(1, DATA.message, true);
-        fillTableDetalle(); // Actualizamos la tabla de detalle
-    } else {
-        sweetAlert(2, DATA.error, false);
-    }
-});
-
-// Función para llenar la tabla de detalle de venta
-const fillTableDetalle = async () => {
-    // Se declara e inicializa una variable para calcular el importe por cada producto.
-    let subtotal = 0;
-    // Se declara e inicializa una variable para sumar cada subtotal y obtener el monto final a pagar.
-    let total = 0;
+const openUpdateDetail = async (idDetalle) => {
     const FORM = new FormData();
-    FORM.append('idVentaDetalle', currentVentaId);
-    const DATA = await fetchData(MODULO_VENTAS_API, 'readDetalleVenta', FORM);
-    if (DATA.status) {
-        TABLE_BODY_DETALLE.innerHTML = ''; // Limpiamos la tabla antes de llenarla
-        DATA.dataset.forEach(row => {
-            subtotal = row.precio_con_iva * row.cantidad;
-            total += subtotal;
-            TABLE_BODY_DETALLE.innerHTML += `
-                <tr>
-                    <td>${row.codigo}</td>
-                    <td>${row.nombre}</td>
-                    <td>${row.cantidad}</td>
-                    <td>${row.precio_con_iva}</td>
-                    <td>${subtotal}</td>
-                </tr>
-            `;
-        });
-        // Se muestra el total a pagar con dos decimales.
-        document.getElementById('pago').textContent = total.toFixed(2);
-        // Se muestra un mensaje de acuerdo con el resultado.
-        ROWS_FOUND_DETALLE.textContent = DATA.message;
+    FORM.append('idDetalle', idDetalle);
+    const responseData = await fetchData(MODULO_VENTAS_API, 'readOneDetalle', FORM);
+
+    if (responseData.status) {
+        SAVE_MODAL_DETALLE.show();
+        MODAL_TITLE_DETALLE.textContent = 'Actualizar producto de la venta';
+        SAVE_FORM_DETALLE.reset();
+        
+        const ROW = responseData.dataset;
+        ID_DETALLE.value = ROW.id_detalle_venta;
+        ID_VENTA_DETALLE.value = ROW.id_venta; // Asegúrate de guardar el ID de la venta
+        NOMBRE_DETALLE.value = ROW.nombre;
+        document.getElementById('codigoDetalle').value = ROW.codigo;
+        PRESENTACION_DETALLE.value = ROW.presentacion;
+        PRECIO_UNITARIO_DETALLE.value = ROW.precio_con_iva;
+        document.getElementById('cantidadDetalle').value = ROW.cantidad;    
     } else {
-        sweetAlert(2, DATA.error, false);
+        sweetAlert(2, responseData.error, false);
+    }
+}
+
+/*
+*   Función asíncrona para eliminar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openDeleteDetail = async (idDetalle, idVenta) => {
+    try {
+        const RESPONSE = await confirmAction('¿Desea eliminar el producto de forma permanente?');
+        if (RESPONSE) {
+            const FORM = new FormData();
+            FORM.append('idDetalle', idDetalle);
+            FORM.append('idVenta', idVenta);
+            
+            const DATA = await fetchData(MODULO_VENTAS_API, 'deleteRowDetalle', FORM);
+            if (DATA.status) {
+                await sweetAlert(1, DATA.message, true);
+                // Forzamos una actualización inmediata de la tabla
+                await fillTableDetalle(idVenta);
+            } else {
+                sweetAlert(2, DATA.error || DATA.exception, false);
+            }
+        }
+    } catch (error) {
+        console.error('Error al eliminar:', error);
+        sweetAlert(2, 'Ocurrió un error al procesar la solicitud', false);
     }
 };

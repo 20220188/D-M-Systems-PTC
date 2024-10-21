@@ -88,19 +88,26 @@ if (isset($_GET['action'])) {
                     $result['exception'] = 'Ocurrió un problema al eliminar la venta';
                 }
                 break;
-                case 'searchByCode':
-                    if (!isset($_POST['codigo'])) {
-                        $result['error'] = 'Código no proporcionado';
-                    } elseif ($result['dataset'] = $venta->searchByCode($_POST['codigo'])) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'Producto no encontrado';
-                    }
-                    break;
-    
+
+                /*
+                /ACCIONES PARA EL MANEJO DE LOS DETALLES DE LA VENTA
+                */
+            case 'searchByCode':
+                if (!isset($_POST['codigo'])) {
+                    $result['error'] = 'Código no proporcionado';
+                } elseif ($result['dataset'] = $venta->searchByCode($_POST['codigo'])) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Producto no encontrado';
+                }
+                break;
+
                 case 'createDetalleVenta':
                     $_POST = Validator::validateForm($_POST);
-                    if (
+                    // Verificamos que el ID de la venta exista y sea válido
+                    if (!isset($_POST['idVentaDetalle']) || empty($_POST['idVentaDetalle'])) {
+                        $result['error'] = 'El ID de la venta es requerido';
+                    } elseif (
                         !$venta->setIdVenta($_POST['idVentaDetalle']) or
                         !$venta->setCantidad($_POST['cantidadDetalle']) or
                         !$venta->setPrecioUnitario($_POST['precioUnitarioDetalle']) or
@@ -114,16 +121,70 @@ if (isset($_GET['action'])) {
                         $result['exception'] = Database::getException();
                     }
                     break;
-    
-                case 'readDetalleVenta':
-                    if (!$venta->setIdVenta($_POST['idVentaDetalle'])) {
+
+                
+
+            case 'readOneDetalle':
+                if (!$venta->setIdDetalleVenta($_POST['idDetalle'])) {
+                    $result['error'] = $venta->getDataError();
+                } elseif ($result['dataset'] = $venta->readOneDetalle()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Producto inexistente';
+                }
+                break;
+                
+                case 'updateRowDetalle':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                        !$venta->setIdDetalleVenta($_POST['idDetalle']) or
+                        !$venta->setCantidad($_POST['cantidadDetalle']) or
+                        !$venta->setIdVenta($_POST['idVentaDetalle']) or
+                        // Agregar validación del precio
+                        !$venta->setPrecioUnitario($_POST['precioUnitarioDetalle'])
+                    ) {
                         $result['error'] = $venta->getDataError();
-                    } elseif ($result['dataset'] = $venta->readDetalleVenta()) {
+                    } elseif ($venta->updateRowDetalle()) {
                         $result['status'] = 1;
+                        $result['message'] = 'Producto modificado correctamente';
+                        // Actualizar el dataset después de la modificación
+                        if ($result['dataset'] = $venta->readDetalleVenta()) {
+                            $result['status'] = 1;
+                        }
                     } else {
-                        $result['error'] = 'No hay detalles para esta venta';
+                        $result['exception'] = 'Ocurrió un problema al modificar el producto';
                     }
                     break;
+                
+                    case 'deleteRowDetalle':
+                        if (!$venta->setIdDetalleVenta($_POST['idDetalle'])) {
+                            $result['error'] = $venta->getDataError();
+                        } elseif ($venta->deleteRowDetalle()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Producto eliminado correctamente';
+                            // Actualizar el dataset después de la eliminación
+                            if ($result['dataset'] = $venta->readDetalleVenta()) {
+                                $result['status'] = 1;
+                            }
+                        } else {
+                            $result['exception'] = 'Ocurrió un problema al eliminar el producto';
+                        }
+                        break;
+                    case 'readDetalleVenta':
+                        if (!$venta->setIdVenta($_POST['idVentaDetalle'])) {
+                            $result['error'] = $venta->getDataError();
+                        } else {
+                            $result['dataset'] = $venta->readDetalleVenta();
+                            if ($result['dataset'] && count($result['dataset']) > 0) {
+                                $result['status'] = 1;
+                                $result['message'] = 'Se encontraron ' . count($result['dataset']) . ' productos';
+                            } else {
+                                $result['status'] = 1;  // Mantenemos status 1 pero sin datos
+                                $result['dataset'] = [];
+                                $result['message'] = 'No hay detalles para esta venta';
+                            }
+                        }
+                        break;
             default:
                 $result['error'] = 'Acción no disponible dentro de la sesión';
         }

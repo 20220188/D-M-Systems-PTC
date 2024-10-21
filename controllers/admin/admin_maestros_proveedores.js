@@ -98,7 +98,7 @@ const fillTable = async () => {
                     <td>${row.nombre_proveedor}</td>
                     <td>${row.codigo_proveedor}</td>
                     <td>${row.giro_negocio_proveedor}</td>
-                     <td>${row.telefono_proveedor}</td>
+                    <td>${row.telefono_proveedor}</td>
                     <td>
                         <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_proveedor})">
                         <i class="fa-solid fa-pencil"></i>
