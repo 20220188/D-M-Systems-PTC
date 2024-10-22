@@ -165,14 +165,53 @@ class VentasHandler
 
     public function updateRowDetalle()
 {
-    // Corrección: Usar this->id_venta
-    $sql = 'UPDATE tb_detalle_venta
-            SET cantidad = ?
-            WHERE id_detalle_venta = ? 
-            AND id_venta = ?';
-    $params = array($this->cantidad, $this->id_detalle_venta, $this->id_venta);
-    return Database::executeRow($sql, $params);
+    try {
+        // Inicia una nueva transacción para asegurar que todas las operaciones se completen correctamente.
+        Database::beginTransaction();
+        
+        // Separa los IDs de detalle, esperando que estén en una cadena separada por comas.
+        $detalleIds = explode(',', $this->id_detalle_venta);
+        
+        // Calcula cuántas unidades se asignarán a cada detalle.
+        $cantidadPorDetalle = floor($this->cantidad / count($detalleIds));
+        
+        // Calcula cuántas unidades sobran después de distribuirlas uniformemente.
+        $cantidadExtra = $this->cantidad % count($detalleIds);
+        
+        // Recorre cada ID de detalle en el arreglo $detalleIds.
+        foreach ($detalleIds as $index => $id) {
+            // Inicializa la cantidad actual con la cantidad por detalle.
+            $cantidadActual = $cantidadPorDetalle;
+
+            // Para el primer detalle, añade la cantidad extra para asegurar que todas las unidades se distribuyan.
+            if ($index == 0) {
+                $cantidadActual += $cantidadExtra;
+            }
+            
+            
+            $sql = 'UPDATE tb_detalle_venta
+                    SET cantidad = ?
+                    WHERE id_detalle_venta = ? AND id_venta = ?';
+            
+            $params = array($cantidadActual, $id, $this->id_venta);
+
+            if (!Database::executeRow($sql, $params)) {
+                // Si la ejecución falla, lanza una excepción.
+                throw new Exception('Error al actualizar detalle');
+            }
+        }
+        
+        // Si todas las actualizaciones son exitosas, se confirma la transacción.
+        Database::commitTransaction();
+        return true; 
+    } catch (Exception $e) {
+        // Si ocurre una excepción, se revierte la transacción para deshacer cambios.
+        Database::rollbackTransaction();
+        return false; 
+    }
 }
+
+    
     
         // Delete a sale record by its ID
         public function deleteRowDetalle()

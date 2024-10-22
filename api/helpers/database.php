@@ -13,6 +13,47 @@ class Database
     private static $error = null;
 
     /*
+     *   Método para crear la conexión a la base de datos.
+     *   Retorno: conexión a la base de datos.
+     */
+    private static function getConnection()
+    {
+        if (self::$connection === null) {
+            try {
+                self::$connection = new PDO('mysql:host=' . SERVER . ';dbname=' . DATABASE, USERNAME, PASSWORD);
+                self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $error) {
+                self::setException($error->getCode(), $error->getMessage());
+            }
+        }
+        return self::$connection;
+    }
+
+    /*
+     *   Método para iniciar una transacción.
+     */
+    public static function beginTransaction()
+    {
+        self::getConnection()->beginTransaction();
+    }
+
+    /*
+     *   Método para confirmar una transacción.
+     */
+    public static function commitTransaction()
+    {
+        self::getConnection()->commit();
+    }
+
+    /*
+     *   Método para revertir una transacción.
+     */
+    public static function rollbackTransaction()
+    {
+        self::getConnection()->rollBack();
+    }
+
+    /*
      *   Método para ejecutar las sentencias SQL.
      *   Parámetros: $query (sentencia SQL) y $values (arreglo con los valores para la sentencia SQL).
      *   Retorno: booleano (true si la sentencia se ejecuta satisfactoriamente o false en caso contrario).
@@ -20,10 +61,8 @@ class Database
     public static function executeRow($query, $values)
     {
         try {
-            // Se crea la conexión mediante la clase PDO con el controlador para MariaDB.
-            self::$connection = new PDO('mysql:host=' . SERVER . ';dbname=' . DATABASE, USERNAME, PASSWORD);
             // Se prepara la sentencia SQL.
-            self::$statement = self::$connection->prepare($query);
+            self::$statement = self::getConnection()->prepare($query);
             // Se ejecuta la sentencia preparada y se retorna el resultado.
             return self::$statement->execute($values);
         } catch (PDOException $error) {
@@ -41,11 +80,10 @@ class Database
     public static function getLastRow($query, $values)
     {
         if (self::executeRow($query, $values)) {
-            $id = self::$connection->lastInsertId();
+            return self::getConnection()->lastInsertId();
         } else {
-            $id = 0;
+            return 0;
         }
-        return $id;
     }
 
     /*
