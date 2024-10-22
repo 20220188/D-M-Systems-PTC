@@ -183,6 +183,26 @@ class VentasHandler
             return Database::executeRow($sql, $params);
         }
 
+        public function readDetallesByCode($codigo)
+{
+    $sql = 'SELECT dv.id_detalle_venta, dv.id_venta, p.codigo, p.nombre, 
+            dv.cantidad, dv.precio_con_iva, p.presentacion
+            FROM tb_detalle_venta dv
+            INNER JOIN tb_productos p USING(id_producto)
+            WHERE dv.id_venta = ? AND p.codigo = ?';
+    $params = array($this->id_venta, $codigo);
+    return Database::getRows($sql, $params);
+}
+
+public function deleteDetallesByCode($codigo)
+{
+    $sql = 'DELETE dv FROM tb_detalle_venta dv
+            INNER JOIN tb_productos p USING(id_producto)
+            WHERE dv.id_venta = ? AND p.codigo = ?';
+    $params = array($this->id_venta, $codigo);
+    return Database::executeRow($sql, $params);
+}
+
 
 
 }

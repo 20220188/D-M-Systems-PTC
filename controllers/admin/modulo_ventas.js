@@ -217,29 +217,49 @@ const fillTableDetalle = async (id) => {
         TABLE_BODY_DETALLE.innerHTML = '';
         
         if (DATA.status && DATA.dataset && DATA.dataset.length > 0) {
-            DATA.dataset.forEach(row => {
-                subtotal = parseFloat(row.precio_con_iva) * parseInt(row.cantidad);
+            // Crear un objeto para agrupar productos por código
+            const productosAgrupados = DATA.dataset.reduce((acc, row) => {
+                const key = row.codigo;
+                if (!acc[key]) {
+                    acc[key] = {
+                        codigo: row.codigo,
+                        nombre: row.nombre,
+                        cantidad: 0,
+                        precio_con_iva: parseFloat(row.precio_con_iva),
+                        id_detalles: [], // Array para guardar todos los id_detalle_venta
+                    };
+                }
+                acc[key].cantidad += parseInt(row.cantidad);
+                acc[key].id_detalles.push(row.id_detalle_venta);
+                return acc;
+            }, {});
+
+            // Convertir el objeto agrupado en array y generar las filas
+            Object.values(productosAgrupados).forEach(producto => {
+                subtotal = producto.precio_con_iva * producto.cantidad;
                 total += subtotal;
+
                 TABLE_BODY_DETALLE.innerHTML += `
                     <tr>
-                        <td>${row.codigo}</td>
-                        <td>${row.nombre}</td>
-                        <td>${row.cantidad}</td>
-                        <td>${parseFloat(row.precio_con_iva).toFixed(2)}</td>
+                        <td>${producto.codigo}</td>
+                        <td>${producto.nombre}</td>
+                        <td>${producto.cantidad}</td>
+                        <td>${producto.precio_con_iva.toFixed(2)}</td>
                         <td>${subtotal.toFixed(2)}</td>
                         <td>
-                            <button type="button" class="btn btn-info" onclick="openUpdateDetail(${row.id_detalle_venta})">
+                            <button type="button" class="btn btn-info" onclick="openUpdateDetailGroup('${producto.codigo}', ${id})">
                                 <i class="fa-solid fa-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-danger" onclick="openDeleteDetail(${row.id_detalle_venta}, ${id})">
+                            <button type="button" class="btn btn-danger" onclick="openDeleteDetailGroup('${producto.codigo}', ${id})">
                                 <i class="fa-regular fa-trash-can"></i>
                             </button>
                         </td>
                     </tr>
                 `;
             });
+            
             document.getElementById('pago').textContent = total.toFixed(2);
-            ROWS_FOUND_DETALLE.textContent = DATA.message;
+            ROWS_FOUND_DETALLE.textContent = 'Productos agrupados: ' + Object.keys(productosAgrupados).length;
         } else {
             TABLE_BODY_DETALLE.innerHTML = `
                 <tr>
@@ -252,6 +272,62 @@ const fillTableDetalle = async (id) => {
     } catch (error) {
         console.error('Error al cargar detalles:', error);
         sweetAlert(2, 'Error al cargar los detalles de la venta', false);
+    }
+};
+
+// Nueva función para actualizar grupo de productos
+const openUpdateDetailGroup = async (codigo, idVenta) => {
+    try {
+        const FORM = new FormData();
+        FORM.append('codigo', codigo);
+        FORM.append('idVenta', idVenta);
+        const DATA = await fetchData(MODULO_VENTAS_API, 'readDetallesByCode', FORM);
+
+        if (DATA.status) {
+            SAVE_MODAL_DETALLE.show();
+            MODAL_TITLE_DETALLE.textContent = 'Actualizar cantidad del producto';
+            SAVE_FORM_DETALLE.reset();
+            
+            const producto = DATA.dataset[0]; // Tomamos el primer registro para los datos básicos
+            const cantidadTotal = DATA.dataset.reduce((sum, item) => sum + parseInt(item.cantidad), 0);
+            
+            // Guardamos todos los IDs de detalle en un campo oculto
+            const detalleIds = DATA.dataset.map(item => item.id_detalle_venta).join(',');
+            ID_DETALLE.value = detalleIds;
+            
+            ID_VENTA_DETALLE.value = idVenta;
+            document.getElementById('codigoDetalle').value = codigo;
+            NOMBRE_DETALLE.value = producto.nombre;
+            PRESENTACION_DETALLE.value = producto.presentacion;
+            PRECIO_UNITARIO_DETALLE.value = producto.precio_con_iva;
+            document.getElementById('cantidadDetalle').value = cantidadTotal;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        sweetAlert(2, 'Error al cargar los detalles del producto', false);
+    }
+};
+
+// Nueva función para eliminar grupo de productos
+const openDeleteDetailGroup = async (codigo, idVenta) => {
+    try {
+        const RESPONSE = await confirmAction('¿Desea eliminar todos los registros de este producto?');
+        if (RESPONSE) {
+            const FORM = new FormData();
+            FORM.append('codigo', codigo);
+            FORM.append('idVenta', idVenta);
+            
+            const DATA = await fetchData(MODULO_VENTAS_API, 'deleteDetallesByCode', FORM);
+            if (DATA.status) {
+                await sweetAlert(1, DATA.message, true);
+                await fillTableDetalle(idVenta);
+            } else {
+                sweetAlert(2, DATA.error || DATA.exception, false);
+            }
+        }
+    } catch (error) {
+        console.error('Error al eliminar:', error);
+        sweetAlert(2, 'Ocurrió un error al procesar la solicitud', false);
     }
 };
 

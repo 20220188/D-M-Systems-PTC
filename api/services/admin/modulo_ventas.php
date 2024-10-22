@@ -133,6 +133,26 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Producto inexistente';
                 }
                 break;
+                case 'readDetallesByCode':
+                    if (!$venta->setIdVenta($_POST['idVenta']) || !isset($_POST['codigo'])) {
+                        $result['error'] = 'Parámetros incompletos';
+                    } elseif ($result['dataset'] = $venta->readDetallesByCode($_POST['codigo'])) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Productos no encontrados';
+                    }
+                    break;
+                
+                case 'deleteDetallesByCode':
+                    if (!$venta->setIdVenta($_POST['idVenta']) || !isset($_POST['codigo'])) {
+                        $result['error'] = 'Parámetros incompletos';
+                    } elseif ($venta->deleteDetallesByCode($_POST['codigo'])) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Productos eliminados correctamente';
+                    } else {
+                        $result['exception'] = 'Error al eliminar los productos';
+                    }
+                    break;
                 
                 case 'updateRowDetalle':
                     $_POST = Validator::validateForm($_POST);
