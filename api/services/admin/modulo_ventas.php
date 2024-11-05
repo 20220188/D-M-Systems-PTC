@@ -23,9 +23,6 @@ if (isset($_GET['action'])) {
                     !$venta->setFechaVenta($_POST['FechaVenta']) or
                     !$venta->setIdCliente($_POST['ClienteVenta']) or
                     !$venta->setIdVendedor($_POST['Vendedor']) or
-                    !$venta->setFormaPago($_POST['FormaPagoVenta']) or
-                    !$venta->setIdDocumento($_POST['DocumentoVenta']) or
-                    !$venta->setIdTipoDocumento($_POST['TipoDocumentoVenta']) or
                     !$venta->setNotas($_POST['Notasventa']) or
                     !$venta->setIdBodega($_POST['BodegaVenta'])
                 ) {
@@ -63,9 +60,6 @@ if (isset($_GET['action'])) {
                     !$venta->setFechaVenta($_POST['fechaVenta']) or
                     !$venta->setIdCliente($_POST['ClienteVenta']) or
                     !$venta->setIdVendedor($_POST['Vendedor']) or
-                    !$venta->setFormaPago($_POST['formaPago']) or
-                    !$venta->setIdDocumento($_POST['DocumentoVenta']) or
-                    !$venta->setIdTipoDocumento($_POST['TipoDocumentoVenta']) or
                     !$venta->setIdBodega($_POST['BodegaVenta']) or
                     !$venta->setSubtotal($_POST['subtotalVenta'])
                 ) {

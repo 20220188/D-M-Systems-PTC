@@ -127,9 +127,6 @@ const fillTable = async (form = null) => {
                     <td>${row.fecha_venta}</td>
                     <td>${row.vendedor}</td>
                     <td>${row.cliente}</td>
-                    <td>${row.forma_pago}</td>
-                    <td>${row.documento}</td>
-                    <td>${row.tipo_documento}</td>
                     <td>${row.bodega}</td>
                     <td>${row.notas}</td>
                     <td>
@@ -161,13 +158,10 @@ const openCreate = () => {
     MODAL_TITLE.textContent = 'Crear venta';
     // Se prepara el formulario.
     SAVE_FORM.reset();
-    fillSelect(FORMAS_DE_PAGO_API, 'readAll', 'FormaPagoVenta');
-    fillSelect(DOCUMENTO_API, 'readAll', 'DocumentoVenta');
+    FECHA_VENTA.value = new Date().toISOString().split('T')[0];
     fillSelect(BODEGA_API, 'readAll', 'BodegaVenta');
-    fillSelect(TIPO_DOCUMENTO_API, 'readAll', 'TipoDocumentoVenta');
     fillSelect(VENDEDOR_API, 'readAll', 'Vendedor');
     fillSelect(CLIENTE_API, 'readAll', 'ClienteVenta');
-
 }
 
 

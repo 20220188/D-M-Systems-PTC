@@ -19,8 +19,7 @@
         <!-- Título del contenido principal -->
         <h3 id="mainTitle"></h3>
         <div class="row">
-            <!-- Formulario de búsqueda -->
-            <div class="col-sm-12 col-md-6 text-end">
+            <div class="col-sm-12 col-md-12 text-end">
                 <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
                 <button type="button" class="btn btn-primary" onclick="openCreate()">
                     <i class="fa-solid fa-plus"></i>
@@ -32,18 +31,15 @@
         <table class="table table-hover text-center">
             <thead>
                 <tr>
-                    <td class="text-start" colspan="9" id="rowsFound"></td>
+                    <td class="text-start" colspan="6" id="rowsFound"></td>
                 </tr>
                 <tr>
                     <th>FECHA</th>
                     <th>VENDEDOR</th>
                     <th>CLIENTE</th>
-                    <th>FORMA DE PAGO</th>
-                    <th>DOCUMENTO</th>
-                    <th>TIPO DE DOCUMENTO</th>
                     <th>BODEGA</th>
                     <th>NOTA</th>
-                    <th>Acciones</th>
+                    <th>ACCIONES</th>
                 </tr>
             </thead>
             <tbody id="tableBody"></tbody>
@@ -64,54 +60,31 @@
                             <!-- Inputs Ocultos -->
                             <input type="number" class="d-none" id="idVenta" name="idVenta">
                             <!-- Fecha -->
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 <label for="FechaVenta" class="form-label">Fecha</label>
                                 <input type="date" id="FechaVenta" name="FechaVenta" required>
                             </div>
                             <!-- Vendedor -->
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 <label for="Vendedor" class="form-label">Vendedor</label>
                                 <select id="Vendedor" name="Vendedor" class="form-select" required>
-                                    <!-- Opciones de tipo de documento serán llenadas desde la base de datos -->
-                                </select>
-                            </div>
-                            <!-- Forma de Pago -->
-                            <div class="col-md-6">
-                                <label for="FormaPagoVenta" class="form-label">Forma de Pago</label>
-                                <select id="FormaPagoVenta" name="FormaPagoVenta" class="form-select" required>
-                                    <!-- Opciones de forma de pago serán llenadas desde la base de datos -->
                                 </select>
                             </div>
                             <!-- Bodega -->
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 <label for="BodegaVenta" class="form-label">Bodega</label>
-                                <select id="BodegaVenta" name="BodegaVenta" class="form-select" required>
+                                <select id="BodegaVenta" name="BodegaVenta" class="form-select" required >
                                     <!-- Opciones de bodega serán llenadas desde la base de datos -->
                                 </select>
                             </div>
-                            <!-- Documento -->
-                            <div class="col-md-6">
-                                <label for="DocumentoVenta" class="form-label">Documento</label>
-                                <select id="DocumentoVenta" name="DocumentoVenta" class="form-select" required>
-                                    <!-- Opciones de documento serán llenadas desde la base de datos -->
-                                </select>
-                            </div>
-                            <!-- Tipo de Documento -->
-                            <div class="col-md-6">
-                                <label for="TipoDocumentoVenta" class="form-label">Tipo Documento</label>
-                                <select id="TipoDocumentoVenta" name="TipoDocumentoVenta" class="form-select" required>
-                                    <!-- Opciones de tipo de documento serán llenadas desde la base de datos -->
-                                </select>
-                            </div>
                             <!-- Cliente -->
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 <label for="ClienteVenta" class="form-label">Cliente</label>
                                 <select id="ClienteVenta" name="ClienteVenta" class="form-select" required>
-                                    <!-- Opciones de tipo de documento serán llenadas desde la base de datos -->
                                 </select>
                             </div>
                             <!-- Notas -->
-                            <div class="col-md-6">
+                            <div class="col-sm-12 col-md-6">
                                 <label for="Notasventa" class="form-label">Notas</label>
                                 <input type="text" class="form-control" name="Notasventa" id="Notasventa">
                             </div>
